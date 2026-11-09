@@ -6,6 +6,9 @@ Cozy game 3D sobre a igreja de Antioquia da Síria, a cidade de Atos 11 onde os 
 
 - Menu inicial, introdução em 6 cenas (os primeiros discípulos desembarcam no Orontes e chegam à casa de Cloé) e tutorial guiado com setas
 - Painel Atividades com todos os mini-games, horários e onde ganhar moedas, mais 3 missões diárias com recompensa
+- História em 5 capítulos (Atos 11–15) com a despedida de Barnabé e Saulo no cais, cartas da viagem, volta e epílogo
+- Selos de conquista, calendário da estação, rebanho no monte Sílpio, crianças correndo atrás das pombas e save exportável por código
+- Iluminação de época: lamparinas de óleo de barro, sem lâmpadas nem sinos de igreja
 - Ciclo de dia e noite, quatro estações com chuva, cores próprias e uma festa por estação
 - Moradores com pedidos de oração, pão, consolo e ensino; ágape no pátio ao entardecer
 - O local de reunião cresce em 4 níveis, da Casa de Cloé à Grande casa de Antioquia; quem não cabe espera no portão
