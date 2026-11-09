@@ -340,7 +340,7 @@ const CODEX = [
   ] },
   { title: 'A primeira viagem', glyph: '🗺️', color: '#4a6a8a', pages: [
     { u: ['days', 3], hint: 'Viva 3 dias em Antioquia.', text: 'Barnabé e Saulo atravessaram para Chipre, a ilha onde Barnabé nascera. Em Pafos, o procônsul Sérgio Paulo mandou chamá-los porque queria ouvir a palavra de Deus. É a partir dali que Saulo passa a ser chamado pelo nome romano: Paulo.', verse: 'Quando o procônsul viu o que tinha acontecido, creu, maravilhado com o ensino do Senhor.', ref: 'Atos 13:12' },
-    { u: ['walk', 300], hint: 'Caminhe 300 passos pela cidade.', text: 'Subiram para o interior, até outra Antioquia, na Pisídia. Na sinagoga, Paulo contou a história de Israel do começo ao fim. No sábado seguinte, quase a cidade inteira veio escutar, e os gentios se alegraram com uma promessa antiga que também era para eles.', verse: 'Eu fiz de você luz para os gentios, para que leve a salvação até os confins da terra.', ref: 'Atos 13:47' },
+    { u: ['weave', 1], hint: 'Teça um toldo no tear da Irene.', text: 'Subiram para o interior, até outra Antioquia, na Pisídia. Na sinagoga, Paulo contou a história de Israel do começo ao fim. No sábado seguinte, quase a cidade inteira veio escutar, e os gentios se alegraram com uma promessa antiga que também era para eles.', verse: 'Eu fiz de você luz para os gentios, para que leve a salvação até os confins da terra.', ref: 'Atos 13:47' },
     { u: ['help', 10], hint: 'Acolha 10 moradores.', text: 'Em Listra, apedrejaram Paulo e o arrastaram para fora da cidade, achando que estava morto. Os discípulos fizeram uma roda em volta dele, e ele se levantou e entrou de novo na cidade. Na volta, passaram por cada lugar fortalecendo os irmãos.', verse: 'É necessário passarmos por muitas tribulações para entrarmos no Reino de Deus.', ref: 'Atos 14:22' },
   ] },
   { title: 'A carta de Jerusalém', glyph: '✉️', color: '#7a5a3a', pages: [
@@ -418,7 +418,7 @@ const costTxt = c => Object.entries(c).map(([k, n]) => qty(n, k)).join(' + ');
 const KEY = 'luzes-de-antioquia-v1';
 const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain'];
 const DEF = () => ({ time: 31, clock: 0, res: { pao: 6, azeite: 6, perg: 2 }, comm: 0,
-  stats: { fish: 0, olive: 0, copy: 0, help: 0, teach: 0, lantern: 0, agape: 0, vigil: 0, dawnPier: 0, relief: 0, build: 0, house: 0, bake: 0, weave: 0, load: 0, walk: 0, festival: 0, pentecost: 0, autumnOlive: 0, summerAgape: 0, rainAgape: 0 },
+  stats: { fish: 0, olive: 0, copy: 0, help: 0, teach: 0, lantern: 0, agape: 0, vigil: 0, dawnPier: 0, relief: 0, build: 0, house: 0, bake: 0, weave: 0, load: 0, festival: 0, pentecost: 0, autumnOlive: 0, summerAgape: 0, rainAgape: 0 },
   built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null });
 function makeState(s) {
   const d = DEF();
@@ -588,8 +588,6 @@ function flat(w, d, m, x, y, z, uvs = 2, parent = world) { const g = scaleUV(new
 
 const rects = [], segs = [];
 const occupy = (x, z, w, d) => rects.push([x - w / 2, z - d / 2, x + w / 2, z + d / 2]);
-const solids = [];
-const solid = (x, z, w, d) => solids.push([x - w / 2, z - d / 2, x + w / 2, z + d / 2]);
 function segDist(px, pz, s) { const [ax, az, bx, bz] = s, dx = bx - ax, dz = bz - az; const t = clamp(((px - ax) * dx + (pz - az) * dz) / (dx * dx + dz * dz || 1), 0, 1); return Math.hypot(px - (ax + t * dx), pz - (az + t * dz)); }
 function isFree(x, z, m = 0.4) {
   if (z > 11.6 - m) return false;
@@ -698,7 +696,7 @@ function house(x, z, w, d, h, o = {}) {
   box(0.06, 0.06, 0.3, M.woodDark, dx + 0.8, 2.2, fz + 0.12, g, false);
   box(0.2, 0.26, 0.2, M.lamp, dx + 0.8, 2.02, fz + 0.26, g, false);
   if (o.awning) { const a = box(Math.min(2.6, w * 0.6), 0.06, 1.1, o.awning, dx, 2.35, fz + 0.5, g); a.rotation.x = 0.28; }
-  occupy(x, z, w + 0.4, d + 0.4); solid(x, z, w + 0.2, d + 0.2);
+  occupy(x, z, w + 0.4, d + 0.4);
   return g;
 }
 
@@ -744,8 +742,6 @@ function houseChurch(cx, cz) {
   for (const [ax, az] of [[x1 - 0.8, hz + 0.6], [x1 - 1.3, hz + 0.6], [x1 - 0.8, z1 - 0.9]]) add(AMPHORA, M.clay, ax, 0.05, az);
   pointLight(cx - 2, 2.3, tz, 22); pointLight(cx + 2, 2.3, tz, 22);
   occupy(cx, cz, W + 0.4, D + 0.4);
-  solid(cx, z0 + hallD / 2, W, hallD); solid(x0 + t / 2, (hz + z1) / 2, t, D - hallD); solid(x1 - t / 2, (hz + z1) / 2, t, D - hallD);
-  solid(x0 + sw / 2, z1 - t / 2, sw + 0.2, t + 0.2); solid(x1 - sw / 2, z1 - t / 2, sw + 0.2, t + 0.2); solid(cx, tz, 5.4, 1.3);
   // seats for the agape
   const at = (x, z, approach = []) => SEATS.push({ pos: [x, z], face: Math.atan2(cx - x, tz - z), approach });
   for (let i = 0; i < 5; i++) at(cx - 2 + i, tz + 1.0);
@@ -762,7 +758,7 @@ function bakery(x, z) {
   box(1.6, 0.08, 0.7, M.wood, x - 1.6, 0.8, z + 2.6);
   for (const lx of [-0.7, 0.7]) box(0.08, 0.76, 0.6, M.woodDark, x - 1.6 + lx, 0.38, z + 2.6);
   for (let i = 0; i < 5; i++) { const l = add(SPH, M.loaf, x - 2.2 + i * 0.3, 0.9, z + 2.6 + rand(-0.15, 0.15), world, false); l.scale.set(0.15, 0.08, 0.11); }
-  occupy(x + 3.1, z + 0.4, 2.4, 2.4); occupy(x - 1.6, z + 2.6, 1.8, 0.9); solid(x + 3.1, z + 0.4, 2.2, 2.2); solid(x - 1.6, z + 2.6, 1.7, 0.8);
+  occupy(x + 3.1, z + 0.4, 2.4, 2.4); occupy(x - 1.6, z + 2.6, 1.8, 0.9);
   pointLight(x - 0.5, 2.3, z + 2.4, 18);
 }
 function scriptorium(x, z) {
@@ -771,7 +767,7 @@ function scriptorium(x, z) {
   for (const lx of [-0.6, 0.6]) box(0.08, 0.76, 0.7, M.woodDark, x + 1.9 + lx, 0.38, z + 2.9);
   for (let i = 0; i < 4; i++) { const s = add(new THREE.CylinderGeometry(0.07, 0.07, 0.6, 8), M.cream, x + 1.45 + i * 0.3, 0.92, z + 2.9, world, false); s.rotation.x = Math.PI / 2; s.rotation.z = rand(-0.3, 0.3); }
   box(0.14, 0.12, 0.14, M.lamp, x + 2.4, 0.9, z + 2.7, world, false);
-  occupy(x + 1.9, z + 2.9, 1.6, 1.0); solid(x + 1.9, z + 2.9, 1.5, 0.9);
+  occupy(x + 1.9, z + 2.9, 1.6, 1.0);
   pointLight(x + 1.9, 2.0, z + 2.8, 16);
 }
 function stall(x, z, ci) {
@@ -782,28 +778,25 @@ function stall(x, z, ci) {
   for (let i = 0; i < 7; i++) { const f = add(SPH, M.fruit[(ci + i) % 5], rand(-1, 1), 0.95, rand(0, 0.5), g, false); f.scale.setScalar(rand(0.08, 0.13)); }
   cyl(0.28, 0.22, 0.3, M.wood, -0.7, 1.0, 0.3, g, 10, false);
   add(AMPHORA, M.clay, 1.5, 0, -0.4, g);
-  occupy(x, z, 3.2, 2.2); solid(x, z + 0.1, 2.8, 1.8);
+  occupy(x, z, 3.2, 2.2);
 }
-function column(x, z) { solid(x, z, 0.55, 0.55); box(0.6, 0.25, 0.6, M.stone, x, 0.13, z); cyl(0.2, 0.22, 2.8, M.stone, x, 1.65, z, world, 10); box(0.56, 0.22, 0.56, M.stone, x, 3.12, z); }
+function column(x, z) { box(0.6, 0.25, 0.6, M.stone, x, 0.13, z); cyl(0.2, 0.22, 2.8, M.stone, x, 1.65, z, world, 10); box(0.56, 0.22, 0.56, M.stone, x, 3.12, z); }
 
 /* ========================= trees & plants ========================= */
 function oliveTree(x, z, parent = world, s = 1) {
-  solid(x, z, 0.5, 0.5);
   const g = group(x, z, parent, rand(0, 6.28)); g.scale.setScalar(s * rand(0.85, 1.15));
   const tr = cyl(0.13, 0.24, 1.6, M.trunk, 0, 0.8, 0, g, 6); tr.rotation.z = rand(-0.18, 0.18);
   for (let i = 0; i < 4; i++) { const b = add(ICO, M.olive, rand(-0.6, 0.6), rand(1.7, 2.3), rand(-0.6, 0.6), g); b.scale.set(rand(0.7, 1.0), rand(0.5, 0.72), rand(0.7, 1.0)); }
   return g;
 }
-function cypress(x, z, s = 1) { solid(x, z, 0.5, 0.5); const g = group(x, z); g.scale.setScalar(s * rand(0.85, 1.2)); cyl(0.1, 0.14, 0.8, M.trunk, 0, 0.4, 0, g, 5); add(new THREE.ConeGeometry(0.62, 4.4, 7), M.cypress, 0, 2.8, 0, g); return g; }
+function cypress(x, z, s = 1) { const g = group(x, z); g.scale.setScalar(s * rand(0.85, 1.2)); cyl(0.1, 0.14, 0.8, M.trunk, 0, 0.4, 0, g, 5); add(new THREE.ConeGeometry(0.62, 4.4, 7), M.cypress, 0, 2.8, 0, g); return g; }
 function figTree(x, z, s = 1, m = M.leaf) {
-  solid(x, z, 0.55, 0.55);
   const g = group(x, z, world, rand(0, 6.28)); g.scale.setScalar(s * rand(0.9, 1.15));
   cyl(0.16, 0.26, 2.0, M.trunk, 0, 1.0, 0, g, 6);
   for (let i = 0; i < 4; i++) { const b = add(DODE, m, rand(-0.7, 0.7), rand(2.3, 3.0), rand(-0.7, 0.7), g); b.scale.setScalar(rand(0.75, 1.1)); }
   return g;
 }
 function palm(x, z) {
-  solid(x, z, 0.45, 0.45);
   const g = group(x, z, world, rand(0, 6.28)); let y = 0, ox = 0;
   for (let i = 0; i < 6; i++) { const s = cyl(0.13, 0.17, 0.75, M.trunk, ox, y + 0.37, 0, g, 6); s.rotation.z = -0.06; y += 0.72; ox += 0.05; }
   for (let i = 0; i < 8; i++) { const f = new THREE.Group(); f.position.set(ox, y, 0); f.rotation.y = i / 8 * Math.PI * 2; g.add(f); const leaf = box(1.9, 0.04, 0.38, M.leaf, 0.85, -0.25, 0, f); leaf.rotation.z = -0.45; }
@@ -875,7 +868,7 @@ cyl(1.1, 1.2, 0.6, M.stone, 12.5, 0.3, -13.5, world, 14);
 const mill = cyl(0.6, 0.6, 0.35, M.stoneDark, 12.5, 1.0, -13.5, world, 14); mill.rotation.z = Math.PI / 2;
 box(2.6, 0.12, 0.12, M.wood, 12.5, 1.0, -13.5);
 for (const ax of [11.0, 14.0, 14.3]) add(AMPHORA, M.clay, ax, 0, -12.6);
-occupy(12.5, -13.5, 3, 2.4); solid(12.5, -13.5, 2.4, 2.4);
+occupy(12.5, -13.5, 3, 2.4);
 
 // mount Silpius & far hills
 function hill(x, z, r, h, m) {
@@ -1134,102 +1127,6 @@ function addJoiner(i, silent) {
   if (!silent) toast(`Um novo irmão chegou pelo porto: <b>${name}</b>, ${role}.`);
 }
 function checkJoin() { const want = Math.min(JOINERS.length, Math.floor(G.comm / 15) + G.stats.house); while (G.joined < want) addJoiner(G.joined++, false); }
-
-/* ========================= player ========================= */
-const player = (() => {
-  const fig = makeFigure(0xf1ead8, 0xd9a640, 0xcf9a72);
-  box(0.16, 0.2, 0.16, M.lantern, 0.42, 0.62, 0.12, fig.body, false);
-  box(0.03, 0.22, 0.03, M.woodDark, 0.42, 0.82, 0.12, fig.body, false);
-  const light = new THREE.PointLight(0xffb060, 0, 7, 2); light.position.set(0.4, 1.1, 0.3); fig.g.add(light);
-  const ring = new THREE.Mesh(RING, new THREE.MeshBasicMaterial({ color: new THREE.Color(1.6, 1.15, 0.5), transparent: true, opacity: 0.5, depthWrite: false }));
-  ring.scale.setScalar(0.55); ring.position.y = 0.06; fig.g.add(ring);
-  fig.g.position.set(-11, 0, 0.2);
-  return { g: fig.g, body: fig.body, light, pts: [], goal: null, face: 0, walk: 0, speed: 4.4, stepT: 0 };
-})();
-const marker = new THREE.Mesh(RING, new THREE.MeshBasicMaterial({ color: new THREE.Color(2, 1.5, 0.7), transparent: true, opacity: 0, depthWrite: false }));
-marker.position.y = 0.08; scene.add(marker);
-function showMarker(x, z) { marker.position.x = x; marker.position.z = z; marker.material.opacity = 1; marker.scale.setScalar(0.3); }
-function blocked(x, z, r = 0.3) {
-  if (x < -34 || x > 34 || z < -30) return true;
-  if (z > 12.1 - r && !(x > 6.95 + r && x < 9.05 - r && z < 19.7)) return true; // river, except the pier
-  for (const b of solids) if (x > b[0] - r && x < b[2] + r && z > b[1] - r && z < b[3] + r) return true;
-  return false;
-}
-function clearLine(ax, az, bx, bz) {
-  const n = Math.ceil(Math.hypot(bx - ax, bz - az) / 0.4);
-  for (let i = 1; i <= n; i++) if (blocked(ax + (bx - ax) * i / n, az + (bz - az) * i / n, 0.25)) return false;
-  return true;
-}
-function nearestNode(x, z) {
-  return Object.keys(NODES).map(k => [k, Math.hypot(NODES[k][0] - x, NODES[k][1] - z)]).sort((a, b) => a[1] - b[1]).find(([k]) => clearLine(x, z, ...NODES[k]))?.[0] ?? null;
-}
-function smoothPath(sx, sz, pts) {
-  const out = []; let cx = sx, cz = sz, i = 0;
-  while (i < pts.length) { let j = pts.length - 1; while (j > i && !clearLine(cx, cz, pts[j][0], pts[j][1])) j--; out.push(pts[j]); [cx, cz] = pts[j]; i = j + 1; }
-  return out;
-}
-function walkTo(x, z, goal = null) {
-  const p = player.g.position; player.goal = goal;
-  if (clearLine(p.x, p.z, x, z)) { player.pts = [[x, z]]; return; }
-  const a = nearestNode(p.x, p.z), b = nearestNode(x, z);
-  if (!a || !b) { player.pts = [[x, z]]; return; }
-  player.pts = smoothPath(p.x, p.z, [...(bfs(a, b) || [a]).map(id => NODES[id]), [x, z]]);
-}
-const goalPos = goal => (goal.type === 'hot' ? { x: goal.ref.pos[0], z: goal.ref.pos[2] } : goal.ref.g.position);
-function arrive(goal) {
-  const gp = goalPos(goal), [sx, sy] = toScreen({ x: gp.x, y: 0.6, z: gp.z });
-  if (goal.type === 'hot') return openHotspot(goal.ref, sx, sy);
-  const n = goal.ref, p = player.g.position;
-  n.face = Math.atan2(p.x - n.g.position.x, p.z - n.g.position.z);
-  openNPC(n, sx, sy);
-}
-function goInteract(goal) {
-  const gp = goalPos(goal), p = player.g.position;
-  if (Math.hypot(gp.x - p.x, gp.z - p.z) < (goal.type === 'npc' ? 2.3 : 1.8)) return arrive(goal);
-  walkTo(gp.x, gp.z, goal); showMarker(gp.x, gp.z);
-}
-function updatePlayer(dt) {
-  const p = player.g.position; let vx = 0, vz = 0, moving = false;
-  if (!modalOpen) {
-    const fx = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
-    const fz = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
-    if (fx || fz) {
-      camera.getWorldDirection(_f); _f.y = 0; _f.normalize(); _r.set(-_f.z, 0, _f.x);
-      const v = _r.multiplyScalar(fx).add(_f.multiplyScalar(-fz)).normalize(); vx = v.x; vz = v.z; player.pts = []; player.goal = null;
-    }
-  }
-  if (!vx && !vz && player.pts.length) {
-    const [tx, tz] = player.pts[0], dx = tx - p.x, dz = tz - p.z, d = Math.hypot(dx, dz);
-    if (d < 0.12) player.pts.shift(); else { vx = dx / d; vz = dz / d; }
-  }
-  if (vx || vz) {
-    const step = player.speed * dt, ox = p.x, oz = p.z;
-    if (!blocked(p.x + vx * step, p.z)) p.x += vx * step;
-    if (!blocked(p.x, p.z + vz * step)) p.z += vz * step;
-    const moved = Math.hypot(p.x - ox, p.z - oz);
-    if (moved > step * 0.2) { moving = true; player.face = Math.atan2(vx, vz); G.stats.walk += moved; }
-    else if (player.pts.length) player.pts.shift(); // stuck on a corner: try the next point
-  }
-  const goal = player.goal;
-  if (goal) {
-    if (goal.type === 'npc') goal.ref.wait = Math.max(goal.ref.wait, 0.5);
-    const gp = goalPos(goal);
-    if (Math.hypot(gp.x - p.x, gp.z - p.z) < (goal.type === 'npc' ? 2.3 : 1.8)) { player.goal = null; player.pts = []; arrive(goal); }
-    else if (!player.pts.length && !moving) player.goal = null;
-  }
-  player.walk += moving ? dt * 10 : 0;
-  let dr = player.face - player.g.rotation.y; dr = Math.atan2(Math.sin(dr), Math.cos(dr));
-  player.g.rotation.y += dr * Math.min(1, dt * 10);
-  player.body.position.y = moving ? Math.abs(Math.sin(player.walk)) * 0.07 : 0;
-  player.body.rotation.z = moving ? Math.sin(player.walk) * 0.06 : 0;
-  if (moving) {
-    const k = Math.min(1, dt * 3), dx = (p.x - controls.target.x) * k, dz = (p.z - controls.target.z) * k;
-    controls.target.x += dx; controls.target.z += dz; camera.position.x += dx; camera.position.z += dz;
-    if ((player.stepT += dt) > 0.3) { player.stepT = 0; audio.sfx('step'); }
-  }
-  marker.material.opacity = Math.max(0, marker.material.opacity - dt * 1.4);
-  marker.scale.setScalar(Math.min(0.9, marker.scale.x + dt * 0.6));
-}
 
 /* ========================= game actions ========================= */
 let ff = null, modalOpen = false, buildMode = false;
@@ -1696,8 +1593,7 @@ $('#modal').addEventListener('pointerdown', e => { if (e.target.id === 'modal' &
 function openHelp() {
   const el = openModal(`<div class="card" style="text-align:left"><button class="x" aria-label="Fechar">✕</button><h2>Como jogar</h2>
     <ul class="howto">
-      <li><b>Seu personagem</b>: ande com WASD ou setas, ou clique no chão. Clique num anel dourado ou num morador e ele vai até lá.</li>
-      <li><b>De dia</b>: pesque no píer, asse pães no forno, colha no olival, teça no tear e copie versículos.</li>
+      <li><b>De dia</b>: clique nos anéis dourados. Pesque no píer, asse pães no forno, colha no olival, teça no tear e copie versículos.</li>
       <li><b>Ao entardecer</b>: o azeite acende as lamparinas e a igreja se reúne para o ágape. Cada irmão come um pão.</li>
       <li><b>À noite</b>: moradores mostram ícones flutuantes pedindo oração 🙏, pão 🍞, consolo 💧 ou ensino 📜.</li>
       <li><b>Códice</b>: páginas se revelam com o que você faz. Algumas só em certos horários.</li>
@@ -1706,7 +1602,7 @@ function openHelp() {
       <li><b>Comunhão ✦</b>: a cada 15, um novo irmão chega pelo porto.</li>
       <li><b>Som</b>: música, rio, pássaros e grilos são gerados pelo próprio jogo. Ajuste no alto-falante ou aperte M.</li>
     </ul>
-    <p class="keys">WASD ou setas: andar · Clique no chão: ir até lá · Arrastar: mover a câmera · Roda ou pinça: zoom · Botão direito: girar · B: construir · C: Códice · M: som · Esc: fechar</p>
+    <p class="keys">Arrastar ou WASD: mover a câmera · Roda ou pinça: zoom · Botão direito: girar · B: construir · C: Códice · M: som · Esc: fechar</p>
     <button class="ghost reset">Recomeçar do zero</button></div>`, null, true);
   const r = el.querySelector('.reset');
   r.onclick = () => {
@@ -1724,7 +1620,7 @@ function openIntro() {
   el.querySelector('.go').onclick = closeModal;
 }
 function tips() {
-  [['Ande com WASD ou clique no chão · arraste para mover a câmera · roda do mouse para zoom.', 600],
+  [['Arraste para mover a câmera · roda do mouse para zoom · botão direito para girar.', 600],
    ['Clique nos anéis dourados para trabalhar: píer, forno, olival, tear, copista e casa da igreja.', 5500],
    ['À noite, clique nos ícones sobre os moradores para acolhê-los.', 10500]].forEach(([t, d]) => setTimeout(() => toast(t, 5200), d));
 }
@@ -1795,18 +1691,16 @@ function pickAt(x, y) {
   for (const h of raycaster.intersectObjects(list, true)) { let o = h.object; while (o && !o.userData.pick) o = o.parent; if (o) return o.userData.pick; }
   return null;
 }
-const GROUND = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), _gp = new THREE.Vector3();
-function groundAt(x, y) { ndc.set(x / innerWidth * 2 - 1, -(y / innerHeight) * 2 + 1); raycaster.setFromCamera(ndc, camera); return raycaster.ray.intersectPlane(GROUND, _gp); }
 canvas.addEventListener('pointerdown', e => { ptr.down = { x: e.clientX, y: e.clientY }; closePop(); });
 canvas.addEventListener('pointermove', e => { ptr.x = e.clientX; ptr.y = e.clientY; ptr.dirty = true; });
 canvas.addEventListener('pointerleave', () => { $('#tip').hidden = true; });
 canvas.addEventListener('pointerup', e => {
   const d = ptr.down; ptr.down = null;
   if (!d || e.button !== 0 || Math.hypot(e.clientX - d.x, e.clientY - d.y) > 6) return;
-  const p = pickAt(e.clientX, e.clientY);
-  if (!p) { const gp = groundAt(e.clientX, e.clientY); if (gp && !blocked(gp.x, gp.z)) { walkTo(gp.x, gp.z); showMarker(gp.x, gp.z); } return; }
+  const p = pickAt(e.clientX, e.clientY); if (!p) return;
   $('#tip').hidden = true; audio.sfx('click');
-  if (p.type === 'hot' || p.type === 'npc') goInteract(p);
+  if (p.type === 'hot') openHotspot(p.ref, e.clientX, e.clientY);
+  else if (p.type === 'npc') openNPC(p.ref, e.clientX, e.clientY);
   else if (p.type === 'plot') openPlot(p.ref, e.clientX, e.clientY);
 });
 function hover() {
@@ -1816,7 +1710,7 @@ function hover() {
   canvas.style.cursor = p ? 'pointer' : '';
   if (!p) { tip.hidden = true; return; }
   const r = p.ref;
-  tip.innerHTML = p.type === 'hot' ? `${r.name}<small>Clique para ir até lá</small>` : p.type === 'plot' ? 'Terreno livre<small>Clique para construir</small>' : `${r.name}<small>${r.need ? NEEDS[r.need].label : r.role}</small>`;
+  tip.innerHTML = p.type === 'hot' ? `${r.name}<small>Clique para ver os ofícios</small>` : p.type === 'plot' ? 'Terreno livre<small>Clique para construir</small>' : `${r.name}<small>${r.need ? NEEDS[r.need].label : r.role}</small>`;
   tip.hidden = false; tip.style.left = ptr.x + 14 + 'px'; tip.style.top = ptr.y + 14 + 'px';
 }
 const keys = {};
@@ -1832,6 +1726,15 @@ addEventListener('keydown', e => {
 addEventListener('keyup', e => { keys[e.code] = false; });
 addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
 const _f = new THREE.Vector3(), _r = new THREE.Vector3();
+function keyPan(dt) {
+  if (modalOpen) return;
+  const fx = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
+  const fz = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
+  if (!fx && !fz) return;
+  camera.getWorldDirection(_f); _f.y = 0; _f.normalize(); _r.set(-_f.z, 0, _f.x);
+  const v = _r.multiplyScalar(fx).add(_f.multiplyScalar(-fz)).multiplyScalar(dt * 16 * camera.position.distanceTo(controls.target) / 40);
+  controls.target.add(v); camera.position.add(v);
+}
 function clampCam() {
   const t = controls.target, cx = clamp(t.x, -32, 32), cz = clamp(t.z, -28, 22), dx = cx - t.x, dz = cz - t.z;
   if (dx || dz) { t.x = cx; t.z = cz; camera.position.x += dx; camera.position.z += dz; }
@@ -1867,7 +1770,6 @@ function updateLighting() {
   lampOn = h < 12 ? 1 - smooth(5.3, 6.9, h) : smooth(17.7, 19.3, h);
   if (rainAmt > 0.01) { _rc.lerpColors(RAIN_DAY, RAIN_NIGHT, lampOn); scene.background.lerp(_rc, 0.6 * rainAmt); scene.fog.color.copy(scene.background); sun.intensity *= 1 - 0.6 * rainAmt; hemi.intensity *= 1 - 0.2 * rainAmt; }
   scene.fog.near = 70 - 35 * rainAmt; scene.fog.far = 150 - 55 * rainAmt;
-  player.light.intensity = 9 * lampOn;
   const L = lampOn * (0.25 + 0.75 * G.lit) * G.lampMul;
   M.window.emissiveIntensity = 2.6 * L;
   M.lamp.emissiveIntensity = 0.25 + 5 * L;
@@ -2073,7 +1975,6 @@ const audio = (() => {
     join: t => [587.33, 659.25, 880].forEach((fr, i) => pluck(fr, t + i * 0.14, 0.12, 1.2, 4000, sfxBus)),
     strum: t => { const sc = lampOn > 0.5 ? NIGHT : DAY; [0, 2, 4, 7, 9].forEach((d, i) => pluck(f(sc, d, -1), t + i * 0.04, 0.1, 2.4, 2600, sfxBus)); },
     bell: t => bell(293.66, t, 0.12, 4),
-    step: t => burst(t, 240, 0.03, 0.05, sfxBus, 'lowpass', 0.8),
     dawn: t => { [440, 587.33, 739.99].forEach((fr, i) => pluck(fr, t + i * 0.16, 0.11, 1.4, 4500, sfxBus)); for (let i = 0; i < 3; i++) bird(t + 0.4 + i * 0.5, 0.04); },
   };
   function sfx(name) { if (!ctx || ctx.state !== 'running' || G.muted || !G.vol.sfx) return; try { SFX[name]?.(ctx.currentTime + 0.01); } catch (e) { console.warn('sfx', name, e); } }
@@ -2119,7 +2020,7 @@ function step(dt, t) {
   }
   if (ringT <= 0) ringT = 0.4;
   if (buildMode) plotMat.opacity = 0.55 + 0.3 * Math.sin(t * 3);
-  updatePlayer(dt); clampCam(); controls.update(); hover();
+  keyPan(dt); clampCam(); controls.update(); hover();
   composer.render();
   hudT -= dt; if (hudT <= 0) { hudT = 0.25; refreshHUD(); audio.update(controls.target.z, rainAmt); checkUnlocks(); }
   saveT -= dt; if (saveT <= 0) { saveT = 5; save(); }
@@ -2146,6 +2047,6 @@ addEventListener('pagehide', save);
 const hot = window.claude?.hot;
 try { hot?.snapshot?.(() => (resetting ? {} : { save: serial() })); } catch (e) {}
 hot?.ready ? hot.ready(start) : start(hot?.data ?? {});
-window.__antioquia = { get G() { return G; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, player, walkTo, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: id => HOT.find(h => h.id === id).actions()[0].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
+window.__antioquia = { get G() { return G; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: id => HOT.find(h => h.id === id).actions()[0].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
 let simT = 0;
 </script>

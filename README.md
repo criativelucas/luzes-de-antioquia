@@ -4,7 +4,6 @@ Cozy game 3D sobre a igreja de Antioquia da Síria, a cidade de Atos 11 onde os 
 
 **Jogar:** https://criativelucas.github.io/luzes-de-antioquia/
 
-- Personagem que anda pela cidade (WASD ou clique no chão)
 - Ciclo de dia e noite, quatro estações com chuva, cores próprias e uma festa por estação
 - Moradores com pedidos de oração, pão, consolo e ensino; ágape no pátio ao entardecer
 - Mini-games: pesca, forno, colheita de azeitonas, tear, copista e carga do barco
