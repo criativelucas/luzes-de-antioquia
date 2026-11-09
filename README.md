@@ -1,10 +1,11 @@
-# Luzes de Antioquia
+# A Luz de Antioquia
 
 Cozy game 3D sobre a igreja de Antioquia da Síria, a cidade de Atos 11 onde os discípulos foram chamados cristãos pela primeira vez.
 
 **Jogar:** https://criativelucas.github.io/luzes-de-antioquia/
 
 - Menu inicial, introdução em 6 cenas (os primeiros discípulos desembarcam no Orontes e chegam à casa de Cloé) e tutorial guiado com setas
+- Painel Atividades com todos os mini-games, horários e onde ganhar moedas, mais 3 missões diárias com recompensa
 - Ciclo de dia e noite, quatro estações com chuva, cores próprias e uma festa por estação
 - Moradores com pedidos de oração, pão, consolo e ensino; ágape no pátio ao entardecer
 - O local de reunião cresce em 4 níveis, da Casa de Cloé à Grande casa de Antioquia; quem não cabe espera no portão

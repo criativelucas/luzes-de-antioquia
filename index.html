@@ -8,7 +8,7 @@
 </head>
 <body>
 <meta charset="utf-8">
-<title>Luzes de Antioquia</title>
+<title>A Luz de Antioquia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;0,800;1,500;1,600&family=Nunito:wght@600;700;800&display=swap">
@@ -307,6 +307,57 @@ body.menu #hud,body.menu #pop,body.menu #tip,body.menu #toasts,body.cine #hud,bo
 .talk .who{padding-bottom:12px;background:var(--divider);background-position:center bottom,center bottom}
 .talk .who .ptr{width:64px;height:64px}
 #news .ntag{background:rgba(63,128,136,.35);color:var(--gold-hi)}
+:root{--terra:#d0784f;--terra-hi:#f0a27c;--sky:#5b8fb0;--plum:#9a74b8;--olive:#8fa652}
+.card{--acc:var(--gold);border-top:3px solid var(--acc);background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 24%,transparent),transparent 130px),var(--corners),var(--panel)}
+.card .eyebrow{color:var(--acc)}
+#modal.mini .card{--acc:var(--terra);background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 24%,transparent),transparent 130px),var(--corners),var(--panel)}
+#modal.mini .card.talk{--acc:var(--plum)}
+.card.album{--acc:var(--sky)}
+.card.letter{border-top-color:#9a6a2a}
+#tut{border-top:3px solid var(--terra);background:linear-gradient(180deg,rgba(208,120,79,.22),transparent 90px),var(--corners),var(--panel)}
+#tut .eyebrow{color:var(--terra-hi)}
+.trow{display:flex;gap:8px;align-items:center}
+.pill.alt{position:relative;background:linear-gradient(180deg,#e08a60,#b85f3b);color:#fff6e6;border-color:#f0c49a;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.pill.alt:hover{background:linear-gradient(180deg,#eb9a70,#c76c46)}
+.pill .cnt{position:absolute;top:-7px;right:-7px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--cream);color:var(--cream-ink);font:800 12px/20px var(--sans);font-style:normal;box-shadow:0 0 0 2px #b85f3b}
+.act.mg{border-left:3px solid var(--terra)}
+.act.mg b::before{content:"▶ ";color:var(--terra-hi);font-size:.75em}
+.act.coin{border-left:3px solid var(--gold)}
+.act.coin b::before{content:"● ";color:var(--gold-hi);font-size:.7em}
+.res{cursor:pointer}
+.res:hover{color:var(--gold-hi)}
+.card.acts{--acc:var(--terra);width:min(660px,calc(100vw - 32px));text-align:left}
+.acts .grp{display:flex;align-items:center;gap:8px;margin:16px 0 7px;font:700 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gc)}
+.acts .grp::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gc),transparent);opacity:.5}
+.acts .grp small{font:600 12px var(--sans);letter-spacing:0;text-transform:none;color:var(--ink-dim)}
+.arow{display:grid;grid-template-columns:34px minmax(0,1fr) auto auto;align-items:center;gap:10px;padding:8px 10px;border-radius:4px;background:rgba(44,80,84,.32);border:1px solid rgba(201,168,106,.2);border-left:3px solid var(--gc);margin-bottom:6px}
+.arow .ai{font-size:20px;text-align:center}
+.arow b{display:block;font:700 16px/1.2 var(--serif);color:#f6ebd0}
+.arow small{color:var(--ink-dim);font-size:12px}
+.arow .gv{font-size:12px;font-weight:800;color:var(--gc);white-space:nowrap}
+.arow .go2{padding:6px 12px;border-radius:4px;border:1px solid var(--gold);color:var(--gold-hi);font-weight:800;font-size:13px}
+.arow .go2:hover{background:var(--cream);color:var(--cream-ink)}
+.arow.now{background:rgba(44,80,84,.6)}
+.arow.now .st{color:var(--ok)}
+.arow .st{display:block;font-size:11.5px;color:var(--ink-dim);margin-top:1px}
+.arow.done{opacity:.6}
+.arow.done b{text-decoration:line-through}
+.mbar{height:6px;border-radius:1px;background:rgba(8,18,20,.75);margin-top:5px;overflow:hidden}
+.mbar i{display:block;height:100%;background:linear-gradient(90deg,var(--olive),#c5d98a)}
+.mbonus{margin:4px 0 0;font-size:12.5px;color:var(--ink-dim)}
+#menu .mcard{--acc:var(--terra);background:linear-gradient(180deg,#f7eedb,#eadcbc);color:var(--cream-ink);border:1px solid var(--gold);border-top:3px solid var(--terra);box-shadow:inset 0 0 0 3px rgba(255,255,255,.35),inset 0 0 0 4px rgba(154,106,42,.4),0 24px 60px rgba(0,0,0,.55)}
+#menu .mcard .eyebrow{color:#a8562f;text-align:center}
+#menu h1{margin:0}
+#menu h1 img{display:block;width:100%;height:auto;margin:-4px 0 -6px}
+#menu h1::after{margin:8px 0 10px}
+#menu .mcard .sub{color:#5a5040;text-align:center}
+#menu .mcard .foot{color:#7a6c54;text-align:center}
+#menu .macts .act{background:#1f3b3e;border-color:rgba(201,168,106,.6);color:var(--ink)}
+#menu .macts .act small{color:var(--ink-dim)}
+#menu .macts .act.main{background:linear-gradient(180deg,#e08a60,#b85f3b);color:#fff6e6;border-color:#f0c49a}
+#menu .macts .act.main small{color:#ffe6d0}
+#menu .macts .act:hover:not(.main){background:#2c5054;color:var(--ink)}
+@media (max-width:640px){.pill{padding:8px 12px;font-size:14px}.arow{grid-template-columns:28px minmax(0,1fr) auto}.arow .gv{display:none}}
 @media (max-width:640px){#res{gap:14px;padding:5px 14px}}
 #menu{position:fixed;inset:0;z-index:15;display:flex;align-items:center;padding:24px calc(24px + env(safe-area-inset-right,0px)) 24px calc(min(7vw,90px) + env(safe-area-inset-left,0px));background:linear-gradient(90deg,rgba(6,14,16,.8),rgba(6,14,16,.35) 45%,transparent 72%)}
 #menu .mcard{position:relative;width:min(410px,100%);padding:30px 30px 22px;text-align:left}
@@ -407,7 +458,7 @@ body.menu #hud,body.menu #pop,body.menu #tip,body.menu #toasts,body.cine #hud,bo
       <div class="res" id="r-azeite" title="Azeite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 12.6c2.6 3.6 10.6 4 14.6.4l3.6-3h-6.6c-3-1.7-8.1-1.6-11.6 2.6z"/><path d="M8 18.6h6.5"/><path d="M19.6 7.4c-1.1-1.1-1.1-2.6 0-4.3 1.1 1.7 1.1 3.2 0 4.3z"/></svg><b>0</b></div>
       <div class="res" id="r-perg" title="Pergaminhos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4.5h10.5a2 2 0 0 1 2 2V17"/><path d="M5 7.5V18a2 2 0 0 0 2 2h10.5a2 2 0 0 0 2-2"/><path d="M7 4.5a2 2 0 0 0-2 2v1h4v-1a2 2 0 0 0-2-2z"/><path d="M9.6 10.2h6.6M9.6 13.7h6.6"/></svg><b>0</b></div>
     </div>
-    <button class="pill" id="phaseBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 12.6c2.6 3.6 10.6 4 14.6.4l3.6-3h-6.6c-3-1.7-8.1-1.6-11.6 2.6z"/><path d="M19.6 7.4c-1.1-1.1-1.1-2.6 0-4.3 1.1 1.7 1.1 3.2 0 4.3z"/></svg><span>Reunir a Igreja</span></button>
+    <div class="trow"><button class="pill alt" id="actBtn" title="Mini-games, moedas e missões do dia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5h11M9 12h11M9 19h11"/><path d="M4 5l1 1 2-2M4 12l1 1 2-2M4 19l1 1 2-2"/></svg><span>Atividades</span><i class="cnt" hidden></i></button><button class="pill" id="phaseBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 12.6c2.6 3.6 10.6 4 14.6.4l3.6-3h-6.6c-3-1.7-8.1-1.6-11.6 2.6z"/><path d="M19.6 7.4c-1.1-1.1-1.1-2.6 0-4.3 1.1 1.7 1.1 3.2 0 4.3z"/></svg><span>Reunir a Igreja</span></button></div>
   </div>
   <div id="tr">
     <button class="icon-btn" id="bookBtn" title="Cartas de Antioquia (C)" aria-label="Abrir as Cartas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span class="badge" id="badge" hidden></span></button>
@@ -462,7 +513,7 @@ body.menu #hud,body.menu #pop,body.menu #tip,body.menu #toasts,body.cine #hud,bo
 <div id="menu" hidden>
   <div class="mcard card">
     <p class="eyebrow">Um cozy game sobre Atos 11–15</p>
-    <h1>Luzes de Antioquia</h1>
+    <h1><img src="logo.webp" alt="A Luz de Antioquia" width="900" height="634"></h1>
     <p class="sub">Cuide da primeira igreja chamada cristã, às margens do rio Orontes.</p>
     <div class="macts">
       <button class="act" id="mContinue"><b>Continuar</b><small></small></button>
@@ -773,10 +824,10 @@ const costTxt = c => Object.entries(c).map(([k, n]) => qty(n, k)).join(' + ');
 
 /* ========================= state ========================= */
 const KEY = 'luzes-de-antioquia-v1';
-const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter', 'loom', 'peds', 'quality', 'church', 'churchBuild', 'curious', 'converts', 'ev', 'tut'];
+const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter', 'loom', 'peds', 'quality', 'church', 'churchBuild', 'curious', 'converts', 'ev', 'tut', 'mis'];
 const DEF = () => ({ time: 31, clock: 0, res: { moeda: 10, pao: 6, peixe: 0, azeite: 6, perg: 2 }, comm: 0,
-  stats: { fish: 0, olive: 0, copy: 0, help: 0, teach: 0, lantern: 0, agape: 0, vigil: 0, dawnPier: 0, relief: 0, build: 0, house: 0, bake: 0, weave: 0, load: 0, festival: 0, pentecost: 0, autumnOlive: 0, summerAgape: 0, rainAgape: 0, talk: 0, convert: 0, evHelp: 0 },
-  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0, loom: [], peds: null, quality: '', church: 1, churchBuild: 0, curious: [], converts: [], ev: null, tut: 0 });
+  stats: { fish: 0, olive: 0, copy: 0, help: 0, teach: 0, lantern: 0, agape: 0, vigil: 0, dawnPier: 0, relief: 0, build: 0, house: 0, bake: 0, weave: 0, load: 0, festival: 0, pentecost: 0, autumnOlive: 0, summerAgape: 0, rainAgape: 0, talk: 0, convert: 0, evHelp: 0, sold: 0, lamps: 0, hymn: 0 },
+  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0, loom: [], peds: null, quality: '', church: 1, churchBuild: 0, curious: [], converts: [], ev: null, tut: 0, mis: null });
 function makeState(s) {
   const d = DEF();
   if (!s || typeof s !== 'object') return d;
@@ -1150,12 +1201,13 @@ function buildChurchLevel(lv) {
     for (const sx of [-1, 1]) box(0.25, 0.8, z1 - fz0, M.stoneDark, cx + sx * fx, 0.4, (fz0 + z1) / 2, P);
     box(sw, 0.8, 0.25, M.stoneDark, cx - fx + sw / 2, 0.4, z1 - 0.2, P); box(sw, 0.8, 0.25, M.stoneDark, cx + fx - sw / 2, 0.4, z1 - 0.2, P);
     for (const gx of [-1, 1]) cyl(0.07, 0.08, 1.8, M.wood, cx + gx, 0.9, z1 - 0.2, P, 6);
-    for (const [mx, mz, c] of [[-0.9, -0.3, 0], [0.9, 0.2, 2], [0, 0.9, 3]]) box(1.5, 0.03, 1.0, M.cloth[c], cx + mx, 0.05, tz + mz, P, false);
-    cyl(0.28, 0.22, 0.22, M.wood, cx, 0.12, tz, P, 10, false);
-    for (let i = 0; i < 3; i++) { const l = add(SPH, M.loaf, cx + rand(-0.12, 0.12), 0.25, tz + rand(-0.12, 0.12), P, false); l.scale.set(0.12, 0.06, 0.09); }
-    box(0.14, 0.12, 0.14, M.lamp, cx + 0.5, 0.12, tz - 0.4, P, false);
-    cyl(0.05, 0.06, 2.4, M.wood, cx + 3.3, 1.2, tz + 2.2, P, 6);
-    stringLights(cx - 2.4, 2.4, z0 + 3.2, cx + 3.3, 2.35, tz + 2.2, 9, 0.5, B, C);
+    add(new THREE.CircleGeometry(1.2, 24).rotateX(-Math.PI / 2), M.cloth[1], cx, 0.045, tz, P, false); // round rug under a low table
+    box(0.9, 0.03, 1.9, M.cloth[0], cx - 1.75, 0.05, tz, P, false); box(0.9, 0.03, 1.9, M.cloth[2], cx + 1.75, 0.05, tz, P, false); box(1.9, 0.03, 0.9, M.cloth[3], cx, 0.05, tz - 1.75, P, false);
+    box(1.2, 0.06, 0.7, M.wood, cx, 0.3, tz, P); for (const [lx, lz] of [[-0.5, -0.27], [0.5, -0.27], [-0.5, 0.27], [0.5, 0.27]]) box(0.08, 0.28, 0.08, M.woodDark, cx + lx, 0.14, tz + lz, P, false);
+    for (let i = 0; i < 3; i++) { const l = add(SPH, M.loaf, cx - 0.25 + i * 0.22, 0.38, tz + (i % 2 ? 0.1 : -0.08), P, false); l.scale.set(0.11, 0.06, 0.08); }
+    box(0.12, 0.1, 0.12, M.lamp, cx + 0.42, 0.38, tz - 0.18, P, false);
+    cyl(0.05, 0.06, 2.8, M.wood, cx + 3.3, 1.4, tz + 2.2, P, 6);
+    stringLights(cx - 2.4, 2.75, z0 + 3.2, cx + 3.3, 2.75, tz + 2.2, 9, 0.35, B, C);
     add(AMPHORA, M.clay, cx - 3.1, 0.05, z0 + 3.6, P); add(AMPHORA, M.clay, cx - 2.7, 0.05, z0 + 3.7, P);
     for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; seat(cx + Math.sin(a) * 1.7, tz + Math.cos(a) * 1.5); }
   } else {
@@ -1470,18 +1522,18 @@ const HOT = [
   ] },
   { id: 'market', name: 'Mercado do cais', pos: [-10.5, 0.09, 9.6], actions: () => [
     { label: 'Conversar com quem passa', sub: G.curious.length >= 3 ? 'Mini-game de diálogo · já há 3 curiosos na cidade' : 'Mini-game de diálogo · pode despertar um curioso', ok: () => inHours(8, 18), why: 'Com o cais cheio, de 8h a 18h', cd: 'talk', run: playTalk },
-    ...[['peixe', 3, 7], ['pao', 3, 3], ['azeite', 2, 4]].map(([k, n, c]) => ({ label: `Vender ${qty(n, k)}`, sub: `+${c} moedas`, ok: () => inHours(7, 18.5) && G.res[k] >= n, why: inHours(7, 18.5) ? `Você precisa de ${qty(n, k)}` : 'O mercado abre de 7h a 18h', cd: null, run: () => { addRes(k, -n); addRes('moeda', c); toast(`Vendido: ${qty(n, k)} por ${c} moedas.`); } })),
+    ...[['peixe', 3, 7], ['pao', 3, 3], ['azeite', 2, 4]].map(([k, n, c]) => ({ label: `Vender ${qty(n, k)}`, sub: `+${c} moedas`, ok: () => inHours(7, 18.5) && G.res[k] >= n, why: inHours(7, 18.5) ? `Você precisa de ${qty(n, k)}` : 'O mercado abre de 7h a 18h', cd: null, run: () => { addRes(k, -n); addRes('moeda', c); G.stats.sold++; toast(`Vendido: ${qty(n, k)} por ${c} moedas.`); } })),
     ...[['perg', 2, 8], ['azeite', 3, 8], ['pao', 4, 5]].map(([k, n, c]) => ({ label: `Comprar ${qty(n, k)}`, sub: `−${c} moedas`, ok: () => inHours(7, 18.5) && G.res.moeda >= c, why: inHours(7, 18.5) ? `Custa ${c} moedas` : 'O mercado abre de 7h a 18h', cd: null, run: () => { addRes('moeda', -c); addRes(k, n); toast(`Comprado: ${qty(n, k)}.`); } })),
   ] },
   { id: 'street', name: 'Rua das colunas', pos: [-4.5, 0.09, 2.3], actions: () => [
-    { label: 'Encher as lamparinas', sub: 'Mini-game · acende a rua esta noite', ok: () => inHours(15, 21), why: 'No fim da tarde (15h–21h)', cd: 'lamps', run: () => playLamps(r => { setCd('lamps', 10); const g = r + (r === 5 ? 3 : 0); toast(r ? `${r} ${r === 1 ? 'lamparina vai' : 'lamparinas vão'} arder esta noite na rua das colunas. <span class="dim">+${g} ✦</span>` : 'Nenhuma lamparina acendeu. Tente amanhã.'); addComm(g); }) },
+    { label: 'Encher as lamparinas', sub: 'Mini-game · acende a rua esta noite', ok: () => inHours(15, 21), why: 'No fim da tarde (15h–21h)', cd: 'lamps', run: () => playLamps(r => { setCd('lamps', 10); G.stats.lamps++; const g = r + (r === 5 ? 3 : 0); toast(r ? `${r} ${r === 1 ? 'lamparina vai' : 'lamparinas vão'} arder esta noite na rua das colunas. <span class="dim">+${g} ✦</span>` : 'Nenhuma lamparina acendeu. Tente amanhã.'); addComm(g); }) },
   ] },
   { id: 'event', get name() { return evNow()?.name || 'Evento'; }, pos: [0, 0.09, 40], actions: () => evNow()?.actions() || [] },
   { id: 'church', get name() { return LEVELS[G.church].name; }, pos: [-12, 0.09, -2.7], actions: () => [
     ...(G.church < 4 ? [churchUpgrade()] : []),
     { label: 'Reunir a igreja para o ágape', sub: 'Avança até o entardecer (19h)', ok: () => inHours(5, 18.9) && !ff, why: 'A igreja se reúne todo entardecer', cd: null, run: phaseAction },
     { label: 'Vigília de oração', sub: '1 azeite · entre 0h e 4h · +6 ✦', ok: () => inHours(0, 4) && G.res.azeite >= 1, why: 'Só de madrugada (0h–4h), com 1 azeite', cd: 'vigil', run: doVigil },
-    { label: 'Cantar hinos no pátio', sub: 'Mini-game de ritmo · rende comunhão', ok: () => inHours(19, 1), why: 'À noite (19h–1h)', cd: 'hymn', run: () => playHymn(sc => { setCd('hymn', 6); const g = Math.round(sc / 3); toast(`O pátio cantou junto. <span class="dim">+${g} ✦</span>`); addComm(g); }) },
+    { label: 'Cantar hinos no pátio', sub: 'Mini-game de ritmo · rende comunhão', ok: () => inHours(19, 1), why: 'À noite (19h–1h)', cd: 'hymn', run: () => playHymn(sc => { setCd('hymn', 6); G.stats.hymn++; const g = Math.round(sc / 3); toast(`O pátio cantou junto. <span class="dim">+${g} ✦</span>`); addComm(g); }) },
   ] },
 ];
 for (const h of HOT) {
@@ -3105,7 +3157,7 @@ function openPop(sx, sy, title, sub, text, acts, anchor = null) {
   p.innerHTML = `<div class="pop-h">${title}</div>${sub ? `<div class="pop-r">${sub}</div>` : ''}${text ? `<p class="pop-t">${text}</p>` : ''}<div class="pop-acts"></div>`;
   for (const a of acts) {
     if (a.header) { p.querySelector('.pop-acts').insertAdjacentHTML('beforeend', `<div class="lbl2">${a.header}</div>`); continue; }
-    const b = document.createElement('button'); b.className = 'act'; b.disabled = !a.enabled;
+    const b = document.createElement('button'); b.className = 'act ' + (a.cls || ''); b.disabled = !a.enabled;
     b.innerHTML = `<b>${a.label}</b><small>${a.enabled ? a.sub || '' : a.reason || ''}</small>`; b.onclick = a.run;
     p.querySelector('.pop-acts').append(b);
   }
@@ -3121,7 +3173,7 @@ function openHotspot(h, sx, sy) {
   h.onOpen?.();
   openPop(sx, sy, h.name, '', '', h.actions().map(a => {
     const w = cdLeft(a.cd), ok = a.ok() && w <= 0;
-    return { label: a.label, sub: a.sub, enabled: ok, reason: a.ok() ? `Disponível em ${fmtWait(w)}` : a.why, run: () => { closePop(); a.run(); } };
+    return { label: a.label, sub: a.sub, cls: /^Mini-game/.test(a.sub) ? 'mg' : /moeda/.test(a.sub) ? 'coin' : '', enabled: ok, reason: a.ok() ? `Disponível em ${fmtWait(w)}` : a.why, run: () => { closePop(); a.run(); } };
   }), new THREE.Vector3(h.pos[0], 0.5, h.pos[2]));
   focusOn(h.pos[0], h.pos[2]);
 }
@@ -3176,6 +3228,8 @@ function openHelp() {
       <li><b>Câmera</b>: modo foto e passeio pela cidade. O passeio começa sozinho quando ninguém mexe por 1 minuto; qualquer toque encerra.</li>
       <li><b>Ajustes</b>: qualidade gráfica (o modo leve deixa o jogo fluido em celulares) e volume.</li>
       <li><b>Comunhão ✦</b>: a cada 15, um novo irmão chega pelo porto.</li>
+      <li><b>Moedas</b>: a coleta de cada amanhecer (1 moeda a cada 2 irmãos), vender no mercado do cais, oficinas nos terrenos, missões do dia e eventos. Toque num recurso no topo para ver de onde ele vem.</li>
+      <li><b>Atividades</b> (botão laranja no topo): lista todos os mini-games com horário e recompensa, e as 3 missões do dia.</li>
       <li><b>Som</b>: música, rio, pássaros e grilos são gerados pelo próprio jogo. Ajuste na engrenagem ou aperte M.</li>
     </ul>
     <p class="keys">Arrastar: girar a cidade · Botão direito ou WASD: mover · Roda ou pinça: zoom · B: construir · C: Cartas · M: som · H: ajuda · Esc: fechar</p>
@@ -3718,12 +3772,12 @@ function step(dt, t) {
   watchFps(dt);
   updateCine(dt); updateTour(dt); updateFocus(dt); keyPan(dt); clampCam(); controls.update(); hover(); anchorPop(); updateTutArrow();
   composer.render();
-  hudT -= dt; if (hudT <= 0) { hudT = 0.25; refreshHUD(); tutTick(); audio.update(controls.target.x, controls.target.z, rainAmt); checkUnlocks(); }
+  hudT -= dt; if (hudT <= 0) { hudT = 0.25; refreshHUD(); tutTick(); misTick(); audio.update(controls.target.x, controls.target.z, rainAmt); checkUnlocks(); }
   saveT -= dt; if (saveT <= 0) { saveT = 5; save(); }
 }
 
 /* ========================= title menu, intro film and tutorial ========================= */
-let menuOn = false, cine = null, tutMoved = 0, tutBook = false, tutNeed = null, tutWait = false;
+let menuOn = false, cine = null, tutMoved = 0, tutBook = false, tutActs = false, tutNeed = null, tutWait = false;
 controls.addEventListener('start', () => { tutMoved++; });
 const hasProgress = () => G.seenIntro || G.comm > 0;
 function openMenu() {
@@ -3813,7 +3867,7 @@ function cineEnd() {
   if (!c.replay) G.time = 24 + 9;
   controls.target.set(-4, 0, 1); _sph.set(34, 0.88, 0.3); camera.position.setFromSpherical(_sph).add(controls.target); // back to the usual view of the city
   const tutOn = G.tut < TUT.length;
-  const el = openModal(`<div class="card intro"><p class="eyebrow">Sua missão</p><h2>Luzes de Antioquia</h2>
+  const el = openModal(`<div class="card intro"><p class="eyebrow">Sua missão</p><h2>A Luz de Antioquia</h2>
     <p>Esta pequena comunidade agora está nas suas mãos. Trabalhe de dia, reúna a igreja ao entardecer e acolha quem chega à noite.</p>
     <p class="v">“Em Antioquia, os discípulos foram chamados cristãos pela primeira vez.” <span class="ref">Atos 11:26</span></p>
     <p>A cada 15 de comunhão (✦), um novo irmão chega pelo porto, e a igreja cresce.</p>
@@ -3827,6 +3881,8 @@ const TUT = [
   { t: 'Olhe ao redor', d: 'Arraste para girar a cidade. Use a roda do mouse, ou dois dedos no celular, para aproximar e afastar.', done: () => tutMoved > 0 },
   { t: 'Asse pães no forno', d: 'O pão alimenta a igreja no ágape. Toque no anel dourado do Forno da Cloé.', hot: 'bakery', done: s => s.bake >= 1 },
   { t: 'Pesque no Orontes', d: 'Peixe deixa a mesa mais farta. Toque no anel dourado do píer.', hot: 'pier', done: s => s.fish >= 1 },
+  { t: 'Ganhe moedas', d: 'Moedas vêm do mercado, das oficinas e da coleta de cada amanhecer. Toque no anel do Mercado do cais e venda alguma coisa.', hot: 'market', done: s => s.sold >= 1 },
+  { t: 'Veja as atividades', d: 'O botão laranja “Atividades” mostra todos os mini-games, onde ganhar moedas e as missões do dia. Abra.', el: '#actBtn', done: () => tutActs },
   { t: 'Reúna a igreja', d: 'Ao entardecer, a igreja se reúne para o ágape: cada irmão come um pão e a comunhão ✦ cresce. Toque em “Reunir a Igreja”.', el: '#phaseBtn', done: s => G.gathering || s.agape >= 1 },
   { t: 'Acolha quem precisa', d: 'Um ícone sobre a cabeça é um pedido: oração 🙏, pão 🍞, consolo 💧 ou ensino 📜. Toque na pessoa que a seta mostra.', need: true, done: s => s.help >= 1 },
   { t: 'Abra as Cartas', d: 'Cada coisa que você faz revela uma página da história de Antioquia. Toque no livro, no canto de cima.', el: '#bookBtn', done: () => tutBook },
@@ -3860,6 +3916,7 @@ function tutFinish() {
       <li>Nos <b>terrenos</b> (botão de construir ou tecla B), erga oficinas onde os irmãos trabalham.</li>
       <li>Na <b>casa da igreja</b>, amplie o local de reunião quando ele ficar pequeno.</li>
       <li>No <b>mercado do cais</b>, venda, compre e converse com quem passa.</li>
+      <li>Todo dia há <b>3 missões</b> com recompensa em moedas: veja em <b>Atividades</b>.</li>
       <li>Fique de olho na <b>faixa de notícias</b>: alguns dias trazem eventos na cidade.</li>
     </ul>
     <button class="pill go">Vamos lá</button></div>`);
@@ -3874,6 +3931,93 @@ function updateTutArrow() { // a bouncing arrow over the 3D target of the curren
   if (w) _ta.set(...w).project(camera);
   if (!w || _ta.z > 1 || Math.abs(_ta.x) > 1.02 || Math.abs(_ta.y) > 1.02) { a.hidden = true; return; }
   a.hidden = false; a.style.left = (_ta.x + 1) / 2 * innerWidth + 'px'; a.style.top = (1 - _ta.y) / 2 * innerHeight + 'px';
+}
+
+/* ========================= activities list, resource info and daily missions ========================= */
+const GROUPS = [['food', 'Comida e azeite', 'pão, peixe e azeite para o ágape e as lamparinas', '#e59a74'], ['coin', 'Moedas', 'para ampliar a igreja, construir e comprar', '#ead096'], ['comm', 'Comunhão ✦', 'faz a igreja crescer e traz irmãos novos', '#79c0bf']];
+const ACTS = [ // [group, icon, name, where and when, gives, hotspot id, action index] — index null opens the hotspot
+  ['food', '🍞', 'Assar pães', 'Forno da Cloé · 4h–14h', '+ pães', 'bakery', 0],
+  ['food', '🎣', 'Pescar', 'Píer do Orontes · 5h–19h', '+ peixes', 'pier', 0],
+  ['food', '🫒', 'Colher azeitonas', 'Olival · 6h–18h', '+ azeite', 'grove', 0],
+  ['coin', '⚖️', 'Vender no mercado', 'Mercado do cais · 7h–18h · pão, peixe ou azeite', '+3 a +7', 'market', null],
+  ['coin', '🏺', 'Oficinas nos terrenos', 'Construir (B) · rendem todo amanhecer', 'renda diária', 'build', null],
+  ['coin', '🌅', 'Coleta da comunidade', 'Automática ao amanhecer · 1 moeda a cada 2 irmãos', 'automático', null, null],
+  ['comm', '🧵', 'Tecer um toldo', 'Tear da Irene · 7h–20h · jogo da memória', '+ ✦', 'loom', 0],
+  ['comm', '📜', 'Copiar um versículo', 'Casa do Copista · a qualquer hora', '+ pergaminho', 'scroll', 0],
+  ['comm', '🪔', 'Encher as lamparinas', 'Rua das colunas · 15h–21h', '+ ✦', 'street', 0],
+  ['comm', '🗣️', 'Conversar com quem passa', 'Mercado do cais · 8h–18h', 'curiosos', 'market', 0],
+  ['comm', '🎶', 'Cantar hinos', 'Casa da igreja · 19h–1h', '+ ✦', 'church', 'hymn'],
+  ['comm', '🍷', 'Reunir para o ágape', 'Botão “Reunir a Igreja” · todo entardecer', '+ ✦', 'agape', null],
+];
+const MISSIONS = [
+  { k: 'bake', n: 2, t: 'Asse pães 2 vezes', r: { moeda: 4 }, hot: 'bakery' },
+  { k: 'fish', n: 2, t: 'Pesque 2 vezes no Orontes', r: { moeda: 4 }, hot: 'pier' },
+  { k: 'olive', n: 1, t: 'Colha azeitonas no olival', r: { moeda: 3 }, hot: 'grove' },
+  { k: 'copy', n: 1, t: 'Copie um versículo', r: { moeda: 3 }, hot: 'scroll' },
+  { k: 'weave', n: 1, t: 'Teça um toldo com as irmãs', r: { moeda: 3 }, hot: 'loom' },
+  { k: 'sold', n: 2, t: 'Venda 2 vezes no mercado do cais', r: { comm: 4 }, hot: 'market' },
+  { k: 'talk', n: 1, t: 'Converse com quem passa no cais', r: { moeda: 4 }, hot: 'market' },
+  { k: 'lamps', n: 1, t: 'Encha as lamparinas da rua', r: { moeda: 4 }, hot: 'street' },
+  { k: 'help', n: 2, t: 'Acolha 2 pessoas à noite', r: { moeda: 5 }, night: true },
+  { k: 'hymn', n: 1, t: 'Cante hinos no pátio à noite', r: { moeda: 4 }, hot: 'church', night: true },
+  { k: 'agape', n: 1, t: 'Celebre o ágape ao entardecer', r: { moeda: 3 }, hot: 'agape' },
+];
+const rewardTxt = r => Object.entries(r).map(([k, v]) => k === 'comm' ? `+${v} ✦` : '+' + qty(v, k)).join(' · ');
+function newMissions() { // three a day, at most one that only works at night
+  const pool = shuffle(MISSIONS.map((_, i) => i)), list = [];
+  for (const i of pool) { if (list.length === 3) break; if (MISSIONS[i].night && list.some(m => MISSIONS[m.i].night)) continue; list.push({ i, base: G.stats[MISSIONS[i].k] || 0, done: false }); }
+  G.mis = { d: dayN(), list, bonus: false };
+}
+function misTick() {
+  if (!G.mis || G.mis.d !== dayN()) newMissions();
+  for (const m of G.mis.list) {
+    const M0 = MISSIONS[m.i]; if (m.done || (G.stats[M0.k] || 0) - m.base < M0.n) continue;
+    m.done = true; audio.sfx('win');
+    for (const [k, v] of Object.entries(M0.r)) k === 'comm' ? addComm(v) : addRes(k, v);
+    toast(`<b>Missão cumprida:</b> ${M0.t}. <span class="dim">${rewardTxt(M0.r)}</span>`, 5500);
+  }
+  if (!G.mis.bonus && G.mis.list.every(m => m.done)) { G.mis.bonus = true; addRes('moeda', 5); addComm(5); setTimeout(() => toast('<b>Todas as missões do dia!</b> <span class="dim">+5 moedas · +5 ✦</span>', 6000), 1200); }
+  const left = G.mis.list.filter(m => !m.done).length, c = $('#actBtn .cnt');
+  c.hidden = !left; c.textContent = left;
+}
+function goTo(hot) { // fly to a hotspot and open it, or run the special targets
+  closeModal();
+  if (hot === 'build') return toggleBuild(true);
+  if (hot === 'agape') { $('#phaseBtn').classList.add('tut-glow'); setTimeout(() => G.tut >= TUT.length && $('#phaseBtn').classList.remove('tut-glow'), 4000); return; }
+  const h = HOT.find(h => h.id === hot); if (!h) return;
+  focusOn(h.pos[0], h.pos[2], 20);
+  setTimeout(() => { if (modalOpen) return; const [x, y] = toScreen(new THREE.Vector3(h.pos[0], 0.5, h.pos[2])); openHotspot(h, x, y); }, 900);
+}
+function openActs() {
+  tutActs = true; misTick();
+  const status = (hot, idx) => {
+    const h = HOT.find(h => h.id === hot); if (!h || idx === null) return ['', ''];
+    const a = typeof idx === 'string' ? h.actions().find(a => a.cd === idx) : h.actions()[idx]; if (!a) return ['', ''];
+    const w = cdLeft(a.cd); return a.ok() && w <= 0 ? ['now', 'Disponível agora'] : !a.ok() ? ['', a.why] : ['', `Volta em ${fmtWait(w)}`];
+  };
+  const mis = G.mis.list.map(m => { const M0 = MISSIONS[m.i], n = Math.min(M0.n, (G.stats[M0.k] || 0) - m.base);
+    return `<div class="arow ${m.done ? 'done' : ''}" style="--gc:var(--olive)"><div class="ai">${m.done ? '✅' : '🎯'}</div><div><b>${M0.t}</b><div class="mbar"><i style="width:${n / M0.n * 100}%"></i></div><span class="st">${n} de ${M0.n}${M0.night ? ' · à noite' : ''}</span></div><span class="gv">${rewardTxt(M0.r)}</span>${!m.done && M0.hot ? `<button class="go2" data-go="${M0.hot}">Ir</button>` : '<span></span>'}</div>`; }).join('');
+  const groups = GROUPS.map(([g, name, sub, col]) => `<div class="grp" style="--gc:${col}">${name} <small>${sub}</small></div>` + ACTS.filter(a => a[0] === g).map(([, ic, nm, where, gives, hot, idx]) => {
+    const [cls, st] = status(hot, idx);
+    return `<div class="arow ${cls}" style="--gc:${col}"><div class="ai">${ic}</div><div><b>${nm}</b><small>${where}</small>${st ? `<span class="st">${st}</span>` : ''}</div><span class="gv">${gives}</span>${hot ? `<button class="go2" data-go="${hot}">Ir</button>` : '<span></span>'}</div>`;
+  }).join('')).join('');
+  const el = openModal(`<div class="card acts"><button class="x" aria-label="Fechar">✕</button><p class="eyebrow">Dia ${dayN()} · ${SEASONS[seasonIdx()].name}</p><h2>Atividades</h2>
+    <div class="grp" style="--gc:var(--olive)">Missões de hoje <small>recompensa ao cumprir · as 3 juntas dão +5 moedas e +5 ✦</small></div>${mis}
+    ${groups}</div>`, null, true);
+  el.querySelectorAll('[data-go]').forEach(b => { b.onclick = () => goTo(b.dataset.go); });
+}
+$('#actBtn').onclick = openActs;
+const RES_INFO = {
+  moeda: ['Moedas', 'Para ampliar a casa da igreja, construir oficinas e comprar no mercado.', ['Coleta de cada amanhecer: 1 moeda a cada 2 irmãos', 'Vender pão, peixe ou azeite no Mercado do cais', 'Oficinas nos terrenos: banca, tecelagem e olaria rendem todo dia', 'Missões do dia e eventos (a caravana paga o dobro pelo peixe)']],
+  pao: ['Pães', 'Cada irmão come um pão no ágape. Também ajuda quem pede pão à noite.', ['Assar no Forno da Cloé (4h–14h)', 'Forno comunitário construído num terreno', 'Comprar no Mercado do cais']],
+  peixe: ['Peixes', 'Deixam a mesa do ágape mais farta (+✦) e valem bem no mercado.', ['Pescar no píer do Orontes (5h–19h)', 'Banca de peixe construída num terreno']],
+  azeite: ['Azeite', 'Acende as lamparinas da cidade todo entardecer.', ['Colher azeitonas no Olival (6h–18h)', 'Lagar de azeite construído num terreno', 'Comprar no Mercado do cais']],
+  perg: ['Pergaminhos', 'Para ensinar quem pede um rolo, construir e ampliar a igreja.', ['Copiar versículos na Casa do Copista', 'Sala dos copistas construída num terreno', 'Comprar no Mercado do cais']],
+};
+for (const k of Object.keys(RES_INFO)) {
+  const el = $('#r-' + k); el.setAttribute('role', 'button'); el.tabIndex = 0;
+  const open = () => { const [t, use, how] = RES_INFO[k], r = el.getBoundingClientRect(); openPop(r.left, r.bottom + 120, `${t}: ${G.res[k]}`, use, '', [{ header: `<div class="news-list">${how.map(h => `<div>• ${h}</div>`).join('')}</div>` }, { label: 'Ver todas as atividades', sub: 'Mini-games, horários e missões do dia', enabled: true, run: () => { closePop(); openActs(); } }]); };
+  el.addEventListener('click', open); el.addEventListener('keydown', e => { if (e.code === 'Enter' || e.code === 'Space') { e.preventDefault(); open(); } });
 }
 
 /* ========================= boot ========================= */
