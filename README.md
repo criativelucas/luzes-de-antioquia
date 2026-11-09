@@ -8,6 +8,8 @@ Cozy game 3D sobre a igreja de Antioquia da Síria, a cidade de Atos 11 onde os 
 - Moradores com pedidos de oração, pão, consolo e ensino; ágape no pátio ao entardecer
 - O local de reunião cresce em 4 níveis, da Casa de Cloé à Grande casa de Antioquia; quem não cabe espera no portão
 - Moedas, mercado no cais e oficinas (banca de peixe, forno, tecelagem, olaria, copistas, lagar) onde os irmãos trabalham e produzem a cada amanhecer
+- Faixa de notícias com o que acontece na cidade, no império e na viagem missionária, e um pregoeiro que lê as notícias na rua das colunas
+- Evangelismo: converse com quem passa no cais (mercador, ancião, soldado, filósofo, viúva, escravo). Quem se interessa vira curioso; depois de 2 ágapes, pede o batismo e entra para a igreja
 - Arraste para girar a cidade inteira; rio com reflexo, refração, leito e cardumes de peixes
 - Mini-games encenados na própria cidade: pesca de boia no píer, forno, colheita de azeitonas com cesto, tear, copista, carga do barco, lamparinas da rua e hinos no pátio
 - Qualidade gráfica alta, média ou leve, com escolha automática pelo aparelho e ajuste se o jogo ficar lento
