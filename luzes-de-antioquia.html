@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;0,800;1,500;1,600&family=Nunito:wght@600;700;800&display=swap">
 <style>
-/* Layout: full-bleed 3D diorama of Antioch; HUD floats in the corners like a game screen; the Códice opens as parchment */
+/* Layout: full-bleed 3D diorama of Antioch; HUD floats in the corners like a game screen; the Cartas book opens as parchment */
 :root{
   color-scheme: dark;
   --night:#0d1526;
@@ -44,6 +44,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--lamp);outline-o
 #hud{position:fixed;inset:0;pointer-events:none;z-index:4}
 #hud > *{pointer-events:auto}
 body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!important}
+body.menu #hud,body.menu #pop,body.menu #tip,body.menu #toasts,body.cine #hud,body.cine #pop,body.cine #tip,body.cine #toasts{display:none!important}
 
 #tl{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:calc(14px + env(safe-area-inset-left,0px));padding:10px 14px 9px;min-width:210px}
 #tl .row{display:flex;align-items:baseline;gap:7px}
@@ -298,6 +299,54 @@ body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!
 .talk .who .ptr{width:64px;height:64px}
 #news .ntag{background:rgba(63,128,136,.35);color:var(--gold-hi)}
 @media (max-width:640px){#res{gap:14px;padding:5px 14px}}
+#menu{position:fixed;inset:0;z-index:15;display:flex;align-items:center;padding:24px calc(24px + env(safe-area-inset-right,0px)) 24px calc(min(7vw,90px) + env(safe-area-inset-left,0px));background:linear-gradient(90deg,rgba(6,14,16,.8),rgba(6,14,16,.35) 45%,transparent 72%)}
+#menu .mcard{position:relative;width:min(410px,100%);padding:30px 30px 22px;text-align:left}
+#menu h1{font:800 52px/1 var(--serif);margin:6px 0 0;color:#f6ebd0;text-shadow:0 0 30px rgba(242,196,107,.35)}
+#menu h1::after{content:"";display:block;height:10px;margin:14px 0 12px;background:var(--divider)}
+#menu .sub{font:italic 600 18px/1.4 var(--serif);color:var(--ink-dim);margin:0 0 18px}
+.macts{display:flex;flex-direction:column;gap:9px}
+.macts .act{padding:11px 16px}
+.macts .act b{font:700 20px/1.2 var(--serif)}
+.macts .act.main{background:var(--cream);color:var(--cream-ink);border-color:var(--gold-hi)}
+.macts .act.main small{color:#55625c}
+.macts .act[data-armed]{border-color:var(--bad)}
+.macts .act[data-armed] small{color:var(--bad)}
+#menu .foot{margin:16px 0 0;font-size:11.5px;color:var(--ink-dim)}
+#cine{position:fixed;inset:0;z-index:15;cursor:pointer}
+#cine::before,#cine::after{content:"";position:absolute;left:0;right:0;height:9vh;background:#05090a}
+#cine::before{top:0}
+#cine::after{bottom:0}
+.cap{position:absolute;left:50%;bottom:calc(9vh + 30px);transform:translateX(-50%);width:min(760px,calc(100vw - 40px));text-align:center;transition:opacity .5s}
+.cap.off{opacity:0}
+.cap .eyebrow{margin:0 0 8px;text-shadow:0 1px 6px #000}
+.cap .ct{font:italic 600 clamp(20px,2.7vw,29px)/1.35 var(--serif);color:#fbf1d8;text-shadow:0 2px 14px rgba(0,0,0,.95),0 0 3px #000;margin:0;text-wrap:balance}
+.cap .ref{margin-top:9px;text-shadow:0 1px 6px #000}
+.cdots{position:absolute;left:50%;bottom:calc(4.5vh - 4px);transform:translateX(-50%);display:flex;gap:9px;z-index:1}
+.cdots i{width:8px;height:8px;transform:rotate(45deg);background:rgba(201,168,106,.3)}
+.cdots i.on{background:var(--gold)}
+#cineSkip{position:absolute;z-index:1;top:calc(9vh + 14px);right:calc(18px + env(safe-area-inset-right,0px));padding:7px 14px;border-radius:4px;border:1px solid rgba(201,168,106,.5);background:rgba(10,20,22,.65);color:var(--gold-hi);font-weight:700}
+.cnext{position:absolute;right:calc(26px + env(safe-area-inset-right,0px));bottom:calc(4.5vh - 12px);color:var(--gold-hi);font-size:13px;font-weight:800;z-index:1;animation:nudge 1.6s infinite}
+@keyframes nudge{50%{transform:translateX(5px)}}
+#tut{position:absolute;top:calc(150px + env(safe-area-inset-top,0px));left:calc(14px + env(safe-area-inset-left,0px));width:290px;padding:14px 16px 12px}
+#tut .eyebrow{margin:0 0 5px;display:flex;justify-content:space-between;align-items:center}
+#tut .tsk{font:600 12px var(--sans);letter-spacing:0;text-transform:none;color:var(--ink-dim);text-decoration:underline}
+#tut b{display:block;font:700 20px/1.15 var(--serif);color:#f6ebd0}
+#tut p{margin:6px 0 2px;font-size:13.5px;line-height:1.45}
+#tut.ok b::before{content:"✓ ";color:var(--ok)}
+#tutArrow{position:fixed;z-index:6;pointer-events:none;width:34px;height:40px;margin:-48px 0 0 -17px;animation:tbob 1s ease-in-out infinite;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}
+#tutArrow svg{display:block;width:100%;height:100%}
+@keyframes tbob{50%{transform:translateY(-9px)}}
+.tut-glow{animation:tglow 1.3s ease-in-out infinite}
+@keyframes tglow{50%{box-shadow:0 0 0 3px var(--gold-hi),0 0 22px 6px rgba(234,208,150,.7)}}
+@media (max-width:640px){
+  #menu{align-items:flex-end;padding:16px;background:linear-gradient(0deg,rgba(6,14,16,.88),rgba(6,14,16,.35) 62%,transparent)}
+  #menu h1{font-size:40px}
+  #menu .mcard{padding:22px 20px 16px}
+  #tut{top:auto;bottom:calc(62px + env(safe-area-inset-bottom,0px));left:calc(66px + env(safe-area-inset-left,0px));right:calc(14px + env(safe-area-inset-right,0px));width:auto;padding:11px 13px 9px}
+  #tut b{font-size:17px}
+  #tut p{font-size:12.5px}
+  body.tuton #toasts{bottom:calc(200px + env(safe-area-inset-bottom,0px))}
+}
 .mem .ptr{width:66px;height:66px}
 .chain{position:relative;height:46px;margin:6px 14px 14px}
 .chain::before{content:"";position:absolute;left:0;right:0;top:22px;height:2px;background:rgba(201,168,106,.35)}
@@ -352,7 +401,7 @@ body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!
     <button class="pill" id="phaseBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 12.6c2.6 3.6 10.6 4 14.6.4l3.6-3h-6.6c-3-1.7-8.1-1.6-11.6 2.6z"/><path d="M19.6 7.4c-1.1-1.1-1.1-2.6 0-4.3 1.1 1.7 1.1 3.2 0 4.3z"/></svg><span>Reunir a Igreja</span></button>
   </div>
   <div id="tr">
-    <button class="icon-btn" id="bookBtn" title="Códice de Antioquia (C)" aria-label="Abrir o Códice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span class="badge" id="badge" hidden></span></button>
+    <button class="icon-btn" id="bookBtn" title="Cartas de Antioquia (C)" aria-label="Abrir as Cartas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span class="badge" id="badge" hidden></span></button>
     <button class="icon-btn" id="albumBtn" title="Álbum da comunidade" aria-label="Álbum da comunidade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.6 13.4c3 .2 5.4 2.7 5.4 5.9"/></svg></button>
     <button class="icon-btn" id="soundBtn" title="Ajustes: gráficos e som (M silencia)" aria-label="Ajustes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
   </div>
@@ -367,6 +416,7 @@ body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!
     <label for="volSfx">Efeitos<input type="range" id="volSfx" min="0" max="1" step="0.05" value="0.8"></label>
     <button class="ghost" id="muteBtn">Silenciar tudo</button>
     <button class="ghost" id="howBtn">Como jogar</button>
+    <button class="ghost" id="menuBtn">Menu inicial</button>
   </div>
   <div id="bl">
     <button class="icon-btn" id="buildBtn" title="Construir (B)" aria-label="Modo construção"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5v-8.5"/><path d="M12 12c0-4 3-6.6 7.2-6.6 0 4-3 6.6-7.2 6.6z"/><path d="M12 14.6c0-3-2.6-5.1-6.2-5.1 0 3 2.6 5.1 6.2 5.1z"/></svg></button>
@@ -379,6 +429,7 @@ body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!
     <button class="act" id="photoGo"><b>Modo foto</b><small>Esconde a interface, com desfoque de miniatura</small></button>
     <button class="act" id="tourGo"><b>Passeio pela cidade</b><small>A câmera passeia sozinha. Começa também quando ninguém mexe por 1 minuto.</small></button>
   </div>
+  <div id="tut" class="glass" hidden><p class="eyebrow"><span id="tutN">Tutorial</span><button class="tsk" id="tutSkip">Pular tutorial</button></p><b id="tutT"></b><p id="tutD"></p></div>
   <div id="dial" class="glass" hidden>
     <svg viewBox="-80 -80 160 160" id="dialSvg" aria-label="Arraste para mudar a hora">
       <path id="dayArc" fill="none" stroke="rgba(242,196,107,.55)" stroke-width="8" stroke-linecap="round"/>
@@ -398,6 +449,22 @@ body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!
 <div id="tip" hidden></div>
 <div id="pop" class="glass" hidden></div>
 <div id="modal" hidden></div>
+<div id="tutArrow" hidden><svg viewBox="0 0 34 40" aria-hidden="true"><path d="M17 38L3 20h9V2h10v18h9Z" fill="#ead096" stroke="#142729" stroke-width="2" stroke-linejoin="round"/></svg></div>
+<div id="menu" hidden>
+  <div class="mcard card">
+    <p class="eyebrow">Um cozy game sobre Atos 11–15</p>
+    <h1>Luzes de Antioquia</h1>
+    <p class="sub">Cuide da primeira igreja chamada cristã, às margens do rio Orontes.</p>
+    <div class="macts">
+      <button class="act" id="mContinue"><b>Continuar</b><small></small></button>
+      <button class="act" id="mNew"><b>Novo jogo</b><small></small></button>
+      <button class="act" id="mIntro"><b>Ver a introdução</b><small>Como a igreja chegou a Antioquia</small></button>
+      <button class="act" id="mHelp"><b>Como jogar</b><small>Tudo o que dá para fazer na cidade</small></button>
+    </div>
+    <p class="foot">Versículos em tradução livre · música e sons gerados pelo próprio jogo</p>
+  </div>
+</div>
+<div id="cine" hidden><button id="cineSkip">Pular introdução ›</button><div class="cap off"><p class="eyebrow"></p><p class="ct"></p><p class="ref"></p></div><span class="cnext">toque para seguir ›</span><div class="cdots"></div></div>
 <button id="photoExit" hidden>✕ Sair do modo foto</button>
 
 <script type="importmap">
@@ -697,10 +764,10 @@ const costTxt = c => Object.entries(c).map(([k, n]) => qty(n, k)).join(' + ');
 
 /* ========================= state ========================= */
 const KEY = 'luzes-de-antioquia-v1';
-const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter', 'loom', 'peds', 'quality', 'church', 'churchBuild', 'curious', 'converts', 'ev'];
+const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter', 'loom', 'peds', 'quality', 'church', 'churchBuild', 'curious', 'converts', 'ev', 'tut'];
 const DEF = () => ({ time: 31, clock: 0, res: { moeda: 10, pao: 6, peixe: 0, azeite: 6, perg: 2 }, comm: 0,
   stats: { fish: 0, olive: 0, copy: 0, help: 0, teach: 0, lantern: 0, agape: 0, vigil: 0, dawnPier: 0, relief: 0, build: 0, house: 0, bake: 0, weave: 0, load: 0, festival: 0, pentecost: 0, autumnOlive: 0, summerAgape: 0, rainAgape: 0, talk: 0, convert: 0, evHelp: 0 },
-  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0, loom: [], peds: null, quality: '', church: 1, churchBuild: 0, curious: [], converts: [], ev: null });
+  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0, loom: [], peds: null, quality: '', church: 1, churchBuild: 0, curious: [], converts: [], ev: null, tut: 0 });
 function makeState(s) {
   const d = DEF();
   if (!s || typeof s !== 'object') return d;
@@ -711,6 +778,7 @@ function makeState(s) {
   if (s.church === undefined) d.church = 3; // saves from before the levels already had the full courtyard
   d.church = clamp(Math.round(d.church) || 1, 1, 4);
   if (!d.ev || !EVENTS[d.ev.id] || !Array.isArray(d.ev.done)) d.ev = null;
+  if (s.tut === undefined && s.seenIntro) d.tut = 99; // older saves already know how to play
   return d;
 }
 let G = DEF(), resetting = false;
@@ -1383,7 +1451,7 @@ const HOT = [
     { label: 'Colher azeitonas', sub: 'Mini-game · rende azeite', ok: () => inHours(6, 18.5), why: 'A colheita é com luz do dia (6h–18h)', cd: 'olive', run: () => playOlives(r => { if (seasonIdx() === 2) { r += 2; G.stats.autumnOlive++; if (isFestival()) r *= 2; } addRes('azeite', r); G.stats.olive++; setCd('olive', 3); toast(`O lagar rendeu <b>${qty(r, 'azeite')}</b> para as lamparinas.`); addComm(1); }) },
   ] },
   { id: 'scroll', name: 'Casa do Copista', pos: [16.4, 0.09, -2.75], actions: () => [
-    { label: 'Copiar um versículo', sub: 'Mini-game · rende pergaminhos', ok: () => true, why: '', cd: 'copy', run: () => playCopy((r, idx) => { addRes('perg', r); G.stats.copy++; setCd('copy', 2); const fresh = !G.copied.includes(idx); if (fresh) G.copied.push(idx); toast(`+${qty(r, 'perg')}${fresh ? ' · versículo guardado no Códice' : ''}`); addComm(2); }) },
+    { label: 'Copiar um versículo', sub: 'Mini-game · rende pergaminhos', ok: () => true, why: '', cd: 'copy', run: () => playCopy((r, idx) => { addRes('perg', r); G.stats.copy++; setCd('copy', 2); const fresh = !G.copied.includes(idx); if (fresh) G.copied.push(idx); toast(`+${qty(r, 'perg')}${fresh ? ' · versículo guardado nas Cartas' : ''}`); addComm(2); }) },
   ] },
   { id: 'bakery', name: 'Forno da Cloé', pos: [7.8, 0.09, -1.5], actions: () => [
     { label: 'Assar pães', sub: 'Mini-game · rende pães', ok: () => inHours(4, 14), why: 'O forno acende de madrugada (4h–14h)', cd: 'bake', run: () => playBake(r => { addRes('pao', r); G.stats.bake++; setCd('bake', 3); toast(`Cloé sorriu: <b>${qty(r, 'pao')}</b> quentinhos para a mesa comum.`); addComm(1); }) },
@@ -2445,7 +2513,7 @@ function checkUnlocks(silent = false) {
     const id = ci + '-' + pi;
     if (G.pages.includes(id) || (p.u && !(s[p.u[0]] >= p.u[1]))) return;
     G.pages.push(id);
-    if (!silent) { audio.sfx('page'); toast(`Nova página no Códice: <i>${ch.title}</i>`); $('#badge').hidden = false; }
+    if (!silent) { audio.sfx('page'); toast(`Nova página nas Cartas: <i>${ch.title}</i>`); $('#badge').hidden = false; }
   }));
 }
 function chapters() {
@@ -2456,9 +2524,9 @@ function chapters() {
 }
 let bookCh = 0, bookPg = 0;
 function openBook() {
-  audio.sfx('page');
+  audio.sfx('page'); tutBook = true;
   $('#badge').hidden = true;
-  const el = openModal('<div class="book" role="dialog" aria-label="Códice de Antioquia"></div>', null, true);
+  const el = openModal('<div class="book" role="dialog" aria-label="Cartas de Antioquia"></div>', null, true);
   renderBook(el);
 }
 function renderBook(el) {
@@ -2469,7 +2537,7 @@ function renderBook(el) {
   const pages = [];
   for (let i = 0; i < per; i++) pages.push(pageHTML(ch.pages[bookPg + i], bookPg + i + 1));
   el.innerHTML = `<button class="x" aria-label="Fechar">✕</button>
-    <div><h2>Códice</h2><div class="chlist">${chs.map((c, i) => { const n = c.pages.filter(p => p.open).length, t = c.pages.length; return `<button class="ch ${i === bookCh ? 'sel' : ''} ${n ? '' : 'locked'}" data-i="${i}"><span class="cover" style="--c:${c.color}">${c.glyph}</span><span class="meta"><b>${c.title}</b><small><span>${n === 0 ? 'Bloqueado' : n === t ? 'Completo' : 'Ativo'}</span><span>${n} / ${t}</span></small></span></button>`; }).join('')}</div></div>
+    <div><h2>Cartas</h2><div class="chlist">${chs.map((c, i) => { const n = c.pages.filter(p => p.open).length, t = c.pages.length; return `<button class="ch ${i === bookCh ? 'sel' : ''} ${n ? '' : 'locked'}" data-i="${i}"><span class="cover" style="--c:${c.color}">${c.glyph}</span><span class="meta"><b>${c.title}</b><small><span>${n === 0 ? 'Bloqueado' : n === t ? 'Completo' : 'Ativo'}</span><span>${n} / ${t}</span></small></span></button>`; }).join('')}</div></div>
     <div class="spread"><h3>${ch.title}</h3><div class="pages">${pages.join('')}</div>
     <div class="bnav"><button class="pv" aria-label="Página anterior" ${bookPg === 0 ? 'disabled' : ''}>‹</button><span>${bookPg + 1}${per > 1 && ch.pages.length > bookPg + 1 ? '–' + Math.min(ch.pages.length, bookPg + per) : ''} de ${ch.pages.length}</span><button class="nx" aria-label="Próxima página" ${bookPg + per >= ch.pages.length ? 'disabled' : ''}>›</button></div></div>`;
   el.querySelector('.x').onclick = closeModal;
@@ -2917,9 +2985,9 @@ function openVisitor(n, sx, sy) {
 }
 function readLetter() {
   const L = LETTERS[G.lettersRead]; if (!L) return;
-  const el = openModal(`<div class="card letter"><button class="x" aria-label="Fechar">✕</button><p class="eyebrow">Carta da viagem · ${G.lettersRead + 1} de ${LETTERS.length}</p><h2>${L.title}</h2><p class="ltxt">${L.text}</p><p class="lsig">Paulo e Barnabé · <span>${L.ref}</span></p><button class="pill go">Guardar no Códice</button></div>`, null, true);
+  const el = openModal(`<div class="card letter"><button class="x" aria-label="Fechar">✕</button><p class="eyebrow">Carta da viagem · ${G.lettersRead + 1} de ${LETTERS.length}</p><h2>${L.title}</h2><p class="ltxt">${L.text}</p><p class="lsig">Paulo e Barnabé · <span>${L.ref}</span></p><button class="pill go">Guardar nas Cartas</button></div>`, null, true);
   audio.sfx('page');
-  el.querySelector('.go').onclick = () => { G.lettersRead++; toast('Carta guardada no Códice. <span class="dim">+3 ✦</span>'); closeModal(); addComm(3); };
+  el.querySelector('.go').onclick = () => { G.lettersRead++; toast('A carta foi guardada no livro de Cartas. <span class="dim">+3 ✦</span>'); closeModal(); addComm(3); };
 }
 const hex = c => '#' + c.toString(16).padStart(6, '0');
 function portrait(n) {
@@ -3089,7 +3157,7 @@ function openHelp() {
       <li><b>Ao fim da tarde</b>: encha as lamparinas da rua das colunas. <b>À noite</b>: cante hinos no pátio da igreja.</li>
       <li><b>Ao entardecer</b>: o azeite acende as lamparinas e a igreja se reúne para o ágape. Cada irmão come um pão; peixes deixam a mesa mais farta.</li>
       <li><b>À noite</b>: moradores mostram ícones flutuantes pedindo oração 🙏, pão 🍞, consolo 💧 ou ensino 📜.</li>
-      <li><b>Códice</b>: páginas se revelam com o que você faz. Algumas só em certos horários.</li>
+      <li><b>Cartas</b>: páginas se revelam com o que você faz. Algumas só em certos horários.</li>
       <li><b>Construir</b>: oliveiras, lamparinas, pérgolas e casas nos terrenos marcados.</li>
       <li><b>Igreja e ofícios</b>: amplie o local de reunião em 4 níveis na casa da igreja. Nos terrenos, construa oficinas: um irmão trabalha lá e produz todo amanhecer. Venda e compre no mercado do cais.</li>
       <li><b>Notícias e evangelismo</b>: a faixa de notícias conta o que acontece na cidade e na missão (clique para ver as últimas); de dia, o pregoeiro lê as notícias na rua das colunas. No mercado do cais, converse com quem passa: a melhor resposta depende de quem escuta. Quem se interessa ganha um <b>?</b> azul. Convide para o ágape (1 pão) e, depois de 2 ágapes, vira irmão.</li>
@@ -3101,7 +3169,7 @@ function openHelp() {
       <li><b>Comunhão ✦</b>: a cada 15, um novo irmão chega pelo porto.</li>
       <li><b>Som</b>: música, rio, pássaros e grilos são gerados pelo próprio jogo. Ajuste na engrenagem ou aperte M.</li>
     </ul>
-    <p class="keys">Arrastar: girar a cidade · Botão direito ou WASD: mover · Roda ou pinça: zoom · B: construir · C: Códice · M: som · H: ajuda · Esc: fechar</p>
+    <p class="keys">Arrastar: girar a cidade · Botão direito ou WASD: mover · Roda ou pinça: zoom · B: construir · C: Cartas · M: som · H: ajuda · Esc: fechar</p>
     <button class="ghost reset">Recomeçar do zero</button></div>`, null, true);
   const r = el.querySelector('.reset');
   r.onclick = () => {
@@ -3109,19 +3177,6 @@ function openHelp() {
     resetting = true; try { localStorage.removeItem(KEY); } catch (e) {}
     location.reload();
   };
-}
-function openIntro() {
-  const el = openModal(`<div class="card intro"><p class="eyebrow">Antioquia da Síria · c. 43 d.C.</p><h2>Luzes de Antioquia</h2>
-    <p>Às margens do rio Orontes, numa das maiores cidades do império, uma pequena comunidade começa a se reunir nas casas: judeus e gregos, pescadores e mestres, padeiras e prosélitos.</p>
-    <p class="v">“Em Antioquia, os discípulos foram chamados cristãos pela primeira vez.” <span class="ref">Atos 11:26</span></p>
-    <p>Trabalhe de dia, acolha à noite e mantenha acesas as luzes da cidade.</p>
-    <button class="pill go">Começar</button></div>`, () => { G.seenIntro = true; tips(); });
-  el.querySelector('.go').onclick = closeModal;
-}
-function tips() {
-  [['Arraste para girar a cidade · botão direito ou WASD para mover · roda do mouse para zoom.', 600],
-   ['Clique nos anéis dourados para trabalhar: píer, forno, olival, tear, copista, rua das colunas e casa da igreja.', 5500],
-   ['À noite, clique nos ícones sobre os moradores para acolhê-los.', 10500]].forEach(([t, d]) => setTimeout(() => toast(t, 5200), d));
 }
 const SPEEDS = [1, 2, 4, 0];
 function phaseName(h) { return h < 5 ? 'Madrugada' : h < 7 ? 'Amanhecer' : h < 12 ? 'Manhã' : h < 17 ? 'Tarde' : h < 19.5 ? 'Entardecer' : 'Noite'; }
@@ -3253,6 +3308,8 @@ function hover() {
 const keys = {};
 addEventListener('keydown', e => {
   if (e.target.closest?.('input')) return;
+  if (cine) { if (e.code === 'Escape') cineSkip(); else if (['Space', 'Enter', 'ArrowRight'].includes(e.code)) { e.preventDefault(); cineNext(); } return; }
+  if (menuOn && !modalOpen) return;
   if (tour) { setPhoto(false); return; }
   keys[e.code] = true;
   if (e.code === 'Escape') { if (document.body.classList.contains('photo')) setPhoto(false); else if (modalOpen) closeModal(); else { closePop(); if (buildMode) toggleBuild(false); } }
@@ -3268,7 +3325,7 @@ let lastInput = performance.now();
 for (const ev of ['pointerdown', 'wheel', 'keydown']) addEventListener(ev, () => { lastInput = performance.now(); }, { capture: true, passive: true });
 const _f = new THREE.Vector3(), _r = new THREE.Vector3();
 function keyPan(dt) {
-  if (modalOpen) return;
+  if (modalOpen || menuOn || cine) return;
   const fx = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
   const fz = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
   if (!fx && !fz) return;
@@ -3626,7 +3683,7 @@ function frame(now) {
   requestAnimationFrame(frame);
 }
 function step(dt, t) {
-  const rate = modalOpen ? 0 : ff ? 2.5 : SPEEDS[G.speedIdx] / 20;
+  const rate = modalOpen || menuOn || cine ? 0 : ff ? 2.5 : SPEEDS[G.speedIdx] / 20;
   const dh = rate * dt; G.time += dh; G.clock += dh;
   if (ff && G.time >= ff.to) { G.time = ff.to; ff = null; refreshHUD(); }
   timeEvents(); updateNeeds(dh);
@@ -3648,12 +3705,166 @@ function step(dt, t) {
   }
   if (ringT <= 0) ringT = 0.4;
   if (buildMode) plotMat.opacity = 0.55 + 0.3 * Math.sin(t * 3);
-  if (!tour && !modalOpen && !focus && performance.now() - lastInput > 60000) { lastInput = performance.now(); startTour(); } // idle: the camera tours the city
+  if (!tour && !modalOpen && !focus && !menuOn && !cine && performance.now() - lastInput > 60000) { lastInput = performance.now(); startTour(); } // idle: the camera tours the city
   watchFps(dt);
-  updateTour(dt); updateFocus(dt); keyPan(dt); clampCam(); controls.update(); hover(); anchorPop();
+  updateCine(dt); updateTour(dt); updateFocus(dt); keyPan(dt); clampCam(); controls.update(); hover(); anchorPop(); updateTutArrow();
   composer.render();
-  hudT -= dt; if (hudT <= 0) { hudT = 0.25; refreshHUD(); audio.update(controls.target.x, controls.target.z, rainAmt); checkUnlocks(); }
+  hudT -= dt; if (hudT <= 0) { hudT = 0.25; refreshHUD(); tutTick(); audio.update(controls.target.x, controls.target.z, rainAmt); checkUnlocks(); }
   saveT -= dt; if (saveT <= 0) { saveT = 5; save(); }
+}
+
+/* ========================= title menu, intro film and tutorial ========================= */
+let menuOn = false, cine = null, tutMoved = 0, tutBook = false, tutNeed = null, tutWait = false;
+controls.addEventListener('start', () => { tutMoved++; });
+const hasProgress = () => G.seenIntro || G.comm > 0;
+function openMenu() {
+  closeModal(); closePop(); if (tour) setPhoto(false);
+  menuOn = true; document.body.classList.add('menu'); $('#menu').hidden = false; $('#snd').hidden = true; $('#tutArrow').hidden = true;
+  controls.enabled = false; controls.autoRotate = true; controls.autoRotateSpeed = 0.35; focus = { x: -2, z: 2, dist: 42, polar: 0.92, speed: 1.2 };
+  const prog = hasProgress(), c = $('#mContinue'), nw = $('#mNew');
+  c.hidden = !prog; c.classList.toggle('main', prog); nw.classList.toggle('main', !prog); delete nw.dataset.armed;
+  if (prog) c.querySelector('small').textContent = `Dia ${dayN()} · ${SEASONS[seasonIdx()].name} · ${npcs.filter(n => !n.visitor).length} irmãos · ${G.comm} ✦`;
+  nw.querySelector('small').textContent = prog ? 'Apaga o progresso e começa do zero' : 'Introdução e tutorial, uns 5 minutos';
+  setTimeout(() => (prog ? c : nw).focus(), 60);
+}
+function closeMenu() { menuOn = false; document.body.classList.remove('menu'); $('#menu').hidden = true; controls.autoRotate = false; controls.enabled = true; focus = null; }
+$('#mContinue').onclick = closeMenu;
+$('#mNew').onclick = () => {
+  const b = $('#mNew');
+  if (!hasProgress()) { closeMenu(); return playIntro(); }
+  if (!b.dataset.armed) { b.dataset.armed = '1'; b.querySelector('small').textContent = 'Toque de novo para apagar tudo e recomeçar'; return; }
+  resetting = true; try { localStorage.removeItem(KEY); sessionStorage.setItem('antioquia-novo', '1'); } catch (e) {}
+  location.reload();
+};
+$('#mIntro').onclick = () => { closeMenu(); playIntro(true); };
+$('#mHelp').onclick = openHelp;
+$('#menuBtn').onclick = openMenu;
+
+const SHOTS = [ // camera [x, z, distance, polar, azimuth]; walk = path of the three travellers during the shot
+  { eb: 'Jerusalém · por volta do ano 36', txt: 'Depois da morte de Estêvão, a perseguição espalhou os discípulos para longe de Jerusalém.', ref: 'Atos 11:19', cam: [22, 19, 40, 1.12, 1.7], h: 6.5 },
+  { eb: 'O rio Orontes', txt: 'Alguns desceram pela costa e subiram o rio até Antioquia, com quase nada nas mãos.', h: 7, cam: [8.2, 15, 19, 0.92, 0.85], walk: [[8.3, 18.8], [8, 14.2], [8, 11]] },
+  { eb: 'Antioquia da Síria', txt: 'A terceira maior cidade do império: gregos, judeus, sírios e romanos nas mesmas ruas.', h: 7.6, cam: [0, 1, 44, 0.86, 0.3], walk: [[8, 10.4], [0, 10.4], [0, 3.5], [-6, 3.5]] },
+  { eb: 'A rua das colunas', txt: 'Eles falavam de Jesus a judeus e também a gregos. E muitos creram.', ref: 'Atos 11:20–21', h: 8.1, cam: [0, 0, 13, 1.0, 1.5], track: true, walk: [[-2, 3.5], [-12, 3.5], [-12, -0.6]] },
+  { eb: 'A casa de Cloé', txt: 'Umas esteiras no pátio e um forno aceso: foi ali que a igreja começou a se reunir.', h: 8.6, cam: [CH.cx, CH.cz + 1.5, 15, 0.78, 0.3], walk: [[-12, 0.4], [-12, -2.6], [-11.4, -4.6]] },
+  { eb: 'Barnabé', txt: 'Jerusalém enviou Barnabé. Quando viu a graça de Deus, ele se alegrou e animou a todos.', ref: 'Atos 11:23', h: 9, cam: [0, 0, 13, 0.68, 0.35], follow: 'Barnabé' },
+];
+function playIntro(replay = false) {
+  closeModal(); closePop(); hideTut(); if (tour) setPhoto(false);
+  document.body.classList.add('cine'); $('#cine').hidden = false; controls.enabled = false; focus = null; HOT.forEach(h => { h.g.visible = false; });
+  if (!replay) G.time = 24 + 6; // the film opens at sunrise and the sun climbs shot by shot
+  const trav = [['Viajante de Chipre', 0x6a7a44, 0xe0c9a0, 1], ['Viajante de Cirene', 0x9c6b4e, 0xd9b45a, 3], ['Viajante', 0x4d6f8a, 0xeee4cf, 0]]
+    .map(([n, r, c, sk], i) => { const f = makeFigure(r, c, SKINS[sk], lookFor(n, false, i === 2)); f.g.visible = false; return f; });
+  cine = { i: -1, t: 0, trav, replay, from: null, who: null };
+  cineNext();
+}
+function cineNext() {
+  const c = cine; if (!c) return;
+  c.i++; c.t = 0; c.who = null;
+  if (c.i >= SHOTS.length) return cineEnd();
+  const sh = SHOTS[c.i], cap = $('#cine .cap');
+  cap.classList.add('off');
+  setTimeout(() => { if (cine !== c || c.i !== SHOTS.indexOf(sh)) return; cap.querySelector('.eyebrow').textContent = sh.eb; cap.querySelector('.ct').textContent = sh.txt; cap.querySelector('.ref').textContent = sh.ref || ''; cap.classList.remove('off'); }, c.i ? 500 : 250);
+  $('#cine .cdots').innerHTML = SHOTS.map((_, k) => `<i class="${k <= c.i ? 'on' : ''}"></i>`).join('');
+  c.from = camState(); c.h0 = hour();
+  if (sh.follow) { const n = npcs.find(n => n.name === sh.follow); if (n) { const [x, z] = n.node('H1'); n.g.position.set(x, 0, z); Object.assign(n, { at: 'H1', pts: [], prev: null, wait: 30, face: Math.PI * 0.85 }); c.who = n; } }
+  c.trav.forEach(f => { f.g.visible = !!(sh.walk || sh.follow); });
+}
+function cineSkip() { if (cine) { cine.i = SHOTS.length - 1; cineNext(); } }
+$('#cine').addEventListener('click', e => { if (e.target.id === 'cineSkip') cineSkip(); else cineNext(); });
+function walkTrav(path, t) {
+  const segs = []; let L = 0;
+  for (let i = 1; i < path.length; i++) { const l = Math.hypot(path[i][0] - path[i - 1][0], path[i][1] - path[i - 1][1]); segs.push(l); L += l; }
+  cine.trav.forEach((f, j) => {
+    const go = t * 1.5 - j * 1.0; let d = clamp(go, 0, L), i = 0;
+    while (i < segs.length - 1 && d > segs[i]) { d -= segs[i]; i++; }
+    const A = path[i], B = path[i + 1], dx = (B[0] - A[0]) / segs[i], dz = (B[1] - A[1]) / segs[i], side = (j - 1) * 0.45, k = Math.min(1, d / segs[i]);
+    f.g.position.set(lerp(A[0], B[0], k) - dz * side, 0, lerp(A[1], B[1], k) + dx * side);
+    f.g.rotation.y = Math.atan2(dx, dz); f.body.position.y = go > 0 && go < L ? Math.abs(Math.sin(t * 9 + j)) * 0.07 : 0;
+  });
+}
+function updateCine(dt) { // eases into each shot like the tour, then drifts slowly
+  const c = cine; if (!c || c.i < 0 || c.i >= SHOTS.length) return;
+  const sh = SHOTS[c.i]; c.t += dt;
+  if (c.t > 9.5) return cineNext();
+  let [x, z, d, ph, th] = sh.cam;
+  if (c.who) { x = c.who.g.position.x; z = c.who.g.position.z; }
+  if (sh.track) { const p = c.trav[1].g.position; x = p.x; z = p.z; }
+  if (!c.replay && sh.h) G.time = 24 + lerp(c.h0, sh.h, Math.min(1, c.t / 9.5));
+  const a = c.from, k = smooth(0, 2.8, c.t);
+  let dth = th - a[4]; dth = Math.atan2(Math.sin(dth), Math.cos(dth));
+  controls.target.set(lerp(a[0], x, k), 0, lerp(a[1], z, k));
+  _sph.set(lerp(a[2], d, k), lerp(a[3], ph, k), a[4] + dth * k + c.t * 0.025);
+  camera.position.setFromSpherical(_sph).add(controls.target);
+  if (sh.walk) walkTrav(sh.walk, c.t);
+}
+function cineEnd() {
+  const c = cine; cine = null; $('#cine').hidden = true; HOT.forEach(h => { h.g.visible = h.id !== 'event'; });
+  c.trav.forEach(f => scene.remove(f.g));
+  if (c.who) c.who.wait = 2;
+  if (!c.replay) G.time = 24 + 9;
+  controls.target.set(-4, 0, 1); _sph.set(34, 0.88, 0.3); camera.position.setFromSpherical(_sph).add(controls.target); // back to the usual view of the city
+  const tutOn = G.tut < TUT.length;
+  const el = openModal(`<div class="card intro"><p class="eyebrow">Sua missão</p><h2>Luzes de Antioquia</h2>
+    <p>Esta pequena comunidade agora está nas suas mãos. Trabalhe de dia, reúna a igreja ao entardecer e acolha quem chega à noite.</p>
+    <p class="v">“Em Antioquia, os discípulos foram chamados cristãos pela primeira vez.” <span class="ref">Atos 11:26</span></p>
+    <p>A cada 15 de comunhão (✦), um novo irmão chega pelo porto, e a igreja cresce.</p>
+    <button class="pill go">${tutOn ? 'Começar o tutorial' : 'Voltar à cidade'}</button>${tutOn ? '<button class="ghost skip">Já sei jogar: pular o tutorial</button>' : ''}</div>`,
+    () => { document.body.classList.remove('cine'); controls.enabled = true; G.seenIntro = true; if (G.tut < TUT.length) { tutMoved = 0; showTut(); } });
+  el.querySelector('.go').onclick = closeModal;
+  el.querySelector('.skip')?.addEventListener('click', () => { G.tut = TUT.length; closeModal(); toast('Tutorial pulado. Tudo está em Como jogar (H).'); });
+}
+
+const TUT = [
+  { t: 'Olhe ao redor', d: 'Arraste para girar a cidade. Use a roda do mouse, ou dois dedos no celular, para aproximar e afastar.', done: () => tutMoved > 0 },
+  { t: 'Asse pães no forno', d: 'O pão alimenta a igreja no ágape. Toque no anel dourado do Forno da Cloé.', hot: 'bakery', done: s => s.bake >= 1 },
+  { t: 'Pesque no Orontes', d: 'Peixe deixa a mesa mais farta. Toque no anel dourado do píer.', hot: 'pier', done: s => s.fish >= 1 },
+  { t: 'Reúna a igreja', d: 'Ao entardecer, a igreja se reúne para o ágape: cada irmão come um pão e a comunhão ✦ cresce. Toque em “Reunir a Igreja”.', el: '#phaseBtn', done: s => G.gathering || s.agape >= 1 },
+  { t: 'Acolha quem precisa', d: 'Um ícone sobre a cabeça é um pedido: oração 🙏, pão 🍞, consolo 💧 ou ensino 📜. Toque na pessoa que a seta mostra.', need: true, done: s => s.help >= 1 },
+  { t: 'Abra as Cartas', d: 'Cada coisa que você faz revela uma página da história de Antioquia. Toque no livro, no canto de cima.', el: '#bookBtn', done: () => tutBook },
+];
+function showTut() {
+  const st = TUT[G.tut]; if (!st) return hideTut();
+  $('#tut').hidden = false; $('#tut').classList.remove('ok'); document.body.classList.add('tuton');
+  $('#tutN').textContent = `Tutorial · ${G.tut + 1} de ${TUT.length}`; $('#tutT').textContent = st.t; $('#tutD').textContent = st.d;
+  document.querySelectorAll('.tut-glow').forEach(e => e.classList.remove('tut-glow'));
+  if (st.el) $(st.el).classList.add('tut-glow');
+  if (st.hot) { const h = HOT.find(h => h.id === st.hot); focusOn(h.pos[0], h.pos[2], 22); }
+  if (st.need) {
+    const near = G.gathering ? new THREE.Vector3(CH.cx, 0, CH.cz + 1) : controls.target; // at the ágape everyone heads to the courtyard
+    tutNeed = npcs.filter(n => !n.visitor && (!G.gathering || n.seat)).sort((a, b) => a.g.position.distanceTo(near) - b.g.position.distanceTo(near))[0];
+    if (tutNeed) { tutNeed.setNeed('ora'); if (G.gathering) focus = { x: CH.cx, z: CH.cz + 1.5, dist: 17, polar: 0.8, speed: 2 }; else focusOn(tutNeed.g.position.x, tutNeed.g.position.z, 18); }
+  }
+}
+function hideTut() { $('#tut').hidden = true; document.body.classList.remove('tuton'); tutNeed = null; $('#tutArrow').hidden = true; document.querySelectorAll('.tut-glow').forEach(e => e.classList.remove('tut-glow')); }
+function tutTick() {
+  const st = TUT[G.tut]; if (!st || tutWait || menuOn || cine || $('#tut').hidden) return;
+  if (st.done(G.stats)) {
+    tutWait = true; $('#tut').classList.add('ok'); audio.sfx('chime'); $('#tutArrow').hidden = true;
+    setTimeout(() => { tutWait = false; G.tut++; if (G.tut >= TUT.length) tutFinish(); else showTut(); }, 1400);
+  } else if (st.need && !tutNeed?.need) showTut(); // the request was cleared at dawn: ask someone else
+}
+function tutFinish() {
+  hideTut(); audio.sfx('win');
+  const el = openModal(`<div class="card intro"><p class="eyebrow">Tutorial concluído</p><h2>A cidade é sua</h2>
+    <ul class="howto">
+      <li>A cada <b>15 ✦</b> de comunhão, um novo irmão chega pelo porto.</li>
+      <li>Nos <b>terrenos</b> (botão de construir ou tecla B), erga oficinas onde os irmãos trabalham.</li>
+      <li>Na <b>casa da igreja</b>, amplie o local de reunião quando ele ficar pequeno.</li>
+      <li>No <b>mercado do cais</b>, venda, compre e converse com quem passa.</li>
+      <li>Fique de olho na <b>faixa de notícias</b>: alguns dias trazem eventos na cidade.</li>
+    </ul>
+    <button class="pill go">Vamos lá</button></div>`);
+  el.querySelector('.go').onclick = closeModal;
+}
+$('#tutSkip').onclick = () => { G.tut = TUT.length; hideTut(); toast('Tutorial pulado. Tudo está em Como jogar (H).'); };
+const _ta = new THREE.Vector3();
+function updateTutArrow() { // a bouncing arrow over the 3D target of the current step
+  const a = $('#tutArrow'), st = !menuOn && !cine && !modalOpen && !tutWait && !document.body.classList.contains('photo') && !$('#tut').hidden && TUT[G.tut];
+  const h = st?.hot && HOT.find(h => h.id === st.hot);
+  const w = h ? [h.pos[0], 1.3, h.pos[2]] : st?.need && tutNeed?.need ? [tutNeed.g.position.x, 2.95, tutNeed.g.position.z] : null;
+  if (w) _ta.set(...w).project(camera);
+  if (!w || _ta.z > 1 || Math.abs(_ta.x) > 1.02 || Math.abs(_ta.y) > 1.02) { a.hidden = true; return; }
+  a.hidden = false; a.style.left = (_ta.x + 1) / 2 * innerWidth + 'px'; a.style.top = (1 - _ta.y) / 2 * innerHeight + 'px';
 }
 
 /* ========================= boot ========================= */
@@ -3672,7 +3883,8 @@ function start(data) {
   syncSoundUI();
   refreshHUD();
   $('#loading').remove();
-  if (!G.seenIntro) openIntro();
+  let fresh = false; try { fresh = sessionStorage.getItem('antioquia-novo') === '1'; sessionStorage.removeItem('antioquia-novo'); } catch (e) {}
+  if (fresh) playIntro(); else openMenu();
   requestAnimationFrame(frame);
 }
 addEventListener('visibilitychange', () => { if (document.hidden) save(); });
@@ -3680,6 +3892,6 @@ addEventListener('pagehide', save);
 const hot = window.claude?.hot;
 try { hot?.snapshot?.(() => (resetting ? {} : { save: serial() })); } catch (e) {}
 hot?.ready ? hot.ready(start) : start(hot?.data ?? {});
-if (new URLSearchParams(location.search).has('debug')) window.__antioquia = { get G() { return G; }, NEWS, crier, nextNews, event: id => { G.ev = { id, d: dayN(), done: [] }; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, plots, build: (i, k) => { pay(BUILDS[k].cost); placeBuild(i, k); }, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: (id, i = 0) => HOT.find(h => h.id === id).actions()[i].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
+if (new URLSearchParams(location.search).has('debug')) window.__antioquia = { get G() { return G; }, NEWS, crier, nextNews, tut: i => { G.tut = i; showTut(); }, event: id => { G.ev = { id, d: dayN(), done: [] }; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, plots, build: (i, k) => { pay(BUILDS[k].cost); placeBuild(i, k); }, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: (id, i = 0) => HOT.find(h => h.id === id).actions()[i].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
 let simT = 0;
 </script>
