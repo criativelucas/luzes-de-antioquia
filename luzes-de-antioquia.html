@@ -99,6 +99,22 @@ body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!
 .cargo-next{margin:6px 0 2px;color:var(--ink-dim)}
 .cargo-next b{color:var(--ink)}
 .msg{min-height:1.4em;color:var(--ink-dim);margin:10px 0 0}
+#modal.mini{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;pointer-events:none;place-items:center end;padding:16px calc(18px + env(safe-area-inset-right,0px)) 16px 16px}
+#modal.mini > *{pointer-events:auto}
+#modal.mini .card{width:min(370px,calc(100vw - 32px));max-height:calc(100vh - 110px);padding:15px 18px 14px;background:rgba(22,18,14,.76);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#modal.mini .card h2{font-size:25px}
+#modal.mini .hint{margin-bottom:8px}
+#modal.mini .ring{width:170px;height:170px}
+#modal.mini .oven{height:86px;margin-bottom:12px}
+#modal.mini .loaf{width:110px;height:48px}
+#modal.mini .olv{width:290px;margin:0 auto}
+#modal.mini .thread{height:52px}
+#modal.mini .loom{min-height:48px}
+.vessel{position:relative;width:110px;height:130px;margin:4px auto 10px;border-radius:14px 14px 40px 40px;background:linear-gradient(#5a3a22,#3a2414);overflow:hidden;box-shadow:inset 0 0 0 3px #8a5a34;cursor:pointer;touch-action:none}
+.vessel .oil{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(#e8b84a,#b8822a)}
+.vessel .band{position:absolute;left:-2px;right:-2px;border-top:2px solid var(--lamp-hi);border-bottom:2px solid var(--lamp-hi);background:rgba(255,223,158,.18)}
+.hymn{cursor:pointer;background:#1c1712}
+@media (max-width:760px){#modal.mini{place-items:end center;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}#modal.mini .card{max-height:50vh}}
 #rainbow{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity 5s;mix-blend-mode:screen;background:radial-gradient(circle at 72% 118%,transparent 57%,rgba(255,70,60,.2) 58.2%,rgba(255,165,50,.2) 59.6%,rgba(255,235,90,.18) 61%,rgba(90,215,110,.16) 62.4%,rgba(70,150,255,.16) 63.8%,rgba(130,80,220,.14) 65.2%,transparent 66.6%)}
 #rainbow.on{opacity:1}
 .card.album{width:min(920px,calc(100vw - 32px));text-align:left}
@@ -322,6 +338,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { HorizontalTiltShiftShader } from 'three/addons/shaders/HorizontalTiltShiftShader.js';
 import { VerticalTiltShiftShader } from 'three/addons/shaders/VerticalTiltShiftShader.js';
+import { Water } from 'three/addons/objects/Water2.js';
 
 /* ========================= helpers ========================= */
 const $ = s => document.querySelector(s);
@@ -487,16 +504,16 @@ const costTxt = c => Object.entries(c).map(([k, n]) => qty(n, k)).join(' + ');
 
 /* ========================= state ========================= */
 const KEY = 'luzes-de-antioquia-v1';
-const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter'];
+const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter', 'loom', 'peds'];
 const DEF = () => ({ time: 31, clock: 0, res: { pao: 6, azeite: 6, perg: 2 }, comm: 0,
   stats: { fish: 0, olive: 0, copy: 0, help: 0, teach: 0, lantern: 0, agape: 0, vigil: 0, dawnPier: 0, relief: 0, build: 0, house: 0, bake: 0, weave: 0, load: 0, festival: 0, pentecost: 0, autumnOlive: 0, summerAgape: 0, rainAgape: 0 },
-  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0 });
+  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0, loom: [], peds: null });
 function makeState(s) {
   const d = DEF();
   if (!s || typeof s !== 'object') return d;
   for (const k of SAVE_KEYS) if (s[k] !== undefined && typeof s[k] === typeof d[k]) d[k] = s[k];
   d.res = { ...DEF().res, ...(s.res || {}) }; d.stats = { ...DEF().stats, ...(s.stats || {}) }; d.vol = { ...DEF().vol, ...(s.vol || {}) };
-  for (const k of ['built', 'pages', 'copied']) if (!Array.isArray(d[k])) d[k] = [];
+  for (const k of ['built', 'pages', 'copied', 'loom']) if (!Array.isArray(d[k])) d[k] = [];
   return d;
 }
 let G = DEF(), resetting = false;
@@ -547,11 +564,12 @@ composer.addPass(new OutputPass());
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; controls.dampingFactor = 0.08;
-controls.mouseButtons = { LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.ROTATE };
-controls.touches = { ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_ROTATE };
+controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN };
+controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
+controls.rotateSpeed = 0.6; controls.autoRotateSpeed = 0.35;
 controls.screenSpacePanning = false;
 controls.minDistance = 12; controls.maxDistance = 72;
-controls.minPolarAngle = 0.45; controls.maxPolarAngle = 1.36;
+controls.minPolarAngle = 0.35; controls.maxPolarAngle = 1.42;
 controls.target.set(-1, 0, -1);
 
 const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
@@ -651,6 +669,22 @@ const glowTex = canvasTex(128, (x, s) => {
   x.fillStyle = g; x.fillRect(0, 0, s, s);
 }, false);
 
+const bedTex = canvasTex(256, (x, sz) => {
+  x.fillStyle = '#6f6a4c'; x.fillRect(0, 0, sz, sz);
+  for (let i = 0; i < 240; i++) {
+    const px = Math.random() * sz, py = Math.random() * sz, r = rand(3, 11), e = rand(0.6, 0.9), a = rand(0, 3), v = rand(85, 150) | 0;
+    x.fillStyle = `rgb(${v},${v - 6},${v - 24})`;
+    for (const ox of [-sz, 0, sz]) for (const oy of [-sz, 0, sz]) { x.beginPath(); x.ellipse(px + ox, py + oy, r, r * e, a, 0, Math.PI * 2); x.fill(); }
+  }
+});
+const causticTex = canvasTex(256, (x, sz) => { // light rippling on the riverbed
+  const img = x.createImageData(sz, sz), d = img.data;
+  for (let j = 0; j < sz; j++) for (let i = 0; i < sz; i++) {
+    const u = i / sz * Math.PI * 2, v = j / sz * Math.PI * 2, f = Math.abs(Math.sin(3 * u + 2 * Math.sin(2 * v)) + Math.sin(4 * v + 2 * Math.sin(3 * u))) / 2;
+    const c = Math.pow(1 - Math.min(1, f), 8) * 255, k = (j * sz + i) * 4; d[k] = d[k + 1] = d[k + 2] = c; d[k + 3] = 255;
+  }
+  x.putImageData(img, 0, 0);
+});
 const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.9, metalness: 0, ...o });
 const M = {
   grass: mat(0xffffff, { map: grassTex }), pave: mat(0xebdfcb, { map: cobbleTex }), quay: mat(0xd0c4b2, { map: cobbleTex }), mosaic: mat(0xffffff, { map: mosaicTex, roughness: 0.55 }), marble: mat(0xefe9dd),
@@ -662,7 +696,7 @@ const M = {
   autumn: mat(0xd9a440, { flatShading: true }), autumn2: mat(0xc7733a, { flatShading: true }), vine: mat(0x587a36, { flatShading: true }),
   clay: mat(0xb8774f), hill: mat(0x6a7646, { flatShading: true }), hill2: mat(0x55623a, { flatShading: true }), farbank: mat(0x5f6e3c),
   cream: mat(0xefe6d2), dark: mat(0x1e160f), loaf: mat(0xb9793d), reed: mat(0x76803f, { flatShading: true }),
-  water: new THREE.MeshStandardMaterial({ color: 0x2f6474, roughness: 0.08, metalness: 0 }), bed: mat(0x10262e),
+  bed: mat(0x7c8070, { map: bedTex, emissive: 0xfff4d8, emissiveMap: causticTex, emissiveIntensity: 0 }),
   window: new THREE.MeshStandardMaterial({ color: 0x2c1f14, roughness: 0.8, emissive: 0xffb15e, emissiveMap: latticeTex, emissiveIntensity: 0 }),
   lamp: new THREE.MeshStandardMaterial({ color: 0xffe2b0, emissive: 0xffa449, emissiveIntensity: 0 }),
   lantern: new THREE.MeshStandardMaterial({ color: 0xffe8c4, emissive: 0xffa040, emissiveIntensity: 0 }),
@@ -760,10 +794,22 @@ for (const k of Object.keys(NODES)) {
   add(g, M.pave, x, 0.07, z, world, false);
 }
 // river Orontes
-const waterGeo = new THREE.PlaneGeometry(140, 36, 100, 26); waterGeo.rotateX(-Math.PI / 2);
-const water = new THREE.Mesh(waterGeo, M.water); water.position.set(0, -0.62, 30.2); water.receiveShadow = true; scene.add(water);
-const wpos = waterGeo.attributes.position, wbase = Float32Array.from(wpos.array);
-add(new THREE.PlaneGeometry(140, 40).rotateX(-Math.PI / 2), M.bed, 0, -1.5, 32, world, false);
+function waterNormals() { // tileable ripple normal map built from integer-frequency waves
+  const S = 256, c = document.createElement('canvas'); c.width = c.height = S;
+  const x = c.getContext('2d'), img = x.createImageData(S, S), d = img.data;
+  const W = Array.from({ length: 12 }, (_, i) => ({ kx: Math.round(rand(-7, 7)), ky: Math.round(rand(1, 7)) * (Math.random() < 0.5 ? -1 : 1), a: rand(0.5, 1) / (1 + i * 0.35), p: rand(0, 6.28) }));
+  for (let j = 0; j < S; j++) for (let i = 0; i < S; i++) {
+    let dx = 0, dy = 0;
+    for (const w of W) { const cs = Math.cos(2 * Math.PI * (w.kx * i / S + w.ky * j / S) + w.p) * w.a; dx += cs * w.kx; dy += cs * w.ky; }
+    const nx = -dx * 0.022, ny = -dy * 0.022, l = Math.hypot(nx, ny, 1), k = (j * S + i) * 4;
+    d[k] = (nx / l * 0.5 + 0.5) * 255; d[k + 1] = (ny / l * 0.5 + 0.5) * 255; d[k + 2] = (1 / l * 0.5 + 0.5) * 255; d[k + 3] = 255;
+  }
+  x.putImageData(img, 0, 0);
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
+}
+const water = new Water(scaleUV(new THREE.PlaneGeometry(140, 36), 1, 36 / 140), { color: 0xb8dce4, scale: 30, flowDirection: new THREE.Vector2(1, 0.12), flowSpeed: 0.02, reflectivity: 0.3, textureWidth: 768, textureHeight: 768, normalMap0: waterNormals(), normalMap1: waterNormals() });
+water.rotation.x = -Math.PI / 2; water.position.set(0, -0.62, 30.2); scene.add(water);
+add(scaleUV(new THREE.PlaneGeometry(140, 40), 140 / 6, 40 / 6).rotateX(-Math.PI / 2), M.bed, 0, -1.5, 32, world, false);
 box(140, 1.6, 0.6, M.stoneDark, 0, -0.72, 12.5);
 box(140, 0.12, 0.8, M.stone, 0, 0.06, 12.35, world, false);
 add(new THREE.PlaneGeometry(220, 60).rotateX(-Math.PI / 2), M.farbank, 0, -0.1, 78, world, false);
@@ -951,6 +997,12 @@ box(58, 0.24, 0.42, M.stone, 0, 3.34, 1.15); box(58, 0.24, 0.42, M.stone, 0, 3.3
 for (const [list, z] of [[colsN, 1.15], [colsS, 5.85]]) for (let i = 1; i < list.length; i++) if (list[i] - list[i - 1] < 3.1) stringLights(list[i - 1], 3.2, z, list[i], 3.2, z, 6, 0.35);
 for (let x = -27; x <= 27; x += 9) stringLights(x - 1.5, 3.25, 5.85, x + 1.5, 3.25, 1.15, 10, 0.75);
 pointLight(-15, 3, 3.5); pointLight(3, 3, 3.5); pointLight(18, 3, 3.5);
+const PEDS = [-16.5, -7.5, 1.5, 10.5, 19.5].map(x => { // filled in the lamps mini-game, lit that night
+  const m = new THREE.MeshStandardMaterial({ color: 0xffe2b0, emissive: 0xff9a40, emissiveIntensity: 0 });
+  cyl(0.1, 0.14, 1.5, M.stone, x, 0.75, 2.05); cyl(0.2, 0.1, 0.16, M.clay, x, 1.56, 2.05);
+  add(new THREE.SphereGeometry(0.09, 8, 6), m, x, 1.72, 2.05, world, false).scale.y = 1.6;
+  return { x, m };
+});
 
 // market between street and quay
 for (let x = -29, ci = 0; x < 28;) {
@@ -1075,9 +1127,13 @@ const HOT = [
   { id: 'loom', name: 'Tear da Irene', pos: [-4, 0.09, -2.5], actions: () => [
     { label: 'Tecer um toldo', sub: 'Mini-game de memória · rende comunhão', ok: () => inHours(7, 20), why: 'As tecelãs trabalham de 7h a 20h', cd: 'weave', run: () => playWeave(r => { G.stats.weave++; setCd('weave', 3); toast(r ? `Você teceu ${r} ${r === 1 ? 'faixa' : 'faixas'} com as irmãs. <span class="dim">+${r * 2} ✦</span>` : 'Os fios se embaraçaram. Tente de novo mais tarde.'); addComm(r * 2); }) },
   ] },
+  { id: 'street', name: 'Rua das colunas', pos: [-4.5, 0.09, 2.3], actions: () => [
+    { label: 'Encher as lamparinas', sub: 'Mini-game · acende a rua esta noite', ok: () => inHours(15, 21), why: 'No fim da tarde (15h–21h)', cd: 'lamps', run: () => playLamps(r => { setCd('lamps', 10); const g = r + (r === 5 ? 3 : 0); toast(r ? `${r} ${r === 1 ? 'lamparina vai' : 'lamparinas vão'} arder esta noite na rua das colunas. <span class="dim">+${g} ✦</span>` : 'Nenhuma lamparina acendeu. Tente amanhã.'); addComm(g); }) },
+  ] },
   { id: 'church', name: 'Casa da Igreja', pos: [-12, 0.09, -2.7], actions: () => [
     { label: 'Reunir a igreja para o ágape', sub: 'Avança até o entardecer (19h)', ok: () => inHours(5, 18.9) && !ff, why: 'A igreja se reúne todo entardecer', cd: null, run: phaseAction },
     { label: 'Vigília de oração', sub: '1 azeite · entre 0h e 4h · +6 ✦', ok: () => inHours(0, 4) && G.res.azeite >= 1, why: 'Só de madrugada (0h–4h), com 1 azeite', cd: 'vigil', run: doVigil },
+    { label: 'Cantar hinos no pátio', sub: 'Mini-game de ritmo · rende comunhão', ok: () => inHours(19, 1), why: 'À noite (19h–1h)', cd: 'hymn', run: () => playHymn(sc => { setCd('hymn', 6); const g = Math.round(sc / 3); toast(`O pátio cantou junto. <span class="dim">+${g} ✦</span>`); addComm(g); }) },
   ] },
 ];
 for (const h of HOT) {
@@ -1142,6 +1198,13 @@ for (let i = 0; i < 40; i++) { const x = pick([-1, 1]) * rand(37, 70), z = rand(
   const lo = new THREE.InstancedMesh(new THREE.ConeGeometry(1, 1.4, 6), mat(0xffffff, { emissive: 0xff9ab8, emissiveIntensity: 0.15 }), bl.length);
   bl.forEach(([x, z], i) => { lo.setMatrixAt(i, m4.compose(p.set(x + 0.1, -0.44, z), q.identity(), s.set(0.13, 0.13, 0.13))); lo.setColorAt(i, col.setHex(pick([0xf6d2de, 0xf4f0e6, 0xf2a6c0]))); });
   world.add(pi, lo); lotusMesh = lo;
+  const wd = []; // water weeds and stones on the riverbed
+  for (let i = 0; i < 240; i++) { const x = rand(-60, 60), z = Math.random() < 0.6 ? rand(12.8, 16) : rand(26, 42); if (Math.abs(x - 8) > 1.5) wd.push([x, z]); }
+  const wim = new THREE.InstancedMesh(new THREE.ConeGeometry(0.06, 1, 4), mat(0x3f6a34, { flatShading: true }), wd.length);
+  wd.forEach(([x, z], i) => { const h = rand(0.3, 0.75); wim.setMatrixAt(i, m4.compose(p.set(x, -1.5 + h / 2, z), q.setFromEuler(new THREE.Euler(rand(-0.25, 0.25), 0, rand(-0.25, 0.25))), s.set(1, h, 1))); });
+  const rim = new THREE.InstancedMesh(DODE, mat(0x8a8576, { flatShading: true }), 80);
+  for (let i = 0; i < 80; i++) { const r = rand(0.15, 0.5); rim.setMatrixAt(i, m4.compose(p.set(rand(-60, 60), -1.5 + r * 0.3, rand(13, 42)), q.setFromEuler(new THREE.Euler(rand(0, 3), rand(0, 3), 0)), s.set(r, r * 0.6, r))); }
+  world.add(wim, rim);
   for (let i = 0; i < 26; i++) {
     const x = rand(-45, 45); if (Math.abs(x - 8) < 3 || Math.abs(x - 11.6) < 4) continue;
     for (let k = 0; k < 7; k++) { const r = add(new THREE.ConeGeometry(0.045, rand(0.9, 1.5), 4), M.reed, x + rand(-0.5, 0.5), -0.1, 13.0 + rand(0, 0.5), world, false); r.rotation.set(rand(-0.15, 0.15), 0, rand(-0.2, 0.2)); }
@@ -1189,7 +1252,7 @@ function makeBoat(x, z) {
   return g;
 }
 const boat = makeBoat(11.6, 16.6), boat2 = makeBoat(-14, 17.2); boat2.rotation.y = 0.15;
-function boatHome() { const [x, z] = boat.userData.home; boat.position.set(x, -0.62, z); boat.visible = true; boat.userData.away = false; }
+function boatHome() { const [x, z] = boat.userData.home; boat.position.set(x, -0.62, z); boat.visible = true; boat.userData.away = false; clearCargo(); }
 
 const lanterns = [];
 const LBASE = new THREE.BoxGeometry(0.34, 0.05, 0.34), LBODY = new THREE.BoxGeometry(0.24, 0.3, 0.24);
@@ -1298,7 +1361,8 @@ class NPC {
       else if (k === 'write') this.aR.rotation.x = -0.9 + 0.12 * sn;
       else { this.aR.rotation.x = -0.7 + 0.5 * sn; this.body.rotation.y = 0.2 * Math.sin(t * 0.6); }
       this.posing = true;
-    } else if (this.posing) { this.posing = false; this.aL.rotation.x = this.aR.rotation.x = this.body.rotation.x = this.body.rotation.y = 0; }
+    } else if (G.singing && this.seated) { this.body.rotation.z = Math.sin(t * 2.2 + this.ph) * 0.09; this.aL.rotation.x = this.aR.rotation.x = -0.35; this.posing = true; }
+    else if (this.posing) { this.posing = false; this.aL.rotation.x = this.aR.rotation.x = this.body.rotation.x = this.body.rotation.y = 0; }
     if (this.icon) this.icon.position.y = 2.15 + Math.sin(t * 2.2 + this.ph) * 0.08;
   }
   setNeed(type) {
@@ -1457,6 +1521,128 @@ function updateLife(dt, t) {
   FOUNT.jet.scale.y = 1 + Math.sin(t * 9) * 0.08; FOUNT.wm.opacity = 0.45 + Math.sin(t * 5) * 0.06;
 }
 
+/* ========================= fish under the water ========================= */
+const FISH_GEO = (() => { const b = new THREE.SphereGeometry(1, 8, 6); b.scale(0.07, 0.055, 0.2); const tl = new THREE.ConeGeometry(0.065, 0.13, 4); tl.rotateX(Math.PI / 2); tl.translate(0, 0, -0.24); return mergeGeometries([b, tl]); })();
+const schools = [[0xd9963a, 12, 1], [0xc4ccd2, 10, 0.8], [0xd8603a, 7, 1.15]].map(([col, n, sp], si) => {
+  const im = new THREE.InstancedMesh(FISH_GEO, mat(0xffffff, { roughness: 0.4 }), n); im.frustumCulled = false; scene.add(im);
+  const c = new THREE.Color(col); for (let i = 0; i < n; i++) im.setColorAt(i, c.clone().offsetHSL(0, 0, rand(-0.08, 0.08)));
+  return { im, sp, ph: si * 2.3, off: Array.from({ length: n }, () => [rand(-1.4, 1.4), rand(-0.14, 0.14), rand(-0.9, 0.9), rand(0, 6)]) };
+});
+const _m4 = new THREE.Matrix4(), _q = new THREE.Quaternion(), _e = new THREE.Euler(), _p = new THREE.Vector3(), _one = new THREE.Vector3(1, 1, 1);
+function updateFishSchools(t) {
+  for (const sc of schools) {
+    const u = t * 0.05 * sc.sp + sc.ph, w = t * 0.09 * sc.sp + sc.ph * 1.7;
+    const cx = Math.sin(u) * 32, cz = 24 + Math.sin(w) * 8.5, head = Math.atan2(Math.cos(u) * 1.6 * sc.sp, Math.cos(w) * 0.77 * sc.sp), ch = Math.cos(head), sh = Math.sin(head);
+    sc.off.forEach(([ox, oy, oz, ph], i) => {
+      const wx = ox + Math.sin(t * 0.7 + ph) * 0.25, wz = oz + Math.cos(t * 0.6 + ph) * 0.25;
+      _p.set(cx + wx * ch + wz * sh, -1.12 + oy, cz - wx * sh + wz * ch);
+      sc.im.setMatrixAt(i, _m4.compose(_p, _q.setFromEuler(_e.set(0, head + Math.sin(t * 9 + ph) * 0.18, 0)), _one));
+    });
+    sc.im.instanceMatrix.needsUpdate = true;
+  }
+}
+
+/* ========================= mini-game stages: a helper acts out each game in the city ========================= */
+const helper = makeFigure(0xf1ead8, 0xd9a640, 0xcf9a72); helper.g.visible = false;
+function prop(build) { const g = new THREE.Group(); build(g); g.visible = false; helper.body.add(g); return g; }
+const PROPS = {
+  rod: prop(g => { g.position.set(0.36, 0.7, 0.15); cyl(0.012, 0.03, 2.6, M.woodDark, 0, 1.3, 0, g, 5, false); const tip = new THREE.Object3D(); tip.position.y = 2.6; g.add(tip); g.userData.tip = tip; }),
+  stick: prop(g => { g.position.set(0.36, 0.75, 0.1); cyl(0.02, 0.03, 2.2, M.wood, 0, 1.1, 0, g, 5, false); }),
+  peel: prop(g => { g.position.set(0.3, 0.72, 0.2); box(0.05, 0.05, 1.5, M.wood, 0, 0, 0.75, g, false); box(0.34, 0.025, 0.32, M.wood, 0, 0, 1.6, g, false); }),
+  jar: prop(g => { g.position.set(0.34, 0.62, 0.22); add(AMPHORA, M.clay, 0, 0, 0, g, false).scale.setScalar(0.42); }),
+  quill: prop(g => { g.position.set(0.36, 0.72, 0.28); box(0.015, 0.22, 0.015, M.cream, 0, 0.08, 0, g, false); }),
+};
+const rig = { kind: null, t: 0, temp: [], to: null };
+const _tip = new THREE.Vector3(), _v3 = new THREE.Vector3();
+const bobber = add(SPH, mat(0xd8483a), 0, -5, 0, scene, false); bobber.scale.setScalar(0.07); bobber.visible = false;
+const fishLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]), new THREE.LineBasicMaterial({ color: 0xe8e2d0, transparent: true, opacity: 0.75 }));
+fishLine.frustumCulled = false; fishLine.visible = false; scene.add(fishLine);
+const caught = new THREE.Mesh(FISH_GEO, mat(0xd9963a, { roughness: 0.4 })); caught.visible = false; scene.add(caught);
+const olives3d = Array.from({ length: 16 }, () => { const m = add(SPH, mat(0x3e2f4f), 0, -5, 0, scene, false); m.scale.setScalar(0.05); m.visible = false; return { m, vy: 0, rest: 0 }; });
+let boatTilt = 0;
+const cargo = [];
+function showHelper(x, z, face, propName) {
+  helper.g.position.set(x, 0, z); helper.g.rotation.y = face; helper.g.visible = true; helper.body.position.y = 0;
+  helper.aL.rotation.set(0, 0, 0.25); helper.aR.rotation.set(0, 0, -0.25);
+  for (const k in PROPS) PROPS[k].visible = k === propName;
+  PROPS.rod.rotation.x = 0.9; PROPS.stick.rotation.x = 0.4; PROPS.jar.rotation.x = 0; PROPS.peel.position.z = 0.2;
+}
+function stage(spot, at, propName, kind) {
+  const saved = camState();
+  focus = { x: spot[0], z: spot[1], dist: spot[2], polar: spot[3], az: spot[4], speed: 2.4 };
+  if (at) showHelper(at[0], at[1], at[2], propName);
+  Object.assign(rig, { kind, t: 0, temp: [], to: null, pouring: false });
+  tiltH.enabled = tiltV.enabled = true;
+  return { end() {
+    helper.g.visible = false; bobber.visible = fishLine.visible = caught.visible = false; olives3d.forEach(o => { o.m.visible = false; });
+    rig.temp.forEach(m => scene.remove(m)); rig.kind = null; G.singing = false;
+    tiltH.enabled = tiltV.enabled = document.body.classList.contains('photo');
+    focus = { x: saved[0], z: saved[1], dist: saved[2], polar: saved[3], az: saved[4], speed: 2.4 };
+  } };
+}
+function rigFishStart() {
+  helper.g.updateMatrixWorld(true); PROPS.rod.userData.tip.getWorldPosition(_tip);
+  rig.from = _tip.clone(); rig.bob = new THREE.Vector3(helper.g.position.x + 0.5, -0.58, helper.g.position.z + 3.6);
+  rig.cast = 0; rig.dip = 0; rig.reel = -1; bobber.visible = fishLine.visible = true;
+}
+function rigFishHit() { rig.dip = 0.3; splash(rig.bob.x, rig.bob.z); if (!jump) { jump = { x: rig.bob.x + 0.4, z: rig.bob.z + 0.3, a: rand(0, 6.28), t: 0 }; fish.visible = true; } }
+function rigFishMiss() { splash(rig.bob.x, rig.bob.z); }
+function rigFishCatch() { rig.reel = 0; caught.visible = true; }
+function rigBake(r) { rig.thrust = 0.5; if (!r) return; const l = add(SPH, M.loaf, rand(3.2, 4.6), 0.97, -2.0 + rand(-0.22, 0.22), scene, false); l.scale.set(0.15, 0.08, 0.11); rig.temp.push(l); }
+function addCargo(side, it) {
+  const n = cargo.filter(c => c.side === side).length, h = 0.16 + it[1] * 0.08;
+  cargo.push({ side, m: box(0.3, h, 0.26, cm(parseInt(it[2].slice(1), 16)), -1.3 + n * 0.42, 0.42 + h / 2, side * 0.36, boat, false) });
+}
+function dropCargo() { const c = cargo.pop(); if (!c) return; c.m.getWorldPosition(_v3); boat.remove(c.m); splash(_v3.x, _v3.z + c.side * 0.6); }
+function clearCargo() { cargo.splice(0).forEach(c => boat.remove(c.m)); boatTilt = 0; }
+const loomRows = [];
+function addLoomRow(colors, save = true) {
+  if (loomRows.length >= 8) { loomRows.splice(0).forEach(r => r.forEach(m => scene.remove(m))); if (save) { G.loom = []; toast('Irene cortou o toldo pronto e começou outro no tear.'); } }
+  const w = 1.1 / colors.length, i = loomRows.length;
+  loomRows.push(colors.map((c, k) => box(w - 0.01, 0.055, 0.03, cm(c), -5.85 + w * (k + 0.5), 0.84 + i * 0.065, -3.0, scene, false)));
+  if (save) G.loom.push(colors);
+}
+function updateRig(dt, t) {
+  if (!rig.kind) return;
+  rig.t += dt;
+  const hp = helper.g.position, aL = helper.aL, aR = helper.aR, sn = Math.sin(t * 7);
+  if (rig.to) {
+    const dx = rig.to[0] - hp.x, dz = rig.to[1] - hp.z, d = Math.hypot(dx, dz);
+    if (d > 0.05) { const st = Math.min(d, dt * 3); hp.x += dx / d * st; hp.z += dz / d * st; helper.g.rotation.y = Math.atan2(dx, dz); helper.body.position.y = Math.abs(Math.sin(t * 9)) * 0.06; }
+    else { rig.to = null; helper.g.rotation.y = rig.toFace ?? helper.g.rotation.y; helper.body.position.y = 0; }
+  }
+  if (rig.kind === 'fish') {
+    PROPS.rod.userData.tip.getWorldPosition(_tip);
+    if (rig.cast < 1) {
+      rig.cast = Math.min(1, rig.cast + dt / 0.8); const k = rig.cast;
+      bobber.position.lerpVectors(rig.from, rig.bob, k); bobber.position.y += Math.sin(Math.PI * k) * 1.6;
+      PROPS.rod.rotation.x = 0.9 - Math.sin(Math.PI * k) * 0.6; if (k === 1) splash(rig.bob.x, rig.bob.z);
+    } else {
+      rig.dip = Math.max(0, rig.dip - dt);
+      bobber.position.set(rig.bob.x, -0.58 + Math.sin(t * 3) * 0.02 - (rig.dip > 0 ? 0.12 : 0), rig.bob.z);
+      PROPS.rod.rotation.x = 0.9 + (rig.dip > 0 ? 0.25 : 0);
+    }
+    if (rig.reel >= 0) {
+      rig.reel = Math.min(1, rig.reel + dt / 0.9);
+      caught.position.lerpVectors(bobber.position, _tip, rig.reel); caught.position.y += Math.sin(Math.PI * rig.reel) * 0.5;
+      caught.rotation.set(-1.2, helper.g.rotation.y, Math.sin(t * 20) * 0.4, 'YXZ'); PROPS.rod.rotation.x = 0.9 - rig.reel * 0.5;
+      if (rig.reel >= 1) { caught.visible = false; rig.reel = -1; }
+    }
+    const lp = fishLine.geometry.attributes.position; lp.setXYZ(0, _tip.x, _tip.y, _tip.z); lp.setXYZ(1, bobber.position.x, bobber.position.y, bobber.position.z); lp.needsUpdate = true;
+    aL.rotation.x = aR.rotation.x = -0.9;
+  } else if (rig.kind === 'olive') {
+    const sw = Math.max(0, Math.sin(t * 4)); PROPS.stick.rotation.x = 0.4 + sw * 0.9; aR.rotation.x = -1.2 - sw * 0.6;
+    rig.spawn = (rig.spawn || 0) - dt;
+    if (rig.spawn <= 0) { rig.spawn = 0.22; const o = olives3d.find(o => !o.m.visible); if (o) { o.m.position.set(hp.x + rand(-1.6, 1.6), 2.4, hp.z - rand(0.6, 2.2)); o.vy = 0; o.rest = 0; o.m.visible = true; } }
+    for (const o of olives3d) if (o.m.visible) { if (o.m.position.y > 0.05) { o.vy -= 9.8 * dt; o.m.position.y = Math.max(0.05, o.m.position.y + o.vy * dt); } else if ((o.rest += dt) > 1.5) o.m.visible = false; }
+  } else if (rig.kind === 'bake') {
+    rig.thrust = Math.max(0, (rig.thrust || 0) - dt); PROPS.peel.position.z = 0.2 + Math.sin(Math.min(1, rig.thrust / 0.5) * Math.PI) * 0.6; aL.rotation.x = aR.rotation.x = -1.1;
+  } else if (rig.kind === 'copy') aR.rotation.x = -0.9 + 0.12 * Math.sin(t * 10);
+  else if (rig.kind === 'weave') { aL.rotation.x = -0.8 + 0.3 * sn; aR.rotation.x = -0.8 - 0.3 * sn; }
+  else if (rig.kind === 'lamps') { PROPS.jar.rotation.x += ((rig.pouring ? 1.4 : 0) - PROPS.jar.rotation.x) * Math.min(1, dt * 8); aR.rotation.x = rig.pouring ? -1.3 : -0.9; }
+  else if (rig.kind === 'hymn') { aL.rotation.z = 1.45 + Math.sin(t * 2.2) * 0.2; aR.rotation.z = -1.45 - Math.sin(t * 2.2) * 0.2; }
+}
+
 /* ========================= game actions ========================= */
 let ff = null, modalOpen = false, buildMode = false;
 const cdLeft = k => (k ? Math.max(0, (G.cd[k] || 0) - G.clock) : 0);
@@ -1529,6 +1715,7 @@ function startGathering() {
   G.gathering = true; G.agapeDone = false;
   [...npcs].sort((a, b) => (b.name === 'Barnabé') - (a.name === 'Barnabé')).forEach((n, i) => { const s = SEATS[(i === 0 ? 10 : i <= 10 ? i - 1 : i) % SEATS.length]; n.seat = s; n.goTo('H1', [...s.approach, s.pos]); });
   toast('O sol se põe. A igreja se reúne no pátio para o ágape.');
+  setTimeout(() => { if (G.gathering && !modalOpen && !tour && performance.now() - lastInput > 3000) focus = { x: -12, z: -4.6, dist: 15, polar: 0.75, az: 0.25, speed: 1.1 }; }, 4500);
 }
 function resolveAgape() {
   G.agapeDone = true;
@@ -1573,6 +1760,7 @@ function dawn() {
   G.rain = Math.random() < s.rain ? [rand(5, 15), rand(17, 29)] : null;
   if (seasonDay() === 1) setTimeout(() => toast(`<b>${s.name}</b> em Antioquia. ${s.intro}`, 6500), 1200);
   if (isFestival()) { G.stats.festival++; if (seasonIdx() === 1) { addRes('pao', 2); addRes('azeite', 1); } setTimeout(() => toast(`Festa hoje: <b>${s.fest}</b>. ${s.festTxt}`, 7000), 2600); }
+  G.peds = null;
   dawnVisits();
   applySeason();
 }
@@ -1654,7 +1842,8 @@ function playFishing(done) {
     <svg class="ring" viewBox="-120 -120 240 240" aria-label="Medidor de pesca">
       <path class="wave" d="M-118 70q10-14 20 0t20 0M78 70q10-14 20 0t20 0M-112 84q10-14 20 0M92 84q10-14 20 0"/>
       <circle r="96" class="trk"/><path class="arc"/><g class="ndl"><line x1="0" y1="0" x2="0" y2="-104"/><circle cy="-104" r="6"/></g><circle r="11" class="hub"/>
-    </svg><div class="pips"></div></div>`, () => { over = true; removeEventListener('keydown', key); });
+    </svg><div class="pips"></div></div>`, () => { over = true; removeEventListener('keydown', key); st.end(); }, false, true);
+  const st = stage([8.4, 21.2, 10, 1.18, 0.75], [7.55, 19.2, 0], 'rod', 'fish'); rigFishStart();
   let ang = 0, speed = 150, arcStart = 0, arcLen = 64, hits = 0, miss = 0, lt = performance.now();
   const svg = el.querySelector('.ring'), arcEl = el.querySelector('.arc'), ndl = el.querySelector('.ndl'), pips = el.querySelector('.pips');
   const newArc = () => { arcStart = (ang + 100 + Math.random() * 160) % 360; arcEl.setAttribute('d', arcPath(arcStart, arcLen, 96)); };
@@ -1662,12 +1851,12 @@ function playFishing(done) {
   const flash = c => { svg.classList.remove('ok', 'no'); void svg.getBoundingClientRect(); svg.classList.add(c); };
   function hit() {
     if (over) return;
-    if ((ang - arcStart + 360) % 360 <= arcLen) { hits++; flash('ok'); audio.sfx('hit'); speed += 45; arcLen = Math.max(30, arcLen - 12); newArc(); } else { miss++; flash('no'); audio.sfx('miss'); }
+    if ((ang - arcStart + 360) % 360 <= arcLen) { hits++; flash('ok'); audio.sfx('hit'); rigFishHit(); speed += 45; arcLen = Math.max(30, arcLen - 12); newArc(); } else { miss++; flash('no'); audio.sfx('miss'); rigFishMiss(); }
     drawPips();
     if (hits >= 3 || miss >= 3) {
       over = true; removeEventListener('keydown', key);
       const r = hits + (hits === 3 && miss === 0 ? 1 : 0);
-      setTimeout(() => { done(r); audio.sfx(r ? 'win' : 'miss'); resultScreen(el, r ? 'Rede cheia!' : 'Rede vazia', `+${r}`, r ? `${qty(r, 'pao')} para a mesa comum.` : 'Os peixes fugiram desta vez.'); }, 350);
+      setTimeout(() => { done(r); audio.sfx(r ? 'win' : 'miss'); if (r) rigFishCatch(); resultScreen(el, r ? 'Rede cheia!' : 'Rede vazia', `+${r}`, r ? `${qty(r, 'pao')} para a mesa comum.` : 'Os peixes fugiram desta vez.'); }, 350);
     }
   }
   el.addEventListener('pointerdown', e => { if (!e.target.closest('button')) hit(); });
@@ -1686,7 +1875,8 @@ function playOlives(done) {
   const el = openModal(`<div class="card"><button class="x" aria-label="Fechar">✕</button>
     <h2>Colheita no Olival</h2><p class="hint">Mova o cesto com o mouse, o dedo ou ← →. Azeitonas douradas valem 3.</p>
     <canvas class="olv" aria-label="Cesto e azeitonas caindo"></canvas>
-    <div class="mg-stats"><span>Azeitonas: <b class="sc">0</b></span><span>Tempo: <b class="tm">20</b> s</span></div></div>`, () => { over = true; removeEventListener('keydown', kd); removeEventListener('keyup', kd); });
+    <div class="mg-stats"><span>Azeitonas: <b class="sc">0</b></span><span>Tempo: <b class="tm">20</b> s</span></div></div>`, () => { over = true; removeEventListener('keydown', kd); removeEventListener('keyup', kd); st.end(); }, false, true);
+  const st = stage([22, -12.6, 10, 1.0, 0.45], [22, -12.2, Math.PI], 'stick', 'olive');
   const W = 360, H = 300, cv = el.querySelector('canvas'), cx = cv.getContext('2d'), dpr = Math.min(2, devicePixelRatio);
   cv.width = W * dpr; cv.height = H * dpr; cx.scale(dpr, dpr);
   let bx = W / 2, score = 0, time = 20, items = [], spawn = 0, lt = performance.now();
@@ -1735,7 +1925,8 @@ function playCopy(done) {
   const [text, ref] = VERSES[idx], words = text.split(' ');
   const el = openModal(`<div class="card copy"><button class="x" aria-label="Fechar">✕</button>
     <h2>Casa do Copista</h2><p class="hint">Toque nas palavras na ordem certa para copiar o versículo no rolo.</p>
-    <div class="scroll-line"><span class="built"></span><span class="caret">▍</span></div><span class="ref">${ref}</span><div class="chips"></div></div>`);
+    <div class="scroll-line"><span class="built"></span><span class="caret">▍</span></div><span class="ref">${ref}</span><div class="chips"></div></div>`, () => st.end(), false, true);
+  const st = stage([18.6, -2.8, 6.5, 1.02, 0.15], [19.25, -2.25, Math.PI], 'quill', 'copy');
   const chips = el.querySelector('.chips'), built = el.querySelector('.built');
   let pos = 0, mistakes = 0;
   for (const w of shuffle([...words])) {
@@ -1757,7 +1948,8 @@ function playBake(done) {
     <h2>Forno da Cloé</h2><p class="hint">Tire cada pão quando ele estiver dourado: a marca dentro da faixa clara. Clique ou aperte Espaço.</p>
     <div class="oven"><div class="loaf"></div></div>
     <div class="heat"><div class="zone"></div><div class="mark"></div></div>
-    <div class="pips"></div><p class="msg">Pão 1 de 3</p></div>`, () => { over = true; removeEventListener('keydown', key); });
+    <div class="pips"></div><p class="msg">Pão 1 de 3</p></div>`, () => { over = true; removeEventListener('keydown', key); st.end(); }, false, true);
+  const st = stage([7.4, -3.0, 8, 1.05, 0.4], [7.35, -2.45, 2.03], 'peel', 'bake');
   const loafEl = el.querySelector('.loaf'), zone = el.querySelector('.zone'), mark = el.querySelector('.mark'), pips = el.querySelector('.pips'), msg = el.querySelector('.msg');
   const COLORS = [[0, [241, 227, 196]], [0.45, [231, 194, 122]], [0.6, [201, 138, 69]], [0.78, [122, 68, 32]], [1, [46, 26, 14]]];
   const colorAt = v => { let i = 0; while (i < COLORS.length - 2 && COLORS[i + 1][0] < v) i++; const [a, ca] = COLORS[i], [b, cb] = COLORS[i + 1], t = clamp((v - a) / (b - a), 0, 1); return `rgb(${ca.map((c, k) => Math.round(c + (cb[k] - c) * t)).join(',')})`; };
@@ -1765,7 +1957,7 @@ function playBake(done) {
   const results = [];
   const setZone = () => { zone.style.left = z0 * 100 + '%'; zone.style.width = (z1 - z0) * 100 + '%'; };
   const drawPips = () => { pips.innerHTML = [0, 1, 2].map(i => `<span class="pip ${results[i] > 0 ? 'ok' : results[i] === 0 ? 'bad' : ''}"></span>`).join(''); };
-  function finishLoaf(r, text) { results.push(r); score += r; drawPips(); msg.textContent = text; audio.sfx(r === 2 ? 'hit' : r === 1 ? 'pop' : 'wrong'); pause = 0.9; }
+  function finishLoaf(r, text) { results.push(r); score += r; drawPips(); msg.textContent = text; audio.sfx(r === 2 ? 'hit' : r === 1 ? 'pop' : 'wrong'); rigBake(r); pause = 0.9; }
   function pull() {
     if (over || pause > 0) return;
     const c = (z0 + z1) / 2, r = p >= z0 && p <= z1 ? (Math.abs(p - c) <= (z1 - z0) * 0.2 ? 2 : 1) : 0;
@@ -1800,7 +1992,8 @@ function playWeave(done) {
     <h2>Tear da Irene</h2><p class="hint">Observe a ordem dos fios e repita. Cada sequência certa vira uma faixa do toldo.</p>
     <div class="loom"></div>
     <div class="threads">${COL.map(([n, c], i) => `<button class="thread" data-i="${i}" style="--c:${c}" aria-label="Fio ${n}"></button>`).join('')}</div>
-    <p class="msg">Observe…</p></div>`, () => { over = true; });
+    <p class="msg">Observe…</p></div>`, () => { over = true; st.end(); }, false, true);
+  const st = stage([-5.5, -2.8, 6.5, 1.02, -0.2], [-6.05, -2.45, Math.PI], null, 'weave');
   const btns = [...el.querySelectorAll('.thread')], loom = el.querySelector('.loom'), msg = el.querySelector('.msg');
   let seq = [], pos = 0, round = 0, listening = false;
   const lit = (i, ms = 380) => { btns[i].classList.add('lit'); audio.note(i); setTimeout(() => btns[i].classList.remove('lit'), ms); };
@@ -1823,6 +2016,7 @@ function playWeave(done) {
     if (++pos < seq.length) return;
     round++; setEnabled(false); msg.textContent = 'Faixa tecida!';
     loom.insertAdjacentHTML('beforeend', `<div class="row">${seq.map(c => `<i style="background:${COL[c][1]}"></i>`).join('')}</div>`);
+    addLoomRow(seq.map(c => parseInt(COL[c][1].slice(1), 16)));
     setTimeout(round >= 4 ? end : play, 900);
   });
   play();
@@ -1841,12 +2035,14 @@ function playLoad(done) {
     </svg>
     <p class="cargo-next"></p>
     <div class="sides"><button class="pill sl">← Bombordo</button><button class="pill sr">Estibordo →</button></div>
-    <div class="pips"></div><p class="msg"> </p></div>`, () => { over = true; removeEventListener('keydown', key); });
+    <div class="pips"></div><p class="msg"> </p></div>`, () => { over = true; removeEventListener('keydown', key); st.end(); if (!finished) clearCargo(); }, false, true);
+  const st = stage([11.6, 16.6, 9.5, 1.05, 0.3], [9.05, 16.6, Math.PI / 2], null, 'load');
+  let finished = false;
   const hull = el.querySelector('.hull'), cargoG = el.querySelector('.cargo'), nextEl = el.querySelector('.cargo-next'), pips = el.querySelector('.pips'), msg = el.querySelector('.msg');
   const L = [], R = [], marks = []; let idx = 0;
   const torque = () => R.reduce((a, c) => a + c[1], 0) - L.reduce((a, c) => a + c[1], 0);
   function draw() {
-    hull.style.transform = `rotate(${clamp(torque() * 3.5, -18, 18)}deg)`;
+    hull.style.transform = `rotate(${clamp(torque() * 3.5, -18, 18)}deg)`; boatTilt = clamp(torque() * 0.035, -0.3, 0.3);
     cargoG.innerHTML = [...L.map((c, i) => [c, -30 - i * 22]), ...R.map((c, i) => [c, 30 + i * 22])].map(([c, x]) => { const h = 10 + c[1] * 7; return `<rect x="${x - 9}" y="${-4 - h}" width="18" height="${h}" rx="3" fill="${c[2]}" stroke="rgba(0,0,0,.35)"/>`; }).join('');
     const it = items[idx];
     nextEl.innerHTML = it ? `Carga ${idx + 1} de 8: <b>${it[0]}</b> · peso ${'●'.repeat(it[1])}` : 'Tudo a bordo.';
@@ -1854,13 +2050,13 @@ function playLoad(done) {
   }
   function place(side) {
     if (over || idx >= items.length) return;
-    const it = items[idx++]; (side < 0 ? L : R).push(it); marks.push('ok'); audio.sfx('pop');
+    const it = items[idx++]; (side < 0 ? L : R).push(it); marks.push('ok'); audio.sfx('pop'); addCargo(side, it);
     const tq = torque();
-    if (Math.abs(tq) > 4) { (tq > 0 ? R : L).pop(); marks[marks.length - 1] = 'bad'; msg.textContent = `${it[0]} caiu no rio!`; setTimeout(() => audio.sfx('splash'), 150); }
+    if (Math.abs(tq) > 4) { (tq > 0 ? R : L).pop(); marks[marks.length - 1] = 'bad'; dropCargo(); msg.textContent = `${it[0]} caiu no rio!`; setTimeout(() => audio.sfx('splash'), 150); }
     else msg.textContent = Math.abs(tq) >= 3 ? 'Cuidado, está inclinando!' : 'Bem equilibrado.';
     draw();
     if (idx < items.length) return;
-    over = true; removeEventListener('keydown', key);
+    over = true; finished = true; removeEventListener('keydown', key);
     const kept = marks.filter(m => m === 'ok').length;
     setTimeout(() => { if (!el.isConnected) return; done(kept); audio.sfx('win'); resultScreen(el, kept >= 7 ? 'Barco bem carregado!' : 'Barco carregado', `${kept}/8`, `${kept} cargas descem o rio até Selêucia e seguem para a Judeia.`); }, 700);
   }
@@ -1868,6 +2064,95 @@ function playLoad(done) {
   el.querySelector('.sr').onclick = () => place(1);
   addEventListener('keydown', key);
   draw();
+}
+
+function playLamps(done) {
+  let over = false, holding = false, idx = 0, level = 0, pause = 0, lt = performance.now(), band = [0.62, 0.8];
+  const results = [];
+  const key = e => { if (e.code !== 'Space') return; e.preventDefault(); if (e.type === 'keydown') { if (!e.repeat) hold(); } else release(); };
+  const up = () => release();
+  const el = openModal(`<div class="card"><button class="x" aria-label="Fechar">✕</button><h2>Lamparinas da rua</h2>
+    <p class="hint">Segure (ou Espaço) para derramar azeite e solte quando o nível estiver na faixa dourada.</p>
+    <div class="vessel"><div class="oil"></div><div class="band"></div></div>
+    <div class="pips"></div><p class="msg">Lamparina 1 de 5</p></div>`, () => { over = true; rig.pouring = false; removeEventListener('keydown', key); removeEventListener('keyup', key); removeEventListener('pointerup', up); st.end(); }, false, true);
+  const st = stage([PEDS[0].x, 2.4, 9, 1.12, Math.PI / 2], [PEDS[0].x + 0.6, 2.7, -Math.PI / 2], 'jar', 'lamps');
+  const oil = el.querySelector('.oil'), bandEl = el.querySelector('.band'), pips = el.querySelector('.pips'), msg = el.querySelector('.msg');
+  const setBand = () => { bandEl.style.bottom = band[0] * 100 + '%'; bandEl.style.height = (band[1] - band[0]) * 100 + '%'; };
+  const drawPips = () => { pips.innerHTML = [0, 1, 2, 3, 4].map(i => `<span class="pip ${results[i] === true ? 'ok' : results[i] === false ? 'bad' : ''}"></span>`).join(''); };
+  function hold() { if (over || pause > 0) return; holding = true; rig.pouring = true; }
+  function release() { if (!holding) return; holding = false; rig.pouring = false; judge(level >= band[0] && level <= band[1], level < band[0] ? 'Pouco azeite: a chama não pegou.' : 'Lamparina acesa!'); }
+  function judge(ok, text) {
+    results.push(ok); drawPips(); msg.textContent = text; audio.sfx(ok ? 'chime' : 'wrong');
+    if (ok) { if (G.peds?.day !== dayN()) G.peds = { day: dayN(), lit: [] }; G.peds.lit[idx] = true; }
+    pause = 0.9;
+  }
+  function next() {
+    if (++idx >= 5) {
+      over = true; removeEventListener('keydown', key); removeEventListener('keyup', key);
+      const lit = results.filter(Boolean).length; done(lit); audio.sfx('win');
+      resultScreen(el, lit === 5 ? 'Rua toda iluminada!' : 'Lamparinas cheias', `${lit}/5`, `${lit} ${lit === 1 ? 'lamparina vai' : 'lamparinas vão'} arder esta noite na rua das colunas.`);
+      return;
+    }
+    level = 0; const w = 0.18 - idx * 0.02, lo = rand(0.45, 0.85 - w); band = [lo, lo + w]; setBand(); msg.textContent = `Lamparina ${idx + 1} de 5`;
+    const P = PEDS[idx]; rig.to = [P.x + 0.6, 2.7]; rig.toFace = -Math.PI / 2; focus = { x: P.x, z: 2.4, dist: 9, polar: 1.12, az: Math.PI / 2, speed: 2.4 };
+  }
+  el.addEventListener('pointerdown', e => { if (!e.target.closest('button')) hold(); });
+  addEventListener('pointerup', up); addEventListener('keydown', key); addEventListener('keyup', key);
+  setBand(); drawPips();
+  (function loop(now) {
+    if (over) return;
+    const dt = Math.min(0.05, (now - lt) / 1000); lt = now;
+    if (pause > 0) { pause -= dt; if (pause <= 0) next(); }
+    else if (holding) { level += dt * (0.42 + idx * 0.08); if (level >= 1) { level = 1; holding = false; rig.pouring = false; judge(false, 'Derramou! Azeite no chão da rua.'); } }
+    oil.style.height = level * 100 + '%';
+    if (!over) requestAnimationFrame(loop);
+  })(lt);
+}
+function playHymn(done) {
+  let over = false, score = 0;
+  const W = 300, H = 220, LINE = 186, SPEED = 120, LANES = { KeyA: 0, KeyS: 1, KeyD: 2, ArrowLeft: 0, ArrowDown: 1, ArrowRight: 2 }, COLS = ['#f2c46b', '#62bfd0', '#b98ee6'];
+  const notes = []; let nt = 2.2;
+  for (let i = 0; i < 20; i++) { notes.push({ t: nt, lane: Math.floor(Math.random() * 3), res: 0 }); nt += 0.75 * pick([1, 1, 0.5, 1.5]); }
+  const end = notes[notes.length - 1].t + 1.2;
+  const key = e => { const l = LANES[e.code]; if (l != null) { e.preventDefault(); press(l); } };
+  const el = openModal(`<div class="card"><button class="x" aria-label="Fechar">✕</button><h2>Hinos no pátio</h2>
+    <p class="hint">Toque na coluna (ou A, S, D) quando a nota chegar à linha. O pátio canta com você.</p>
+    <canvas class="olv hymn" aria-label="Notas do hino"></canvas><div class="mg-stats"><span>Acertos: <b class="sc">0</b></span><span class="fb"></span></div></div>`, () => { over = true; G.singing = false; removeEventListener('keydown', key); st.end(); }, false, true);
+  const st = stage([-12, -4.6, 12.5, 0.7, 0.25], [-12, -3.3, Math.PI], null, 'hymn');
+  G.singing = true;
+  const cv = el.querySelector('canvas'), cx = cv.getContext('2d'), dpr = Math.min(2, devicePixelRatio), sc = el.querySelector('.sc'), fb = el.querySelector('.fb');
+  cv.width = W * dpr; cv.height = H * dpr; cx.scale(dpr, dpr);
+  const start = performance.now(), now = () => (performance.now() - start) / 1000;
+  function press(l) {
+    if (over) return;
+    const tn = now(), n = notes.filter(n => !n.res && n.lane === l).sort((a, b) => Math.abs(a.t - tn) - Math.abs(b.t - tn))[0];
+    if (!n || Math.abs(n.t - tn) > 0.3) { fb.textContent = 'Fora do tempo'; return; }
+    n.res = Math.abs(n.t - tn) < 0.1 ? 2 : 1; score += n.res; sc.textContent = notes.filter(n => n.res > 0).length;
+    fb.textContent = n.res === 2 ? 'Perfeito!' : 'Bom'; audio.sing(l);
+  }
+  cv.addEventListener('pointerdown', e => { const r = cv.getBoundingClientRect(); press(Math.min(2, Math.floor((e.clientX - r.left) / r.width * 3))); });
+  addEventListener('keydown', key);
+  (function loop() {
+    if (over) return;
+    const tn = now();
+    for (const n of notes) if (!n.res && tn - n.t > 0.3) { n.res = -1; fb.textContent = 'Perdeu uma nota'; }
+    cx.fillStyle = '#1c1712'; cx.fillRect(0, 0, W, H);
+    for (let l = 0; l < 3; l++) { cx.fillStyle = l % 2 ? 'rgba(255,255,255,.03)' : 'rgba(255,255,255,.06)'; cx.fillRect(l * W / 3, 0, W / 3, H); }
+    cx.strokeStyle = 'rgba(255,223,158,.7)'; cx.lineWidth = 3; cx.beginPath(); cx.moveTo(0, LINE); cx.lineTo(W, LINE); cx.stroke();
+    for (const n of notes) {
+      if (n.res > 0) continue;
+      const y = LINE - (n.t - tn) * SPEED; if (y < -20 || y > H + 20) continue;
+      cx.fillStyle = n.res === -1 ? 'rgba(120,110,100,.5)' : COLS[n.lane]; cx.beginPath(); cx.arc((n.lane + 0.5) * W / 3, y, 13, 0, Math.PI * 2); cx.fill();
+    }
+    cx.fillStyle = 'rgba(247,238,219,.55)'; cx.font = '700 13px Nunito, sans-serif'; cx.textAlign = 'center'; ['A', 'S', 'D'].forEach((k, l) => cx.fillText(k, (l + 0.5) * W / 3, H - 8));
+    if (tn > end) {
+      over = true; G.singing = false; removeEventListener('keydown', key);
+      const hit = notes.filter(n => n.res > 0).length; done(score); audio.sfx('win');
+      resultScreen(el, hit >= 16 ? 'O pátio inteiro cantou!' : 'Hino cantado', `${hit}/${notes.length}`, `+${Math.round(score / 3)} ✦ de comunhão.`);
+      return;
+    }
+    requestAnimationFrame(loop);
+  })();
 }
 
 /* ========================= stories, visitors, letters & album ========================= */
@@ -1921,13 +2206,18 @@ function openAlbum() {
 /* ========================= camera: smooth focus & city tour ========================= */
 let focus = null, tour = null, popAnchor = null;
 function focusOn(x, z, dist) { focus = { x, z, dist: dist ?? Math.min(camera.position.distanceTo(controls.target), 26) }; }
-function updateFocus(dt) {
+function updateFocus(dt) { // eases target, distance and (optionally) camera angles toward the focus
   if (!focus || tour) return;
-  const k = 1 - Math.exp(-dt * 3.5), tg = controls.target, off = camera.position.clone().sub(tg);
+  const k = 1 - Math.exp(-dt * (focus.speed || 3.5)), tg = controls.target;
+  _sph.setFromVector3(_v3.copy(camera.position).sub(tg));
   tg.x += (focus.x - tg.x) * k; tg.z += (focus.z - tg.z) * k;
-  const len = off.length(); off.setLength(len + (focus.dist - len) * k); camera.position.copy(tg).add(off);
-  if (Math.hypot(focus.x - tg.x, focus.z - tg.z) < 0.05 && Math.abs(len - focus.dist) < 0.05) focus = null;
+  _sph.radius += (focus.dist - _sph.radius) * k;
+  if (focus.polar != null) _sph.phi += (focus.polar - _sph.phi) * k;
+  if (focus.az != null) _sph.theta += Math.atan2(Math.sin(focus.az - _sph.theta), Math.cos(focus.az - _sph.theta)) * k;
+  camera.position.setFromSpherical(_sph).add(tg);
+  if (Math.hypot(focus.x - tg.x, focus.z - tg.z) < 0.05 && Math.abs(_sph.radius - focus.dist) < 0.05 && (focus.polar == null || Math.abs(_sph.phi - focus.polar) < 0.005)) focus = null;
 }
+function camState() { _sph.setFromVector3(_v3.copy(camera.position).sub(controls.target)); return [controls.target.x, controls.target.z, _sph.radius, _sph.phi, _sph.theta]; }
 const TOUR = [[-12, -4, 19, 0.95, 0.4], [3, 6.5, 22, 1.1, 0.9], [8.5, 17, 17, 1.25, 1.5], [21, -13, 21, 1.0, 2.3], [-24, -10, 26, 0.9, -0.5], [-31, 20, 24, 1.3, -1.1], [0, -2, 46, 0.8, 0.3], [16, -3, 16, 1.15, 0]]; // x, z, distance, polar, azimuth
 const _sph = new THREE.Spherical();
 function startTour() {
@@ -1999,9 +2289,9 @@ function openPlot(p, sx, sy) {
   })), { x: p.x, y: 0.3, z: p.z });
 }
 let modalClose = null, backdropCloses = false;
-function openModal(html, onClose = null, backdrop = false) {
+function openModal(html, onClose = null, backdrop = false, mini = false) {
   closeModal(); closePop();
-  const m = $('#modal'); m.innerHTML = html; m.hidden = false; modalOpen = true; modalClose = onClose; backdropCloses = backdrop;
+  const m = $('#modal'); m.innerHTML = html; m.hidden = false; m.classList.toggle('mini', mini); modalOpen = true; modalClose = onClose; backdropCloses = backdrop;
   m.querySelectorAll('.x').forEach(b => b.onclick = closeModal);
   return m.firstElementChild;
 }
@@ -2014,7 +2304,8 @@ $('#modal').addEventListener('pointerdown', e => { if (e.target.id === 'modal' &
 function openHelp() {
   const el = openModal(`<div class="card" style="text-align:left"><button class="x" aria-label="Fechar">✕</button><h2>Como jogar</h2>
     <ul class="howto">
-      <li><b>De dia</b>: clique nos anéis dourados. Pesque no píer, asse pães no forno, colha no olival, teça no tear e copie versículos.</li>
+      <li><b>De dia</b>: clique nos anéis dourados. Pesque no píer, asse pães no forno, colha no olival, teça no tear e copie versículos. A câmera vai até o lugar e você vê o trabalho acontecer.</li>
+      <li><b>Ao fim da tarde</b>: encha as lamparinas da rua das colunas. <b>À noite</b>: cante hinos no pátio da igreja.</li>
       <li><b>Ao entardecer</b>: o azeite acende as lamparinas e a igreja se reúne para o ágape. Cada irmão come um pão.</li>
       <li><b>À noite</b>: moradores mostram ícones flutuantes pedindo oração 🙏, pão 🍞, consolo 💧 ou ensino 📜.</li>
       <li><b>Códice</b>: páginas se revelam com o que você faz. Algumas só em certos horários.</li>
@@ -2025,7 +2316,7 @@ function openHelp() {
       <li><b>Comunhão ✦</b>: a cada 15, um novo irmão chega pelo porto.</li>
       <li><b>Som</b>: música, rio, pássaros e grilos são gerados pelo próprio jogo. Ajuste no alto-falante ou aperte M.</li>
     </ul>
-    <p class="keys">Arrastar ou WASD: mover a câmera · Roda ou pinça: zoom · Botão direito: girar · B: construir · C: Códice · M: som · Esc: fechar</p>
+    <p class="keys">Arrastar: girar a cidade · Botão direito ou WASD: mover · Roda ou pinça: zoom · B: construir · C: Códice · M: som · Esc: fechar</p>
     <button class="ghost reset">Recomeçar do zero</button></div>`, null, true);
   const r = el.querySelector('.reset');
   r.onclick = () => {
@@ -2043,8 +2334,8 @@ function openIntro() {
   el.querySelector('.go').onclick = closeModal;
 }
 function tips() {
-  [['Arraste para mover a câmera · roda do mouse para zoom · botão direito para girar.', 600],
-   ['Clique nos anéis dourados para trabalhar: píer, forno, olival, tear, copista e casa da igreja.', 5500],
+  [['Arraste para girar a cidade · botão direito ou WASD para mover · roda do mouse para zoom.', 600],
+   ['Clique nos anéis dourados para trabalhar: píer, forno, olival, tear, copista, rua das colunas e casa da igreja.', 5500],
    ['À noite, clique nos ícones sobre os moradores para acolhê-los.', 10500]].forEach(([t, d]) => setTimeout(() => toast(t, 5200), d));
 }
 const SPEEDS = [1, 2, 4, 0];
@@ -2122,7 +2413,7 @@ canvas.addEventListener('pointermove', e => { ptr.x = e.clientX; ptr.y = e.clien
 canvas.addEventListener('pointerleave', () => { $('#tip').hidden = true; });
 canvas.addEventListener('pointerup', e => {
   const d = ptr.down; ptr.down = null;
-  if (!d || e.button !== 0 || Math.hypot(e.clientX - d.x, e.clientY - d.y) > 6) return;
+  if (!d || modalOpen || e.button !== 0 || Math.hypot(e.clientX - d.x, e.clientY - d.y) > 6) return;
   const p = pickAt(e.clientX, e.clientY); if (!p) return;
   $('#tip').hidden = true; audio.sfx('click');
   if (p.type === 'hot') openHotspot(p.ref, e.clientX, e.clientY);
@@ -2152,6 +2443,8 @@ addEventListener('keydown', e => {
 });
 addEventListener('keyup', e => { keys[e.code] = false; });
 addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
+let lastInput = performance.now();
+for (const ev of ['pointerdown', 'wheel', 'keydown']) addEventListener(ev, () => { lastInput = performance.now(); }, { capture: true, passive: true });
 const _f = new THREE.Vector3(), _r = new THREE.Vector3();
 function keyPan(dt) {
   if (modalOpen) return;
@@ -2185,7 +2478,7 @@ const KEYS = [
   [19.8, 0x27223f, 0x9db0ff, 0.34, 0x363a6e, 0x16141e, 0.6],
   [24, 0x0e1730, 0x9db0ff, 0.32, 0x2c3c6a, 0x0d0c14, 0.6],
 ].map(k => [k[0], new THREE.Color(k[1]), new THREE.Color(k[2]), k[3], new THREE.Color(k[4]), new THREE.Color(k[5]), k[6]]);
-const WATER_DAY = new THREE.Color(0x3f7d8c), WATER_NIGHT = new THREE.Color(0x163444);
+const WATER_DAY = new THREE.Color(0x8fbfb6), WATER_NIGHT = new THREE.Color(0x6a8a9a);
 let lampOn = 0;
 function updateLighting() {
   const h = hour(); let i = 0; while (KEYS[i + 1][0] < h) i++;
@@ -2203,11 +2496,13 @@ function updateLighting() {
   const tf = performance.now() / 1000;
   M.lamp.emissiveIntensity = (0.25 + 5 * L) * (0.95 + 0.05 * Math.sin(tf * 11));
   M.lantern.emissiveIntensity = 3.6 * lampOn;
-  M.ember.emissiveIntensity = 1.2 + 1.6 * lampOn;
-  glowFlat.opacity = 0.6 * Math.max(L, lampOn * 0.5);
+  M.ember.emissiveIntensity = 1.2 + 1.6 * lampOn + (rig.kind === 'bake' ? 2.5 : 0);
+  glowFlat.opacity = 0.35 * Math.max(L, lampOn * 0.5);
   ffMat.opacity = 0.9 * lampOn;
   for (const p of PL) { const ph = p.userData.ph ??= Math.random() * 9; p.intensity = p.userData.base * L * (0.9 + 0.06 * Math.sin(tf * 9 + ph) + 0.04 * Math.sin(tf * 23 + ph * 3)); }
-  M.water.color.lerpColors(WATER_DAY, WATER_NIGHT, lampOn);
+  water.material.uniforms.color.value.lerpColors(WATER_DAY, WATER_NIGHT, lampOn);
+  M.bed.emissiveIntensity = 0.16 * (1 - lampOn) * (1 - 0.6 * rainAmt); causticTex.offset.set(tf * 0.015, tf * 0.011);
+  PEDS.forEach((pd, i) => { pd.m.emissiveIntensity = G.peds?.lit?.[i] ? (0.6 + 3.5 * lampOn) * (0.92 + 0.08 * Math.sin(tf * 10 + i)) : 0; });
   bloom.strength = 0.18 + 0.62 * lampOn; bloom.threshold = lerp(2.6, 0.75, lampOn);
   renderer.toneMappingExposure = lerp(1.0, 1.2, lampOn);
 }
@@ -2375,6 +2670,15 @@ const audio = (() => {
       vib.start(t); vib.stop(t + dur + 1.6);
     }
   }
+  function voice(fr, t, dur, vel) {
+    const e = g(0), f1 = filt('bandpass', 700, 4), f2 = filt('bandpass', 1150, 6), vib = osc('sine', 4.8), vg = g(fr * 0.006);
+    vib.connect(vg);
+    for (const det of [-0.004, 0.004]) { const o = osc('sawtooth', fr * (1 + det)); vg.connect(o.frequency); o.connect(f1); o.connect(f2); o.start(t); o.stop(t + dur + 0.6); }
+    f1.connect(e); f2.connect(e); e.connect(sfxBus);
+    e.gain.setValueAtTime(0.0001, t); e.gain.exponentialRampToValueAtTime(vel, t + 0.06); e.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.5);
+    vib.start(t); vib.stop(t + dur + 0.6);
+  }
+  function sing(i) { if (!ctx || ctx.state !== 'running' || G.muted || !G.vol.sfx) return; const t = ctx.currentTime + 0.01, fr = f(DAY, [7, 9, 11][i % 3], -1); voice(fr, t, 0.45, 0.09); pluck(fr * 2, t, 0.07, 1.2, 3500, sfxBus); }
   function makePhrase(night) {
     const p = new Array(16).fill(null), stride = night ? 3 : 1; let d = melDeg;
     for (let i = 0; i < 16; i += stride) if (Math.random() < 0.5) { d = clamp(d + pick([-2, -1, -1, 1, 1, 2]), 4, 11); p[i] = d; }
@@ -2488,7 +2792,7 @@ const audio = (() => {
     if (name === 'plip') { sweep('sine', 900, 280, t, 0.12, 0.07 * v, ambBus); burst(t, 1400, 0.04 * v, 0.08, ambBus); }
     if (name === 'flap') for (let i = 0; i < 9; i++) burst(t + i * 0.045 + rand(0, 0.02), rand(350, 700), 0.06 * v, 0.04, ambBus, 'lowpass', 1);
   }
-  return { init, sfx, note, at, update, applyVolumes, get state() { return ctx ? ctx.state : 'off'; } };
+  return { init, sfx, note, sing, at, update, applyVolumes, get state() { return ctx ? ctx.state : 'off'; } };
 })();
 
 /* ========================= main loop ========================= */
@@ -2504,12 +2808,12 @@ function step(dt, t) {
   if (ff && G.time >= ff.to) { G.time = ff.to; ff = null; refreshHUD(); }
   timeEvents(); updateNeeds(dh);
   updateLighting(); updateRain(dt); updateSky(dt, t);
-  for (let i = 0; i < wpos.count; i++) { const x = wbase[i * 3], z = wbase[i * 3 + 2]; wpos.array[i * 3 + 1] = Math.sin(x * 0.35 + t * 0.9) * 0.04 + Math.sin(z * 0.7 - t * 1.3 + x * 0.2) * 0.035; }
-  wpos.needsUpdate = true; waterGeo.computeVertexNormals();
+  updateFishSchools(t); updateRig(dt, t);
   for (const n of npcs) n.update(dt, t);
   updateLife(dt, t);
   for (const l of lanterns) { const u = l.userData; l.position.x += u.vx * dt; if (l.position.x > 50) l.position.x = -50; l.position.z = u.z0 + Math.sin(t * 0.3 + u.ph) * 0.5; l.position.y = -0.58 + Math.sin(t * 1.7 + u.ph) * 0.03; l.rotation.y = Math.sin(t * 0.4 + u.ph) * 0.3; }
   for (const b of [boat, boat2]) { b.position.y = -0.62 + Math.sin(t * 1.2 + b.userData.ph) * 0.04; b.rotation.z = Math.sin(t * 0.9 + b.userData.ph) * 0.025; }
+  boat.rotation.x += (boatTilt - boat.rotation.x) * Math.min(1, dt * 5);
   if (boat.userData.away) { boat.position.x += 2.4 * dt; if (boat.position.x > 52) boat.visible = false; }
   if (lampOn > 0.01) { const fa = ffGeo.attributes.position.array; ffBase.forEach(([x, y, z, ph], i) => { fa[i * 3] = x + Math.sin(t * 0.5 + ph) * 1.2; fa[i * 3 + 1] = y + Math.sin(t * 1.3 + ph * 2) * 0.35; fa[i * 3 + 2] = z + Math.cos(t * 0.4 + ph) * 1.2; }); ffGeo.attributes.position.needsUpdate = true; }
   ringT -= dt;
@@ -2520,6 +2824,7 @@ function step(dt, t) {
   }
   if (ringT <= 0) ringT = 0.4;
   if (buildMode) plotMat.opacity = 0.55 + 0.3 * Math.sin(t * 3);
+  controls.autoRotate = !tour && !modalOpen && !focus && performance.now() - lastInput > 45000; // gentle orbit when idle
   updateTour(dt); updateFocus(dt); keyPan(dt); clampCam(); controls.update(); hover(); anchorPop();
   composer.render();
   hudT -= dt; if (hudT <= 0) { hudT = 0.25; refreshHUD(); audio.update(controls.target.x, controls.target.z, rainAmt); checkUnlocks(); }
@@ -2533,6 +2838,7 @@ function start(data) {
   for (const p of PEOPLE) new NPC(p[0], p[1], p[2], p[3], p[4], p[5], false, pick(Object.keys(NODES).filter(k => k[0] !== 'P')));
   for (let i = 0; i < Math.min(G.joined, JOINERS.length); i++) addJoiner(i, true);
   for (const v of VISITORS) if (G.visits[v.id] === 'here') spawnVisitor(v);
+  G.loom.forEach(c => addLoomRow(c, false));
   for (const [i, k] of G.built) placeBuild(i, k, true);
   for (let i = 0; i < Math.min(G.lanterns, 40); i++) spawnLantern(rand(-48, 48), rand(15, 27));
   checkUnlocks(true); applySeason();
@@ -2548,6 +2854,6 @@ addEventListener('pagehide', save);
 const hot = window.claude?.hot;
 try { hot?.snapshot?.(() => (resetting ? {} : { save: serial() })); } catch (e) {}
 hot?.ready ? hot.ready(start) : start(hot?.data ?? {});
-window.__antioquia = { get G() { return G; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: id => HOT.find(h => h.id === id).actions()[0].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
+window.__antioquia = { get G() { return G; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: (id, i = 0) => HOT.find(h => h.id === id).actions()[i].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
 let simT = 0;
 </script>
