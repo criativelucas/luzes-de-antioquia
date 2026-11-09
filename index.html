@@ -113,6 +113,9 @@ body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!
 .cargo-next{margin:6px 0 2px;color:var(--ink-dim)}
 .cargo-next b{color:var(--ink)}
 .msg{min-height:1.4em;color:var(--ink-dim);margin:10px 0 0}
+#members.full{color:#f0a070}
+.toast .sum{display:block;text-align:left;font-size:13px;line-height:1.5;color:var(--ink-dim);margin-top:4px}
+.pop-acts .lbl2{margin:6px 0 -2px}
 #modal.mini{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;pointer-events:none;place-items:center end;padding:16px calc(18px + env(safe-area-inset-right,0px)) 16px 16px}
 #modal.mini > *{pointer-events:auto}
 #modal.mini .card{width:min(370px,calc(100vw - 32px));max-height:calc(100vh - 110px);padding:15px 18px 14px;background:rgba(22,18,14,.76);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
@@ -162,7 +165,7 @@ body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!
 #tip{position:fixed;z-index:7;pointer-events:none;padding:6px 10px;border-radius:8px;background:rgba(20,16,12,.85);border:1px solid var(--line);font-size:13px;white-space:nowrap}
 #tip small{display:block;color:var(--ink-dim);font-weight:600;font-size:12px}
 
-#pop{position:fixed;z-index:8;width:min(290px,calc(100vw - 32px));padding:14px}
+#pop{position:fixed;z-index:8;width:min(300px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;padding:14px}
 .pop-h{font:700 22px/1.1 var(--serif);color:var(--lamp-hi)}
 .pop-r{color:var(--ink-dim);font-size:12.5px;margin-top:2px}
 .pop-t{font:italic 600 17px/1.35 var(--serif);margin:10px 0 2px}
@@ -275,6 +278,7 @@ body.photo #hud,body.photo #pop,body.photo #tip,body.photo #toasts{display:none!
   </div>
   <div id="tc">
     <div id="res">
+      <div class="res" id="r-moeda" title="Moedas (dracmas)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.6"/><path d="M12 9.6v4.8"/></svg><b>0</b></div>
       <div class="res" id="r-pao" title="Pães"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 13.8C3.5 9.2 7.4 6.5 12 6.5s8.5 2.7 8.5 7.3c0 2-1 3.7-2.6 3.7H6.1c-1.6 0-2.6-1.7-2.6-3.7z"/><path d="M8.6 9.6l-1.2 3.1M12.6 8.9l-1.2 3.4M16.4 9.7l-1 2.9"/></svg><b>0</b></div>
       <div class="res" id="r-peixe" title="Peixes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 12c3-4.6 9.2-5.6 13.6-2L21 6.8v10.4L16.4 14C12 17.6 5.8 16.6 2.8 12z"/><circle cx="7.6" cy="11.2" r=".9" fill="currentColor"/></svg><b>0</b></div>
       <div class="res" id="r-azeite" title="Azeite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 12.6c2.6 3.6 10.6 4 14.6.4l3.6-3h-6.6c-3-1.7-8.1-1.6-11.6 2.6z"/><path d="M8 18.6h6.5"/><path d="M19.6 7.4c-1.1-1.1-1.1-2.6 0-4.3 1.1 1.7 1.1 3.2 0 4.3z"/></svg><b>0</b></div>
@@ -409,6 +413,11 @@ const CODEX = [
     { u: ['pentecost', 1], hint: 'Celebre o ágape de Pentecostes, na festa da primavera.', text: 'Na primavera, a igreja lembra o dia em que o Espírito desceu sobre os discípulos em Jerusalém. Em Antioquia, enfeitam o pátio com flores do campo e cantam em grego, em aramaico e em latim, cada um na sua língua.', verse: 'Ao chegar o dia de Pentecostes, estavam todos reunidos num só lugar.', ref: 'Atos 2:1' },
     { u: ['summerAgape', 1], hint: 'Celebre um ágape no verão.', text: 'No verão, as noites são longas e mornas. O ágape vai até tarde, com figos frescos e água fria do poço. As crianças dormem no colo de quem estiver mais perto, e ninguém sabe direito de quem é cada uma.', verse: 'Provem e vejam como o Senhor é bom.', ref: 'Salmo 34:8' },
   ] },
+  { title: 'A igreja na casa', glyph: '🏠', color: '#8a5a3a', pages: [
+    { u: ['church', 2], hint: 'Amplie o local de reunião para o Pátio com pérgola.', text: 'O pátio de Cloé ficou pequeno. Os vizinhos emprestaram bancos, alguém trouxe uma muda de videira, e um carpinteiro grego levantou uma pérgola sem cobrar nada. Na primeira noite debaixo dela, cantaram até a lamparina apagar.', verse: 'Saúdem também a igreja que se reúne na casa deles.', ref: 'Romanos 16:5' },
+    { u: ['church', 3], hint: 'Amplie o local de reunião para a Casa da igreja.', text: 'Agora havia um salão de verdade. No chão do pátio, um artesão de Dafne desenhou peixes e pães com pedrinhas coloridas, e os meninos passavam as tardes contando as pedras. A casa já não era de uma família só.', verse: 'Saúdem os irmãos de Laodiceia, e Ninfa e a igreja que se reúne em sua casa.', ref: 'Colossenses 4:15' },
+    { u: ['church', 4], hint: 'Amplie o local de reunião para a Grande casa de Antioquia.', text: 'A casa vizinha foi comprada com as ofertas de muitos. Ganhou quartos para viajantes e uma torre de onde se via o rio inteiro. Quem chegava de longe, cansado e sem conhecer ninguém, encontrava uma cama e um prato quente.', verse: 'Não se esqueçam da hospitalidade; foi praticando-a que, sem saber, alguns acolheram anjos.', ref: 'Hebreus 13:2' },
+  ] },
 ];
 const VERSES = [
   ['Em Antioquia, os discípulos foram chamados cristãos pela primeira vez.', 'Atos 11:26'],
@@ -506,23 +515,25 @@ const LETTERS = [
   { title: 'De Antioquia da Pisídia', ref: 'cf. Atos 13:44–52', text: 'Existe outra Antioquia, irmãos, no alto das montanhas. Falamos na sinagoga, e no sábado seguinte quase a cidade inteira veio ouvir. Muitos gentios se alegraram. Fomos expulsos da região, mas saímos cheios de alegria e do Espírito Santo.' },
   { title: 'De Listra e Derbe', ref: 'cf. Atos 14:19–23', text: 'Em Listra me apedrejaram e me deixaram como morto. Os discípulos fizeram uma roda à minha volta, e eu me levantei. Em Derbe muitos creram. Agora voltamos pelas mesmas cidades, fortalecendo os irmãos. Logo estaremos em casa. Acendam as lamparinas.' },
 ];
-const RES1 = { pao: 'pão', peixe: 'peixe', azeite: 'azeite', perg: 'pergaminho' };
-const RESN = { pao: 'pães', peixe: 'peixes', azeite: 'azeite', perg: 'pergaminhos' };
+const RES1 = { moeda: 'moeda', pao: 'pão', peixe: 'peixe', azeite: 'azeite', perg: 'pergaminho' };
+const RESN = { moeda: 'moedas', pao: 'pães', peixe: 'peixes', azeite: 'azeite', perg: 'pergaminhos' };
 const qty = (n, k) => `${n} ${n === 1 ? RES1[k] : RESN[k]}`;
 const costTxt = c => Object.entries(c).map(([k, n]) => qty(n, k)).join(' + ');
 
 /* ========================= state ========================= */
 const KEY = 'luzes-de-antioquia-v1';
-const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter', 'loom', 'peds', 'quality'];
-const DEF = () => ({ time: 31, clock: 0, res: { pao: 6, peixe: 0, azeite: 6, perg: 2 }, comm: 0,
+const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter', 'loom', 'peds', 'quality', 'church', 'churchBuild'];
+const DEF = () => ({ time: 31, clock: 0, res: { moeda: 10, pao: 6, peixe: 0, azeite: 6, perg: 2 }, comm: 0,
   stats: { fish: 0, olive: 0, copy: 0, help: 0, teach: 0, lantern: 0, agape: 0, vigil: 0, dawnPier: 0, relief: 0, build: 0, house: 0, bake: 0, weave: 0, load: 0, festival: 0, pentecost: 0, autumnOlive: 0, summerAgape: 0, rainAgape: 0 },
-  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0, loom: [], peds: null, quality: '' });
+  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0, loom: [], peds: null, quality: '', church: 1, churchBuild: 0 });
 function makeState(s) {
   const d = DEF();
   if (!s || typeof s !== 'object') return d;
   for (const k of SAVE_KEYS) if (s[k] !== undefined && typeof s[k] === typeof d[k]) d[k] = s[k];
   d.res = { ...DEF().res, ...(s.res || {}) }; d.stats = { ...DEF().stats, ...(s.stats || {}) }; d.vol = { ...DEF().vol, ...(s.vol || {}) };
   for (const k of ['built', 'pages', 'copied', 'loom']) if (!Array.isArray(d[k])) d[k] = [];
+  if (s.church === undefined) d.church = 3; // saves from before the levels already had the full courtyard
+  d.church = clamp(Math.round(d.church) || 1, 1, 4);
   return d;
 }
 let G = DEF(), resetting = false;
@@ -696,7 +707,7 @@ const causticTex = canvasTex(256, (x, sz) => { // light rippling on the riverbed
 });
 const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.9, metalness: 0, ...o });
 const M = {
-  grass: mat(0xffffff, { map: grassTex }), pave: mat(0xebdfcb, { map: cobbleTex }), quay: mat(0xd0c4b2, { map: cobbleTex }), mosaic: mat(0xffffff, { map: mosaicTex, roughness: 0.55 }), marble: mat(0xefe9dd),
+  grass: mat(0xffffff, { map: grassTex }), pave: mat(0xebdfcb, { map: cobbleTex }), quay: mat(0xd0c4b2, { map: cobbleTex }), mosaic: mat(0xffffff, { map: mosaicTex, roughness: 0.55 }), earth: mat(0xb39a70, { map: plasterTex }), marble: mat(0xefe9dd),
   stone: mat(0xcdbb9c), stoneDark: mat(0x8f7f6a),
   wallA: mat(0xf0e4cc, { map: plasterTex }), wallB: mat(0xe4cda4, { map: plasterTex }), wallC: mat(0xecd4b6, { map: plasterTex }), wallD: mat(0xd9b98f, { map: plasterTex }),
   roof: mat(0xb65a3a, { flatShading: true }), roof2: mat(0x9a4a33, { flatShading: true }),
@@ -859,56 +870,120 @@ function house(x, z, w, d, h, o = {}) {
   return g;
 }
 
-const SEATS = [];
-function houseChurch(cx, cz) {
-  const W = 11, D = 9, t = 0.4, wh = 2.3, hallD = 3.2;
-  const x0 = cx - W / 2, x1 = cx + W / 2, z0 = cz - D / 2, z1 = cz + D / 2, hz = z0 + hallD;
-  add(new THREE.PlaneGeometry(W - 0.3, D - hallD).rotateX(-Math.PI / 2), M.mosaic, cx, 0.045, (hz + z1) / 2, world, false);
-  box(W, 3.9, hallD, M.wallA, cx, 1.95, z0 + hallD / 2);
-  const r = add(HIP, M.roof, cx, 3.9 + 0.8, z0 + hallD / 2); r.scale.set((W + 0.8) / Math.SQRT2, 1.6, (hallD + 0.8) / Math.SQRT2);
-  box(1.2, 2.0, 0.08, M.woodDark, cx, 1.0, hz + 0.04);
-  box(1.6, 0.18, 0.18, M.stone, cx, 2.1, hz + 0.05);
-  for (const wx of [-4, -2.2, 2.2, 4]) box(0.7, 0.8, 0.07, pick(WINS), cx + wx, 1.5, hz + 0.04, world, false);
-  for (const wx of [-4, -1.4, 1.4, 4]) box(0.6, 0.6, 0.07, pick(WINS), cx + wx, 3.1, hz + 0.04, world, false);
-  box(t, wh, D - hallD, M.wallB, x0 + t / 2, wh / 2, (hz + z1) / 2);
-  box(t, wh, D - hallD, M.wallB, x1 - t / 2, wh / 2, (hz + z1) / 2);
-  const gap = 2.0, sw = (W - gap) / 2;
-  box(sw, wh, t, M.wallB, x0 + sw / 2, wh / 2, z1 - t / 2); box(sw, wh, t, M.wallB, x1 - sw / 2, wh / 2, z1 - t / 2);
-  box(sw + 0.1, 0.14, t + 0.16, M.stone, x0 + sw / 2, wh + 0.07, z1 - t / 2); box(sw + 0.1, 0.14, t + 0.16, M.stone, x1 - sw / 2, wh + 0.07, z1 - t / 2);
-  box(t + 0.16, 0.14, D - hallD, M.stone, x0 + t / 2, wh + 0.07, (hz + z1) / 2); box(t + 0.16, 0.14, D - hallD, M.stone, x1 - t / 2, wh + 0.07, (hz + z1) / 2);
-  box(0.6, 3.0, 0.65, M.stone, cx - gap / 2 - 0.15, 1.5, z1 - t / 2); box(0.6, 3.0, 0.65, M.stone, cx + gap / 2 + 0.15, 1.5, z1 - t / 2);
-  box(gap + 1.5, 0.38, 0.75, M.stone, cx, 3.15, z1 - t / 2);
-  box(0.22, 0.28, 0.22, M.lamp, cx - gap / 2 - 0.15, 2.4, z1 + 0.05, world, false); box(0.22, 0.28, 0.22, M.lamp, cx + gap / 2 + 0.15, 2.4, z1 + 0.05, world, false);
-  // courtyard: table, benches, pergola
-  const tz = cz + 1.4;
-  box(5.2, 0.12, 1.2, M.wood, cx, 0.78, tz);
-  for (const lx of [-2.4, 2.4]) for (const lz of [-0.45, 0.45]) box(0.1, 0.72, 0.1, M.woodDark, cx + lx, 0.38, tz + lz);
-  for (const bz of [-1, 1]) { box(5.2, 0.1, 0.42, M.wood, cx, 0.45, tz + bz); box(0.1, 0.4, 0.3, M.woodDark, cx - 2.3, 0.2, tz + bz); box(0.1, 0.4, 0.3, M.woodDark, cx + 2.3, 0.2, tz + bz); }
-  for (let i = 0; i < 6; i++) { const l = add(SPH, M.loaf, cx - 2.1 + i * 0.85, 0.9, tz + rand(-0.25, 0.25), world, false); l.scale.set(0.2, 0.09, 0.14); }
-  for (const lx of [-1.7, 0, 1.7]) box(0.14, 0.12, 0.14, M.lamp, cx + lx, 0.9, tz, world, false);
-  for (const lx of [-1.0, 1.0]) add(AMPHORA, M.clay, cx + lx, 0.84, tz + 0.3, world, false).scale.setScalar(0.35);
-  for (const px of [-3.0, 3.0]) for (const pz of [-1.9, 1.9]) box(0.12, 2.6, 0.12, M.wood, cx + px, 1.3, tz + pz);
-  for (const pz of [-1.9, 1.9]) box(6.6, 0.12, 0.14, M.wood, cx, 2.66, tz + pz);
-  for (let i = 0; i < 8; i++) box(0.08, 0.08, 4.2, M.wood, cx - 2.8 + i * 0.8, 2.76, tz);
-  for (let i = 0; i < 7; i++) { const b = add(ICO, M.vine, cx + rand(-3, 3), 2.88, tz + rand(-1.9, 1.9)); b.scale.set(rand(0.4, 0.75), 0.22, rand(0.4, 0.75)); }
-  stringLights(cx - 3.0, 2.6, tz - 1.9, cx + 3.0, 2.6, tz - 1.9, 9, 0.25);
-  stringLights(cx - 3.0, 2.6, tz + 1.9, cx + 3.0, 2.6, tz + 1.9, 9, 0.25);
-  stringLights(cx, 3.3, z1 - 0.3, cx, 3.7, hz + 0.1, 8, 0.45);
-  stringLights(x0 + 0.3, 2.4, z1 - 0.3, cx - 3.0, 2.7, tz - 1.9, 7, 0.4);
-  stringLights(x1 - 0.3, 2.4, z1 - 0.3, cx + 3.0, 2.7, tz - 1.9, 7, 0.4);
-  // fig tree + jars + plants
-  figTree(cx - 4.3, z1 - 1.1, 0.8);
-  for (const [ax, az] of [[x1 - 0.8, hz + 0.6], [x1 - 1.3, hz + 0.6], [x1 - 0.8, z1 - 0.9]]) add(AMPHORA, M.clay, ax, 0.05, az);
-  pointLight(cx - 2, 2.3, tz, 22); pointLight(cx + 2, 2.3, tz, 22);
-  occupy(cx, cz, W + 0.4, D + 0.4);
-  // seats for the agape
-  const at = (x, z, approach = []) => SEATS.push({ pos: [x, z], face: Math.atan2(cx - x, tz - z), approach });
-  for (let i = 0; i < 5; i++) at(cx - 2 + i, tz + 1.0);
-  for (let i = 0; i < 5; i++) { const x = cx - 2 + i, side = x < cx ? cx - 3.7 : cx + 3.7; at(x, tz - 1.0, [[side, tz + 1.9], [side, tz - 1.0]]); }
-  at(cx - 3.2, tz); at(cx + 3.2, tz);
-  for (const [x, z] of [[cx - 4.4, tz - 1.6], [cx + 4.4, tz - 1.6], [cx - 4.4, tz + 1.6], [cx + 4.4, tz + 1.6], [cx - 1.6, tz + 2.5], [cx + 1.6, tz + 2.5], [cx - 4.4, tz], [cx + 4.4, tz]]) at(x, z, [[x, tz + 1.9]]);
+const CH = { cx: -12, cz: -6 }; // the house church footprint: 11 x 9, gate to the south
+const LEVELS = [null,
+  { name: 'Casa de Cloé', cap: 8, bonus: 0 },
+  { name: 'Pátio com pérgola', cap: 14, bonus: 2, cost: { moeda: 30, pao: 6, azeite: 4 }, req: 20 },
+  { name: 'Casa da igreja', cap: 22, bonus: 4, cost: { moeda: 80, pao: 10, azeite: 6, perg: 4 }, req: 60 },
+  { name: 'Grande casa de Antioquia', cap: 32, bonus: 6, cost: { moeda: 160, pao: 15, azeite: 10, perg: 8 }, req: 120 },
+];
+let SEATS = [];
+const LEVEL_SEATS = [], churchLevels = [];
+const OUTSIDE = [[-16, 0.2], [-15, 0.2], [-14, 0.2], [-10, 0.2], [-9, 0.2], [-8, 0.2], [-15.5, 0.75], [-14.5, 0.75], [-9.5, 0.75], [-8.5, 0.75], [-16.5, 0.75], [-7.5, 0.75]]
+  .map(([x, z]) => ({ pos: [x, z], face: Math.atan2(-12 - x, -1.5 - z), approach: [], node: 'H0' })); // who doesn't fit waits by the gate
+function buildChurchLevel(lv) {
+  const P = new THREE.Group(); P.visible = false; scene.add(P);
+  const B = [], C = [], S = [];
+  const { cx, cz } = CH, W = 11, D = 9, t = 0.4, x0 = cx - W / 2, x1 = cx + W / 2, z0 = cz - D / 2, z1 = cz + D / 2, tz = cz + 1.4;
+  const seat = (x, z, approach = [], fx = cx, fz = tz) => S.push({ pos: [x, z], face: Math.atan2(fx - x, fz - z), approach });
+  if (lv === 1) { // a small house and a packed-earth yard
+    add(new THREE.PlaneGeometry(7.6, 8.4).rotateX(-Math.PI / 2), M.earth, cx, 0.03, cz + 0.2, P, false);
+    box(5, 2.7, 3, M.wallC, cx, 1.35, z0 + 1.6, P);
+    const r = add(HIP, M.roof2, cx, 2.7 + 0.6, z0 + 1.6, P); r.scale.set(5.8 / Math.SQRT2, 1.2, 3.8 / Math.SQRT2);
+    box(0.95, 1.6, 0.08, M.woodDark, cx, 0.8, z0 + 3.12, P);
+    for (const wx of [-1.6, 1.6]) box(0.55, 0.6, 0.07, pick(WINS), cx + wx, 1.5, z0 + 3.12, P, false);
+    const fx = 3.8, fz0 = z0 + 3.1, sw = fx - 1;
+    for (const sx of [-1, 1]) box(0.25, 0.8, z1 - fz0, M.stoneDark, cx + sx * fx, 0.4, (fz0 + z1) / 2, P);
+    box(sw, 0.8, 0.25, M.stoneDark, cx - fx + sw / 2, 0.4, z1 - 0.2, P); box(sw, 0.8, 0.25, M.stoneDark, cx + fx - sw / 2, 0.4, z1 - 0.2, P);
+    for (const gx of [-1, 1]) cyl(0.07, 0.08, 1.8, M.wood, cx + gx, 0.9, z1 - 0.2, P, 6);
+    for (const [mx, mz, c] of [[-0.9, -0.3, 0], [0.9, 0.2, 2], [0, 0.9, 3]]) box(1.5, 0.03, 1.0, M.cloth[c], cx + mx, 0.05, tz + mz, P, false);
+    cyl(0.28, 0.22, 0.22, M.wood, cx, 0.12, tz, P, 10, false);
+    for (let i = 0; i < 3; i++) { const l = add(SPH, M.loaf, cx + rand(-0.12, 0.12), 0.25, tz + rand(-0.12, 0.12), P, false); l.scale.set(0.12, 0.06, 0.09); }
+    box(0.14, 0.12, 0.14, M.lamp, cx + 0.5, 0.12, tz - 0.4, P, false);
+    cyl(0.05, 0.06, 2.4, M.wood, cx + 3.3, 1.2, tz + 2.2, P, 6);
+    stringLights(cx - 2.4, 2.4, z0 + 3.2, cx + 3.3, 2.35, tz + 2.2, 9, 0.5, B, C);
+    add(AMPHORA, M.clay, cx - 3.1, 0.05, z0 + 3.6, P); add(AMPHORA, M.clay, cx - 2.7, 0.05, z0 + 3.7, P);
+    for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; seat(cx + Math.sin(a) * 1.7, tz + Math.cos(a) * 1.5); }
+  } else {
+    const hallD = 3.2, hz = z0 + hallD, wh = lv === 2 ? 1.9 : 2.3, hallH = lv === 2 ? 2.9 : 3.9;
+    const fg = new THREE.PlaneGeometry(W - 0.3, D - hallD); if (lv === 2) scaleUV(fg, (W - 0.3) / 2, (D - hallD) / 2);
+    add(fg.rotateX(-Math.PI / 2), lv === 2 ? M.pave : M.mosaic, cx, 0.045, (hz + z1) / 2, P, false);
+    box(W, hallH, hallD, M.wallA, cx, hallH / 2, z0 + hallD / 2, P);
+    if (lv === 4) { // an upper floor with a loggia
+      box(W, 0.12, hallD, M.stone, cx, hallH + 0.06, z0 + hallD / 2, P);
+      box(W - 1.6, 2.4, hallD - 0.9, M.wallC, cx, hallH + 1.2, z0 + (hallD - 0.9) / 2, P);
+      for (let i = 0; i < 6; i++) cyl(0.13, 0.15, 2.2, M.stone, cx - 4 + i * 1.6, hallH + 1.1, hz - 0.35, P, 8);
+      box(W - 0.6, 0.18, 0.5, M.stone, cx, hallH + 2.3, hz - 0.35, P);
+      for (const wx of [-3.2, -1.1, 1.1, 3.2]) box(0.55, 0.7, 0.07, pick(WINS), cx + wx, hallH + 1.3, hz - 0.86, P, false);
+      const r = add(HIP, M.roof, cx, hallH + 2.4 + 0.75, z0 + (hallD - 0.9) / 2, P); r.scale.set((W - 0.8) / Math.SQRT2, 1.5, (hallD - 0.1) / Math.SQRT2);
+    } else {
+      const r = add(HIP, lv === 2 ? M.roof2 : M.roof, cx, hallH + 0.8, z0 + hallD / 2, P); r.scale.set((W + 0.8) / Math.SQRT2, 1.6, (hallD + 0.8) / Math.SQRT2);
+    }
+    box(1.2, 2.0, 0.08, M.woodDark, cx, 1.0, hz + 0.04, P);
+    box(1.6, 0.18, 0.18, M.stone, cx, 2.1, hz + 0.05, P);
+    for (const wx of [-4, -2.2, 2.2, 4]) box(0.7, 0.8, 0.07, pick(WINS), cx + wx, 1.5, hz + 0.04, P, false);
+    if (lv >= 3) for (const wx of [-4, -1.4, 1.4, 4]) box(0.6, 0.6, 0.07, pick(WINS), cx + wx, 3.1, hz + 0.04, P, false);
+    box(t, wh, D - hallD, M.wallB, x0 + t / 2, wh / 2, (hz + z1) / 2, P);
+    box(t, wh, D - hallD, M.wallB, x1 - t / 2, wh / 2, (hz + z1) / 2, P);
+    const gap = 2.0, sw = (W - gap) / 2;
+    box(sw, wh, t, M.wallB, x0 + sw / 2, wh / 2, z1 - t / 2, P); box(sw, wh, t, M.wallB, x1 - sw / 2, wh / 2, z1 - t / 2, P);
+    box(sw + 0.1, 0.14, t + 0.16, M.stone, x0 + sw / 2, wh + 0.07, z1 - t / 2, P); box(sw + 0.1, 0.14, t + 0.16, M.stone, x1 - sw / 2, wh + 0.07, z1 - t / 2, P);
+    box(t + 0.16, 0.14, D - hallD, M.stone, x0 + t / 2, wh + 0.07, (hz + z1) / 2, P); box(t + 0.16, 0.14, D - hallD, M.stone, x1 - t / 2, wh + 0.07, (hz + z1) / 2, P);
+    if (lv === 2) for (const gx of [-1.1, 1.1]) cyl(0.08, 0.09, 2.3, M.wood, cx + gx, 1.15, z1 - t / 2, P, 6);
+    else {
+      box(0.6, 3.0, 0.65, M.stone, cx - gap / 2 - 0.15, 1.5, z1 - t / 2, P); box(0.6, 3.0, 0.65, M.stone, cx + gap / 2 + 0.15, 1.5, z1 - t / 2, P);
+      box(gap + 1.5, 0.38, 0.75, M.stone, cx, 3.15, z1 - t / 2, P);
+      box(0.22, 0.28, 0.22, M.lamp, cx - gap / 2 - 0.15, 2.4, z1 + 0.05, P, false); box(0.22, 0.28, 0.22, M.lamp, cx + gap / 2 + 0.15, 2.4, z1 + 0.05, P, false);
+    }
+    box(5.2, 0.12, 1.2, M.wood, cx, 0.78, tz, P);
+    for (const lx of [-2.4, 2.4]) for (const lz of [-0.45, 0.45]) box(0.1, 0.72, 0.1, M.woodDark, cx + lx, 0.38, tz + lz, P);
+    for (const bz of [-1, 1]) { box(5.2, 0.1, 0.42, M.wood, cx, 0.45, tz + bz, P); box(0.1, 0.4, 0.3, M.woodDark, cx - 2.3, 0.2, tz + bz, P); box(0.1, 0.4, 0.3, M.woodDark, cx + 2.3, 0.2, tz + bz, P); }
+    for (let i = 0; i < 6; i++) { const l = add(SPH, M.loaf, cx - 2.1 + i * 0.85, 0.9, tz + rand(-0.25, 0.25), P, false); l.scale.set(0.2, 0.09, 0.14); }
+    for (const lx of [-1.7, 0, 1.7]) box(0.14, 0.12, 0.14, M.lamp, cx + lx, 0.9, tz, P, false);
+    for (const lx of [-1.0, 1.0]) add(AMPHORA, M.clay, cx + lx, 0.84, tz + 0.3, P, false).scale.setScalar(0.35);
+    for (const px of [-3.0, 3.0]) for (const pz of [-1.9, 1.9]) box(0.12, 2.6, 0.12, M.wood, cx + px, 1.3, tz + pz, P);
+    for (const pz of [-1.9, 1.9]) box(6.6, 0.12, 0.14, M.wood, cx, 2.66, tz + pz, P);
+    for (let i = 0; i < 8; i++) box(0.08, 0.08, 4.2, M.wood, cx - 2.8 + i * 0.8, 2.76, tz, P);
+    for (let i = 0; i < 7; i++) { const b = add(ICO, M.vine, cx + rand(-3, 3), 2.88, tz + rand(-1.9, 1.9), P); b.scale.set(rand(0.4, 0.75), 0.22, rand(0.4, 0.75)); }
+    stringLights(cx - 3.0, 2.6, tz - 1.9, cx + 3.0, 2.6, tz - 1.9, 9, 0.25, B, C);
+    stringLights(cx - 3.0, 2.6, tz + 1.9, cx + 3.0, 2.6, tz + 1.9, 9, 0.25, B, C);
+    if (lv >= 3) {
+      stringLights(cx, 3.3, z1 - 0.3, cx, 3.7, hz + 0.1, 8, 0.45, B, C);
+      stringLights(x0 + 0.3, 2.4, z1 - 0.3, cx - 3.0, 2.7, tz - 1.9, 7, 0.4, B, C);
+      stringLights(x1 - 0.3, 2.4, z1 - 0.3, cx + 3.0, 2.7, tz - 1.9, 7, 0.4, B, C);
+    }
+    for (const [ax, az] of [[x1 - 0.8, hz + 0.6], [x1 - 1.3, hz + 0.6], [x1 - 0.8, z1 - 0.9]]) add(AMPHORA, M.clay, ax, 0.05, az, P);
+    if (lv === 4) {
+      const ax = x0 - 1.15; // guest rooms built against the west wall
+      box(2.2, 4.4, 6, M.wallB, ax, 2.2, cz - 0.4, P); box(2.5, 0.2, 6.3, M.stone, ax, 4.5, cz - 0.4, P);
+      for (const az of [-2.4, -0.4, 1.6]) for (const wy of [1.5, 3.3]) box(0.07, 0.75, 0.6, pick(WINS), ax - 1.14, wy, cz + az, P, false);
+      box(0.2, 0.26, 0.2, M.lamp, ax - 0.6, 4.75, cz - 2.6, P, false); box(0.2, 0.26, 0.2, M.lamp, ax - 0.6, 4.75, cz + 1.8, P, false);
+      box(1.8, 7.2, 1.8, M.wallA, x1 - 1.1, 3.6, z0 + 1.1, P); // a tower that sees the whole river
+      const tr = add(HIP, M.roof, x1 - 1.1, 7.2 + 0.7, z0 + 1.1, P); tr.scale.set(2.6 / Math.SQRT2, 1.4, 2.6 / Math.SQRT2);
+      for (const sx of [-1, 1]) box(0.07, 0.8, 0.5, pick(WINS), x1 - 1.1 + sx * 0.94, 6.1, z0 + 1.1, P, false);
+      box(0.5, 0.8, 0.07, pick(WINS), x1 - 1.1, 6.1, z0 + 2.04, P, false);
+      for (const [bx, c] of [[x0 + 2.2, 0], [x1 - 2.2, 1]]) box(0.9, 1.2, 0.04, M.cloth[c], bx, 1.4, z1 + 0.03, P, false);
+      stringLights(x0 + 0.3, 2.5, hz + 0.3, x1 - 0.3, 2.5, z1 - 0.3, 14, 0.6, B, C); stringLights(x1 - 0.3, 2.5, hz + 0.3, x0 + 0.3, 2.5, z1 - 0.3, 14, 0.6, B, C);
+    }
+    for (let i = 0; i < 5; i++) seat(cx - 2 + i, tz + 1.0);
+    for (let i = 0; i < 5; i++) { const x = cx - 2 + i, side = x < cx ? cx - 3.7 : cx + 3.7; seat(x, tz - 1.0, [[side, tz + 1.9], [side, tz - 1.0]]); }
+    seat(cx - 3.2, tz); seat(cx + 3.2, tz);
+    for (let x = cx - 3; x <= cx + 3.01; x += 1) seat(x, tz + 2.5, [[x, tz + 1.9]]);
+    for (let z = tz - 1.6; z <= tz + 1.61; z += 0.8) for (const sx of [-1, 1]) seat(cx + sx * 4.4, z, [[cx + sx * 4.4, tz + 1.9]]);
+    for (let x = cx - 2.4; x <= cx + 2.41; x += 1.2) { const side = x < cx ? cx - 3.7 : cx + 3.7; seat(x, tz - 2.3, [[side, tz + 1.9], [side, tz - 2.3]]); }
+  }
+  makeBulbs(B, P); makeCords(C, P); mergeStatic(P);
+  churchLevels[lv] = P; LEVEL_SEATS[lv] = S;
 }
-
+const scaffold = new THREE.Group(); scaffold.visible = false; scene.add(scaffold); // shown while the church is being enlarged
+{
+  const { cx, cz } = CH, x0 = cx - 6, x1 = cx + 6, z0 = cz - 5, z1 = cz + 5;
+  for (let x = x0; x <= x1 + 0.01; x += 2.4) for (const z of [z0, z1]) cyl(0.05, 0.05, 5, M.wood, x, 2.5, z, scaffold, 5);
+  for (let z = z0 + 2.5; z < z1; z += 2.5) for (const x of [x0, x1]) cyl(0.05, 0.05, 5, M.wood, x, 2.5, z, scaffold, 5);
+  for (const y of [1.8, 3.6]) { box(x1 - x0, 0.06, 0.4, M.wood, cx, y, z0, scaffold); box(x1 - x0, 0.06, 0.4, M.wood, cx, y, z1, scaffold); box(0.4, 0.06, z1 - z0, M.wood, x0, y, cz, scaffold); box(0.4, 0.06, z1 - z0, M.wood, x1, y, cz, scaffold); }
+  for (let i = 0; i < 6; i++) box(0.5, 0.35, 0.4, M.stone, cx + 2.6 + (i % 3) * 0.55, 0.18 + Math.floor(i / 3) * 0.36, cz + 5.9, scaffold);
+}
+function setChurchLevel() { churchLevels.forEach((g, i) => { if (g) g.visible = i === G.church; }); SEATS = LEVEL_SEATS[G.church]; scaffold.visible = !!G.churchBuild; }
 function bakery(x, z) {
   house(x, z, 4.6, 3.8, 3.0, { flat: true, wall: M.wallB, awning: M.cloth[2] });
   add(new THREE.SphereGeometry(1.1, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2), M.clay, x + 3.1, 0, z + 0.4);
@@ -973,7 +1048,10 @@ function pergola(x, z, parent = world) {
 }
 
 /* ========================= build the city ========================= */
-houseChurch(-12, -6);
+occupy(CH.cx, CH.cz, 11.4, 9.4);
+figTree(CH.cx - 4.3, CH.cz + 3.4, 0.8);
+pointLight(CH.cx - 2, 2.3, CH.cz + 1.4, 22); pointLight(CH.cx + 2, 2.3, CH.cz + 1.4, 22);
+for (let lv = 1; lv <= 4; lv++) buildChurchLevel(lv);
 bakery(5.5, -4.6);
 scriptorium(16.5, -6);
 house(-4, -5.2, 3.6, 3.6, 2.8);
@@ -1097,7 +1175,8 @@ const hillY = (x, z) => Math.max(-0.5, 33 - Math.hypot(x - 12, z + 100) * (34 / 
 }
 
 /* ========================= build plots & hotspots ========================= */
-const PLOTS = [[-27, -0.6], [-20.5, -15], [-9, -12.5], [9.4, -7.0], [16, -14.5], [-27.5, -21], [19.5, -0.6], [-3, -19]];
+const PLOTS = [[-27, -0.6], [-20.5, -15], [-9, -12.5], [9.4, -7.0], [16, -14.5], [-27.5, -21], [19.5, -0.6], [-3, -19]]
+  .concat([[30, -2.5], [-31, -8], [-31, -17], [-9.5, -19], [12, -18], [-14, -20], [31, -15]].filter(([x, z]) => isFree(x, z, 1.4)));
 const SQ = new THREE.RingGeometry(1.25, 1.42, 4, 1, Math.PI / 4); SQ.rotateX(-Math.PI / 2);
 const SQ_HIT = new THREE.PlaneGeometry(2.8, 2.8); SQ_HIT.rotateX(-Math.PI / 2);
 const plotMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(1.6, 1.3, 0.7), transparent: true, opacity: 0.8, depthWrite: false });
@@ -1135,10 +1214,15 @@ const HOT = [
   { id: 'loom', name: 'Tear da Irene', pos: [-4, 0.09, -2.5], actions: () => [
     { label: 'Tecer um toldo', sub: 'Mini-game de memória · rende comunhão', ok: () => inHours(7, 20), why: 'As tecelãs trabalham de 7h a 20h', cd: 'weave', run: () => playWeave(r => { G.stats.weave++; setCd('weave', 3); toast(r ? `Você teceu ${r} ${r === 1 ? 'faixa' : 'faixas'} com as irmãs. <span class="dim">+${r * 2} ✦</span>` : 'Os fios se embaraçaram. Tente de novo mais tarde.'); addComm(r * 2); }) },
   ] },
+  { id: 'market', name: 'Mercado do cais', pos: [-10.5, 0.09, 9.6], actions: () => [
+    ...[['peixe', 3, 7], ['pao', 3, 3], ['azeite', 2, 4]].map(([k, n, c]) => ({ label: `Vender ${qty(n, k)}`, sub: `+${c} moedas`, ok: () => inHours(7, 18.5) && G.res[k] >= n, why: inHours(7, 18.5) ? `Você precisa de ${qty(n, k)}` : 'O mercado abre de 7h a 18h', cd: null, run: () => { addRes(k, -n); addRes('moeda', c); toast(`Vendido: ${qty(n, k)} por ${c} moedas.`); } })),
+    ...[['perg', 2, 8], ['azeite', 3, 8], ['pao', 4, 5]].map(([k, n, c]) => ({ label: `Comprar ${qty(n, k)}`, sub: `−${c} moedas`, ok: () => inHours(7, 18.5) && G.res.moeda >= c, why: inHours(7, 18.5) ? `Custa ${c} moedas` : 'O mercado abre de 7h a 18h', cd: null, run: () => { addRes('moeda', -c); addRes(k, n); toast(`Comprado: ${qty(n, k)}.`); } })),
+  ] },
   { id: 'street', name: 'Rua das colunas', pos: [-4.5, 0.09, 2.3], actions: () => [
     { label: 'Encher as lamparinas', sub: 'Mini-game · acende a rua esta noite', ok: () => inHours(15, 21), why: 'No fim da tarde (15h–21h)', cd: 'lamps', run: () => playLamps(r => { setCd('lamps', 10); const g = r + (r === 5 ? 3 : 0); toast(r ? `${r} ${r === 1 ? 'lamparina vai' : 'lamparinas vão'} arder esta noite na rua das colunas. <span class="dim">+${g} ✦</span>` : 'Nenhuma lamparina acendeu. Tente amanhã.'); addComm(g); }) },
   ] },
-  { id: 'church', name: 'Casa da Igreja', pos: [-12, 0.09, -2.7], actions: () => [
+  { id: 'church', get name() { return LEVELS[G.church].name; }, pos: [-12, 0.09, -2.7], actions: () => [
+    ...(G.church < 4 ? [churchUpgrade()] : []),
     { label: 'Reunir a igreja para o ágape', sub: 'Avança até o entardecer (19h)', ok: () => inHours(5, 18.9) && !ff, why: 'A igreja se reúne todo entardecer', cd: null, run: phaseAction },
     { label: 'Vigília de oração', sub: '1 azeite · entre 0h e 4h · +6 ✦', ok: () => inHours(0, 4) && G.res.azeite >= 1, why: 'Só de madrugada (0h–4h), com 1 azeite', cd: 'vigil', run: doVigil },
     { label: 'Cantar hinos no pátio', sub: 'Mini-game de ritmo · rende comunhão', ok: () => inHours(19, 1), why: 'À noite (19h–1h)', cd: 'hymn', run: () => playHymn(sc => { setCd('hymn', 6); const g = Math.round(sc / 3); toast(`O pátio cantou junto. <span class="dim">+${g} ✦</span>`); addComm(g); }) },
@@ -1415,7 +1499,7 @@ function cat(x, y, z, ry, c1, c2) {
   box(0.3, 0.04, 0.05, mat(c2), -0.12, 0.05, 0.16, g, false).rotation.y = 0.5;
   return { body, ph: rand(0, 6) };
 }
-const cats = [cat(-15.7, 2.44, -1.7, 0.3, 0xd9883a, 0xf2e6d2), cat(-16, 4.8, -13.24, -0.4, 0x6a6a6a, 0x3a3a3a), cat(4.2, 3.6, -2.64, 2.6, 0x2a2420, 0xf2efe6), cat(-20.6, 0.12, 11.9, 1.2, 0xc9b49a, 0x8a6a4a)];
+const cats = [cat(-8.05, 0.5, -0.35, 0.3, 0xd9883a, 0xf2e6d2), cat(-16, 4.8, -13.24, -0.4, 0x6a6a6a, 0x3a3a3a), cat(4.2, 3.6, -2.64, 2.6, 0x2a2420, 0xf2efe6), cat(-20.6, 0.12, 11.9, 1.2, 0xc9b49a, 0x8a6a4a)];
 const PIG_AT = [-3.5, 4.8];
 const pigeons = Array.from({ length: 9 }, () => {
   const g = new THREE.Group(); scene.add(g);
@@ -1528,6 +1612,7 @@ function updateLife(dt, t) {
 }
 
 /* ========================= fish under the water ========================= */
+const FISH_MAT = mat(0xc4ccd2, { roughness: 0.35 });
 const FISH_GEO = (() => { const b = new THREE.SphereGeometry(1, 8, 6); b.scale(0.07, 0.055, 0.2); const tl = new THREE.ConeGeometry(0.065, 0.13, 4); tl.rotateX(Math.PI / 2); tl.translate(0, 0, -0.24); return mergeGeometries([b, tl]); })();
 const schools = [[0xd9963a, 12, 1], [0xc4ccd2, 10, 0.8], [0xd8603a, 7, 1.15]].map(([col, n, sp], si) => {
   const im = new THREE.InstancedMesh(FISH_GEO, mat(0xffffff, { roughness: 0.4 }), n); im.frustumCulled = false; scene.add(im);
@@ -1683,17 +1768,24 @@ function helpNPC(n) {
   if (N.cost) addRes(N.cost[0], -N.cost[1]);
   audio.sfx('chime');
   G.stats.help++; if (n.need === 'ensino') G.stats.teach++;
-  floatAt(n.g.position, `+${N.gain} ✦`, 2.6);
+  const gain = N.gain * (n.need === 'ensino' && G.church >= 3 ? 2 : 1); // a real hall doubles the teaching
+  floatAt(n.g.position, `+${gain} ✦`, 2.6);
   toast(`<span class="v">“${N.verse[0]}”</span><span class="ref">${N.verse[1]}</span>`, 6500);
   G.helped[n.name] = (G.helped[n.name] || 0) + 1; advanceStory(n);
-  n.setNeed(null); closePop(); addComm(N.gain);
+  n.setNeed(null); closePop(); addComm(gain);
 }
 const countBuilt = k => plots.filter(p => p.used === k).length;
 const BUILDS = {
   oliveira: { name: 'Oliveira', desc: '+1 azeite em cada colheita', cost: { pao: 2 }, make: (x, z) => oliveTree(x, z, scene, 1.15) },
   lamparinas: { name: 'Cordão de lamparinas', desc: '+2 ✦ em cada ágape · gasta +1 azeite à noite', cost: { azeite: 2 }, make: lampCluster },
   pergola: { name: 'Pérgola com videira', desc: 'Sombra para conversar', cost: { pao: 2, perg: 1 }, make: (x, z) => pergola(x, z, scene) },
-  casa: { name: 'Casa nova', desc: 'Um novo irmão vem morar aqui', cost: { pao: 5, azeite: 3, perg: 1 }, make: (x, z) => { const g = new THREE.Group(); scene.add(g); const h = house(x, z, 3.2, 3, 2.6, {}); world.remove(h); g.add(h); } },
+  banca: { name: 'Banca de peixe', desc: '+4 moedas e +1 peixe por dia', cost: { moeda: 12, pao: 2 }, prod: { moeda: 4, peixe: 1 }, spot: [0, -0.3, 0], anim: 'knead', pref: ['Teódoto', 'Hermes'], make: (x, z) => WS.banca(x, z) },
+  forno: { name: 'Forno comunitário', desc: '+3 pães por dia', cost: { moeda: 18, azeite: 2 }, prod: { pao: 3 }, spot: [0, 0.75, Math.PI], anim: 'knead', pref: ['Cloé', 'Cleonice'], make: (x, z) => WS.forno(x, z) },
+  tecelagem: { name: 'Tecelagem', desc: '+5 moedas por dia com tecidos vendidos', cost: { moeda: 20, perg: 1 }, prod: { moeda: 5 }, spot: [-0.6, 0.65, Math.PI], anim: 'knead', pref: ['Irene', 'Tais'], make: (x, z) => WS.tecelagem(x, z) },
+  olaria: { name: 'Olaria', desc: '+3 moedas por dia · as lamparinas gastam 1 azeite a menos', cost: { moeda: 16, pao: 3 }, prod: { moeda: 3 }, spot: [-0.6, 0.8, Math.PI], anim: 'knead', pref: ['Eutíquia', 'Alexandre'], make: (x, z) => WS.olaria(x, z) },
+  copistas: { name: 'Sala dos copistas', desc: '+2 pergaminhos por dia', cost: { moeda: 24, perg: 2 }, prod: { perg: 2 }, spot: [0, 0.65, Math.PI], anim: 'write', pref: ['Zenas', 'Lucas'], make: (x, z) => WS.copistas(x, z) },
+  lagar: { name: 'Lagar de azeite', desc: '+2 azeite por dia', cost: { moeda: 22, pao: 4 }, prod: { azeite: 2 }, spot: [1.35, 0.2, -Math.PI / 2], anim: 'net', pref: ['Nicolau', 'Rufo'], make: (x, z) => WS.lagar(x, z) },
+  casa: { name: 'Casa nova', desc: 'Um novo irmão vem morar aqui', cost: { moeda: 15, pao: 5, azeite: 3, perg: 1 }, make: (x, z) => { const g = new THREE.Group(); scene.add(g); const h = house(x, z, 3.2, 3, 2.6, {}); world.remove(h); g.add(h); } },
 };
 function lampCluster(x, z) {
   const g = group(x, z, scene), bl = [], co = [];
@@ -1704,39 +1796,110 @@ function lampCluster(x, z) {
   makeBulbs(bl, g); makeCords(co, g);
   box(1.6, 0.1, 0.4, M.wood, 0, 0.45, -0.5, g);
 }
-function placeBuild(i, k, silent = false) {
-  const p = plots[i]; if (!p || p.used || !BUILDS[k]) return;
-  p.used = k; p.marker.visible = false; BUILDS[k].make(p.x, p.z);
+const nearestNodeTo = (x, z) => Object.keys(NODES).filter(k => k[0] !== 'P').sort((a, b) => Math.hypot(NODES[a][0] - x, NODES[a][1] - z) - Math.hypot(NODES[b][0] - x, NODES[b][1] - z))[0];
+function pickWorker(k) { // prefer the resident whose trade it is, then anyone without a job
+  const busy = new Set(plots.map(pl => pl.worker).filter(Boolean)), free = npcs.filter(n => !n.visitor && !busy.has(n.name)), pref = BUILDS[k].pref || [];
+  return free.find(n => pref.includes(n.name)) || free.find(n => !n.work) || free[0] || null;
+}
+function placeBuild(i, k, silent = false, worker = null) {
+  const pl = plots[i], b = BUILDS[k]; if (!pl || pl.used || !b) return;
+  pl.used = k; pl.marker.visible = false; b.make(pl.x, pl.z);
+  if (b.prod) {
+    const w = worker ? npcs.find(n => n.name === worker) : pickWorker(k);
+    if (w) { pl.worker = w.name; w.work = { node: nearestNodeTo(pl.x, pl.z + 1.6), pos: [pl.x + b.spot[0], pl.z + b.spot[1]], face: b.spot[2], anim: b.anim }; w.atWork = false; }
+  }
   if (silent) return;
   audio.sfx('knock');
-  G.built.push([i, k]); G.stats.build++; if (k === 'casa') G.stats.house++;
-  closePop(); toast(`Construído: <b>${BUILDS[k].name}</b>. <span class="dim">+5 ✦</span>`); addComm(5);
+  G.built.push([i, k, pl.worker || null]); G.stats.build++; if (k === 'casa') G.stats.house++;
+  closePop(); toast(`Construído: <b>${b.name}</b>${pl.worker ? `. ${pl.worker} vai trabalhar lá` : ''}. <span class="dim">+5 ✦</span>`); addComm(5);
 }
+function churchUpgrade() {
+  const nx = LEVELS[G.church + 1];
+  return { label: `Ampliar: ${nx.name}`, sub: `${costTxt(nx.cost)} · requer ${nx.req} ✦ · ${nx.cap} lugares`, ok: () => !G.churchBuild && G.comm >= nx.req && canPay(nx.cost),
+    why: G.churchBuild ? 'A obra termina no próximo amanhecer' : G.comm < nx.req ? `Requer ${nx.req} ✦ de comunhão (você tem ${G.comm})` : `${costTxt(nx.cost)} · faltam recursos`, cd: null,
+    run: () => { pay(nx.cost); G.churchBuild = G.church + 1; setChurchLevel(); audio.sfx('knock'); toast(`A obra começou: <b>${nx.name}</b>. Os irmãos trabalham até o amanhecer.`); focus = { x: CH.cx, z: CH.cz, dist: 22, polar: 0.85, az: 0.3, speed: 1.6 }; } };
+}
+const WS = { // workshops: each faces +z and fits a 3 x 3 plot
+  banca(x, z) {
+    const g = group(x, z, scene);
+    for (const px of [-1.1, 1.1]) for (const pz of [-0.7, 0.7]) cyl(0.06, 0.06, 2.2, M.wood, px, 1.1, pz, g, 6);
+    box(2.2, 0.8, 0.8, M.wood, 0, 0.4, 0.35, g);
+    for (let i = 0; i < 5; i++) { const st = box(0.5, 0.05, 1.8, i % 2 ? M.cream : M.cloth[1], -1.0 + i * 0.5, 2.25, 0, g); st.rotation.x = 0.2; }
+    for (let i = 0; i < 5; i++) { const f = new THREE.Mesh(FISH_GEO, FISH_MAT); f.position.set(-0.8 + i * 0.4, 0.84, 0.35); f.rotation.y = Math.PI / 2 + rand(-0.3, 0.3); f.scale.setScalar(1.6); g.add(f); }
+    cyl(0.3, 0.25, 0.3, M.wood, 1.4, 0.15, 0.9, g, 10);
+  },
+  forno(x, z) {
+    const g = group(x, z, scene);
+    add(new THREE.SphereGeometry(1.0, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2), M.clay, 0, 0, -0.5, g);
+    box(0.5, 0.42, 0.1, M.ember, 0, 0.26, 0.48, g, false); cyl(0.1, 0.13, 0.5, M.clay, 0.3, 1.05, -0.7, g, 8);
+    box(1.6, 0.08, 0.6, M.wood, 0, 0.8, 1.15, g); for (const lx of [-0.7, 0.7]) box(0.08, 0.76, 0.5, M.woodDark, lx, 0.38, 1.15, g);
+    for (let i = 0; i < 6; i++) { const l = add(SPH, M.loaf, -0.6 + i * 0.24, 0.9, 1.15 + rand(-0.12, 0.12), g, false); l.scale.set(0.14, 0.07, 0.1); }
+  },
+  tecelagem(x, z) {
+    const g = group(x, z, scene);
+    for (const lx of [-0.6, 0.8]) {
+      for (const sx of [-0.5, 0.5]) box(0.07, 1.4, 0.07, M.wood, lx + sx, 0.7, 0, g);
+      box(1.1, 0.07, 0.08, M.wood, lx, 1.4, 0, g); box(1.1, 0.07, 0.08, M.wood, lx, 0.3, 0, g);
+      for (let i = 0; i < 7; i++) box(0.025, 1.0, 0.02, M.cloth[(i + (lx > 0 ? 2 : 0)) % 5], lx - 0.42 + i * 0.14, 0.85, 0, g, false);
+    }
+    for (const px of [-1.3, 1.3]) cyl(0.04, 0.05, 1.8, M.wood, px, 0.9, -1.1, g, 6);
+    for (let i = 0; i < 3; i++) box(0.6, 0.7, 0.02, M.cloth[i + 1], -0.8 + i * 0.8, 1.35, -1.1, g, false);
+  },
+  olaria(x, z) {
+    const g = group(x, z, scene);
+    cyl(0.35, 0.4, 0.55, M.stone, -0.6, 0.28, 0.2, g, 12); cyl(0.3, 0.3, 0.06, M.clay, -0.6, 0.58, 0.2, g, 12, false);
+    add(AMPHORA, M.clay, -0.6, 0.61, 0.2, g, false).scale.setScalar(0.32);
+    add(new THREE.SphereGeometry(0.75, 12, 6, 0, Math.PI * 2, 0, Math.PI / 2), M.clay, 0.8, 0, -0.6, g); box(0.35, 0.3, 0.08, M.ember, 0.8, 0.18, 0.13, g, false);
+    box(2.2, 0.06, 0.4, M.wood, 0, 0.9, -1.2, g); for (let i = 0; i < 6; i++) add(AMPHORA, M.clay, -0.9 + i * 0.36, 0.93, -1.2, g, false).scale.setScalar(0.3);
+    for (let i = 0; i < 5; i++) box(0.16, 0.08, 0.1, M.clay, 0.3 + i * 0.22, 0.05, 0.9, g, false);
+  },
+  copistas(x, z) {
+    const g = group(x, z, scene);
+    for (const px of [-1.2, 1.2]) for (const pz of [-1, 1]) cyl(0.06, 0.06, 2.2, M.wood, px, 1.1, pz, g, 6);
+    const aw = box(2.8, 0.06, 2.4, M.cloth[3], 0, 2.25, 0, g); aw.rotation.x = 0.12;
+    box(1.8, 0.08, 0.7, M.wood, 0, 0.78, 0.05, g); for (const lx of [-0.8, 0.8]) box(0.08, 0.74, 0.6, M.woodDark, lx, 0.37, 0.05, g);
+    for (let i = 0; i < 5; i++) { const sc = add(new THREE.CylinderGeometry(0.06, 0.06, 0.5, 8), M.cream, -0.6 + i * 0.3, 0.88, 0.05, g, false); sc.rotation.x = Math.PI / 2; }
+    box(2, 1.4, 0.4, M.woodDark, 0, 0.7, -0.85, g);
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 7; c++) { const e = add(new THREE.CylinderGeometry(0.06, 0.06, 0.06, 8), M.cream, -0.75 + c * 0.25, 0.3 + r * 0.4, -0.62, g, false); e.rotation.x = Math.PI / 2; }
+  },
+  lagar(x, z) {
+    const g = group(x, z, scene);
+    cyl(1.0, 1.1, 0.6, M.stone, 0, 0.3, 0, g, 14);
+    const ml = cyl(0.55, 0.55, 0.32, M.stoneDark, 0, 0.95, 0, g, 14); ml.rotation.z = Math.PI / 2;
+    box(2.6, 0.12, 0.12, M.wood, 0, 0.95, 0, g);
+    for (let i = 0; i < 5; i++) add(AMPHORA, M.clay, -1.0 + i * 0.5, 0, -1.25, g);
+  },
+};
 
 /* ========================= day / night events ========================= */
 function startGathering() {
   G.gathering = true; G.agapeDone = false;
-  [...npcs].sort((a, b) => (b.name === 'Barnabé') - (a.name === 'Barnabé')).forEach((n, i) => { const s = SEATS[(i === 0 ? 10 : i <= 10 ? i - 1 : i) % SEATS.length]; n.seat = s; n.goTo('H1', [...s.approach, s.pos]); });
+  const cap = LEVELS[G.church].cap, big = SEATS.length > 10;
+  [...npcs].sort((a, b) => (b.name === 'Barnabé') - (a.name === 'Barnabé')).forEach((n, i) => {
+    if (i < cap) { const s = SEATS[(big ? (i === 0 ? 10 : i <= 10 ? i - 1 : i) : i) % SEATS.length]; n.seat = s; n.goTo('H1', [...s.approach, s.pos]); }
+    else { const s = OUTSIDE[(i - cap) % OUTSIDE.length]; n.seat = s; n.goTo('H0', [s.pos]); }
+  });
   toast('O sol se põe. A igreja se reúne no pátio para o ágape.');
   setTimeout(() => { if (G.gathering && !modalOpen && !tour && performance.now() - lastInput > 3000) focus = { x: -12, z: -4.6, dist: 15, polar: 0.75, az: 0.25, speed: 1.1 }; }, 4500);
 }
 function resolveAgape() {
   G.agapeDone = true;
-  const eat = Math.min(G.res.pao, npcs.length); addRes('pao', -eat);
-  const fishEat = Math.min(G.res.peixe, npcs.length); if (fishEat) addRes('peixe', -fishEat);
+  const att = Math.min(npcs.length, LEVELS[G.church].cap);
+  const eat = Math.min(G.res.pao, att); addRes('pao', -eat);
+  const fishEat = Math.min(G.res.peixe, att); if (fishEat) addRes('peixe', -fishEat);
   const si = seasonIdx(), pente = si === 0 && isFestival();
-  const gain = 4 + eat * 2 + fishEat + countBuilt('lamparinas') * 2 + (si === 3 ? 3 : 0) + (pente ? 10 : 0);
+  const gain = 4 + eat * 2 + fishEat + LEVELS[G.church].bonus + countBuilt('lamparinas') * 2 + (si === 3 ? 3 : 0) + (pente ? 10 : 0);
   if (pente) { G.stats.pentecost++; setTimeout(() => toast('<span class="v">“Ao chegar o dia de Pentecostes, estavam todos reunidos num só lugar.”</span><span class="ref">Atos 2:1 · Pentecostes +10 ✦</span>', 7000), 1500); }
   if (si === 1) G.stats.summerAgape++;
   if (isRaining()) G.stats.rainAgape++;
   G.stats.agape++; audio.sfx('strum');
-  toast(`<span class="v">“Partiam o pão em casa e comiam juntos com alegria e simplicidade de coração.”</span><span class="ref">Atos 2:46</span>${npcs.length} irmãos, ${qty(eat, 'pao')}${fishEat ? ' e ' + qty(fishEat, 'peixe') : ''} na mesa${eat < npcs.length ? ' (faltou pão para alguns)' : ''}. <span class="dim">+${gain} ✦</span>`, 8000);
+  toast(`<span class="v">“Partiam o pão em casa e comiam juntos com alegria e simplicidade de coração.”</span><span class="ref">Atos 2:46</span>${att} irmãos, ${qty(eat, 'pao')}${fishEat ? ' e ' + qty(fishEat, 'peixe') : ''} na mesa${eat < att ? ' (faltou pão para alguns)' : ''}. <span class="dim">+${gain} ✦</span>${att < npcs.length ? `<br>${npcs.length - att} ficaram do lado de fora: a casa está pequena. Amplie na ${LEVELS[G.church].name}.` : ''}`, 8000);
   addComm(gain);
 }
 function release(n) {
-  const s = n.seat; n.seat = null; n.lesson = false; n.prev = null; n.at = 'H1';
+  const s = n.seat, node = s?.node || 'H1'; n.seat = null; n.lesson = false; n.prev = null; n.at = node;
   if (!s) return;
-  if (n.seated) { n.seated = false; n.pts = [...s.approach.slice().reverse(), n.node('H1')]; n.wait = rand(0, 2.5); }
+  if (n.seated) { n.seated = false; n.pts = [...s.approach.slice().reverse(), n.node(node)]; n.wait = rand(0, 2.5); }
   else n.pts = n.pts.slice(0, Math.max(1, n.pts.length - n.extra));
 }
 function endGathering() {
@@ -1750,15 +1913,27 @@ function endGathering() {
 function endLesson() { G.lesson = false; npcs.filter(n => n.lesson).forEach(release); }
 function dusk() {
   audio.sfx('bell');
-  const cost = 2 + countBuilt('lamparinas'), paid = Math.min(cost, G.res.azeite);
+  const cost = Math.max(1, 2 + countBuilt('lamparinas') - countBuilt('olaria')), paid = Math.min(cost, G.res.azeite);
   addRes('azeite', -paid); G.lit = paid / cost;
   toast(G.lit >= 1 ? `As lamparinas de Antioquia se acendem. <span class="dim">−${qty(paid, 'azeite')}</span>` : 'Pouco azeite: as lamparinas ficarão fracas esta noite. Colha azeitonas amanhã.');
   if (hour() < 21) startGathering();
 }
 function dawn() {
   audio.sfx('dawn');
-  addRes('pao', 1);
-  toast(`<b>Dia ${dayN()}</b>. A padaria da Cloé deixou um pão na mesa da igreja. <span class="dim">+1 pão</span>`);
+  if (G.churchBuild) {
+    G.church = G.churchBuild; G.churchBuild = 0; setChurchLevel();
+    const L = LEVELS[G.church];
+    setTimeout(() => { toast(`A obra terminou: <b>${L.name}</b>. Agora cabem ${L.cap} irmãos no ágape.`, 7000); audio.sfx('join'); checkUnlocks(); if (!modalOpen && !tour) focus = { x: CH.cx, z: CH.cz, dist: 22, polar: 0.85, az: 0.3, speed: 1.4 }; }, 1800);
+  }
+  const lines = [], coleta = Math.ceil(npcs.filter(n => !n.visitor).length / 2);
+  addRes('moeda', coleta); lines.push(`Coleta da comunidade: +${qty(coleta, 'moeda')}`);
+  for (const pl of plots) {
+    const b = BUILDS[pl.used]; if (!b?.prod) continue;
+    if (!npcs.some(n => n.name === pl.worker)) { lines.push(`${b.name}: sem ninguém para trabalhar`); continue; }
+    for (const [k, v] of Object.entries(b.prod)) addRes(k, v);
+    lines.push(`${b.name} (${pl.worker}): ${Object.entries(b.prod).map(([k, v]) => '+' + qty(v, k)).join(', ')}`);
+  }
+  toast(`<b>Amanhecer · Dia ${dayN()}</b><span class="sum">${lines.join('<br>')}</span>`, 9000);
   npcs.forEach(n => { if (n.need) n.setNeed(null); }); boatHome();
   const s = SEASONS[seasonIdx()];
   G.rain = Math.random() < s.rain ? [rand(5, 15), rand(17, 29)] : null;
@@ -1790,7 +1965,7 @@ function updateNeeds(dh) {
 
 /* ========================= codex ========================= */
 function checkUnlocks(silent = false) {
-  const s = { ...G.stats, comm: G.comm, days: dayN() };
+  const s = { ...G.stats, comm: G.comm, days: dayN(), church: G.church };
   CODEX.forEach((ch, ci) => ch.pages.forEach((p, pi) => {
     const id = ci + '-' + pi;
     if (G.pages.includes(id) || (p.u && !(s[p.u[0]] >= p.u[1]))) return;
@@ -2168,7 +2343,7 @@ function dawnVisits() {
   const s = { ...G.stats, comm: G.comm };
   const v = VISITORS.find(v => !G.visits[v.id] && (dayN() >= v.day || v.when(s)));
   if (v) { G.visits[v.id] = 'here'; spawnVisitor(v); setTimeout(() => toast(`Um barco trouxe uma visita: <b>${v.name}</b>, ${v.role}. Procure o ✦ dourado pela cidade.`, 7000), 3600); }
-  if (G.stats.lantern >= 1 && G.letters < LETTERS.length && dayN() >= G.nextLetter) { G.letters++; G.nextLetter = dayN() + 2; setTimeout(() => toast(`Chegou uma carta pelo porto: <i>${LETTERS[G.letters - 1].title}</i>. Leia no píer.`, 7000), 4800); }
+  if (G.stats.lantern >= 1 && G.letters < LETTERS.length && dayN() >= G.nextLetter) { G.letters++; G.nextLetter = dayN() + (G.church >= 4 ? 1 : 2); setTimeout(() => toast(`Chegou uma carta pelo porto: <i>${LETTERS[G.letters - 1].title}</i>. Leia no píer.`, 7000), 4800); }
 }
 function openVisitor(n, sx, sy) {
   const v = n.visitor, heard = G.visits[v.id + 'Heard'];
@@ -2192,7 +2367,7 @@ function openAlbum() {
   const el = openModal(`<div class="card album"><button class="x" aria-label="Fechar">✕</button><h2>Álbum da comunidade</h2><p class="hint">${npcs.filter(n => !n.visitor).length} irmãos. Acolha cada um à noite para conhecer sua história.</p><div class="mems">${npcs.map((n, i) => {
     const st = STORIES[n.name], k = G.story[n.name] || 0;
     const story = st ? `<em>${k ? st.steps[k - 1] : `Tem uma história para contar. Acolha ${n.name} quando ele pedir ajuda.`}</em><span class="tag">História ${k} de ${st.steps.length}</span>` : `<em>${n.visitor ? n.quote : `“${n.quote}”`}</em>`;
-    return `<div class="mem">${portrait(n)}<div class="mi"><b>${n.name}</b><small>${n.visitor ? 'visitante · ' : ''}${n.role}</small>${story}<div class="mrow"><span class="tag">${n.visitor ? 'De passagem' : `Acolhido ${G.helped[n.name] || 0}×`}</span><button class="find" data-i="${i}">Ver na cidade</button></div></div></div>`;
+    return `<div class="mem">${portrait(n)}<div class="mi"><b>${n.name}</b><small>${n.visitor ? 'visitante · ' : ''}${n.role}${(pl => pl ? ' · trabalha: ' + BUILDS[pl.used].name : '')(plots.find(pl => pl.worker === n.name))}</small>${story}<div class="mrow"><span class="tag">${n.visitor ? 'De passagem' : `Acolhido ${G.helped[n.name] || 0}×`}</span><button class="find" data-i="${i}">Ver na cidade</button></div></div></div>`;
   }).join('')}</div></div>`, null, true);
   el.querySelectorAll('.find').forEach(b => b.onclick = () => { const n = npcs[+b.dataset.i]; closeModal(); if (n) focusOn(n.g.position.x, n.g.position.z, 16); });
 }
@@ -2245,6 +2420,7 @@ function openPop(sx, sy, title, sub, text, acts, anchor = null) {
   const p = $('#pop');
   p.innerHTML = `<div class="pop-h">${title}</div>${sub ? `<div class="pop-r">${sub}</div>` : ''}${text ? `<p class="pop-t">${text}</p>` : ''}<div class="pop-acts"></div>`;
   for (const a of acts) {
+    if (a.header) { p.querySelector('.pop-acts').insertAdjacentHTML('beforeend', `<div class="lbl2">${a.header}</div>`); continue; }
     const b = document.createElement('button'); b.className = 'act'; b.disabled = !a.enabled;
     b.innerHTML = `<b>${a.label}</b><small>${a.enabled ? a.sub || '' : a.reason || ''}</small>`; b.onclick = a.run;
     p.querySelector('.pop-acts').append(b);
@@ -2277,10 +2453,12 @@ function openNPC(n, sx, sy) {
   }], n.g.position);
 }
 function openPlot(p, sx, sy) {
-  openPop(sx, sy, 'Terreno livre', 'Escolha o que construir aqui', '', Object.entries(BUILDS).map(([k, b]) => ({
-    label: b.name, sub: `${costTxt(b.cost)} · ${b.desc}`, enabled: canPay(b.cost), reason: `${costTxt(b.cost)} · faltam recursos`,
-    run: () => { pay(b.cost); placeBuild(p.i, k); },
-  })), { x: p.x, y: 0.3, z: p.z });
+  const item = ([k, b]) => {
+    const w = b.prod ? pickWorker(k) : true;
+    return { label: b.name, sub: `${costTxt(b.cost)} · ${b.desc}${b.prod && w ? ` · ${w.name} trabalha aqui` : ''}`, enabled: canPay(b.cost) && !!w, reason: w ? `${costTxt(b.cost)} · faltam recursos` : 'Nenhum irmão livre para trabalhar aqui', run: () => { pay(b.cost); placeBuild(p.i, k); } };
+  };
+  const all = Object.entries(BUILDS);
+  openPop(sx, sy, 'Terreno livre', 'Escolha o que construir aqui', '', [{ header: 'Ofícios · um irmão trabalha e produz todo dia' }, ...all.filter(([, b]) => b.prod).map(item), { header: 'Decoração' }, ...all.filter(([, b]) => !b.prod).map(item)], { x: p.x, y: 0.3, z: p.z });
 }
 let modalClose = null, backdropCloses = false;
 function openModal(html, onClose = null, backdrop = false, mini = false) {
@@ -2304,6 +2482,7 @@ function openHelp() {
       <li><b>À noite</b>: moradores mostram ícones flutuantes pedindo oração 🙏, pão 🍞, consolo 💧 ou ensino 📜.</li>
       <li><b>Códice</b>: páginas se revelam com o que você faz. Algumas só em certos horários.</li>
       <li><b>Construir</b>: oliveiras, lamparinas, pérgolas e casas nos terrenos marcados.</li>
+      <li><b>Igreja e ofícios</b>: amplie o local de reunião em 4 níveis na casa da igreja. Nos terrenos, construa oficinas: um irmão trabalha lá e produz todo amanhecer. Venda e compre no mercado do cais.</li>
       <li><b>Estações</b>: a cada 4 dias muda a estação, com clima, cores e uma festa no 3º dia.</li>
       <li><b>Álbum</b>: a ficha de cada morador. Alguns têm uma história que avança quando você os acolhe.</li>
       <li><b>Câmera</b>: modo foto e passeio pela cidade. O passeio começa sozinho quando ninguém mexe por 1 minuto; qualquer toque encerra.</li>
@@ -2339,9 +2518,10 @@ function refreshHUD() {
   const h = hour();
   $('#comm').textContent = G.comm;
   $('#commBar').style.width = (G.joined >= JOINERS.length ? 100 : (G.comm % 15) / 15 * 100) + '%';
-  for (const k of ['pao', 'peixe', 'azeite', 'perg']) $('#r-' + k + ' b').textContent = G.res[k];
+  for (const k of ['moeda', 'pao', 'peixe', 'azeite', 'perg']) $('#r-' + k + ' b').textContent = G.res[k];
   $('#clock').textContent = `${isRaining() ? '☂︎' : isNight() ? '☾' : '☀︎'}  Dia ${dayN()} · ${SEASONS[seasonIdx()].name} · ${fmtH(h)}`;
-  $('#members').textContent = `${npcs.filter(n => !n.visitor).length} irmãos · ${phaseName(h)}`;
+  const nm = npcs.filter(n => !n.visitor).length, cap = LEVELS[G.church].cap;
+  $('#members').textContent = `${nm} irmãos · ${cap} lugares na casa`; $('#members').classList.toggle('full', nm > cap);
   const ev = $('#event'); ev.hidden = !isFestival(); if (isFestival()) ev.textContent = `Festa hoje: ${SEASONS[seasonIdx()].fest}`;
   const btn = $('#phaseBtn');
   btn.disabled = !!ff;
@@ -2866,9 +3046,9 @@ function start(data) {
   for (let i = 0; i < Math.min(G.joined, JOINERS.length); i++) addJoiner(i, true);
   for (const v of VISITORS) if (G.visits[v.id] === 'here') spawnVisitor(v);
   G.loom.forEach(c => addLoomRow(c, false));
-  for (const [i, k] of G.built) placeBuild(i, k, true);
+  for (const [i, k, w] of G.built) placeBuild(i, k, true, w);
   for (let i = 0; i < Math.min(G.lanterns, 40); i++) spawnLantern(rand(-48, 48), rand(15, 27));
-  checkUnlocks(true); applySeason(); applyQuality();
+  checkUnlocks(true); applySeason(); applyQuality(); setChurchLevel();
   $('#lampMul').value = G.lampMul;
   syncSoundUI();
   refreshHUD();
@@ -2881,7 +3061,7 @@ addEventListener('pagehide', save);
 const hot = window.claude?.hot;
 try { hot?.snapshot?.(() => (resetting ? {} : { save: serial() })); } catch (e) {}
 hot?.ready ? hot.ready(start) : start(hot?.data ?? {});
-if (new URLSearchParams(location.search).has('debug')) window.__antioquia = { get G() { return G; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: (id, i = 0) => HOT.find(h => h.id === id).actions()[i].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
+if (new URLSearchParams(location.search).has('debug')) window.__antioquia = { get G() { return G; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, plots, build: (i, k) => { pay(BUILDS[k].cost); placeBuild(i, k); }, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: (id, i = 0) => HOT.find(h => h.id === id).actions()[i].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
 let simT = 0;
 </script>
 
