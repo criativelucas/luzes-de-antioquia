@@ -7,7 +7,8 @@ Cozy game 3D sobre a igreja de Antioquia da Síria, a cidade de Atos 11 onde os 
 - Ciclo de dia e noite, quatro estações com chuva, cores próprias e uma festa por estação
 - Moradores com pedidos de oração, pão, consolo e ensino; ágape no pátio ao entardecer
 - Arraste para girar a cidade inteira; rio com reflexo, refração, leito e cardumes de peixes
-- Mini-games encenados na própria cidade: pesca com vara no píer, forno, colheita de azeitonas, tear, copista, carga do barco, lamparinas da rua e hinos no pátio
+- Mini-games encenados na própria cidade: pesca de boia no píer, forno, colheita de azeitonas com cesto, tear, copista, carga do barco, lamparinas da rua e hinos no pátio
+- Qualidade gráfica alta, média ou leve, com escolha automática pelo aparelho e ajuste se o jogo ficar lento
 - Códice com histórias e versículos de Atos 11 a 15
 - Música e sons gerados pelo próprio jogo com Web Audio, sem arquivos de áudio
 - Cidade viva: moradores trabalhando, mercadores, crianças brincando, burrico, gatos, pombas, barcos, patos e peixes no Orontes
