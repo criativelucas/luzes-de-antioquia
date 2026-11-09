@@ -9,6 +9,11 @@ Cozy game 3D sobre a igreja de Antioquia da Síria, a cidade de Atos 11 onde os 
 - Mini-games: pesca, forno, colheita de azeitonas, tear, copista e carga do barco
 - Códice com histórias e versículos de Atos 11 a 15
 - Música e sons gerados pelo próprio jogo com Web Audio, sem arquivos de áudio
+- Cidade viva: moradores trabalhando, mercadores, crianças brincando, burrico, gatos, pombas, barcos, patos e peixes no Orontes
+- Céu e luz: sombras de nuvens, lua e estrelas, névoa no rio ao amanhecer, arco-íris depois da chuva, janelas acendendo aos poucos
+- Antioquia histórica: mosaico no pátio da igreja, muralha no monte Sílpio, ponte de pedra, aqueduto e templo de Zeus
+- Histórias de moradores, visitas de Ágabo e Pedro, cartas de Paulo e Barnabé durante a viagem e um álbum da comunidade
+- Passeio automático da câmera e modo foto com desfoque de miniatura
 
 Os versículos são traduções livres, citados pela referência.
 
