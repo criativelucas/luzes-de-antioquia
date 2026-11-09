@@ -503,7 +503,6 @@ body.menu #hud,body.menu #pop,body.menu #tip,body.menu #toasts,body.cine #hud,bo
 <div id="tutArrow" hidden><svg viewBox="0 0 34 40" aria-hidden="true"><path d="M17 38L3 20h9V2h10v18h9Z" fill="#ead096" stroke="#142729" stroke-width="2" stroke-linejoin="round"/></svg></div>
 <div id="menu" hidden>
   <div class="mcard card">
-    <p class="eyebrow">Um cozy game sobre Atos 11–15</p>
     <h1><img src="logo.webp" alt="A Luz de Antioquia" width="900" height="634"></h1>
     <p class="sub">Cuide da primeira igreja chamada cristã, às margens do rio Orontes.</p>
     <div class="macts">
@@ -3271,9 +3270,14 @@ $('#bookBtn').onclick = openBook;
 $('#howBtn').onclick = () => { $('#snd').hidden = true; $('#soundBtn').classList.remove('on'); openHelp(); };
 $('#timeBtn').onclick = () => { const d = $('#dial'); d.hidden = !d.hidden; $('#timeBtn').classList.toggle('on', !d.hidden); $('#lampMul').value = G.lampMul; refreshHUD(); };
 $('#speedBtn').onclick = () => { G.speedIdx = (G.speedIdx + 1) % SPEEDS.length; refreshHUD(); };
+let buildView = null;
 function toggleBuild(on = !buildMode) {
   buildMode = on; $('#buildBtn').classList.toggle('on', on); closePop();
   plots.forEach(p => { p.marker.visible = on && !p.used; });
+  if (on) { // pull back to see every free plot; the old view comes back on exit
+    buildView = camState(); const free = plots.filter(p => !p.used), pts = free.length ? free : plots;
+    focus = { x: pts.reduce((a, p) => a + p.x, 0) / pts.length, z: pts.reduce((a, p) => a + p.z, 0) / pts.length + 3, dist: Math.min(72, 64 / Math.sqrt(Math.min(1, camera.aspect))), polar: 0.55, speed: 2.2 }; // portrait screens need more distance
+  } else if (buildView) { const v = buildView; buildView = null; focus = { x: v[0], z: v[1], dist: v[2], polar: v[3], az: v[4], speed: 2.2 }; }
   if (on) toast(plots.some(p => !p.used) ? 'Modo construção: clique num terreno marcado.' : 'Todos os terrenos já foram usados.');
 }
 $('#buildBtn').onclick = () => toggleBuild();
