@@ -445,6 +445,109 @@ body.menu #hud,body.menu #pop,body.menu #tip,body.menu #toasts,body.cine #hud,bo
   #news{left:calc(66px + env(safe-area-inset-left,0px));height:34px}
   #news .ntxt{font-size:14px;line-height:34px}
 }
+#labels{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.plab{position:absolute;left:0;top:0;display:flex;align-items:center;gap:5px;padding:3px 9px 3px 6px;border-radius:99px;background:rgba(17,31,33,.78);border:1px solid rgba(201,168,106,.35);color:var(--ink-dim);font:800 12px var(--sans);white-space:nowrap;pointer-events:auto;will-change:transform;transition:background .15s,color .15s}
+.plab i{font-style:normal;font-size:13px;filter:grayscale(.7)}
+.plab.live{color:#f6ebd0;border-color:var(--gold);background:rgba(24,46,48,.92);box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.plab.live i{filter:none}
+.plab:hover{background:var(--cream);color:var(--cream-ink)}
+@media (max-width:640px){.plab{font-size:11px;padding:2px 7px 2px 5px}.plab:not(.live) span{display:none}}
+.rq-figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.rq-fig,.bk-fig{margin:0;border-radius:4px;overflow:hidden;background:#f1e5c6;color:#3a2b1b;border:1px solid var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.rq-fig img,.rq-fig svg{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.rq-fig figcaption,.bk-fig figcaption{padding:7px 10px 8px;font:500 13.5px/1.35 var(--serif)}
+.rq-fig small,.bk-fig small{display:block;margin-top:2px;font:700 10px var(--sans);letter-spacing:.04em;color:#7e684a}
+.rq-fig a,.bk-fig a{color:inherit}
+svg .sea{font:italic 13px Georgia,serif;fill:#5f7f7a}svg .isl{font:italic 9px Georgia,serif;fill:#7e684a;text-anchor:middle}svg .city{font:700 10.5px Georgia,serif;fill:#2b2118;paint-order:stroke;stroke:#f1e5c6;stroke-width:2.6px}
+.bk-fig{display:grid;grid-template-columns:190px minmax(0,1fr);align-items:center;margin:0 0 10px;background:rgba(255,250,235,.6);border-color:rgba(90,70,40,.3);box-shadow:none}
+.bk-fig img,.bk-fig svg{display:block;width:190px;height:112px;object-fit:cover}
+.spread{overflow:auto}
+@media (max-width:760px){.bk-fig{grid-template-columns:120px minmax(0,1fr)}.bk-fig img,.bk-fig svg{width:120px;height:84px}}
+/* relic puzzles */
+.pz h3{margin-bottom:6px}
+.pz .pz-q{font:500 17px/1.45 var(--serif);margin:0 0 12px}
+.pz-msg{min-height:20px;margin:10px 0 0;font:800 13px var(--sans)!important;color:var(--gold-hi)}
+.pz-tiles{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px;width:min(340px,100%);max-height:300px;aspect-ratio:1;padding:4px;border-radius:5px;background:#0f1e20;border:1px solid var(--line)}
+.pz-tiles button{border-radius:3px;background-color:#1b3336;background-size:300% 300%;transition:transform .12s,box-shadow .12s}
+.pz-tiles button.sel{box-shadow:0 0 0 2px var(--gold-hi);transform:scale(.94)}
+.pz-list{display:grid;gap:6px}
+.pz-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
+.pz-b{padding:8px 11px;border-radius:4px;background:rgba(44,80,84,.5);border:1px solid rgba(201,168,106,.42);text-align:left;font:600 14.5px/1.3 var(--sans);transition:background .15s}
+.pz-b:hover:not(:disabled){background:rgba(60,104,108,.7)}
+.pz-b.sel{border-color:var(--gold-hi);box-shadow:0 0 0 1px var(--gold-hi)}
+.pz-b.ok{background:rgba(120,170,90,.28);border-color:var(--ok);color:var(--ok)}
+.pz-b.bad{background:rgba(229,138,111,.3);border-color:var(--bad)}
+.pz-b em{font-style:normal;font-weight:800;color:var(--gold-hi);margin-right:6px}
+.pz .ghost{margin-top:12px}
+.rq-exam{margin-top:10px}
+/* relics */
+.r0{--rc:#b9c2b0}.r1{--rc:#79c0bf}.r2{--rc:#b98ee6}.r3{--rc:#f2c46b}
+.card.reliq{--acc:var(--gold);display:grid;grid-template-columns:340px minmax(0,1fr);gap:22px;width:min(1060px,calc(100vw - 32px));height:min(720px,calc(100vh - 40px));text-align:left;overflow:hidden;padding:22px 24px}
+.reliq>*{min-width:0;min-height:0}
+.rq-side{display:flex;flex-direction:column}
+.reliq .x{z-index:3}
+.rq-side h2{margin-bottom:8px}
+.rq-side h2::after{margin-left:0}
+.rq-prog{font-size:12.5px;color:var(--ink-dim);margin-bottom:10px}
+.rq-prog b{color:var(--gold-hi);font-size:15px}
+.rq-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:4px}
+.rq-tabs button{padding:7px 0;border-radius:4px;border:1px solid var(--line);font-size:13px;font-weight:800;color:var(--ink-dim)}
+.rq-tabs button.on{background:var(--cream);color:var(--cream-ink);border-color:var(--gold)}
+.rq-list{flex:1;overflow:auto;padding:0 6px 4px 0}
+.rq-list .grp{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:14px 0 7px;font:700 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.rq-list .grp small{font:800 12px var(--sans);letter-spacing:0;color:var(--ink-dim);white-space:nowrap}
+.rq-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.rq-it{position:relative;aspect-ratio:1;border-radius:5px;border:1px solid color-mix(in srgb,var(--rc) 60%,transparent);background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--rc) 32%,transparent),rgba(10,20,22,.65) 74%);overflow:hidden;transition:transform .15s,box-shadow .15s}
+.rq-it img{width:100%;height:100%;display:block}
+.rq-it:hover{transform:translateY(-2px)}
+.rq-it.sel{box-shadow:0 0 0 2px var(--rc),0 0 16px color-mix(in srgb,var(--rc) 60%,transparent)}
+.rq-it.off{--rc:#5c6b68}
+.rq-it.off img{filter:brightness(0) opacity(.4)}
+.rq-it i{position:absolute;font-style:normal}
+.rq-it .num{left:4px;bottom:2px;font:800 10px var(--sans);color:var(--ink-dim)}
+.rq-it .dot{top:4px;right:4px;width:9px;height:9px;border-radius:50%;background:#e2604a;box-shadow:0 0 0 2px rgba(255,255,255,.4)}
+.rq-it .mem{right:4px;bottom:1px;font-size:11px;color:var(--gold-hi)}
+.rq-con{padding:11px 12px;margin-top:10px;border-radius:4px;background:rgba(44,80,84,.32);border:1px solid rgba(201,168,106,.2);border-left:3px solid #5c6b68}
+.rq-con.open{border-left-color:var(--gold)}
+.rq-con>b{display:block;font:700 17px/1.2 var(--serif);color:#f6ebd0;margin-bottom:8px}
+.rq-con .rq-grid{grid-template-columns:repeat(5,1fr);margin-bottom:8px}
+.rq-con p{margin:0;font:500 15.5px/1.45 var(--serif)}
+.rq-con small{color:var(--ink-dim);font-size:12px}
+.rq-main{display:flex;flex-direction:column;overflow:auto;padding-right:4px}
+.rvbox{position:relative;flex:0 0 46%;min-height:230px;border-radius:5px;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 44%,color-mix(in srgb,var(--rc,#c9a86a) 36%,transparent),transparent 62%),radial-gradient(ellipse at 50% 108%,rgba(0,0,0,.55),transparent 58%),#0f1e20;overflow:hidden;touch-action:none;cursor:grab}
+.rvbox:active{cursor:grabbing}
+.rvbox canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.rvbox.off canvas{filter:brightness(0) opacity(.5)}
+.rvbox .drag{position:absolute;bottom:7px;left:0;right:0;text-align:center;font-size:11.5px;color:var(--ink-dim);pointer-events:none}
+.rq-info{padding:14px 2px 4px}
+.rq-chip{display:inline-block;padding:2px 9px;border-radius:99px;font:800 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--rc);color:var(--rc);margin-right:8px;vertical-align:1px}
+.rq-info h3{font:700 29px/1.1 var(--serif);color:#f6ebd0;margin:9px 0 2px;text-wrap:balance}
+.rq-info .dim{font-size:12.5px}
+.rq-era{font:700 13px var(--sans)!important;color:var(--gold-hi);margin:0 0 4px!important}
+.rq-sec{font:700 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:15px 0 4px}
+.rq-info p{margin:0;font:500 17.5px/1.5 var(--serif)}
+.rq-lock{padding:12px 14px;border-radius:4px;border:1px dashed var(--line);color:var(--ink-dim);font-size:13.5px;line-height:1.5;margin-top:8px}
+.rq-lock .pill{margin-top:9px;padding:6px 14px;font-size:14.5px}
+.rq-lock b{color:var(--gold-hi)}
+.rq-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.rq-tag{font:700 11px var(--sans);padding:3px 8px;border-radius:4px;background:rgba(44,80,84,.55);border:1px solid var(--line)}
+.rq-tag.b{border-color:#79c0bf;color:#a8dedd}.rq-tag.h{border-color:#c9a86a;color:#ead096}.rq-tag.f{border-color:#9a74b8;color:#c9aee0}
+.rq-link{margin-top:10px;font-size:12.5px;color:var(--ink-dim)}
+.rq-link b{color:var(--ink)}
+.card.rq-new{--acc:var(--rc);width:min(470px,calc(100vw - 32px))}
+.rq-new .rvbox{height:250px;margin:4px 0 14px}
+.rq-new h2{margin-top:10px}
+.rq-new .rq-o{font:500 17.5px/1.5 var(--serif);margin:0 0 10px}
+.rq-btns{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+.rq-btns .ghost{margin-top:0}
+@media (max-width:760px){
+  .card.reliq{grid-template-columns:minmax(0,1fr);height:auto;max-height:calc(100vh - 24px);overflow:auto;padding:16px;gap:14px}
+  .rq-main{order:-1;overflow:visible;padding-right:0}
+  .reliq .rvbox{flex:none;height:210px;margin-right:42px}
+  .rq-list{overflow:visible}
+  .rq-grid{grid-template-columns:repeat(6,1fr)}
+  .rq-info h3{font-size:24px}
+}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition:none!important}}
 </style>
 
@@ -452,6 +555,7 @@ body.menu #hud,body.menu #pop,body.menu #tip,body.menu #toasts,body.cine #hud,bo
 <div id="vig"></div>
 <div id="rainbow"></div>
 <div id="hud">
+  <div id="labels"></div>
   <div id="tl" class="glass">
     <div class="row"><span class="spark">✦</span><span id="comm">0</span><span class="lbl">Comunhão</span></div>
     <div class="bar" title="Progresso até o próximo irmão chegar"><i id="commBar"></i></div>
@@ -471,6 +575,7 @@ body.menu #hud,body.menu #pop,body.menu #tip,body.menu #toasts,body.cine #hud,bo
   </div>
   <div id="tr">
     <button class="icon-btn" id="bookBtn" title="Cartas de Antioquia (C)" aria-label="Abrir as Cartas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span class="badge" id="badge" hidden></span></button>
+    <button class="icon-btn" id="relBtn" title="Relíquias de Antioquia (R)" aria-label="Abrir as Relíquias"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3.5h5M10 3.5v2.6c-2.6 1.6-4 4.3-4 7.2 0 3.6 2.3 6.2 4.4 7.2h3.2c2.1-1 4.4-3.6 4.4-7.2 0-2.9-1.4-5.6-4-7.2V3.5"/><path d="M6.6 10.5h10.8"/></svg><span class="badge" id="relBadge" hidden></span></button>
     <button class="icon-btn" id="albumBtn" title="Álbum da comunidade" aria-label="Álbum da comunidade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.6 13.4c3 .2 5.4 2.7 5.4 5.9"/></svg></button>
     <button class="icon-btn" id="soundBtn" title="Ajustes: gráficos e som (M silencia)" aria-label="Ajustes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
   </div>
@@ -498,6 +603,7 @@ body.menu #hud,body.menu #pop,body.menu #tip,body.menu #toasts,body.cine #hud,bo
   <button id="news" class="glass" title="Notícias de Antioquia" aria-label="Notícias de Antioquia"><span class="ntag" id="newsTag">Cidade</span><span class="ntxt" id="newsTxt"><span></span></span></button>
   <div id="camMenu" class="glass" hidden>
     <button class="act" id="photoGo"><b>Modo foto</b><small>Esconde a interface, com desfoque de miniatura</small></button>
+    <button class="act" id="homeGo"><b>Ver a cidade inteira</b><small>Volta para a vista de cima</small></button>
     <button class="act" id="tourGo"><b>Passeio pela cidade</b><small>A câmera passeia sozinha. Começa também quando ninguém mexe por 1 minuto.</small></button>
   </div>
   <div id="tut" class="glass" hidden><p class="eyebrow"><span id="tutN">Tutorial</span><button class="tsk" id="tutSkip">Pular tutorial</button></p><b id="tutT"></b><p id="tutD"></p></div>
@@ -555,6 +661,7 @@ import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { HorizontalTiltShiftShader } from 'three/addons/shaders/HorizontalTiltShiftShader.js';
 import { VerticalTiltShiftShader } from 'three/addons/shaders/VerticalTiltShiftShader.js';
 import { Water } from 'three/addons/objects/Water2.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 /* ========================= helpers ========================= */
 const $ = s => document.querySelector(s);
@@ -786,6 +893,7 @@ const LISTENERS = [ // passers-by on the colonnaded street; the best answer depe
       ['Quem sabe ele queira vir também.', 1],
       ['Fuja da casa dele.', 0]]]] },
 ];
+const REPLY = {"Juntamos tesouros no céu, onde a traça não come e o ladrão não rouba.": "Traça já me comeu um carregamento inteiro de seda. Um tesouro que ela não alcança… disso eu quero saber mais.", "Venha jantar conosco e veja com os próprios olhos.": "Jantar de graça sempre tem um preço escondido. Mas confesso que fiquei curioso.", "Quem segue Jesus fica rico, pode apostar.": "Rico? Olhe as sandálias de vocês. Não me venda mercadoria que você não tem.", "De que adianta ganhar o mundo inteiro e perder a própria alma?": "Faço contas o dia todo e nunca pus a alma na balança. Essa conta eu não sei fechar.", "Muitos mercadores já vêm ao ágape.": "Mercadores? Quais? Se o Hermes da banca de vidro vai, talvez eu apareça.", "Então é melhor nem tentar.": "Pois é o que eu pensava. Bom dia para você.", "Isaías escreveu: “Ele foi ferido por causa das nossas transgressões.”": "O servo sofredor… Li esse rolo a vida inteira e nunca pensei que falasse de um homem assim. Preciso reler esta noite.", "Muitos o viram vivo depois da cruz.": "Testemunhas contam muita coisa. Mostre-me nas Escrituras, e então conversamos.", "Esqueça a Lei, ela não importa mais.": "Esquecer a Lei de Moisés? Foi isso mesmo que eu ouvi? Com licença.", "Deus prometeu a Abraão: “Em você serão abençoadas todas as famílias da terra.”": "Todas as famílias da terra… Está escrito, é verdade. Recitei isso mil vezes sem olhar para o grego ao meu lado.", "Até Pedro come com eles.": "Pedro é um pescador da Galileia. Admiro a coragem dele, mas isso não me basta.", "Os costumes de vocês são coisa do passado.": "Esses costumes guardaram o meu povo no exílio, rapaz. Meça as palavras.", "Jesus, que não veio para ser servido, mas para servir e dar a vida.": "Um senhor que serve os seus homens? No quartel, quem manda come primeiro. Eu seguiria um comandante assim.", "Damos a César o que é de César, e a Deus o que é de Deus.": "Então vocês pagam imposto e não fazem motim. Bom saber. Mas e esse Deus, o que ele cobra?", "César é um tirano e vai cair.": "Cuidado. Já prendi gente por menos do que isso.", "Jesus elogiou a fé de um centurião mais do que a de qualquer outro em Israel.": "De um centurião? Um dos nossos? Achei que para vocês eu fosse só a espada de Roma.", "Talvez, se você largar a espada primeiro.": "Largar a espada é desertar, e desertor morre. Não existe outro caminho?", "Soldados não entram no reino.": "Foi o que imaginei. Volto para o meu posto.", "O Deus que fez o mundo não mora em templos. Nele vivemos, nos movemos e existimos.": "Os nossos poetas disseram quase o mesmo! Mas vocês falam desse Deus como quem o conhece pelo nome.", "É a história de um mestre da Galileia.": "Mais um mestre. Já ouvi tantos nos pórticos… O que este ensinou que Zenão não ensinou?", "Filosofia é perda de tempo.": "Quem despreza a razão não tem nada a me dizer. Passe bem.", "Há testemunhas vivas: mais de quinhentos o viram de uma só vez.": "Quinhentas testemunhas, e ainda vivas? Isso se pode investigar. Diga-me onde encontro uma delas.", "É um mistério. Mas eu vi o que ele fez na minha vida.": "Uma vida mudada é um argumento, admito. Não é uma prova, mas é um começo.", "Não discuta, apenas acredite.": "Crer sem examinar? Isso é para crianças. Eu vim atrás de razões.", "Na igreja cuidamos das viúvas. Venha comer conosco no ágape.": "Cuidam das viúvas? Desde o inverno ninguém bateu à minha porta. Você está mesmo me convidando?", "Deus vê a sua dor. Vou orar por você.": "Obrigada, de coração. Mas oração não põe azeite na minha lamparina, não é?", "Procure os sacerdotes do templo de Apolo.": "Já procurei. Pediram uma oferta que eu não tenho.", "Lá ninguém chama de seu o que tem. Tudo é repartido.": "Tudo repartido… Então eu não chegaria como pedinte, e sim como gente da casa?", "Leve só um pouco de azeite.": "Um pouco de azeite eu arranjo. Fico com vergonha, mas levo.", "Então espere até ter alguma coisa.": "Então vou esperar a vida inteira. Deixe para lá.", "Em Cristo não há escravo nem livre: todos são um.": "Nem escravo nem livre… Ninguém nunca falou comigo assim. Na casa do meu senhor eu nem tenho nome.", "Pode, se o seu senhor deixar.": "Se o meu senhor deixar. Tudo na minha vida depende disso.", "Primeiro compre a sua liberdade.": "Com que dinheiro? Você sabe quanto custa um homem?", "Sirva de coração, como quem serve a Deus. E venha à noite, depois do trabalho.": "Servir como quem serve a Deus, e não a ele… Assim até o balde pesa menos. À noite eu consigo sair.", "Quem sabe ele queira vir também.": "O meu senhor, à mesa comigo? Você não conhece o meu senhor. Mas seria bonito de ver.", "Fuja da casa dele.": "Escravo fugido é marcado a ferro na testa. Não me dê um conselho desses."}; // what each listener says back to each answer
 const REACT = [
   ['Não foi isso que eu perguntei.', 'Hum. Isso não me convence.', 'Vocês são estranhos mesmo.'],
   ['Pode ser… Não sei bem.', 'Hum. Vou pensar nisso.', 'Talvez.'],
@@ -834,16 +942,18 @@ const costTxt = c => Object.entries(c).map(([k, n]) => qty(n, k)).join(' + ');
 
 /* ========================= state ========================= */
 const KEY = 'luzes-de-antioquia-v1';
-const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter', 'loom', 'peds', 'quality', 'church', 'churchBuild', 'curious', 'converts', 'ev', 'tut', 'mis', 'seals', 'chap', 'chapShown', 'chapBase'];
+const SAVE_KEYS = ['time', 'clock', 'res', 'comm', 'stats', 'built', 'lanterns', 'cd', 'pages', 'copied', 'joined', 'duskDay', 'dawnDay', 'lit', 'lampMul', 'speedIdx', 'seenIntro', 'vol', 'muted', 'rain', 'story', 'helped', 'visits', 'letters', 'lettersRead', 'nextLetter', 'loom', 'peds', 'quality', 'church', 'churchBuild', 'curious', 'converts', 'ev', 'tut', 'mis', 'seals', 'chap', 'chapShown', 'chapBase', 'rel', 'relNew', 'relConn', 'relSets', 'relBuys', 'relPity', 'relTell', 'relFind', 'relPz'];
 const DEF = () => ({ time: 31, clock: 0, res: { moeda: 10, pao: 6, peixe: 0, azeite: 6, perg: 2 }, comm: 0,
-  stats: { fish: 0, olive: 0, copy: 0, help: 0, teach: 0, lantern: 0, agape: 0, vigil: 0, dawnPier: 0, relief: 0, build: 0, house: 0, bake: 0, weave: 0, load: 0, festival: 0, pentecost: 0, autumnOlive: 0, summerAgape: 0, rainAgape: 0, talk: 0, convert: 0, evHelp: 0, sold: 0, lamps: 0, hymn: 0, misDone: 0 },
-  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0, loom: [], peds: null, quality: '', church: 1, churchBuild: 0, curious: [], converts: [], ev: null, tut: 0, mis: null, seals: [], chap: 0, chapShown: -1, chapBase: 0 });
+  stats: { fish: 0, olive: 0, copy: 0, help: 0, teach: 0, lantern: 0, agape: 0, vigil: 0, dawnPier: 0, relief: 0, build: 0, house: 0, bake: 0, weave: 0, load: 0, festival: 0, pentecost: 0, autumnOlive: 0, summerAgape: 0, rainAgape: 0, talk: 0, convert: 0, evHelp: 0, sold: 0, lamps: 0, hymn: 0, misDone: 0, finds: 0, relMem: 0, relPz: 0, relBuy: 0 },
+  built: [], lanterns: 0, cd: {}, pages: [], copied: [], joined: 0, duskDay: -1, dawnDay: -1, lit: 1, lampMul: 1, speedIdx: 0, seenIntro: false, vol: { music: 0.7, amb: 0.7, sfx: 0.8 }, muted: false, rain: null, story: {}, helped: {}, visits: {}, letters: 0, lettersRead: 0, nextLetter: 0, loom: [], peds: null, quality: '', church: 1, churchBuild: 0, curious: [], converts: [], ev: null, tut: 0, mis: null, seals: [], chap: 0, chapShown: -1, chapBase: 0, rel: {}, relNew: [], relConn: [], relSets: [], relBuys: 0, relPity: 0, relTell: -1, relFind: null, relPz: [] });
 function makeState(s) {
   const d = DEF();
   if (!s || typeof s !== 'object') return d;
   for (const k of SAVE_KEYS) if (s[k] !== undefined && typeof s[k] === typeof d[k]) d[k] = s[k];
   d.res = { ...DEF().res, ...(s.res || {}) }; d.stats = { ...DEF().stats, ...(s.stats || {}) }; d.vol = { ...DEF().vol, ...(s.vol || {}) };
-  for (const k of ['built', 'pages', 'copied', 'loom', 'curious', 'converts', 'seals']) if (!Array.isArray(d[k])) d[k] = [];
+  for (const k of ['built', 'pages', 'copied', 'loom', 'curious', 'converts', 'seals', 'relNew', 'relConn', 'relSets', 'relPz']) if (!Array.isArray(d[k])) d[k] = [];
+  if (!d.rel || Array.isArray(d.rel)) d.rel = {};
+  if (d.relFind && typeof d.relFind.i !== 'number') d.relFind = null;
   d.curious = d.curious.filter(c => c && LISTENERS[c.t] && typeof c.name === 'string').slice(0, 3); d.converts = d.converts.filter(c => c && LISTENERS[c.t] && typeof c.name === 'string');
   if (s.church === undefined) d.church = 3; // saves from before the levels already had the full courtyard
   d.church = clamp(Math.round(d.church) || 1, 1, 4);
@@ -899,11 +1009,12 @@ composer.addPass(new OutputPass());
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; controls.dampingFactor = 0.08;
-controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN };
-controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
+controls.mouseButtons = { LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.ROTATE }; // drag walks the streets, like a map
+controls.touches = { ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_ROTATE };
+controls.zoomToCursor = true;
 controls.rotateSpeed = 0.6;
 controls.screenSpacePanning = false;
-controls.minDistance = 12; controls.maxDistance = 72;
+controls.minDistance = 9; controls.maxDistance = 72;
 controls.minPolarAngle = 0.35; controls.maxPolarAngle = 1.42;
 controls.target.set(-1, 0, -1);
 
@@ -1537,6 +1648,7 @@ const HOT = [
   ] },
   { id: 'market', name: 'Mercado do cais', pos: [-10.5, 0.09, 9.6], actions: () => [
     { label: 'Conversar com quem passa', sub: G.curious.length >= 3 ? 'Mini-game de diálogo · já há 3 curiosos na cidade' : 'Mini-game de diálogo · pode despertar um curioso', ok: () => inHours(8, 18), why: 'Com o cais cheio, de 8h a 18h', cd: 'talk', run: playTalk },
+    ...mascAct(),
     ...[['peixe', 3, 7], ['pao', 3, 3], ['azeite', 2, 4]].map(([k, n, c]) => ({ label: `Vender ${qty(n, k)}`, sub: `+${c} moedas`, ok: () => inHours(7, 18.5) && G.res[k] >= n, why: inHours(7, 18.5) ? `Você precisa de ${qty(n, k)}` : 'O mercado abre de 7h a 18h', cd: null, run: () => { addRes(k, -n); addRes('moeda', c); G.stats.sold++; toast(`Vendido: ${qty(n, k)} por ${c} moedas.`); } })),
     ...[['perg', 2, 8], ['azeite', 3, 8], ['pao', 4, 5]].map(([k, n, c]) => ({ label: `Comprar ${qty(n, k)}`, sub: `−${c} moedas`, ok: () => inHours(7, 18.5) && G.res.moeda >= c, why: inHours(7, 18.5) ? `Custa ${c} moedas` : 'O mercado abre de 7h a 18h', cd: null, run: () => { addRes('moeda', -c); addRes(k, n); toast(`Comprado: ${qty(n, k)}.`); } })),
   ] },
@@ -1551,7 +1663,10 @@ const HOT = [
     { label: 'Cantar hinos no pátio', sub: 'Mini-game de ritmo · rende comunhão', ok: () => inHours(19, 1), why: 'À noite (19h–1h)', cd: 'hymn', run: () => playHymn(sc => { setCd('hymn', 6); G.stats.hymn++; const g = Math.round(sc / 3); toast(`O pátio cantou junto. <span class="dim">+${g} ✦</span>`); addComm(g); }) },
   ] },
 ];
+const HOT_ICON = { pier: '🎣', grove: '🫒', scroll: '📜', bakery: '🍞', loom: '🧵', market: '⚖️', street: '🪔', event: '📣', church: '🏠' };
 for (const h of HOT) {
+  h.lab = document.createElement('button'); h.lab.className = 'plab'; h.lab.innerHTML = `<i>${HOT_ICON[h.id]}</i><span></span>`; h.lab.hidden = true; $('#labels').append(h.lab);
+  h.lab.onclick = e => { audio.sfx('click'); openHotspot(h, e.clientX, e.clientY); };
   const g = new THREE.Group(); g.position.set(...h.pos); scene.add(g);
   h.mat = new THREE.MeshBasicMaterial({ color: GOLD.clone(), transparent: true, opacity: 0.85, depthWrite: false });
   h.ring = new THREE.Mesh(RING, h.mat); h.ring2 = new THREE.Mesh(RING2, h.mat);
@@ -2553,7 +2668,7 @@ function resolveAgape() {
   G.stats.agape++; audio.sfx('strum'); news(`${att} pessoas partiram o pão no ágape da casa da igreja.`);
   toast(`<span class="v">“Partiam o pão em casa e comiam juntos com alegria e simplicidade de coração.”</span><span class="ref">Atos 2:46</span>${att} irmãos, ${qty(eat, 'pao')}${fishEat ? ' e ' + qty(fishEat, 'peixe') : ''} na mesa${eat < att ? ' (faltou pão para alguns)' : ''}. <span class="dim">+${gain} ✦</span>${att < goers ? `<br>${goers - att} ficaram do lado de fora: a casa está pequena. Amplie na ${LEVELS[G.church].name}.` : ''}`, 8000);
   addComm(gain);
-  welcomeCurious();
+  welcomeCurious(); tellRelics();
 }
 function release(n) {
   const s = n.seat, node = s?.node || 'H1'; n.seat = null; n.lesson = false; n.prev = null; n.at = node;
@@ -2595,11 +2710,11 @@ function dawn() {
   toast(`<b>Amanhecer · Dia ${dayN()}</b><span class="sum">${lines.join('<br>')}</span>`, 9000);
   npcs.forEach(n => { if (n.need) n.setNeed(null); }); boatHome();
   const s = SEASONS[seasonIdx()];
-  G.rain = Math.random() < s.rain ? [rand(5, 15), rand(17, 29)] : null;
+  G.rain = Math.random() < s.rain ? (a => [a, a + rand(2, 5)])(rand(6, 20)) : null; // a shower of a few hours, not a whole day
   if (seasonDay() === 1) setTimeout(() => toast(`<b>${s.name}</b> em Antioquia. ${s.intro}`, 6500), 1200);
   if (isFestival()) { G.stats.festival++; if (seasonIdx() === 1) { addRes('pao', 2); addRes('azeite', 1); } setTimeout(() => toast(`Festa hoje: <b>${s.fest}</b>. ${s.festTxt}`, 7000), 2600); }
   G.peds = null;
-  rollEvent();
+  rollEvent(); rollFind();
   dawnVisits();
   applySeason();
 }
@@ -2647,7 +2762,7 @@ function openBook() {
   renderBook(el);
 }
 function renderBook(el) {
-  const chs = chapters(), per = innerWidth < 760 ? 1 : 2, ch = chs[bookCh];
+  const chs = chapters(), per = innerWidth < 760 ? 1 : 2, ch = chs[bookCh], cl = el.querySelector('.chlist'), keep = cl ? [cl.scrollTop, cl.scrollLeft] : [0, 0];
   const pageHTML = (p, n) => !p ? '<div class="page empty"></div>' : p.open
     ? `<div class="page"><div class="pgb">${p.title ? `<h4 class="pt">${p.title}</h4>` : ''}${p.text ? `<p class="txt">${p.text}</p>` : ''}${p.verse ? `<blockquote>“${p.verse}”<cite>${p.ref}</cite></blockquote>` : `<p class="lref">${p.ref}</p>`}</div><span class="pn">${n}</span></div>`
     : `<div class="page locked"><div class="pgb"><div class="lk">🔒</div><div>Página ainda não revelada</div><div class="h">${p.hint || ''}</div></div><span class="pn">${n}</span></div>`;
@@ -2655,9 +2770,9 @@ function renderBook(el) {
   for (let i = 0; i < per; i++) pages.push(pageHTML(ch.pages[bookPg + i], bookPg + i + 1));
   el.innerHTML = `<button class="x" aria-label="Fechar">✕</button>
     <div><h2>Cartas</h2><div class="chlist">${chs.map((c, i) => { const n = c.pages.filter(p => p.open).length, t = c.pages.length; return `<button class="ch ${i === bookCh ? 'sel' : ''} ${n ? '' : 'locked'}" data-i="${i}"><span class="cover" style="--c:${c.color}">${c.glyph}</span><span class="meta"><b>${c.title}</b><small><span>${n === 0 ? 'Bloqueado' : n === t ? 'Completo' : 'Ativo'}</span><span>${n} / ${t}</span></small></span></button>`; }).join('')}</div></div>
-    <div class="spread"><h3>${ch.title}</h3><div class="pages">${pages.join('')}</div>
+    <div class="spread"><h3>${ch.title}</h3>${ch.pages.some(p => p.open) ? relFig(BOOK_FIG[bookCh], 'bk-fig') : ''}<div class="pages">${pages.join('')}</div>
     <div class="bnav"><button class="pv" aria-label="Página anterior" ${bookPg === 0 ? 'disabled' : ''}>‹</button><span>${bookPg + 1}${per > 1 && ch.pages.length > bookPg + 1 ? '–' + Math.min(ch.pages.length, bookPg + per) : ''} de ${ch.pages.length}</span><button class="nx" aria-label="Próxima página" ${bookPg + per >= ch.pages.length ? 'disabled' : ''}>›</button></div></div>`;
-  el.querySelector('.x').onclick = closeModal;
+  el.querySelector('.x').onclick = closeModal; el.querySelector('.chlist').scrollTo(keep[1], keep[0]);
   el.querySelectorAll('.ch').forEach(b => b.onclick = () => { bookCh = +b.dataset.i; bookPg = 0; renderBook(el); });
   el.querySelector('.pv').onclick = () => { bookPg = Math.max(0, bookPg - per); renderBook(el); };
   el.querySelector('.nx').onclick = () => { bookPg += per; renderBook(el); };
@@ -3054,15 +3169,15 @@ function playTalk(force) {
     opts.innerHTML = '';
     for (const [text, v, ref] of shuffle(answers.slice())) {
       const b = document.createElement('button'); b.className = 'act'; b.textContent = text;
-      b.onclick = () => answer(v, ref); opts.append(b);
+      b.onclick = () => answer(v, ref, text); opts.append(b);
     }
   }
-  function answer(v, ref) {
+  function answer(v, ref, text) {
     if (over) return;
     score += v; opts.querySelectorAll('button').forEach(b => { b.disabled = true; });
     rig.react = { s: v, t: 0 }; audio.sfx(v === 2 ? 'chime' : v ? 'pop' : 'wrong');
-    say.textContent = `“${pick(REACT[v])}”`; msg.innerHTML = ref ? `<span class="ref">${ref}</span>` : '';
-    setTimeout(() => { if (over) return; if (++qi < L.qs.length) ask(); else finish(); }, 2300);
+    say.textContent = `“${REPLY[text] || pick(REACT[v])}”`; msg.innerHTML = ref ? `<span class="ref">${ref}</span>` : '';
+    setTimeout(() => { if (over) return; if (++qi < L.qs.length) ask(); else finish(); }, 5200); // long enough to read the reply
   }
   function finish() {
     over = true; G.stats.talk++; setCd('talk', 4);
@@ -3164,12 +3279,18 @@ function updateTour(dt) {
 }
 
 /* ========================= UI: HUD, popups, toasts, modals ========================= */
-function toast(html, ms = 4500) {
-  const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = html;
-  const box = $('#toasts'); box.append(t);
-  while (box.children.length > 4) box.firstChild.remove();
-  setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 500); }, ms);
+const TOASTS = { q: [], last: 0 };
+function toast(html, ms = 4500) { // queued: at most two on screen, one at a time, and never on top of an open window
+  if (TOASTS.q.some(t => t[0] === html)) return;
+  TOASTS.q.push([html, ms]); if (TOASTS.q.length > 8) TOASTS.q.splice(0, TOASTS.q.length - 8);
 }
+setInterval(() => {
+  const box = $('#toasts'), now = performance.now();
+  if (!TOASTS.q.length || modalOpen || menuOn || cine || box.children.length >= 2 || now - TOASTS.last < 1100) return;
+  const [html, ms] = TOASTS.q.shift(); TOASTS.last = now;
+  const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = html; box.append(t);
+  setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 500); }, TOASTS.q.length > 2 ? Math.min(ms, 3800) : ms);
+}, 250);
 const NEWS = { q: [], recent: [], t: 0.5 };
 function news(text, tag = 'Igreja') { if (NEWS.q.some(n => n[1] === text)) return; NEWS.q.push([tag, text]); if (NEWS.q.length > 6) NEWS.q.shift(); NEWS.t = Math.min(NEWS.t, 1.5); }
 function newsPool() {
@@ -3257,13 +3378,13 @@ function openPlot(p, sx, sy) {
 let modalClose = null, backdropCloses = false;
 function openModal(html, onClose = null, backdrop = false, mini = false) {
   closeModal(); closePop();
-  const m = $('#modal'); m.innerHTML = html; m.hidden = false; m.classList.toggle('mini', mini); modalOpen = true; modalClose = onClose; backdropCloses = backdrop;
+  const m = $('#modal'); m.innerHTML = html; m.hidden = false; m.classList.toggle('mini', mini); if (mini) audio.focus(0, /hymn|loom|thread/.test(html) ? 0 : 0.15); modalOpen = true; modalClose = onClose; backdropCloses = backdrop;
   m.querySelectorAll('.x').forEach(b => b.onclick = closeModal);
   return m.firstElementChild;
 }
 function closeModal() {
   const m = $('#modal'); if (m.hidden) return;
-  m.hidden = true; m.innerHTML = ''; modalOpen = false;
+  m.hidden = true; m.innerHTML = ''; modalOpen = false; audio.focus();
   const f = modalClose; modalClose = null; f?.();
 }
 $('#modal').addEventListener('pointerdown', e => { if (e.target.id === 'modal' && backdropCloses) closeModal(); });
@@ -3280,6 +3401,7 @@ function openHelp() {
       <li><b>Notícias e evangelismo</b>: a faixa de notícias conta o que acontece na cidade e na missão (clique para ver as últimas); de dia, o pregoeiro lê as notícias na rua das colunas. No mercado do cais, converse com quem passa: a melhor resposta depende de quem escuta. Quem se interessa ganha um <b>?</b> azul. Convide para o ágape (1 pão) e, depois de 2 ágapes, vira irmão.</li>
       <li><b>Eventos da cidade</b>: em alguns dias chega uma caravana de Palmira, passa uma legião, há um casamento no bairro ou um incêndio. A faixa de notícias e o pregoeiro avisam; procure o anel dourado e ajude. No incêndio, forme a corrente de baldes da fonte até a casa.</li>
       <li><b>Estações</b>: a cada 4 dias muda a estação, com clima, cores e uma festa no 3º dia.</li>
+      <li><b>Relíquias</b> (ânfora no canto, ou R): 40 objetos em 9 coleções, para girar em 3D e ler. Algumas chegam com a história e com as cartas da viagem; outras estão nos embrulhos do mascate, no mercado do cais; e às vezes algo brilha num canto da cidade. A cada ágape, um irmão conta a memória de uma relíquia; em 20 delas dá para descobrir sozinho com “Examinar de perto”: girar, recompor peças, ordenar ou ligar pares. Memórias relacionadas revelam conexões.</li>
       <li><b>Álbum</b>: a ficha de cada morador. Alguns têm uma história que avança quando você os acolhe.</li>
       <li><b>Câmera</b>: modo foto e passeio pela cidade. O passeio começa sozinho quando ninguém mexe por 1 minuto; qualquer toque encerra.</li>
       <li><b>Ajustes</b>: qualidade gráfica (o modo leve deixa o jogo fluido em celulares) e volume.</li>
@@ -3288,7 +3410,7 @@ function openHelp() {
       <li><b>Atividades</b> (botão laranja no topo): lista todos os mini-games com horário e recompensa, e as 3 missões do dia.</li>
       <li><b>Som</b>: música, rio, pássaros e grilos são gerados pelo próprio jogo. Ajuste na engrenagem ou aperte M.</li>
     </ul>
-    <p class="keys">Arrastar: girar a cidade · Botão direito ou WASD: mover · Roda ou pinça: zoom · B: construir · C: Cartas · M: som · H: ajuda · Esc: fechar</p>
+    <p class="keys">Arrastar ou WASD: andar pela cidade · Botão direito, dois dedos ou Q/E: girar · Roda ou pinça: zoom no ponteiro · Dois cliques: ir até o lugar · Placas: abrir o lugar · B: construir · C: Cartas · R: Relíquias · M: som · H: ajuda · Esc: fechar</p>
     <button class="ghost reset">Recomeçar do zero</button></div>`, null, true);
   const r = el.querySelector('.reset');
   r.onclick = () => {
@@ -3352,6 +3474,7 @@ const closeCamMenu = () => { $('#camMenu').hidden = true; $('#camBtn').classList
 $('#camBtn').onclick = () => { const m = $('#camMenu'); m.hidden = !m.hidden; $('#camBtn').classList.toggle('on', !m.hidden); };
 $('#photoGo').onclick = () => { closeCamMenu(); setPhoto(true); };
 $('#tourGo').onclick = () => { closeCamMenu(); startTour(); };
+$('#homeGo').onclick = () => { closeCamMenu(); focus = { x: -1, z: -2, dist: Math.min(72, 52 / Math.sqrt(Math.min(1, camera.aspect))), polar: 0.72, az: 0.36, speed: 2.2 }; };
 $('#photoExit').onclick = () => setPhoto(false);
 $('#albumBtn').onclick = openAlbum;
 function syncSoundUI() {
@@ -3386,7 +3509,7 @@ function watchFps(dt) { // automatic mode steps down one level when the game run
   fpsT += dt; fpsN++;
   if (fpsT < 3) return;
   const fps = fpsN / fpsT; fpsT = fpsN = 0;
-  if ((fpsGrace -= 3) > 0 || G.quality || fps >= 28) return;
+  if ((fpsGrace -= 3) > 0 || G.quality || fps >= 28 || RV.on) return; // the relic viewer's own renderer must not downgrade the city
   const nq = { alta: 'media', media: 'leve' }[quality()];
   if (!nq) return;
   measuredQ = nq; fpsGrace = 6; applyQuality();
@@ -3396,12 +3519,13 @@ document.addEventListener('click', e => { const b = e.target.closest?.('button')
 
 /* ========================= input ========================= */
 const raycaster = new THREE.Raycaster(), ndc = new THREE.Vector2(), canvas = renderer.domElement;
-const ptr = { x: 0, y: 0, down: null, dirty: false };
+const ptr = { x: 0, y: 0, down: null, dirty: false }, GROUND = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
 function pickAt(x, y) {
   ndc.set(x / innerWidth * 2 - 1, -(y / innerHeight) * 2 + 1);
   raycaster.setFromCamera(ndc, camera);
   const list = [...HOT.filter(h => h.g.visible).map(h => h.hit), ...npcs.filter(n => n.g.visible).map(n => n.g)];
   if (crier.g.visible) list.push(crier.g);
+  if (findFx.visible) list.push(findFx);
   if (buildMode) list.push(...plots.filter(p => !p.used).map(p => p.hit));
   for (const h of raycaster.intersectObjects(list, true)) { let o = h.object; while (o && !o.userData.pick) o = o.parent; if (o) return o.userData.pick; }
   return null;
@@ -3409,6 +3533,11 @@ function pickAt(x, y) {
 canvas.addEventListener('pointerdown', e => { if (tour) setPhoto(false); focus = null; ptr.down = { x: e.clientX, y: e.clientY }; closePop(); });
 canvas.addEventListener('wheel', () => { focus = null; if (tour) setPhoto(false); }, { passive: true });
 canvas.addEventListener('pointermove', e => { ptr.x = e.clientX; ptr.y = e.clientY; ptr.dirty = true; });
+canvas.addEventListener('dblclick', e => { // double click: fly down to that spot
+  if (modalOpen || tour || pickAt(e.clientX, e.clientY)) return;
+  ndc.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1); raycaster.setFromCamera(ndc, camera);
+  if (raycaster.ray.intersectPlane(GROUND, _v3)) focus = { x: clamp(_v3.x, -32, 32), z: clamp(_v3.z, -28, 22), dist: 17 };
+});
 canvas.addEventListener('pointerleave', () => { $('#tip').hidden = true; });
 canvas.addEventListener('pointerup', e => {
   const d = ptr.down; ptr.down = null;
@@ -3418,6 +3547,7 @@ canvas.addEventListener('pointerup', e => {
   if (p.type === 'hot') openHotspot(p.ref, e.clientX, e.clientY);
   else if (p.type === 'npc') openNPC(p.ref, e.clientX, e.clientY);
   else if (p.type === 'plot') openPlot(p.ref, e.clientX, e.clientY);
+  else if (p.type === 'find') takeFind();
 });
 function hover() {
   if (!ptr.dirty || ptr.down || modalOpen) return;
@@ -3440,6 +3570,7 @@ addEventListener('keydown', e => {
   if (modalOpen) return;
   if (e.code === 'KeyB') toggleBuild();
   if (e.code === 'KeyC') openBook();
+  if (e.code === 'KeyR') openRelics();
   if (e.code === 'KeyM') toggleMute();
   if (e.code === 'KeyH') openHelp();
 });
@@ -3452,6 +3583,8 @@ function keyPan(dt) {
   if (modalOpen || menuOn || cine) return;
   const fx = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
   const fz = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
+  const rot = (keys.KeyE ? 1 : 0) - (keys.KeyQ ? 1 : 0);
+  if (rot) { _sph.setFromVector3(_v3.copy(camera.position).sub(controls.target)); _sph.theta += rot * dt * 1.6; camera.position.setFromSpherical(_sph).add(controls.target); focus = null; }
   if (!fx && !fz) return;
   camera.getWorldDirection(_f); _f.y = 0; _f.normalize(); _r.set(-_f.z, 0, _f.x);
   const v = _r.multiplyScalar(fx).add(_f.multiplyScalar(-fz)).multiplyScalar(dt * 16 * camera.position.distanceTo(controls.target) / 40);
@@ -3717,12 +3850,14 @@ const audio = (() => {
       if (now > nextWave) { nextWave = now + rand(2, 4); if (pierP > 0.05) wave(now + 0.05, 0.09 * pierP); }
     }
   }
+  let quiet = [1, 1];
+  function focus(music = 1, amb = 1) { quiet = [music, amb]; applyVolumes(); } // mini-games fade the music and the city out
   function applyVolumes() {
     if (!ctx) return;
     const t = ctx.currentTime, v = G.vol;
     master.gain.setTargetAtTime(G.muted ? 0 : 1, t, 0.05);
-    musicBus.gain.setTargetAtTime(v.music * 0.5, t, 0.1);
-    ambBus.gain.setTargetAtTime(v.amb * 0.9, t, 0.1);
+    musicBus.gain.setTargetAtTime(v.music * 0.5 * quiet[0], t, 0.25);
+    ambBus.gain.setTargetAtTime(v.amb * 0.9 * quiet[1], t, 0.25);
     sfxBus.gain.setTargetAtTime(v.sfx * 0.7, t, 0.05);
   }
   function init() {
@@ -3739,8 +3874,8 @@ const audio = (() => {
     applyVolumes();
     const river = ctx.createBufferSource(); river.buffer = noiseBuffer(6, true); river.loop = true;
     riverGain = g(0.15, ambBus);
-    river.connect(filt('lowpass', 520, 0.7)).connect(riverGain);
-    const babble = g(0.03, riverGain); river.connect(filt('bandpass', 1300, 0.8)).connect(babble);
+    river.connect(filt('lowpass', 360, 0.7)).connect(riverGain);
+    const babble = g(0.015, riverGain); river.connect(filt('bandpass', 1300, 0.8)).connect(babble);
     const lfo = osc('sine', 0.17), lg = g(0.02); lfo.connect(lg); lg.connect(babble.gain); lfo.start(); river.start();
     const rn = ctx.createBufferSource(); rn.buffer = noiseBuffer(4, false); rn.loop = true; rainGain = g(0, ambBus); rn.connect(filt('bandpass', 2600, 0.35)).connect(rainGain); rn.start();
     const fw = ctx.createBufferSource(); fw.buffer = noiseBuffer(3, false); fw.loop = true; fountGain = g(0, ambBus); fw.connect(filt('bandpass', 1700, 0.5)).connect(fountGain);
@@ -3775,11 +3910,11 @@ const audio = (() => {
   function update(camX, camZ, rain = 0) {
     if (!ctx) return;
     const t = ctx.currentTime;
-    riverGain.gain.setTargetAtTime(0.22 * (0.3 + 0.7 * smooth(-22, 14, camZ)), t, 0.6);
+    riverGain.gain.setTargetAtTime(0.02 + 0.12 * smooth(-4, 15, camZ), t, 0.6); // only by the water: a constant hiss reads as rain
     droneGain.gain.setTargetAtTime(lampOn > 0.5 ? 0.07 : 0.045, t, 1.5);
-    rainLvl = rain; rainGain.gain.setTargetAtTime(0.3 * rain, t, 0.8);
+    rainLvl = rain; rainGain.gain.setTargetAtTime(rain > 0.03 ? 0.13 * rain : 0, t, 0.8);
     marketP = 1 - smooth(6, 24, Math.hypot(camX, camZ - 7)); pierP = 1 - smooth(5, 22, Math.hypot(camX - 8, camZ - 14));
-    fountGain.gain.setTargetAtTime(0.16 * (1 - smooth(3, 16, Math.hypot(camX + 8.8, camZ + 0.35))), t, 0.4);
+    fountGain.gain.setTargetAtTime(0.07 * (1 - smooth(2, 9, Math.hypot(camX + 8.8, camZ + 0.35))), t, 0.4);
   }
   addEventListener('pointerdown', init, true);
   addEventListener('keydown', init, true);
@@ -3796,7 +3931,7 @@ const audio = (() => {
     if (name === 'plip') { sweep('sine', 900, 280, t, 0.12, 0.07 * v, ambBus); burst(t, 1400, 0.04 * v, 0.08, ambBus); }
     if (name === 'flap') for (let i = 0; i < 9; i++) burst(t + i * 0.045 + rand(0, 0.02), rand(350, 700), 0.06 * v, 0.04, ambBus, 'lowpass', 1);
   }
-  return { init, sfx, note, sing, at, update, applyVolumes, get state() { return ctx ? ctx.state : 'off'; } };
+  return { init, sfx, note, sing, at, update, applyVolumes, focus, get state() { return ctx ? ctx.state : 'off'; } };
 })();
 
 /* ========================= main loop ========================= */
@@ -3814,7 +3949,7 @@ function step(dt, t) {
   updateLighting(); updateRain(dt); updateSky(dt, t);
   updateFishSchools(t); updateRig(dt, t);
   for (const n of npcs) n.update(dt, t);
-  updateLife(dt, t); updateCrier(dt, t); updateEvent(dt, t); updateFlock(dt, t);
+  updateLife(dt, t); updateCrier(dt, t); updateEvent(dt, t); updateFlock(dt, t); updateFind(t);
   if ((NEWS.t -= dt) <= 0) nextNews();
   for (const b of [boat, boat2]) { b.position.y = -0.62 + Math.sin(t * 1.2 + b.userData.ph) * 0.04; b.rotation.z = Math.sin(t * 0.9 + b.userData.ph) * 0.025; }
   boat.rotation.x += (boatTilt - boat.rotation.x) * Math.min(1, dt * 5);
@@ -3822,7 +3957,9 @@ function step(dt, t) {
   if (lampOn > 0.01) { const fa = ffGeo.attributes.position.array; ffBase.forEach(([x, y, z, ph], i) => { fa[i * 3] = x + Math.sin(t * 0.5 + ph) * 1.2; fa[i * 3 + 1] = y + Math.sin(t * 1.3 + ph * 2) * 0.35; fa[i * 3 + 2] = z + Math.cos(t * 0.4 + ph) * 1.2; }); ffGeo.attributes.position.needsUpdate = true; }
   ringT -= dt;
   for (const h of HOT) {
-    if (ringT <= 0) h.live = h.actions().some(a => a.ok() && cdLeft(a.cd) <= 0);
+    if (ringT <= 0) { h.live = h.actions().some(a => a.ok() && cdLeft(a.cd) <= 0); h.lab.lastChild.textContent = h.name; h.lab.classList.toggle('live', h.live); }
+    const [lx, ly] = toScreen(h.g.position, 2.6), show = h.g.visible && !modalOpen && !buildMode && !tour && _v.z < 1 && lx > 0 && lx < innerWidth && ly > 60 && ly < innerHeight - 40; // a sign over each place
+    h.lab.hidden = !show; if (show) h.lab.style.transform = `translate(${lx.toFixed(1)}px,${ly.toFixed(1)}px) translate(-50%,-100%)`;
     h.mat.color.copy(h.live ? GOLD : GREY); h.mat.opacity = h.live ? 0.6 + 0.3 * Math.sin(t * 2.4) : 0.45;
     h.ring2.rotation.y = t * 0.6; h.ring.scale.setScalar(1 + (h.live ? 0.05 * Math.sin(t * 2.4) : 0));
   }
@@ -3832,7 +3969,7 @@ function step(dt, t) {
   watchFps(dt);
   updateCine(dt); updateTour(dt); updateFocus(dt); keyPan(dt); clampCam(); controls.update(); hover(); anchorPop(); updateTutArrow();
   composer.render();
-  hudT -= dt; if (hudT <= 0) { hudT = 0.25; refreshHUD(); tutTick(); misTick(); chapTick(); sealTick(); audio.update(controls.target.x, controls.target.z, rainAmt); checkUnlocks(); }
+  hudT -= dt; if (hudT <= 0) { hudT = 0.25; refreshHUD(); tutTick(); misTick(); chapTick(); sealTick(); relTick(); audio.update(controls.target.x, controls.target.z, rainAmt); checkUnlocks(); }
   saveT -= dt; if (saveT <= 0) { saveT = 5; save(); }
 }
 
@@ -3940,7 +4077,7 @@ function cineEnd() {
 }
 
 const TUT = [
-  { t: 'Olhe ao redor', d: 'Arraste para girar a cidade. Use a roda do mouse, ou dois dedos no celular, para aproximar e afastar.', done: () => tutMoved > 0 },
+  { t: 'Olhe ao redor', d: 'Arraste para andar pela cidade. Com o botão direito, ou dois dedos no celular, gire. A roda do mouse ou a pinça aproximam; dois cliques levam até o lugar.', done: () => tutMoved > 0 },
   { t: 'Asse pães no forno', d: 'O pão alimenta a igreja no ágape. Toque no anel dourado do Forno da Cloé.', hot: 'bakery', done: s => s.bake >= 1 },
   { t: 'Pesque no Orontes', d: 'Peixe deixa a mesa mais farta. Toque no anel dourado do píer.', hot: 'pier', done: s => s.fish >= 1 },
   { t: 'Ganhe moedas', d: 'Moedas vêm do mercado, das oficinas e da coleta de cada amanhecer. Toque no anel do Mercado do cais e venda alguma coisa.', hot: 'market', done: s => s.sold >= 1 },
@@ -4009,6 +4146,8 @@ const ACTS = [ // [group, icon, name, where and when, gives, hotspot id, action 
   ['comm', '🪔', 'Encher as lamparinas', 'Rua das colunas · 15h–21h', '+ ✦', 'street', 0],
   ['comm', '🗣️', 'Conversar com quem passa', 'Mercado do cais · 8h–18h', 'curiosos', 'market', 0],
   ['comm', '🎶', 'Cantar hinos', 'Casa da igreja · 19h–1h', '+ ✦', 'church', 'hymn'],
+  ['coin', '🧺', 'Embrulho do mascate', 'Mercado do cais · 7h–18h · uma relíquia por moedas', 'relíquia', 'market', null],
+  ['comm', '🏺', 'Relíquias', 'Chegam com a história, com o mascate e em achados pela cidade', 'memórias', 'relics', null],
   ['comm', '🍷', 'Reunir para o ágape', 'Botão “Reunir a Igreja” · todo entardecer', '+ ✦', 'agape', null],
 ];
 const MISSIONS = [
@@ -4023,11 +4162,14 @@ const MISSIONS = [
   { k: 'help', n: 2, t: 'Acolha 2 pessoas à noite', r: { moeda: 5 }, night: true },
   { k: 'hymn', n: 1, t: 'Cante hinos no pátio à noite', r: { moeda: 4 }, hot: 'church', night: true },
   { k: 'agape', n: 1, t: 'Celebre o ágape ao entardecer', r: { moeda: 3 }, hot: 'agape' },
+  { k: 'relPz', n: 1, t: 'Examine uma relíquia de perto', r: { comm: 4 }, hot: 'relics', ok: () => relIds().some(i => REL_PZ[i + 1] && !G.relPz.includes(i)) },
+  { k: 'relMem', n: 1, t: 'Descubra a memória de uma relíquia', r: { moeda: 4 }, hot: 'relics', ok: () => relIds().some(i => G.rel[i] === 1) },
+  { k: 'relBuy', n: 1, t: 'Compre um embrulho do mascate', r: { comm: 4 }, hot: 'market', ok: () => mascPool().length > 0 },
 ];
 const rewardTxt = r => Object.entries(r).map(([k, v]) => k === 'comm' ? `+${v} ✦` : '+' + qty(v, k)).join(' · ');
 function newMissions() { // three a day, at most one that only works at night
   const pool = shuffle(MISSIONS.map((_, i) => i)), list = [];
-  for (const i of pool) { if (list.length === 3) break; if (MISSIONS[i].night && list.some(m => MISSIONS[m.i].night)) continue; list.push({ i, base: G.stats[MISSIONS[i].k] || 0, done: false }); }
+  for (const i of pool) { if (list.length === 3) break; if (MISSIONS[i].ok && !MISSIONS[i].ok()) continue; if (MISSIONS[i].night && list.some(m => MISSIONS[m.i].night)) continue; list.push({ i, base: G.stats[MISSIONS[i].k] || 0, done: false }); }
   G.mis = { d: dayN(), list, bonus: false };
 }
 function misTick() {
@@ -4045,6 +4187,7 @@ function misTick() {
 function goTo(hot) { // fly to a hotspot and open it, or run the special targets
   closeModal();
   if (hot === 'build') return toggleBuild(true);
+  if (hot === 'relics') return openRelics();
   if (hot === 'agape') { $('#phaseBtn').classList.add('tut-glow'); setTimeout(() => G.tut >= TUT.length && $('#phaseBtn').classList.remove('tut-glow'), 4000); return; }
   const h = HOT.find(h => h.id === hot); if (!h) return;
   focusOn(h.pos[0], h.pos[2], 20);
@@ -4147,6 +4290,8 @@ const SEALS = [
   ['cartas', '✉️', 'Notícias da viagem', 'Ler as 4 cartas', () => G.lettersRead >= 4],
   ['tesouro', '🪙', 'Tesoureiro', 'Juntar 100 moedas', () => G.res.moeda >= 100],
   ['ano', '🍂', 'Um ano em Antioquia', 'Viver as 4 estações', () => dayN() >= 17],
+  ['vestigios', '🏺', 'Guardião de vestígios', 'Reunir 20 relíquias', () => relCount() >= 20],
+  ['memorias', '📖', 'Historiador', 'Ouvir as 40 memórias', () => relMems() >= RELICS.length],
 ];
 function sealTick() {
   for (const [id, ic, nm, , ok] of SEALS) if (!G.seals.includes(id) && ok(G.stats)) { G.seals.push(id); audio.sfx('chime'); toast(`<b>${ic} Selo conquistado:</b> ${nm}`, 5500); }
@@ -4180,6 +4325,762 @@ $('#saveIn').onclick = () => {
   };
 };
 
+/* ========================= relics: 40 objects in 9 collections ========================= */
+// Every object is a fictional reconstruction; each memory says whether it comes from the biblical text or from other historical sources.
+const RARITY = ['Comum', 'Incomum', 'Rara', 'Lendária'], ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+const REL_COLS = [
+  ['Antes dos Cristãos', 'a cidade, o Império e o mundo do século I'],
+  ['Uma Igreja Nascida da Dispersão', 'perseguição, deslocamento e expansão · Atos 6–11'],
+  ['A Comunidade que Crescia', 'ensino, generosidade e liderança · Atos 11–13'],
+  ['Caminhos, Conflitos e Decisões', 'Atos 13–15 e Gálatas 2'],
+  ['Os Ecos do Mundo', 'acontecimentos paralelos e o que veio depois'],
+  ['Os Segredos da Metrópole', 'a Antioquia grega e romana'],
+  ['A Vida entre Dois Mundos', 'línguas, ofícios e convivência'],
+  ['Personagens nas Entrelinhas', 'gente e decisões pouco lembradas'],
+  ['Além dos Muros de Antioquia', 'a primeira viagem missionária · Atos 13–14'],
+];
+// [name, collection, rarity, source (h story · m pedlar · f found in the city), era, memory tags (b biblical · h historical), reference, object, memory]
+const RELICS = [
+  ['A Moeda do Conquistador', 0, 1, 'f', '300 a.C. · fundação de Antioquia', 'h', 'fontes antigas sobre Seleuco I',
+    'Uma moeda selêucida gasta e corroída. De um lado, uma âncora; do outro, letras gregas quase apagadas pelo tempo e por muitas mãos.',
+    'Antioquia foi fundada por volta de 300 a.C. por Seleuco I Nicátor, general e sucessor de Alexandre, o Grande. O nome da cidade homenageava Antíoco, seu pai. Esse passado grego explica a língua, as ruas e os costumes que os primeiros cristãos encontraram ali.'],
+  ['O Mosaico dos Três Mundos', 0, 1, 'm', 'Século I · cultura urbana', 'h', 'escavações de Antioquia, 1932–1939',
+    'Um fragmento de mosaico com três padrões que não combinam entre si, como se três artesãos tivessem dividido o mesmo chão.',
+    'Antioquia era o encontro de três mundos: a herança grega, na língua e no pensamento; o domínio romano, nas leis, nas estradas e nos soldados; e uma comunidade judaica antiga, com suas Escrituras e tradições. A igreja nasceu no meio dos três.'],
+  ['A Ânfora de Selêucia', 0, 0, 'f', 'Século I · comércio mediterrâneo', 'h', 'porto de Selêucia Piéria',
+    'Uma pequena ânfora de barro com um selo comercial carimbado no bojo: a marca do porto de Selêucia Piéria.',
+    'Selêucia era o porto de Antioquia, na foz do Orontes. Por ali entravam e saíam mercadorias, viajantes e ideias de todo o Mediterrâneo. Foi desse cais que Barnabé e Saulo embarcaram para Chipre.'],
+  ['O Denário de Cláudio', 0, 0, 'm', '41–54 d.C. · Império Romano', 'bh', 'Atos 11:28; 18:2',
+    'Uma moeda de prata com o perfil de um imperador de pescoço comprido. A legenda em latim diz o nome dele: Cláudio.',
+    'Enquanto a igreja crescia em Antioquia, Cláudio governava o império. Atos cita o seu reinado duas vezes: na grande fome anunciada por Ágabo e na expulsão dos judeus de Roma, que levou Áquila e Priscila até Corinto.'],
+  ['A Lâmpada dos Dispersos', 1, 2, 'h', 'Atos 7–8 · a dispersão', 'b', 'Atos 8:1–4; 11:19',
+    'Uma lamparina de barro, rachada e enegrecida pelo uso. Alguém a carregou por muitas estradas e nunca a deixou para trás.',
+    'Depois da morte de Estêvão, uma grande perseguição espalhou os discípulos de Jerusalém. Os que foram dispersos anunciavam a palavra por onde passavam. Alguns chegaram até a Fenícia, Chipre e Antioquia. A igreja daqui nasceu de gente em fuga.'],
+  ['A Tábua dos Sete', 1, 1, 'm', 'Atos 6:1–6 · Jerusalém', 'b', 'Atos 6:1–6',
+    'Uma tabuinha de madeira com sete nomes gravados em grego. O último vem acompanhado de uma palavra a mais: “antioqueno”.',
+    'Quando as viúvas de língua grega foram esquecidas na distribuição diária, a igreja de Jerusalém escolheu sete homens para cuidar disso. Um deles era Nicolau, prosélito de Antioquia. Antes de Atos falar da igreja antioquena, alguém da cidade já servia entre os discípulos.'],
+  ['A Bolsa do Viajante Anônimo', 1, 0, 'h', 'Atos 11:19–21 · a chegada', 'b', 'Atos 11:19–21',
+    'Uma bolsa de couro gasta. Dentro, pequenas lembranças: um pedaço de cobre de Chipre e uma moeda de Cirene.',
+    'Atos não registra o nome dos primeiros que falaram de Jesus em Antioquia. Diz apenas que eram homens de Chipre e de Cirene, e que começaram a anunciar o Senhor também aos gregos. A mão do Senhor estava com eles.'],
+  ['O Fragmento Christianos', 1, 3, 'h', 'Atos 11:26 · um nome novo', 'b', 'Atos 11:26',
+    'Um caco de cerâmica com uma palavra grega riscada às pressas: ΧΡΙΣΤΙΑΝΟΣ.',
+    'Foi em Antioquia que os discípulos foram chamados cristãos pela primeira vez. A terminação da palavra tem jeito latino e marcava os partidários de alguém; é provável que o nome tenha vindo de quem olhava de fora. A palavra aparece só três vezes no Novo Testamento.'],
+  ['O Pergaminho de Barnabé', 2, 2, 'm', 'Atos 11:22–26 · um ano de ensino', 'b', 'Atos 11:22–26',
+    'Um rolo com anotações de ensino em letra miúda e referências às Escrituras nas margens. As bordas estão macias de tanto manuseio.',
+    'A igreja de Jerusalém enviou Barnabé a Antioquia. Ele viu a graça de Deus, alegrou-se e foi a Tarso buscar Saulo. Durante um ano inteiro, os dois se reuniram com a igreja e ensinaram muita gente.'],
+  ['O Vaso da Grande Fome', 2, 1, 'h', 'Atos 11:27–30 · a oferta', 'bh', 'Atos 11:27–30; Josefo, Antiguidades 20',
+    'Um pequeno vaso de trigo com uma marca na argila indicando o destino: a Judeia.',
+    'O profeta Ágabo anunciou uma grande fome, que veio no reinado de Cláudio. Os discípulos de Antioquia, cada um conforme podia, enviaram ajuda aos irmãos da Judeia pelas mãos de Barnabé e Saulo. O historiador Josefo também registra essa fome.'],
+  ['Os Cinco Selos', 2, 2, 'h', 'Atos 13:1 · profetas e mestres', 'b', 'Atos 13:1',
+    'Cinco selos de argila, cada um com uma inicial grega: Β, Σ, Λ, Μ, Σ.',
+    'Barnabé, levita de Chipre; Simeão, chamado Níger; Lúcio, de Cirene; Manaém, criado com Herodes; e Saulo, de Tarso. Os profetas e mestres de Antioquia vinham de três continentes e de histórias muito diferentes. Atos não diz que um mandava nos outros.'],
+  ['A Chave da Casa de Reuniões', 2, 0, 'h', 'Século I · o cotidiano cristão', 'h', 'costumes das primeiras gerações',
+    'Uma chave romana de bronze, pesada, com os dentes gastos de tanto abrir a mesma porta.',
+    'Os primeiros cristãos não tinham templos. Reuniam-se em casas, pátios e nos espaços que houvesse. Edifícios feitos só para as reuniões aparecem bem mais tarde, por volta do século III. O lugar exato onde a igreja de Antioquia se encontrava não é conhecido.'],
+  ['A Âncora da Primeira Missão', 3, 2, 'h', 'Atos 13–14 · o envio', 'b', 'Atos 13:1–4',
+    'Uma pequena âncora de bronze, do tipo que os barcos do Orontes levavam na proa.',
+    'Enquanto adoravam e jejuavam, o Espírito disse: separem Barnabé e Saulo. A igreja orou, impôs as mãos sobre eles e os despediu. Os dois desceram a Selêucia e navegaram para Chipre. Antioquia tinha se tornado uma igreja que envia.'],
+  ['O Mapa das Duas Antioquias', 3, 1, 'h', 'Atos 13:14 · duas cidades', 'b', 'Atos 13:14',
+    'Um mapa envelhecido em que o mesmo nome aparece duas vezes, em lugares distantes.',
+    'A Antioquia da Síria, que enviou Paulo e Barnabé, não é a Antioquia da Pisídia, que eles visitaram no alto das montanhas da Ásia Menor. Vários reis selêucidas deram esse nome a cidades. Na da Pisídia, quase a cidade inteira se juntou para ouvir a palavra.'],
+  ['A Carta de Jerusalém', 3, 3, 'h', 'Atos 15:22–35 · a decisão', 'b', 'Atos 15:22–35',
+    'Um rolo fechado com um selo simples de cera. Foi aberto e fechado muitas vezes; todo mundo quis ler.',
+    'Os gentios precisavam se tornar judeus para seguir Jesus? Depois de muito debate em Jerusalém, a resposta veio por escrito: nenhum peso além do necessário. Quando a carta foi lida em Antioquia, a igreja se alegrou com o encorajamento.'],
+  ['As Tigelas Separadas', 3, 2, 'h', 'Gálatas 2:11–14 · a mesa', 'b', 'Gálatas 2:11–14',
+    'Duas tigelas de estilos diferentes sobre a mesma tábua, afastadas uma da outra.',
+    'Pedro comia com os irmãos gentios em Antioquia. Quando chegaram alguns da parte de Tiago, ele se afastou da mesa, e até Barnabé foi levado junto. Paulo o confrontou diante de todos. Quem conta é o próprio Paulo; não se sabe se foi antes ou depois da reunião de Jerusalém.'],
+  ['A Águia do Ocidente', 4, 1, 'm', '43 d.C. · invasão da Britânia', 'h', 'história romana',
+    'Uma pequena águia de bronze dourado, cópia do estandarte que as legiões carregavam à frente da marcha.',
+    'Enquanto a igreja crescia na Síria, as legiões de Cláudio atravessavam o mar para conquistar a Britânia, do outro lado do império. As mesmas estradas e rotas que levavam soldados também levavam viajantes, cartas e pregadores.'],
+  ['A Ficha do Pão', 4, 0, 'h', 'Século I · crises de abastecimento', 'h', 'Josefo, Antiguidades 20',
+    'Uma ficha de chumbo com uma espiga gravada. Dava direito a uma medida de trigo num dia de distribuição.',
+    'A fome não atingiu só a Judeia: o abastecimento de trigo preocupava o império inteiro. Josefo conta que a rainha Helena de Adiabene mandou buscar cereais no Egito e figos secos em Chipre para socorrer Jerusalém. Atos e Josefo falam da mesma crise, cada um a seu modo.'],
+  ['As Sandálias de Dois Caminhos', 4, 2, 'h', 'Atos 15:36–41 · a separação', 'b', 'Atos 15:36–41',
+    'Duas sandálias de viajante, apontadas em direções diferentes.',
+    'Barnabé queria levar João Marcos na segunda viagem. Paulo não quis, porque Marcos os tinha deixado na Panfília. A discussão foi tão forte que se separaram: Barnabé navegou para Chipre com Marcos, e Paulo seguiu por terra com Silas. A missão passou a ter duas equipes.'],
+  ['A Pedra da Memória', 4, 3, 'h', 'Século II · depois dos apóstolos', 'h', 'cartas de Inácio de Antioquia',
+    'Uma pedra lisa com um peixe gravado. Não é do tempo de Atos: alguém a fez depois, para lembrar.',
+    'Antioquia continuou importante depois da geração dos apóstolos. No começo do século II, Inácio aparece como bispo da cidade, e suas cartas são um testemunho precioso daquele tempo. A organização que ele descreve é posterior e não deve ser projetada sobre a igreja dos anos 40.'],
+  ['A Coroa da Fortuna', 5, 1, 'm', 'Antioquia helenística', 'h', 'a Tique de Antioquia',
+    'Uma estatueta de bronze: uma mulher sentada numa rocha, com uma coroa em forma de muralha. A seus pés, um nadador.',
+    'É a Tique de Antioquia, a Fortuna protetora da cidade, numa das imagens mais copiadas do mundo antigo. A coroa são as muralhas; o nadador é o rio Orontes. Era assim que a cidade onde a igreja nasceu via a si mesma: segura e próspera.'],
+  ['O Coração do Aqueduto', 5, 0, 'f', 'Século I · a água da cidade', 'h', 'engenharia romana em Antioquia',
+    'Um segmento de tubulação de terracota, coberto por dentro de depósitos de calcário.',
+    'Os romanos trouxeram água das fontes de Dafne para Antioquia por aquedutos, canais e tubulações. Banhos, fontes e casas dependiam dessa rede, e parte dela remonta ao século I.'],
+  ['A Pedra das Mil Colunas', 5, 0, 'f', 'Século I · a rua das colunas', 'h', 'urbanismo de Antioquia',
+    'Um fragmento de inscrição com marcas de ferramenta e o desenho de uma coluna.',
+    'Antioquia tinha uma grande avenida ladeada de colunatas, que cortava a cidade de ponta a ponta. À sombra delas se comprava, se vendia e se conversava. Era uma das marcas mais conhecidas da paisagem da cidade.'],
+  ['O Peso do Mercador', 5, 0, 'f', 'Século I · o mercado', 'h', 'comércio em Antioquia',
+    'Um pequeno peso de bronze, feito para um dos pratos de uma balança.',
+    'Antioquia vivia do comércio. Mercadores, oficinas e caravanas ligavam a cidade ao Mediterrâneo, à Mesopotâmia e ao Oriente. Os primeiros cristãos também viviam nesse mundo de bancas, pesos e medidas.'],
+  ['A Coroa de Dafne', 5, 1, 'm', 'Século I · o bosque de Dafne', 'h', 'santuário de Apolo em Dafne',
+    'Um fragmento de coroa cerimonial com folhas de louro de metal.',
+    'Perto de Antioquia ficava Dafne, famosa pelo bosque e pelo santuário de Apolo. A cidade onde o cristianismo crescia tinha muitos templos, festas e deuses. Os cristãos surgiram num ambiente religioso plural, e não numa cidade cristã.'],
+  ['O Rolo das Setenta Vozes', 6, 1, 'm', 'A Septuaginta · as Escrituras em grego', 'h', 'tradição da Septuaginta',
+    'Um fragmento de manuscrito grego de Isaías, rasgado de um rolo maior.',
+    'Muitos judeus da diáspora liam as Escrituras em grego, na tradução conhecida como Septuaginta. Foi nesses textos que os primeiros pregadores mostraram Jesus como o Messias. Os cristãos de Antioquia ainda não tinham um Novo Testamento.'],
+  ['A Tábua das Duas Línguas', 6, 0, 'f', 'Atos 6:1 · grego e aramaico', 'b', 'Atos 6:1',
+    'Uma tabuinha de cera com as mesmas palavras em grego e em aramaico, e o estilete que as riscou.',
+    'Os discípulos vinham de mundos linguísticos diferentes. Atos 6 já registra a tensão, em Jerusalém, entre os chamados hebreus e os helenistas. Em Antioquia, as duas línguas dividiam a mesma mesa.'],
+  ['O Sinete da Diáspora', 6, 1, 'm', 'Século I · judeus de Antioquia', 'h', 'comunidades judaicas da diáspora',
+    'Um anel-sinete de comerciante. Na face, um candelabro de sete braços gravado ao contrário, para marcar a cera.',
+    'Havia comunidades judaicas muito além da Judeia, e a de Antioquia era antiga e numerosa. Laços de família, de comércio e de fé ligavam as cidades do Mediterrâneo. Foi por essas redes que a notícia sobre Jesus viajou primeiro.'],
+  ['A Lançadeira do Tecelão', 6, 0, 'f', 'Século I · os ofícios', 'h', 'cotidiano das cidades romanas',
+    'Uma lançadeira de madeira, lisa de tanto uso, ainda com um resto de fio vermelho.',
+    'As cidades romanas dependiam de artesãos, trabalhadores e pequenos comerciantes. Os primeiros cristãos eram, em boa parte, gente assim. O próprio Paulo trabalhava com as mãos, fazendo tendas.'],
+  ['A Tábua do Tributário', 6, 0, 'f', 'Século I · Roma cobra', 'h', 'administração provincial romana',
+    'Uma placa de cera com colunas de mercadorias e valores em números romanos.',
+    'Antioquia era a capital da província romana da Síria. Impostos, taxas de porto e registros faziam parte da vida de todos. A presença do império pesava nos negócios e no bolso dos moradores.'],
+  ['O Anel da Corte de Herodes', 7, 2, 'm', 'Atos 13:1 · Manaém', 'b', 'Atos 13:1',
+    'Um anel ornamentado, com uma pedra vermelha: joia de gente criada em palácio.',
+    'Manaém, um dos profetas e mestres de Antioquia, tinha sido criado com Herodes, o tetrarca, o mesmo que mandou matar João Batista. Não se sabe qual era o laço exato entre os dois. Um cresceu para governar a Galileia; o outro terminou ensinando na igreja.'],
+  ['A Marca de Tarso', 7, 1, 'm', 'Atos 11:25–26 · a busca', 'b', 'Atos 11:25–26',
+    'Um selo de carga de chumbo com o nome de uma cidade em grego: ΤΑΡΣΟΣ.',
+    'Tarso, na Cilícia, era a cidade de Saulo. Quando o trabalho em Antioquia cresceu, Barnabé foi até lá procurá-lo e o trouxe consigo. Sem essa viagem, a história de Paulo, e talvez a de Antioquia, teria sido outra.'],
+  ['O Cordão do Jejum', 7, 2, 'h', 'Atos 13:1–3 · jejum e oração', 'b', 'Atos 13:1–3',
+    'Um cordão de linho com cinco nós. É só um símbolo: Atos não descreve nada parecido.',
+    'A igreja estava adorando ao Senhor e jejuando quando o Espírito Santo mandou separar Barnabé e Saulo. Jejuaram e oraram de novo, impuseram as mãos sobre os dois e os deixaram ir. A missão começou numa reunião de oração.'],
+  ['O Emblema do Centurião', 7, 1, 'h', 'Atos 10 · Cesareia', 'b', 'Atos 10',
+    'Uma pequena placa de bronze com o nome de Cesareia e a marca de uma coorte.',
+    'Antes de Antioquia, houve Cornélio, centurião da coorte chamada Italiana, em Cesareia. Deus mostrou a Pedro que não devia chamar ninguém de impuro, e o Espírito desceu sobre os gentios daquela casa. Esse episódio pesou na decisão de Jerusalém.'],
+  ['O Bastão do Mensageiro', 7, 2, 'm', 'Atos 15:22–33 · Judas e Silas', 'b', 'Atos 15:22–33',
+    'Um bastão de viagem com uma cinta de bronze e um estojo de couro para cartas.',
+    'Judas Barsabás e Silas foram escolhidos para levar a carta de Jerusalém a Antioquia. Eram profetas, e animaram e fortaleceram os irmãos com muitas palavras. Silas, depois, seria o companheiro de viagem de Paulo.'],
+  ['O Anel do Procônsul', 8, 3, 'h', 'Atos 13:6–12 · Pafos', 'b', 'Atos 13:6–12',
+    'Um anel de autoridade romano, pesado, com uma pedra alaranjada e uma águia gravada.',
+    'Em Pafos, na ilha de Chipre, o procônsul Sérgio Paulo, homem inteligente, mandou chamar Barnabé e Saulo porque queria ouvir a palavra de Deus. Ele creu, maravilhado com o ensino do Senhor. É a partir dali que Atos passa a chamar Saulo de Paulo.'],
+  ['O Amuleto de Elimas', 8, 3, 'm', 'Atos 13:6–12 · o mago', 'bh', 'Atos 13:6–12',
+    'Um amuleto de bronze esverdeado, com inscrições meio apagadas em volta de um olho.',
+    'Ao lado do procônsul havia um mago, Barjesus, também chamado Elimas, que tentava afastá-lo da fé. Paulo o repreendeu, e ele ficou cego por um tempo. Amuletos e fórmulas mágicas eram comuns no Mediterrâneo antigo; este objeto é imaginado, o episódio está em Atos.'],
+  ['A Fivela Abandonada', 8, 2, 'h', 'Atos 13:13 · Perge', 'b', 'Atos 13:13; 15:36–39',
+    'Uma fivela de bronze presa a um pedaço de correia, esquecida entre as coisas dos viajantes.',
+    'Em Perge, na Panfília, João Marcos deixou Paulo e Barnabé e voltou para Jerusalém. Atos não explica o motivo. Anos depois, essa partida foi o centro da discussão que separou os dois missionários.'],
+  ['A Coroa dos Deuses Equivocados', 8, 3, 'h', 'Atos 14:8–18 · Listra', 'b', 'Atos 14:8–18',
+    'Uma coroa cerimonial com raios e bastões alados gravados: os sinais de Zeus e de Hermes.',
+    'Em Listra, depois da cura de um homem que nunca tinha andado, a multidão gritou que os deuses tinham descido em forma humana. Chamaram Barnabé de Zeus e Paulo de Hermes, e o sacerdote trouxe touros e coroas para o sacrifício. Os dois rasgaram as roupas e disseram: somos apenas homens, como vocês.'],
+  ['A Pedra dos Anciãos', 8, 2, 'h', 'Atos 14:21–23 · o retorno', 'b', 'Atos 14:21–23',
+    'Uma placa de pedra com nomes de cidades e, ao lado de cada um, um espaço para uma marca.',
+    'Na volta, Paulo e Barnabé passaram de novo por Listra, Icônio e Antioquia da Pisídia, fortalecendo os discípulos. Em cada igreja, designaram presbíteros, oraram com jejuns e os entregaram ao Senhor. A missão cuidava de quem ficava.'],
+].map(([n, c, r, s, e, k, ref, o, m]) => ({ n, c, r, s, e, k, ref, o, m }));
+const REL_CONN = [ // related memories unlock a larger discovery
+  ['O Nascimento de uma Igreja', [5, 7, 8], 'A perseguição espalhou os discípulos. Viajantes sem nome levaram a notícia até Antioquia, falaram também aos gregos, e a comunidade cresceu tanto que a cidade precisou inventar um nome para ela.', 'Atos 8:1–4; 11:19–26'],
+  ['Pão em Tempo de Fome', [4, 10, 18], 'Sob Cláudio, o trigo faltou em muitas partes do império. Uma igreja de judeus e gentios, fora da Judeia, juntou o que tinha para socorrer a igreja-mãe. Antioquia aprendeu a dar antes de aprender a enviar.', 'Atos 11:27–30'],
+  ['De Comunidade a Centro Missionário', [9, 11, 13], 'Primeiro, um ano de ensino. Depois, cinco líderes de origens diferentes orando juntos. Por fim, um barco descendo o Orontes. Em poucos anos, Antioquia passou de igreja recém-nascida a ponto de partida da missão.', 'Atos 11:25–26; 13:1–4'],
+  ['Uma Mesa, Dois Povos', [15, 16], 'A carta resolveu a questão no papel; a mesa mostrou como era difícil vivê-la. Judeus e gentios comendo juntos era o sinal visível do evangelho, e por isso Paulo não aceitou que as tigelas ficassem separadas.', 'Atos 15; Gálatas 2:11–14'],
+  ['Caminhos que se Separam', [14, 19, 38], 'Uma fivela largada em Perge, duas cidades com o mesmo nome, dois missionários que já não viajam juntos. A igreja primitiva também discordava. E a missão, em vez de parar, ganhou dois caminhos.', 'Atos 13:13–14; 15:36–41'],
+  ['A Cidade sob os Pés', [21, 22, 23], 'A deusa coroada de muralhas, a água que descia de Dafne, a avenida das colunas. Antioquia tinha orgulho de si mesma muito antes de ouvir falar de Jesus. Foi nessa cidade grande e segura de si que a igreja aprendeu a existir.', 'história de Antioquia'],
+  ['As Escrituras em Duas Línguas', [6, 26, 27], 'Hebreus e helenistas, aramaico e grego, Jerusalém e a diáspora. As Escrituras já tinham atravessado a fronteira das línguas antes dos missionários. Nicolau de Antioquia e a Septuaginta são parte do mesmo caminho.', 'Atos 6:1–6'],
+  ['O Procônsul e o Mago', [36, 37], 'Na mesma sala, em Pafos: a autoridade de Roma, a magia do Mediterrâneo e dois enviados de Antioquia. O procônsul quis ouvir; o mago quis impedir. Dali em diante, Saulo é Paulo.', 'Atos 13:6–12'],
+  ['Deuses que Não Eram', [25, 39], 'Do bosque de Apolo, em Dafne, às coroas oferecidas em Listra: os missionários falavam a um mundo cheio de deuses. Em vez de aceitar a honra, apontaram para o Deus vivo, que fez o céu, a terra e o mar.', 'Atos 14:8–18'],
+].map(([t, ids, x, ref]) => ({ t, ids: ids.map(n => n - 1), x, ref }));
+const REL_STORY = [ // [relic number, hint while it is missing, when the story hands it over]
+  [7, 'Chega nos primeiros dias da igreja.', () => true],
+  [5, 'Acenda uma lamparina no píer, à noite.', s => s.lantern >= 1],
+  [8, 'Conclua o capítulo 1 da história.', () => G.chap >= 1],
+  [10, 'Ouça o profeta Ágabo quando ele visitar a cidade.', () => !!G.visits.agaboHeard],
+  [18, 'Envie a oferta de pão e azeite à Judeia.', s => s.relief >= 1],
+  [12, 'Amplie a casa da igreja pela primeira vez.', () => G.church >= 2],
+  [11, 'Amplie a casa da igreja até o nível 3.', () => G.church >= 3],
+  [34, 'Acompanhe um curioso até o batismo.', s => s.convert >= 1],
+  [16, 'Ouça Pedro quando ele visitar Antioquia.', () => !!G.visits.pedroHeard],
+  [33, 'Conclua o capítulo 3 da história.', () => G.chap >= 3],
+  [13, 'Leia a 1ª carta da viagem, no píer.', () => G.lettersRead >= 1],
+  [36, 'Leia a 2ª carta da viagem, no píer.', () => G.lettersRead >= 2],
+  [38, 'Leia a 3ª carta da viagem, no píer.', () => G.lettersRead >= 3],
+  [14, 'Leia a 3ª carta da viagem, no píer.', () => G.lettersRead >= 3],
+  [39, 'Leia a 4ª carta da viagem, no píer.', () => G.lettersRead >= 4],
+  [40, 'Receba Barnabé e Paulo de volta da viagem.', () => G.chap >= 4],
+  [15, 'Conclua a história principal.', () => G.chap >= 5],
+  [19, 'Celebre mais 3 ágapes depois do epílogo.', s => G.chap >= 5 && s.agape - G.chapBase >= 6],
+  [20, 'Reúna 30 relíquias.', () => relCount() >= 30],
+];
+const REL_FINDS = { 0: [-8.8, 1.8, 'perto da fonte'], 2: [11, 13.5, 'no cais do Orontes'], 21: [4, -17, 'ao pé do monte Sílpio'], 22: [4.5, 4, 'na rua das colunas'], 23: [-13.5, 8, 'no mercado do cais'], 26: [14, -4.5, 'perto da Casa do Copista'], 28: [-6.5, -4, 'perto do tear da Irene'], 29: [-7, 11.5, 'entre as bancas do cais'] };
+const REL_IMG = {"1": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/T%C3%A9tradrachme_%C3%A0_l%22effigie_de_S%C3%A9leucus_Ier_Nicator.jpg/960px-T%C3%A9tradrachme_%C3%A0_l%22effigie_de_S%C3%A9leucus_Ier_Nicator.jpg", "Tetradracma de Seleuco I Nicátor, fundador de Antioquia.", "cgb.fr · CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Tétradrachme_à_l\"effigie_de_Séleucus_Ier_Nicator.jpg"], "2": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/The_Megalopsychia_Hunt_of_Antioch_mosaic%2C_late_5th_century_AD%2C_found_in_the_village_of_Yakto_near_Daphne%2C_Hatay_Archaeology_Museum%2C_Antakya%2C_Turke_-_50735694481.jpg/960px-thumbnail.jpg", "Mosaico de Antioquia (séc. V), hoje no Museu Arqueológico de Hatay. Os mosaicos conhecidos da cidade são posteriores ao tempo de Atos.", "Carole Raddato · CC BY-SA 2.0", "https://commons.wikimedia.org/wiki/File:The_Megalopsychia_Hunt_of_Antioch_mosaic,_late_5th_century_AD,_found_in_the_village_of_Yakto_near_Daphne,_Hatay_Archaeology_Museum,_Antakya,_Turke_-_50735694481.jpg"], "3": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Titus_Tunnel%2C_Seleucia_Pieria.jpg/960px-Titus_Tunnel%2C_Seleucia_Pieria.jpg", "Túnel de Tito em Selêucia Piéria, o porto de Antioquia, aberto na rocha no século I.", "Htkava · CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Titus_Tunnel,_Seleucia_Pieria.jpg"], "4": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Denarius_of_Claudius_%28YORYM_2001_1433%29_obverse.jpg/960px-Denarius_of_Claudius_%28YORYM_2001_1433%29_obverse.jpg", "Denário de Cláudio, imperador de 41 a 54 d.C.", "York Museums Trust · CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Denarius_of_Claudius_(YORYM_2001_1433)_obverse.jpg"], "5": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Terracotta_oil_lamp_MET_DP232.jpg/960px-Terracotta_oil_lamp_MET_DP232.jpg", "Lamparina romana de terracota, como as que iluminavam as casas do século I.", "Metropolitan Museum of Art · CC0", "https://commons.wikimedia.org/wiki/File:Terracotta_oil_lamp_MET_DP232.jpg"], "8": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Antakya_Orontes_in_2008_13.jpg/960px-Antakya_Orontes_in_2008_13.jpg", "O rio Orontes em Antakya, a Antioquia de hoje, na Turquia.", "Dosseman · CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Antakya_Orontes_in_2008_13.jpg"], "12": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Antioch_Saint_Pierre_Church_Front.JPG/960px-Antioch_Saint_Pierre_Church_Front.JPG", "Gruta-igreja de São Pedro, em Antakya. A tradição que a liga aos primeiros cristãos é posterior; a fachada é medieval.", "Volkan Hatem · CC BY 2.5", "https://commons.wikimedia.org/wiki/File:Antioch_Saint_Pierre_Church_Front.JPG"], "13": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Columns_in_Roman_gymnasium%2C_Salamis%2C_Northern_Cyprus.jpg/960px-Columns_in_Roman_gymnasium%2C_Salamis%2C_Northern_Cyprus.jpg", "Ruínas de Salamina, em Chipre, primeira parada da viagem.", "Michal Klajban · CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Columns_in_Roman_gymnasium,_Salamis,_Northern_Cyprus.jpg"], "14": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Antioch_in_Pisidia_Augustus_Temple_2937.jpg/960px-Antioch_in_Pisidia_Augustus_Temple_2937.jpg", "Ruínas da outra Antioquia, a da Pisídia, perto de Yalvaç, na Turquia.", "Dosseman · CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Antioch_in_Pisidia_Augustus_Temple_2937.jpg"], "15": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Jerusalem_Modell_BW_2.JPG/960px-Jerusalem_Modell_BW_2.JPG", "Maquete de Jerusalém no século I, com o Segundo Templo (Museu de Israel).", "Berthold Werner · Public domain", "https://commons.wikimedia.org/wiki/File:Jerusalem_Modell_BW_2.JPG"], "21": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Tyche_Antioch_Vatican_Inv2672.jpg/960px-Tyche_Antioch_Vatican_Inv2672.jpg", "A Tique de Antioquia: cópia romana em mármore do bronze de Eutíquides, com o Orontes aos pés.", "Museus Vaticanos · Public domain", "https://commons.wikimedia.org/wiki/File:Tyche_Antioch_Vatican_Inv2672.jpg"], "23": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Apamea_01.jpg/960px-Apamea_01.jpg", "Colunata de Apameia, cidade vizinha fundada pelo mesmo Seleuco. A de Antioquia não sobreviveu, mas era assim.", "Bernard Gagnon · CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Apamea_01.jpg"], "25": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Harbiye_waterfalls_-_panoramio.jpg/960px-Harbiye_waterfalls_-_panoramio.jpg", "Cascatas de Harbiye, a antiga Dafne, a poucos quilômetros de Antioquia.", "Ahmet Kaynarpunar · CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Harbiye_waterfalls_-_panoramio.jpg"], "30": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Replica_of_roman_wax_writing_tablet_with_stylus.jpg/960px-Replica_of_roman_wax_writing_tablet_with_stylus.jpg", "Réplica de uma tabuinha de cera romana com estilete.", "Peter van der Sluijs · CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Replica_of_roman_wax_writing_tablet_with_stylus.jpg"], "32": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Cleopatra%27s_Gate%2C_Tarsus%2C_Mersin_Province.jpg/960px-Cleopatra%27s_Gate%2C_Tarsus%2C_Mersin_Province.jpg", "Porta de Cleópatra, em Tarso, a cidade de Saulo.", "Nedim Ardoğa · CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Cleopatra's_Gate,_Tarsus,_Mersin_Province.jpg"], "34": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Caesarea_Maritima_aqueduct.jpg/960px-Caesarea_Maritima_aqueduct.jpg", "Aqueduto romano de Cesareia Marítima, onde vivia o centurião Cornélio.", "Mark87 · Public domain", "https://commons.wikimedia.org/wiki/File:Caesarea_Maritima_aqueduct.jpg"], "36": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Birth_of_Dionysos_-_House_of_Aion_-_Paphos_Archaeological_Park.jpg/960px-Birth_of_Dionysos_-_House_of_Aion_-_Paphos_Archaeological_Park.jpg", "Mosaico de Pafos, capital romana de Chipre (este é do séc. IV). Ali governava o procônsul Sérgio Paulo.", "George M. Groutas · CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Birth_of_Dionysos_-_House_of_Aion_-_Paphos_Archaeological_Park.jpg"], "38": ["https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Colonnade%2C_Perge_02.jpg/960px-Colonnade%2C_Perge_02.jpg", "Rua das colunas de Perge, na Panfília, onde João Marcos deixou a viagem.", "Bernard Gagnon · CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Colonnade,_Perge_02.jpg"]}; // real photographs, hot-linked from Wikimedia Commons with their licences
+const MAP_AT = { ant: [36.16, 36.2, 'Antioquia'], sel: [35.93, 36.1, 'Selêucia'], tar: [34.9, 36.92, 'Tarso'], sal: [33.9, 35.18, 'Salamina'], paf: [32.41, 34.76, 'Pafos'], per: [30.85, 36.96, 'Perge'], ata: [30.7, 36.88, 'Atália'], pis: [31.19, 38.3, 'Antioquia da Pisídia'], ico: [32.49, 37.87, 'Icônio'], lis: [32.34, 37.58, 'Listra'], der: [33.36, 37.35, 'Derbe'], jer: [35.22, 31.78, 'Jerusalém'], ces: [34.89, 32.5, 'Cesareia'] };
+const REL_MAP = { // relic number: [caption, routes]; schematic, drawn for the game
+  5: ['Os caminhos da dispersão: de Jerusalém para a Fenícia, Chipre e Antioquia.', [['jer', 'ces', 'ant'], ['ces', 'sal']]],
+  10: ['A rota da oferta: de Antioquia aos irmãos da Judeia.', [['ant', 'ces', 'jer']]],
+  13: ['A primeira viagem: de Antioquia a Derbe, por mar e por terra.', [['ant', 'sel', 'sal', 'paf', 'per', 'pis', 'ico', 'lis', 'der']]],
+  14: ['Duas cidades, um nome: a Antioquia da Síria e a da Pisídia.', [['ant', 'sel', 'sal', 'paf', 'per', 'pis']]],
+  19: ['Dois caminhos: Barnabé e Marcos para Chipre; Paulo e Silas pela Cilícia.', [['ant', 'sel', 'sal'], ['ant', 'tar', 'der', 'lis']]],
+  32: ['De Antioquia a Tarso: a viagem de Barnabé para buscar Saulo.', [['ant', 'tar']]],
+  40: ['O retorno: as mesmas cidades, no caminho de volta para casa.', [['der', 'lis', 'ico', 'pis', 'per', 'ata', 'ant']]],
+};
+const BOOK_FIG = [5, 8, 32, 12, 10, 21, 3, 13, 15, 25, 0, 23, 40, 0]; // one picture per chapter of the Cartas (0: none)
+function relMapSVG(routes) {
+  const X = lon => ((lon - 28.6) * 50).toFixed(1), Y = lat => ((39 - lat) * 40).toFixed(1), P = k => `${X(MAP_AT[k][0])},${Y(MAP_AT[k][1])}`;
+  const poly = pts => pts.map(([a, b]) => `${X(a)},${Y(b)}`).join(' '), on = [...new Set(routes.flat())];
+  const land = poly([[28.6, 39], [28.6, 36.7], [29.1, 36.2], [29.7, 36.15], [30.6, 36.85], [31.4, 36.7], [32.1, 36.25], [32.9, 36.05], [33.9, 36.2], [34.6, 36.75], [35.3, 36.6], [35.9, 36.9], [36.2, 36.75], [35.85, 36.3], [35.95, 36.0], [35.8, 35.5], [35.9, 34.65], [35.5, 33.9], [35.1, 33.1], [34.9, 32.5], [34.6, 31.8], [34.2, 31.3], [34.2, 30.8], [37, 30.8], [37, 39]]);
+  const cyp = poly([[32.3, 34.95], [32.6, 35.18], [33.4, 35.35], [34.0, 35.45], [34.6, 35.7], [34.05, 35.1], [33.6, 34.8], [33.0, 34.6], [32.4, 34.68]]);
+  return `<svg viewBox="0 0 420 328" role="img" aria-label="Mapa esquemático do Mediterrâneo oriental"><rect width="420" height="328" fill="#b9cdc6"/><polygon points="${land}" fill="#e6d7ae" stroke="#8a6f42" stroke-width="1.2"/><polygon points="${cyp}" fill="#e6d7ae" stroke="#8a6f42" stroke-width="1.2"/>
+    <text x="150" y="232" class="sea">Mar Mediterrâneo</text><text x="${X(33.4)}" y="${Y(35.02)}" class="isl">Chipre</text>
+    ${routes.map(r => `<polyline points="${r.map(P).join(' ')}" fill="none" stroke="#9a2a22" stroke-width="2.4" stroke-dasharray="6 4" stroke-linecap="round" stroke-linejoin="round"/>`).join('')}
+    ${on.map(k => { const [lo, la, nm] = MAP_AT[k], left = ['per', 'ata', 'paf', 'lis', 'jer'].includes(k); return `<circle cx="${X(lo)}" cy="${Y(la)}" r="${k === 'ant' ? 5 : 3.6}" fill="${k === 'ant' ? '#9a2a22' : '#3a2b1b'}" stroke="#f4ead2" stroke-width="1.2"/><text x="${+X(lo) + (left ? -7 : 7)}" y="${+Y(la) + (k === 'ata' ? 13 : k === 'sel' ? 12 : k === 'per' ? -5 : 4)}" text-anchor="${left ? 'end' : 'start'}" class="city">${nm}</text>`; }).join('')}</svg>`;
+}
+function relFig(n, cls = 'rq-fig') { // the documentary side of a relic: a schematic map and/or a real photograph
+  const m = REL_MAP[n], im = REL_IMG[n];
+  return (m ? `<figure class="${cls} map">${relMapSVG(m[1])}<figcaption>${m[0]} <small>Mapa esquemático</small></figcaption></figure>` : '')
+    + (im && !(m && cls === 'bk-fig') ? `<figure class="${cls}"><img loading="lazy" alt="" src="${im[0]}" onerror="this.closest('figure').remove()"><figcaption>${im[1]} <small>Foto: <a href="${im[3]}" target="_blank" rel="noopener">${im[2]}</a> · Wikimedia Commons</small></figcaption></figure>` : '');
+}
+const REL_W = [60, 28, 10, 2];
+const relState = i => G.rel[i] || 0;
+const relIds = () => Object.keys(G.rel).map(Number);
+const relCount = () => relIds().length;
+const relMems = () => relIds().filter(i => G.rel[i] === 2).length;
+const relHint = i => RELICS[i].s === 'm' ? 'O mascate do cais guarda esta entre os seus embrulhos. Procure por ele no Mercado do cais, de 7h a 18h.' : RELICS[i].s === 'f' ? `Às vezes algo brilha ${REL_FINDS[i][2]}. Fique de olho na faixa de notícias e clique no brilho dourado.` : REL_STORY.find(s => s[0] === i + 1)[1];
+
+/* ---- acquisition: story, pedlar, finds ---- */
+let relWait = 0;
+function showRelic(i, via) {
+  const R = RELICS[i];
+  const el = openModal(`<div class="card rq-new r${R.r}"><p class="eyebrow">${via}</p><div class="rvbox"></div><span class="rq-chip">${RARITY[R.r]}</span><h2>${R.n}</h2><p class="hint">${R.e}</p><p class="rq-o">${R.o}</p><p class="hint">A memória deste objeto será contada num próximo ágape.</p><div class="rq-btns"><button class="pill go">Guardar</button><button class="ghost see">Ver nas Relíquias</button></div></div>`, () => { rvStop(); relWait = performance.now() + 15000; });
+  rvMount(el.querySelector('.rvbox'), i, true);
+  el.querySelector('.go').onclick = closeModal; el.querySelector('.see').onclick = () => openRelics(i);
+}
+function grantRelic(i, via) {
+  if (G.rel[i] || !RELICS[i]) return;
+  G.rel[i] = 1; G.relNew.push(i); audio.sfx('win');
+  news(`A igreja guarda um novo vestígio: ${RELICS[i].n.replace(/^(A|O|As|Os) /, m => m.toLowerCase())}.`);
+  showRelic(i, via);
+}
+function relBonus() {
+  REL_CONN.forEach((c, ci) => {
+    if (G.relConn.includes(ci) || !c.ids.every(i => G.rel[i] === 2)) return;
+    G.relConn.push(ci); audio.sfx('join'); toast(`<b>Conexão descoberta:</b> ${c.t}. <span class="dim">+8 ✦ · leia nas Relíquias</span>`, 7500); addComm(8);
+  });
+  REL_COLS.forEach((c, ci) => {
+    if (G.relSets.includes(ci) || !RELICS.every((r, i) => r.c !== ci || G.rel[i] === 2)) return;
+    G.relSets.push(ci); addRes('moeda', 10); toast(`<b>Coleção completa:</b> ${c[0]}. <span class="dim">+10 ✦ · +10 moedas</span>`, 7500); addComm(10);
+  });
+}
+function relTick() {
+  $('#relBadge').hidden = !G.relNew.length;
+  relBonus();
+  if (menuOn || cine || modalOpen || ff || G.tut < TUT.length || performance.now() < relWait) return;
+  const s = REL_STORY.find(([n, , ok]) => !G.rel[n - 1] && ok(G.stats));
+  if (s) grantRelic(s[0] - 1, 'Um vestígio da história');
+}
+function tellRelics() { // at each ágape someone tells the story behind one relic (two once there is a real hall)
+  const pend = relIds().filter(i => G.rel[i] === 1); if (!pend.length) return;
+  const list = [...pend.filter(i => i === G.relTell), ...pend.filter(i => i !== G.relTell)].slice(0, G.church >= 3 ? 2 : 1);
+  const who = pick(npcs.filter(n => n.seated && !n.visitor && !n.curious))?.name || 'Barnabé';
+  list.forEach((i, k) => {
+    G.rel[i] = 2; G.stats.relMem++; if (!G.relNew.includes(i)) G.relNew.push(i);
+    setTimeout(() => { audio.sfx('page'); toast(`<b>Memória revelada:</b> à mesa, ${k ? 'outro irmão' : who} contou a história de <i>${RELICS[i].n}</i>. <span class="dim">+2 ✦ · leia nas Relíquias</span>`, 8000); }, 4200 + k * 2400);
+  });
+  G.relTell = -1; addComm(2 * list.length);
+}
+const mascPool = () => RELICS.map((r, i) => i).filter(i => RELICS[i].s === 'm' && !G.rel[i]);
+const mascPrice = () => 10 + 4 * G.relBuys;
+function buyRelic() { // drawn without repeats, weighted by rarity; every 4th bundle without a rare one is a rare one
+  const pool = mascPool(), p = mascPrice(); if (!pool.length || G.res.moeda < p) return;
+  addRes('moeda', -p); G.relBuys++; G.relPity++; G.stats.relBuy++;
+  const rare = pool.filter(i => RELICS[i].r >= 2), opts = G.relPity >= 4 && rare.length ? rare : pool;
+  let r = Math.random() * opts.reduce((a, i) => a + REL_W[RELICS[i].r], 0);
+  const i = opts.find(i => (r -= REL_W[RELICS[i].r]) <= 0) ?? opts[0];
+  if (RELICS[i].r >= 2) G.relPity = 0;
+  grantRelic(i, 'O mascate desfaz o embrulho');
+}
+function mascAct() {
+  const left = mascPool().length, p = mascPrice();
+  return left ? [{ label: 'Embrulho do mascate', sub: `−${p} moedas · uma relíquia embrulhada em pano · restam ${left}`, ok: () => inHours(7, 18.5) && G.res.moeda >= p, why: inHours(7, 18.5) ? `Custa ${p} moedas` : 'O mascate arma a banca de 7h a 18h', cd: null, run: buyRelic }] : [];
+}
+const findFx = new THREE.Group(); findFx.visible = false; scene.add(findFx);
+{
+  const gem = new THREE.Mesh(new THREE.OctahedronGeometry(0.2), new THREE.MeshBasicMaterial({ color: GOLD })); findFx.add(gem);
+  const ring = new THREE.Mesh(RING, new THREE.MeshBasicMaterial({ color: GOLD, transparent: true, opacity: 0.5, depthWrite: false })); ring.scale.setScalar(0.55); ring.position.y = 0.12; findFx.add(ring);
+  const hit = new THREE.Mesh(new THREE.SphereGeometry(1, 8, 6), hitMat); hit.position.y = 0.6; findFx.add(hit);
+  findFx.userData.pick = { type: 'find', ref: { name: 'Algo brilha aqui', role: 'Clique para ver o que é' } };
+}
+function rollFind() {
+  const left = Object.keys(REL_FINDS).map(Number).filter(i => !G.rel[i]); G.relFind = null;
+  if (!left.length || dayN() < 2 || Math.random() > 0.65) return;
+  const i = pick(left), [cx, cz, where] = REL_FINDS[i], [x, z] = freeSpot(cx, cz, 0.8);
+  G.relFind = { d: dayN(), i, x, z }; news(`Dizem que algo brilha ${where}. Quem achar primeiro, leva.`, 'Cidade');
+}
+function updateFind(t) {
+  const f = G.relFind, on = !!f && f.d === dayN() && !G.rel[f.i] && inHours(6, 19);
+  findFx.visible = on; if (!on) return;
+  findFx.position.set(f.x, 0, f.z); findFx.children[0].rotation.y = t * 1.6; findFx.children[0].position.y = 0.8 + Math.sin(t * 2.2) * 0.12; findFx.children[1].scale.setScalar(0.55 + 0.06 * Math.sin(t * 2.2));
+}
+function takeFind() { const f = G.relFind; if (!f) return; G.relFind = null; G.stats.finds++; grantRelic(f.i, 'Achado na cidade'); }
+
+/* ---- 3D models: each relic is built from primitives, with engraved canvas textures ---- */
+const PI = Math.PI, INK = '#35312a';
+let RMATS = null;
+function relMats() {
+  if (RMATS) return RMATS;
+  const m = (color, roughness = 0.8, metalness = 0) => new THREE.MeshStandardMaterial({ color, roughness, metalness, side: THREE.DoubleSide });
+  return RMATS = { bronze: m(0xa9743a, 0.42, 0.9), old: m(0x86794c, 0.55, 0.8), patina: m(0x6f9a84, 0.65, 0.55), gold: m(0xe0b04a, 0.3, 1), silver: m(0xc4c6c8, 0.4, 0.95), lead: m(0x7d8288, 0.6, 0.7),
+    clay: m(0xb9683f, 0.85), terra: m(0xc98a5a, 0.9), stone: m(0xa9a493, 0.95), marble: m(0xe6e0d2, 0.6), wood: m(0x8a5a34, 0.8), woodD: m(0x5a3a22, 0.85), parch: m(0xe9dbb4, 0.9), parchD: m(0xcbb686, 0.9),
+    linen: m(0xd8cba8, 1), leather: m(0x6e4628, 0.75), leatherD: m(0x4a2e1a, 0.8), seal: m(0x9a2a22, 0.45), wheat: m(0xd9b45a, 0.9), gem: m(0x9a1a2a, 0.15, 0.1), carn: m(0xc9552a, 0.2, 0.1), soot: m(0x2a2019, 1), thread: m(0xb5523a, 0.9), white: m(0xe8e2d0, 0.9),
+    flame: new THREE.MeshBasicMaterial({ color: new THREE.Color(2.2, 1.4, 0.5) }) };
+}
+function relTex(base, w, h, draw, o = {}) { // a worn surface with a drawing that also works as its own bump map; `cut` tears the outline
+  const c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d');
+  x.fillStyle = base; x.fillRect(0, 0, w, h);
+  for (let i = 0; i < w * h / 160; i++) { x.fillStyle = `rgba(${Math.random() < 0.5 ? '0,0,0' : '255,255,255'},${Math.random() * 0.07})`; x.fillRect(Math.random() * w, Math.random() * h, 3, 3); }
+  x.textAlign = 'center'; x.textBaseline = 'middle'; x.lineCap = x.lineJoin = 'round'; x.strokeStyle = x.fillStyle = INK; draw(x, w, h);
+  if (o.cut) { x.globalCompositeOperation = 'destination-in'; x.beginPath(); o.cut.forEach(([px, py], i) => x[i ? 'lineTo' : 'moveTo'](px * w, py * h)); x.closePath(); x.fill(); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  return new THREE.MeshStandardMaterial({ map: t, bumpMap: t, bumpScale: o.bump ?? 2, roughness: o.rough ?? 0.85, metalness: o.metal ?? 0, side: THREE.DoubleSide, alphaTest: o.cut ? 0.5 : 0 });
+}
+const D = { // small engraving helpers, drawn on a 256 px face unless a centre is given
+  arc(x, str, r, a0, a1, c = 128) { [...str].forEach((ch, i, a) => { const t = a0 + (a1 - a0) * (a.length > 1 ? i / (a.length - 1) : 0.5); x.save(); x.translate(c + Math.sin(t) * r, c - Math.cos(t) * r); x.rotate(t); x.fillText(ch, 0, 0); x.restore(); }); },
+  rim(x, r = 116, c = 128) { for (let i = 0; i < 40; i++) { x.beginPath(); x.arc(c + Math.cos(i / 40 * PI * 2) * r, c + Math.sin(i / 40 * PI * 2) * r, 3, 0, 7); x.fill(); } },
+  lines(x, arr, cx, y0, dy) { arr.forEach((s, i) => x.fillText(s, cx, y0 + i * dy)); },
+  scribble(x, x0, y0, w, rows, dy) { x.lineWidth = 2.2; for (let r = 0; r < rows; r++) { let px = x0; const end = x0 + w * (r === rows - 1 ? 0.55 : 1); x.beginPath(); while (px < end) { const l = 5 + Math.random() * 12; x.moveTo(px, y0 + r * dy + Math.random() * 3); x.lineTo(px + l, y0 + r * dy + Math.random() * 3 - 1.5); px += l + 4 + (Math.random() < 0.2 ? 9 : 0); } x.stroke(); } },
+  anchor(x) { x.lineWidth = 10; x.beginPath(); x.moveTo(128, 66); x.lineTo(128, 196); x.moveTo(98, 92); x.lineTo(158, 92); x.moveTo(76, 150); x.quadraticCurveTo(128, 236, 180, 150); x.stroke(); x.beginPath(); x.arc(128, 56, 11, 0, 7); x.stroke(); },
+  fish(x, cx, cy, s) { x.beginPath(); x.moveTo(cx - s, cy); x.quadraticCurveTo(cx, cy - s * 0.75, cx + s * 0.7, cy); x.lineTo(cx + s, cy + s * 0.4); x.moveTo(cx - s, cy); x.quadraticCurveTo(cx, cy + s * 0.75, cx + s * 0.7, cy); x.lineTo(cx + s, cy - s * 0.4); x.stroke(); },
+  wheat(x, cx, cy, h) { x.beginPath(); x.moveTo(cx, cy + h / 2); x.lineTo(cx, cy - h / 2); for (let i = 0; i < 5; i++) { const y = cy - h / 2 + i * h * 0.13; x.moveTo(cx, y + h * 0.12); x.lineTo(cx - h * 0.13, y); x.moveTo(cx, y + h * 0.12); x.lineTo(cx + h * 0.13, y); } x.stroke(); },
+  menorah(x, cx, cy, s) { x.beginPath(); x.moveTo(cx, cy - s); x.lineTo(cx, cy + s); x.moveTo(cx - s * 0.5, cy + s); x.lineTo(cx + s * 0.5, cy + s); for (const k of [1, 2, 3]) { x.moveTo(cx - k * s * 0.3, cy - s); x.arc(cx, cy - s, k * s * 0.3, PI, 0, true); } x.stroke(); },
+  head(x) { x.beginPath(); x.arc(122, 108, 42, 0, 7); x.fill(); x.fillRect(100, 138, 40, 62); x.beginPath(); x.moveTo(160, 100); x.lineTo(182, 122); x.lineTo(158, 128); x.fill(); x.save(); x.strokeStyle = 'rgba(255,255,255,.35)'; x.lineWidth = 5; x.beginPath(); x.arc(122, 108, 34, PI * 0.95, PI * 1.9); x.stroke(); x.restore(); },
+  eagle(x, cx, cy, s) { x.beginPath(); x.ellipse(cx, cy + s * 0.15, s * 0.22, s * 0.42, 0, 0, 7); x.fill(); x.beginPath(); x.arc(cx, cy - s * 0.42, s * 0.14, 0, 7); x.fill(); for (const d of [-1, 1]) { x.beginPath(); x.moveTo(cx + d * s * 0.15, cy - s * 0.1); x.lineTo(cx + d * s, cy - s * 0.5); x.lineTo(cx + d * s * 0.8, cy + s * 0.2); x.lineTo(cx + d * s * 0.2, cy + s * 0.3); x.fill(); } },
+  column(x, cx, y0, y1, w) { x.strokeRect(cx - w / 2, y0 + 10, w, y1 - y0 - 20); x.fillRect(cx - w * 0.8, y0, w * 1.6, 10); x.fillRect(cx - w * 0.8, y1 - 10, w * 1.6, 10); for (let i = 1; i < 4; i++) { x.beginPath(); x.moveTo(cx - w / 2 + i * w / 4, y0 + 12); x.lineTo(cx - w / 2 + i * w / 4, y1 - 12); x.stroke(); } },
+  bolt(x, cx, cy, s) { x.beginPath(); x.moveTo(cx + s * 0.3, cy - s); x.lineTo(cx - s * 0.3, cy); x.lineTo(cx + s * 0.25, cy); x.lineTo(cx - s * 0.3, cy + s); x.stroke(); },
+  caduceus(x, cx, cy, s) { x.beginPath(); x.moveTo(cx, cy - s); x.lineTo(cx, cy + s); x.moveTo(cx - s * 0.5, cy - s * 0.8); x.lineTo(cx + s * 0.5, cy - s * 0.8); x.stroke(); x.beginPath(); x.arc(cx, cy - s * 0.35, s * 0.25, 0, 7); x.stroke(); x.beginPath(); x.arc(cx, cy + s * 0.2, s * 0.25, 0, 7); x.stroke(); },
+};
+const RELIC_BUILD = [
+  (A, M, G, X) => { // 01 Seleucid coin
+    const f = d => X('#8f8b7c', 256, 256, d, { metal: 0.8, rough: 0.5, bump: 4 });
+    A(G.cyl(0.5, 0.5, 0.07, 40), M.silver, 0, 0, 0, PI / 2);
+    A(G.disc(0.48), f(x => { D.rim(x); D.anchor(x); }), 0, 0, 0.037);
+    A(G.disc(0.48), f(x => { D.rim(x); x.font = 'bold 30px Georgia,serif'; D.arc(x, 'ΒΑΣΙΛΕΩΣ', 84, -1.15, 1.15); D.arc(x, 'ΣΕΛΕΥΚΟΥ', 84, PI - 1.1, PI + 1.1); x.lineWidth = 7; D.bolt(x, 128, 128, 34); }), 0, 0, -0.037, 0, PI);
+  },
+  (A, M, G, X) => { // 02 mosaic of the three worlds
+    A(G.box(1.36, 0.94, 0.12), M.stone);
+    A(G.plane(1.3, 0.88), X('#3a362e', 390, 264, x => {
+      for (let i = 0; i < 30; i++) for (let j = 0; j < 20; j++) {
+        let c;
+        if (i < 10) c = (i % 4 < 2) ^ (j % 4 < 2) ? '#3f5e9c' : '#e6dcc0';
+        else if (i < 20) c = ['#b5523a', '#d9a440', '#e6dcc0'][(Math.abs(i - 14.5) + Math.abs(j - 9.5) | 0) % 3];
+        else { const dx = Math.abs(i - 25), r = Math.round(Math.hypot(dx, j - 6)); c = (dx === 0 && j >= 6 && j <= 15) || (j >= 6 && j <= 12 && j - 6 <= r && [2, 4].includes(r) && dx <= r) || (j === 6 && dx <= 4 && dx % 2 === 0) || (j === 16 && dx <= 2) ? '#e0b04a' : '#2f4f55'; }
+        x.fillStyle = c; x.fillRect(i * 13 + 1, j * 13 + 3, 11, 11);
+      }
+    }, { bump: 3, cut: [[0, 0.04], [0.3, 0], [0.62, 0.05], [1, 0], [0.97, 0.45], [1, 1], [0.6, 0.94], [0.33, 1], [0.04, 0.92], [0, 0.5]] }), 0, 0, 0.062);
+  },
+  (A, M, G, X) => { // 03 amphora of Seleucia
+    A(G.lathe([[0, 0], [0.06, 0.02], [0.14, 0.25], [0.3, 0.75], [0.33, 1.05], [0.26, 1.3], [0.12, 1.45], [0.1, 1.75], [0.15, 1.8], [0.15, 1.86], [0.09, 1.86]]), M.terra);
+    for (const s of [-1, 1]) A(G.tor(0.2, 0.035, PI), M.terra, s * 0.14, 1.52, 0, 0, 0, -s * PI / 2);
+    A(G.disc(0.1), X('#c98a5a', 96, 96, x => { x.font = 'bold 34px Georgia,serif'; x.fillText('ΣΕΛ', 48, 50); x.lineWidth = 4; x.strokeRect(8, 20, 80, 56); }, { bump: 4 }), 0, 0.95, 0.338, -0.1);
+  },
+  (A, M, G, X) => { // 04 denarius of Claudius
+    const f = d => X('#b3b4b2', 256, 256, d, { metal: 0.9, rough: 0.4, bump: 4 });
+    A(G.cyl(0.5, 0.5, 0.06, 40), M.silver, 0, 0, 0, PI / 2);
+    A(G.disc(0.48), f(x => { D.head(x); x.font = 'bold 22px Georgia,serif'; D.arc(x, 'TI CLAVD CAESAR AVG', 100, -2.3, 2.3); }), 0, 0, 0.032);
+    A(G.disc(0.48), f(x => { D.rim(x); x.lineWidth = 8; x.beginPath(); x.arc(128, 128, 78, 0, 7); x.stroke(); x.font = 'bold 44px Georgia,serif'; x.fillText('SPQR', 128, 132); }), 0, 0, -0.032, 0, PI);
+  },
+  (A, M) => { // 05 lamp of the scattered; the flame is lit once its memory has been told
+    const G = RG;
+    A(G.sph(0.5), M.clay, 0, 0, 0, 0, 0, 0, 1, 0.42, 0.9);
+    A(G.cyl(0.12, 0.2, 0.5, 16), M.clay, 0.6, 0, 0, 0, 0, -PI / 2, 0.55, 1, 1);
+    A(G.cyl(0.08, 0.08, 0.02, 14), M.soot, 0.78, 0.07, 0); A(G.cyl(0.11, 0.11, 0.02, 16), M.soot, 0, 0.2, 0);
+    A(G.tor(0.13, 0.03), M.clay, 0, 0.2, 0, PI / 2); A(G.tor(0.14, 0.04), M.clay, -0.55, 0.05, 0);
+    A(G.box(0.34, 0.012, 0.014), M.soot, 0.2, 0.185, 0.2, 0, 0.6, -0.3);
+    A(G.cone(0.05, 0.22, 10), M.flame, 0.8, 0.2, 0).name = 'flame';
+  },
+  (A, M, G, X) => { // 06 tablet of the seven
+    A(G.box(0.9, 1.3, 0.07), M.wood);
+    A(G.plane(0.84, 1.24), X('#8a5a34', 340, 500, x => { x.fillStyle = '#2e1c0e'; x.font = 'bold 40px Georgia,serif'; D.lines(x, ['ΣΤΕΦΑΝΟΣ', 'ΦΙΛΙΠΠΟΣ', 'ΠΡΟΧΟΡΟΣ', 'ΝΙΚΑΝΩΡ', 'ΤΙΜΩΝ', 'ΠΑΡΜΕΝΑΣ', 'ΝΙΚΟΛΑΟΣ'], 170, 72, 58); x.font = 'italic 28px Georgia,serif'; x.fillText('ΑΝΤΙΟΧΕΥΣ', 170, 462); }, { bump: 3 }), 0, 0, 0.037);
+    A(G.tor(0.09, 0.016), M.linen, 0, 0.7, 0);
+  },
+  (A, M) => { // 07 bag of the anonymous traveller
+    const G = RG;
+    A(G.sph(0.5), M.leather, 0, 0, 0, 0, 0, 0, 1, 0.85, 0.75); A(G.cyl(0.22, 0.12, 0.25, 16), M.leather, 0, 0.48, 0);
+    A(G.tor(0.135, 0.025), M.linen, 0, 0.4, 0, PI / 2); A(G.cyl(0.02, 0.02, 0.3, 6), M.linen, 0.16, 0.28, 0.08, 0, 0, 0.4);
+    A(G.box(0.24, 0.07, 0.13), M.bronze, 0.62, -0.38, 0.3, 0, 0.4, 0); A(G.cyl(0.11, 0.11, 0.025, 20), M.silver, -0.58, -0.41, 0.36, 0.1);
+  },
+  (A, M, G, X) => { // 08 the Christianos sherd
+    A(G.arc(0.9, 0.78, -0.62, 1.24), X('#b9683f', 512, 256, x => { x.fillStyle = '#2e170c'; x.font = 'bold 62px Georgia,serif'; x.fillText('ΧΡΙΣΤΙΑΝΟΣ', 256, 124); x.lineWidth = 3; x.beginPath(); x.moveTo(60, 176); x.lineTo(430, 170); x.stroke(); }, { bump: 3, cut: [[0, 0.2], [0.16, 0], [0.5, 0.08], [0.82, 0], [1, 0.3], [0.94, 0.74], [0.7, 1], [0.38, 0.9], [0.12, 1], [0.04, 0.6]] }), 0, 0, -0.75);
+  },
+  (A, M, G, X) => { // 09 Barnabas' teaching scroll
+    const S = G.sub(0, 0, 0, -0.3, 0, 0);
+    S(G.plane(1.2, 0.86), X('#e9dbb4', 480, 344, x => { x.fillStyle = x.strokeStyle = '#4a3622'; x.font = 'bold 30px Georgia,serif'; x.fillText('ΒΑΡΝΑΒΑΣ', 240, 40); D.scribble(x, 44, 84, 392, 9, 28); }, { bump: 1 }));
+    for (const s of [-1, 1]) { S(G.cyl(0.075, 0.075, 0.9, 14), M.parchD, s * 0.64, 0, 0.02); S(G.cyl(0.035, 0.035, 1.08, 8), M.woodD, s * 0.64, 0, 0.02); }
+  },
+  (A, M, G, X) => { // 10 jar of the great famine
+    A(G.lathe([[0, 0], [0.3, 0], [0.45, 0.2], [0.5, 0.5], [0.42, 0.8], [0.3, 0.9], [0.34, 1.0]]), M.clay);
+    A(G.cyl(0.3, 0.3, 0.04, 20), M.wheat, 0, 0.9, 0);
+    for (let i = 0; i < 26; i++) { const a = i * 2.4, r = 0.27 * Math.sqrt(i / 26); A(G.sph(0.035, 6, 5), M.wheat, Math.cos(a) * r, 0.93, Math.sin(a) * r, 0, a, 0, 1.6, 1, 1); }
+    A(G.disc(0.15), X('#b9683f', 128, 128, x => { x.font = 'bold 30px Georgia,serif'; x.fillText('ΙΟΥΔΑΙΑ', 64, 66); x.lineWidth = 4; x.beginPath(); x.arc(64, 64, 58, 0, 7); x.stroke(); }, { bump: 4 }), 0, 0.48, 0.506);
+  },
+  (A, M, G, X) => { // 11 the five seals
+    ['Β', 'Σ', 'Λ', 'Μ', 'Σ'].forEach((ch, k) => {
+      const px = (k - 2) * 0.52, py = -Math.abs(k - 2) * 0.13, rz = (2 - k) * 0.12;
+      A(G.cyl(0.24, 0.26, 0.08, 24), M.clay, px, py, 0, PI / 2);
+      A(G.disc(0.22), X('#b9683f', 128, 128, x => { x.font = 'bold 76px Georgia,serif'; x.fillText(ch, 64, 70); x.lineWidth = 5; x.beginPath(); x.arc(64, 64, 54, 0, 7); x.stroke(); }, { bump: 4 }), px, py, 0.042, 0, 0, rz);
+    });
+  },
+  (A, M) => { // 12 key of the meeting house
+    const G = RG, S = G.sub(0, 0, 0, 0, 0, 0.35);
+    S(G.tor(0.28, 0.06), M.bronze, -0.78, 0, 0); S(G.box(1.1, 0.1, 0.1), M.bronze, 0, 0, 0); S(G.box(0.1, 0.42, 0.1), M.bronze, 0.5, -0.2, 0);
+    S(G.box(0.34, 0.08, 0.1), M.bronze, 0.36, -0.4, 0); for (let k = 0; k < 3; k++) S(G.box(0.05, 0.14, 0.08), M.bronze, 0.22 + k * 0.1, -0.3, 0);
+    S(G.tor(0.07, 0.02), M.old, -0.28, 0, 0, PI / 2, 0, PI / 2);
+  },
+  (A, M) => { // 13 anchor of the first mission
+    const G = RG;
+    A(G.cyl(0.05, 0.06, 1.6, 12), M.bronze); A(G.tor(0.13, 0.03), M.bronze, 0, 0.92, 0); A(G.cyl(0.045, 0.045, 0.9, 10), M.woodD, 0, 0.62, 0, PI / 2);
+    A(G.tor(0.55, 0.055, PI), M.bronze, 0, -0.25, 0, 0, 0, PI);
+    for (const s of [-1, 1]) A(G.cone(0.12, 0.26, 4), M.bronze, s * 0.55, -0.14, 0, 0, 0, -s * 0.3, 1, 1, 0.4);
+    A(G.tube([[0.1, 0.98, 0], [0.4, 0.8, 0.1], [0.5, 0.3, 0.15], [0.75, 0.1, 0]], 0.025), M.linen);
+  },
+  (A, M, G, X) => { // 14 map of the two Antiochs
+    A(G.arc(2.4, 1.05, -0.33, 0.66), X('#dfcd9c', 512, 340, x => {
+      x.strokeStyle = '#5a4630'; x.lineWidth = 3; x.beginPath(); x.moveTo(30, 150); x.bezierCurveTo(120, 110, 180, 190, 260, 170); x.bezierCurveTo(330, 150, 370, 120, 420, 150); x.lineTo(440, 320); x.stroke();
+      x.beginPath(); x.ellipse(250, 262, 52, 18, -0.2, 0, 7); x.stroke(); x.fillStyle = '#5a4630'; x.font = 'italic 17px Georgia,serif'; x.fillText('ΚΥΠΡΟΣ', 250, 264);
+      for (const [px, py] of [[448, 120], [205, 82]]) { x.fillStyle = '#9a2a22'; x.beginPath(); x.arc(px, py, 8, 0, 7); x.fill(); x.fillStyle = '#3a2a1a'; x.font = 'bold 21px Georgia,serif'; x.fillText('ΑΝΤΙΟΧΕΙΑ', px - 18, py - 22); }
+      x.setLineDash([7, 6]); x.strokeStyle = '#9a2a22'; x.beginPath(); x.moveTo(448, 120); x.quadraticCurveTo(360, 280, 262, 258); x.quadraticCurveTo(190, 200, 205, 82); x.stroke(); x.setLineDash([]);
+      x.strokeStyle = '#5a4630'; x.lineWidth = 1.5; for (let i = 0; i < 9; i++) { x.beginPath(); x.arc(60 + i * 38 % 300, 230 + (i * 53 % 70), 9, PI, PI * 2); x.stroke(); }
+    }, { bump: 0.6, cut: [[0, 0.06], [0.3, 0], [0.7, 0.04], [1, 0], [0.98, 0.5], [1, 0.96], [0.66, 1], [0.3, 0.95], [0.02, 1], [0.03, 0.5]] }), 0, 0, -2.4);
+  },
+  (A, M, G, X) => { // 15 the letter from Jerusalem
+    const S = G.sub(0, 0, 0, 0, 0.3, 0.12);
+    S(G.cyl(0.16, 0.16, 1.3, 22), M.parch, 0, 0, 0, 0, 0, PI / 2); S(G.cyl(0.09, 0.09, 1.34, 14), M.parchD, 0, 0, 0, 0, 0, PI / 2);
+    S(G.tor(0.168, 0.02), M.linen, 0, 0, 0, 0, PI / 2); S(G.cyl(0.12, 0.13, 0.05, 20), M.seal, 0, 0, 0.17, PI / 2);
+    S(G.disc(0.1), X('#9a2a22', 96, 96, x => { x.fillStyle = '#4a0e0a'; x.lineWidth = 5; x.strokeStyle = '#4a0e0a'; D.fish(x, 48, 48, 28); }, { bump: 4, rough: 0.45 }), 0, 0, 0.197);
+  },
+  (A, M) => { // 16 the separated bowls
+    const G = RG;
+    A(G.box(1.9, 0.08, 0.85), M.wood, 0, -0.04, 0);
+    A(G.lathe([[0, 0.02], [0.12, 0], [0.3, 0.12], [0.36, 0.26]]), M.clay, -0.58, 0, 0); A(G.sph(0.1, 10, 8), M.wheat, -0.58, 0.07, 0, 0, 0, 0, 1, 0.55, 1);
+    A(G.lathe([[0, 0.05], [0.1, 0.05], [0.1, 0], [0.16, 0], [0.26, 0.1], [0.3, 0.3]]), M.marble, 0.58, 0, 0); A(G.tor(0.3, 0.012), M.seal, 0.58, 0.3, 0, PI / 2);
+  },
+  (A, M) => { // 17 eagle of the West
+    const G = RG;
+    A(G.cyl(0.035, 0.035, 0.5, 8), M.woodD, 0, -0.9, 0); A(G.box(0.5, 0.08, 0.3), M.gold, 0, -0.62, 0); A(G.cyl(0.05, 0.05, 0.6, 8), M.gold, 0, -0.52, 0, 0, 0, PI / 2);
+    A(G.sph(0.22), M.gold, 0, -0.15, 0, 0, 0, 0, 0.8, 1.3, 0.8); A(G.sph(0.11), M.gold, 0, 0.2, 0.05); A(G.cone(0.04, 0.14, 6), M.gold, 0, 0.18, 0.19, PI / 2);
+    for (const s of [-1, 1]) for (let k = 0; k < 4; k++) A(G.box(0.56 - k * 0.07, 0.09, 0.03), M.gold, s * (0.34 - k * 0.025), 0.14 - k * 0.1, -0.02, 0, 0, s * (0.75 - k * 0.3));
+    A(G.cone(0.12, 0.26, 4), M.gold, 0, -0.44, -0.02, 0, 0, PI, 1, 1, 0.3);
+  },
+  (A, M, G, X) => { // 18 bread token
+    const f = d => X('#8b8f92', 256, 256, d, { metal: 0.6, rough: 0.6, bump: 4 });
+    A(G.cyl(0.44, 0.44, 0.06, 32), M.lead, 0, 0, 0, PI / 2);
+    A(G.disc(0.42), f(x => { x.lineWidth = 7; D.wheat(x, 128, 136, 120); x.font = 'bold 26px Georgia,serif'; D.arc(x, 'ANNONA', 94, -0.8, 0.8); }), 0, 0, 0.032);
+    A(G.disc(0.42), f(x => { x.font = 'bold 84px Georgia,serif'; x.fillText('VI', 128, 136); D.rim(x, 108); }), 0, 0, -0.032, 0, PI);
+  },
+  (A, M) => { // 19 sandals of two roads
+    const G = RG;
+    for (const s of [-1, 1]) {
+      const S = G.sub(s * 0.3, 0, 0, 0.5, s * 0.5, 0);
+      S(G.caps(0.16, 0.5), M.leather, 0, 0, 0, PI / 2, 0, 0, 1, 1, 0.2);
+      S(G.tor(0.15, 0.02, PI), M.leatherD, 0, 0.02, 0.22, 0, 0, 0, 1, 0.5, 1); S(G.tor(0.16, 0.02, PI), M.leatherD, 0, 0.02, -0.2, 0, 0, 0, 1, 0.6, 1); S(G.box(0.03, 0.03, 0.42), M.leatherD, 0, 0.09, 0.01);
+    }
+  },
+  (A, M, G, X) => { // 20 stone of remembrance
+    const S = G.sub(0, 0, 0, 1.15, 0, 0);
+    S(G.lathe([[0, -0.2], [0.6, -0.2], [0.7, -0.08], [0.7, 0.08], [0.6, 0.2], [0, 0.2]], 9), M.stone);
+    S(G.disc(0.58, 9), X('#a9a493', 256, 256, x => { x.strokeStyle = x.fillStyle = '#5d5849'; x.lineWidth = 9; D.fish(x, 128, 112, 76); x.font = 'bold 34px Georgia,serif'; x.fillText('ΙΧΘΥΣ', 128, 196); }, { bump: 4, rough: 0.95 }), 0, 0.202, 0, -PI / 2);
+  },
+  (A, M) => { // 21 the Tyche of Antioch
+    const G = RG;
+    A(G.cyl(0.6, 0.65, 0.1, 24), M.old, 0, -0.9, 0); A(G.dode(0.42), M.old, 0, -0.5, 0, 0, 0.4, 0, 1.2, 0.75, 1);
+    A(G.cyl(0.16, 0.3, 0.7, 12), M.bronze, 0, 0, 0); A(G.box(0.36, 0.2, 0.42), M.bronze, 0, -0.2, 0.16); A(G.sph(0.14), M.bronze, 0, 0.48, 0);
+    A(G.cyl(0.15, 0.14, 0.14, 12), M.bronze, 0, 0.63, 0); for (let k = 0; k < 6; k++) A(G.box(0.07, 0.07, 0.05), M.bronze, Math.sin(k * PI / 3) * 0.13, 0.73, Math.cos(k * PI / 3) * 0.13, 0, k * PI / 3, 0);
+    A(G.cyl(0.04, 0.04, 0.36, 8), M.bronze, 0.22, 0.15, 0.15, 0.9, 0, -0.3); A(G.cone(0.07, 0.28, 6), M.gold, 0.3, 0.38, 0.34);
+    A(G.sph(0.09), M.patina, 0, -0.62, 0.5); A(G.box(0.44, 0.05, 0.05), M.patina, 0, -0.72, 0.5, 0, 0, 0.15); A(G.box(0.12, 0.05, 0.3), M.patina, 0, -0.78, 0.38);
+  },
+  (A, M) => { // 22 heart of the aqueduct
+    const G = RG, S = G.sub(0, 0, 0, 0.25, 0.5, PI / 2 - 0.1);
+    S(G.lathe([[0.3, -0.6], [0.38, -0.6], [0.38, 0.4], [0.46, 0.42], [0.46, 0.6], [0.3, 0.6], [0.3, -0.6]]), M.terra);
+    S(G.tor(0.27, 0.04), M.white, 0, 0.56, 0, PI / 2); S(G.tor(0.27, 0.03), M.white, 0, -0.56, 0, PI / 2);
+    for (let k = 0; k < 7; k++) S(G.sph(0.05 + (k % 3) * 0.015, 7, 5), M.white, Math.cos(k * 1.9) * 0.27, 0.5 - k * 0.04, Math.sin(k * 1.9) * 0.27);
+  },
+  (A, M, G, X) => { // 23 stone of the thousand columns
+    A(G.box(1.24, 0.84, 0.36), M.stone, 0, 0, 0, 0, 0.25, 0); A(G.dode(0.2), M.stone, 0.58, -0.36, 0.05);
+    A(G.plane(1.16, 0.76), X('#a9a493', 464, 304, x => { x.strokeStyle = x.fillStyle = '#5d5849'; x.lineWidth = 4; for (const cx of [90, 180, 270]) D.column(x, cx, 70, 262, 34); x.fillRect(50, 46, 262, 16); x.font = 'bold 40px Georgia,serif'; x.fillText('ΑΝΤ', 384, 110); x.lineWidth = 2; for (let i = 0; i < 12; i++) { x.beginPath(); x.moveTo(340 + i * 9, 160 + (i * 37 % 60)); x.lineTo(352 + i * 9, 196 + (i * 37 % 60)); x.stroke(); } }, { bump: 4, rough: 0.95 }), 0.046, 0, 0.181, 0, 0.25, 0);
+  },
+  (A, M, G, X) => { // 24 merchant's weight
+    const S = G.sub(0, 0, 0, 0.7, 0, 0);
+    S(G.sph(0.5, 24, 16), M.old, 0, 0, 0, 0, 0, 0, 1, 0.72, 1); S(G.cyl(0.36, 0.36, 0.74, 24), M.old);
+    S(G.disc(0.34), X('#86794c', 128, 128, x => { x.font = 'bold 70px Georgia,serif'; x.fillText('Γ', 64, 62); for (let i = 0; i < 3; i++) { x.beginPath(); x.arc(40 + i * 24, 106, 5, 0, 7); x.fill(); } }, { metal: 0.8, rough: 0.5, bump: 4 }), 0, 0.372, 0, -PI / 2);
+    S(G.tor(0.5, 0.012), M.bronze, 0, 0, 0, PI / 2);
+  },
+  (A, M) => { // 25 crown of Daphne
+    const G = RG;
+    A(G.tor(0.7, 0.025, PI * 1.35), M.gold, 0, 0, 0, 0, 0, -PI * 0.175);
+    for (let k = 0; k < 17; k++) { const a = -PI * 0.175 + k * PI * 1.35 / 16, o = k % 2 ? 1 : -1; A(G.sph(1, 8, 6), M.gold, Math.cos(a) * (0.7 + o * 0.07), Math.sin(a) * (0.7 + o * 0.07), o * 0.03, 0, 0, a + PI / 2 + o * 0.55, 0.17, 0.055, 0.015); }
+  },
+  (A, M, G, X) => { // 26 scroll of the seventy voices
+    const S = G.sub(0, 0, 0, -0.25, 0.2, 0);
+    S(G.cyl(0.09, 0.09, 1.0, 14), M.parchD, -0.62, 0, 0.03); S(G.cyl(0.04, 0.04, 1.2, 8), M.woodD, -0.62, 0, 0.03);
+    S(G.plane(1.15, 0.9), X('#d9c698', 460, 360, x => { x.fillStyle = '#3a2a1a'; x.font = 'bold 34px Georgia,serif'; x.fillText('ΗΣΑΙΑΣ', 190, 46); x.font = '25px Georgia,serif'; D.lines(x, ['ΠΝΕΥΜΑ ΚΥΡΙΟΥ ΕΠ ΕΜΕ', 'ΟΥ ΕΙΝΕΚΕΝ ΕΧΡΙΣΕΝ ΜΕ', 'ΕΥΑΓΓΕΛΙΣΑΣΘΑΙ', 'ΠΤΩΧΟΙΣ ΑΠΕΣΤΑΛΚΕΝ ΜΕ', 'ΙΑΣΑΣΘΑΙ ΤΟΥΣ', 'ΣΥΝΤΕΤΡΙΜΜΕΝΟΥΣ'], 190, 104, 42); }, { bump: 0.8, cut: [[0, 0], [0.8, 0], [0.92, 0.18], [0.82, 0.34], [1, 0.52], [0.86, 0.7], [0.94, 0.9], [0.78, 1], [0, 1]] }), -0.02, 0, 0);
+  },
+  (A, M, G, X) => { // 27 tablet of the two tongues
+    [[-1, ['ΕΙΡΗΝΗ', 'ΑΓΑΠΗ', 'ΑΡΤΟΣ', 'ΦΩΣ']], [1, ['שלמא', 'חובא', 'לחמא', 'נוהרא']]].forEach(([s, words]) => {
+      const S = G.sub(s * 0.42, 0, 0, 0, -s * 0.35, 0);
+      S(G.box(0.8, 1.0, 0.06), M.wood);
+      S(G.plane(0.66, 0.86), X('#2e2620', 264, 344, x => { x.fillStyle = '#c9b78e'; x.font = '40px Georgia,serif'; D.lines(x, words, 132, 62, 74); }, { bump: 3, rough: 0.5 }), 0, 0, 0.032);
+    });
+    A(G.cyl(0.022, 0.01, 0.8, 8), M.bronze, 0, -0.62, 0.3, 0, 0, PI / 2);
+  },
+  (A, M, G, X) => { // 28 signet of the diaspora
+    const S = G.sub(0, 0, 0, 0.75, 0.3, 0);
+    S(G.tor(0.4, 0.07), M.gold); S(G.cyl(0.26, 0.2, 0.13, 24), M.gold, 0, 0.44, 0);
+    S(G.disc(0.23), X('#d0a040', 128, 128, x => { x.strokeStyle = '#5a4010'; x.lineWidth = 6; D.menorah(x, 64, 62, 34); }, { metal: 1, rough: 0.35, bump: 4 }), 0, 0.507, 0, -PI / 2);
+  },
+  (A, M) => { // 29 weaver's shuttle
+    const G = RG, S = G.sub(0, 0, 0, 0.5, 0.3, 0.1);
+    S(G.sph(1, 20, 12), M.wood, 0, 0, 0, 0, 0, 0, 0.9, 0.12, 0.2); S(G.box(0.8, 0.05, 0.14), M.woodD, 0, 0.1, 0);
+    S(G.cyl(0.07, 0.07, 0.6, 12), M.thread, 0, 0.11, 0, 0, 0, PI / 2);
+    S(G.tube([[0.3, 0.12, 0], [0.6, 0.22, 0.2], [0.9, -0.05, 0.3], [1.1, -0.1, 0.1], [1.05, -0.2, -0.15]], 0.012), M.thread);
+  },
+  (A, M, G, X) => { // 30 tablet of the tax collector
+    A(G.box(0.9, 1.2, 0.07), M.wood); A(G.tor(0.08, 0.015), M.linen, 0, 0.66, 0);
+    A(G.plane(0.76, 1.06), X('#2e2620', 304, 424, x => { x.fillStyle = '#c9b78e'; x.font = '30px Georgia,serif'; x.textAlign = 'left'; D.lines(x, ['OLEVM', 'TRITIC', 'PISCES', 'VINVM', 'VECTIG'], 26, 60, 64); x.textAlign = 'right'; D.lines(x, ['XII', 'XL', 'VII', 'IX', 'IV'], 280, 60, 64); x.fillRect(26, 352, 254, 3); x.fillText('LXXII', 280, 388); }, { bump: 3, rough: 0.5 }), 0, 0, 0.037);
+    for (let k = 0; k < 4; k++) A(G.cyl(0.13, 0.13, 0.03, 20), M.silver, 0.72 + (k % 2) * 0.03, -0.58 + k * 0.032, 0.12);
+  },
+  (A, M) => { // 31 ring from Herod's court
+    const G = RG, S = G.sub(0, 0, 0, 0.45, 0.4, 0);
+    S(G.tor(0.42, 0.06), M.gold); for (const z of [-0.07, 0.07]) S(G.tor(0.43, 0.018), M.gold, 0, 0, z);
+    S(G.cyl(0.2, 0.14, 0.14, 8), M.gold, 0, 0.48, 0); S(G.octa(0.17), M.gem, 0, 0.6, 0, 0, 0, 0, 1, 0.7, 1);
+    for (const s of [-1, 1]) S(G.sph(0.06), M.gold, s * 0.24, 0.42, 0);
+  },
+  (A, M, G, X) => { // 32 cargo seal of Tarsus
+    A(G.cyl(0.42, 0.46, 0.14, 18), M.lead, 0, 0, 0, PI / 2);
+    A(G.disc(0.4), X('#7d8288', 256, 256, x => { x.font = 'bold 46px Georgia,serif'; x.fillText('ΤΑΡΣΟΣ', 128, 108); x.lineWidth = 7; x.beginPath(); x.moveTo(70, 168); x.quadraticCurveTo(128, 206, 186, 168); x.closePath(); x.stroke(); x.beginPath(); x.moveTo(128, 168); x.lineTo(128, 132); x.lineTo(156, 160); x.stroke(); }, { metal: 0.6, rough: 0.6, bump: 4 }), 0, 0, 0.072);
+    A(G.tube([[-0.95, 0.32, 0], [-0.4, 0.06, -0.06], [0.4, -0.06, -0.06], [0.95, -0.36, 0.05]], 0.03), M.linen); A(G.sph(0.06), M.linen, -0.72, 0.2, -0.03);
+  },
+  (A, M) => { // 33 cord of the fast: five knots
+    const G = RG, pts = [[-1, 0.12, 0], [-0.6, -0.12, 0.1], [-0.2, 0.1, -0.05], [0.2, -0.1, 0.05], [0.6, 0.12, -0.1], [1, -0.12, 0]], cv = new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(...p)));
+    A(G.tube(pts, 0.035), M.linen);
+    for (let k = 0; k < 5; k++) { const p = cv.getPoint(0.1 + k * 0.2); A(new THREE.TorusKnotGeometry(0.06, 0.03, 40, 6), M.linen, p.x, p.y, p.z, k, k * 0.7, 0); }
+  },
+  (A, M, G, X) => { // 34 centurion's emblem
+    A(G.box(1.1, 0.72, 0.06), M.old);
+    A(G.plane(1.02, 0.64), X('#8a7a4a', 408, 256, x => { x.fillStyle = x.strokeStyle = '#2e2812'; x.font = 'bold 46px Georgia,serif'; x.fillText('CAESAREA', 204, 62); x.font = 'bold 28px Georgia,serif'; x.fillText('COH · ITALICA', 204, 206); x.lineWidth = 6; x.beginPath(); x.arc(204, 130, 34, 0, 7); x.stroke(); D.eagle(x, 204, 132, 24); }, { metal: 0.8, rough: 0.5, bump: 4 }), 0, 0, 0.032);
+    for (const sx of [-1, 1]) for (const sy of [-1, 1]) A(G.sph(0.035), M.bronze, sx * 0.48, sy * 0.29, 0.035);
+    A(G.cyl(0.03, 0.036, 1.4, 8), M.woodD, 0, -0.52, 0.06, 0, 0, PI / 2 + 0.06);
+  },
+  (A, M) => { // 35 messenger's staff
+    const G = RG, S = G.sub(0, 0, 0, 0, 0, 0.6);
+    S(G.cyl(0.045, 0.035, 2.0, 10), M.wood); S(G.sph(0.085), M.wood, 0, 1.02, 0); S(G.cyl(0.056, 0.056, 0.3, 10), M.leather, 0, 0.6, 0);
+    S(G.cyl(0.053, 0.053, 0.12, 16), M.bronze, 0, 0.3, 0); S(G.tor(0.12, 0.012), M.leather, 0.1, 0.8, 0); S(G.cone(0.035, 0.1, 8), M.bronze, 0, -1.05, 0, PI);
+    S(G.cyl(0.07, 0.07, 0.36, 12), M.leatherD, 0.15, 0.44, 0, 0, 0, 0.15); S(G.cyl(0.074, 0.074, 0.05, 12), M.bronze, 0.176, 0.62, 0, 0, 0, 0.15);
+  },
+  (A, M, G, X) => { // 36 the proconsul's ring
+    const S = G.sub(0, 0, 0, 0.8, -0.3, 0);
+    S(G.tor(0.42, 0.09), M.gold, 0, 0, 0, 0, 0, 0, 1, 1, 1.5); S(G.cyl(0.26, 0.24, 0.12, 24), M.gold, 0, 0.47, 0, 0, 0, 0, 1.25, 1, 1);
+    S(G.sph(0.21, 20, 10), M.carn, 0, 0.52, 0, 0, 0, 0, 1.25, 0.25, 1);
+    S(G.disc(0.17), X('#c9552a', 128, 128, x => { x.fillStyle = '#5a1c08'; D.eagle(x, 64, 66, 40); }, { rough: 0.2, bump: 4 }), 0, 0.576, 0, -PI / 2, 0, 0, 1.25, 1, 1);
+  },
+  (A, M, G, X) => { // 37 amulet of Elymas
+    const f = d => X('#64866f', 256, 256, d, { metal: 0.55, rough: 0.65, bump: 3 });
+    A(G.cyl(0.5, 0.5, 0.04, 32), M.patina, 0, 0, 0, PI / 2);
+    A(G.disc(0.48), f(x => { x.globalAlpha = 0.75; x.font = 'bold 26px Georgia,serif'; D.arc(x, 'ΑΒΡΑΣΑΞ · ΙΑΩ · ', 98, 0, PI * 1.25); x.globalAlpha = 0.3; D.arc(x, 'ΣΑΒΑΩΘ', 98, PI * 1.35, PI * 1.9); x.globalAlpha = 0.8; x.lineWidth = 6; x.beginPath(); x.moveTo(78, 128); x.quadraticCurveTo(128, 88, 178, 128); x.quadraticCurveTo(128, 168, 78, 128); x.stroke(); x.beginPath(); x.arc(128, 128, 13, 0, 7); x.fill(); x.lineWidth = 3; x.beginPath(); x.arc(128, 128, 62, 0, 7); x.stroke(); }), 0, 0, 0.022);
+    A(G.disc(0.48), f(x => { x.globalAlpha = 0.5; x.lineWidth = 5; for (let i = 0; i < 7; i++) { const a = i * PI * 2 / 7; x.beginPath(); x.moveTo(128, 128); x.lineTo(128 + Math.cos(a) * 84, 128 + Math.sin(a) * 84); x.stroke(); } }), 0, 0, -0.022, 0, PI);
+    A(G.tor(0.09, 0.025), M.patina, 0, 0.57, 0); for (let k = 0; k < 4; k++) A(G.tor(0.06, 0.016), M.bronze, 0.03 * k, 0.72 + k * 0.09, 0, 0, k % 2 ? PI / 2 : 0, 0);
+  },
+  (A, M) => { // 38 the abandoned buckle
+    const G = RG, S = G.sub(0, 0, 0, 0.95, 0, 0.12);
+    S(G.box(1.3, 0.03, 0.3), M.leather, 0.3, 0, 0); for (let k = 0; k < 4; k++) S(G.cyl(0.022, 0.022, 0.034, 8), M.soot, 0.1 + k * 0.2, 0, 0);
+    for (const px of [-0.75, -0.38]) S(G.box(0.045, 0.045, 0.46), M.bronze, px, 0.02, 0); for (const pz of [-0.21, 0.21]) S(G.box(0.4, 0.045, 0.045), M.bronze, -0.565, 0.02, pz);
+    S(G.box(0.42, 0.03, 0.03), M.bronze, -0.57, 0.05, 0, 0, 0, 0.05);
+  },
+  (A, M, G, X) => { // 39 crown of the mistaken gods
+    A(G.arc(0.6, 0.24, 0, PI * 2), X('#d8a842', 1024, 96, x => { x.strokeStyle = '#5a4010'; x.lineWidth = 6; for (let k = 0; k < 8; k++) (k % 2 ? D.caduceus : D.bolt)(x, 64 + k * 128, 48, 30); }, { metal: 1, rough: 0.32, bump: 4 }));
+    for (const y of [-0.12, 0.12]) A(G.tor(0.6, 0.022), M.gold, 0, y, 0, PI / 2);
+    for (let k = 0; k < 18; k++) { const a = k * PI / 9; A(G.sph(1, 8, 6), M.gold, Math.sin(a) * 0.62, 0.24, Math.cos(a) * 0.62, 0, a, (k % 2 ? 0.25 : -0.25), 0.05, 0.16, 0.014); }
+  },
+  (A, M, G, X) => { // 40 stone of the elders
+    A(G.box(1.0, 1.3, 0.14), M.stone); A(G.dode(0.16), M.stone, -0.46, 0.6, 0);
+    A(G.plane(0.92, 1.22), X('#a9a493', 368, 488, x => { x.fillStyle = x.strokeStyle = '#5d5849'; x.font = 'bold 38px Georgia,serif'; x.textAlign = 'left'; x.lineWidth = 4; ['ΛΥΣΤΡΑ', 'ΙΚΟΝΙΟΝ', 'ΑΝΤΙΟΧΕΙΑ', 'ΔΕΡΒΗ'].forEach((s, i) => { x.fillText(s, 28, 76 + i * 110); x.strokeRect(282, 54 + i * 110, 46, 46); if (i < 3) { x.beginPath(); x.moveTo(292, 78 + i * 110); x.lineTo(304, 90 + i * 110); x.lineTo(320, 64 + i * 110); x.stroke(); } }); }, { bump: 4, rough: 0.95 }), 0, 0, 0.072);
+  },
+];
+const RG = { // geometry shorthands
+  cyl: (rt, rb, h, s = 24) => new THREE.CylinderGeometry(rt, rb, h, s),
+  arc: (r, h, a0, len) => new THREE.CylinderGeometry(r, r, h, 48, 1, true, a0, len),
+  box: (w, h, d) => new THREE.BoxGeometry(w, h, d), sph: (r = 1, w = 20, h = 14) => new THREE.SphereGeometry(r, w, h),
+  tor: (R, r, arc = PI * 2) => new THREE.TorusGeometry(R, r, 10, 44, arc), cone: (r, h, s = 12) => new THREE.ConeGeometry(r, h, s),
+  lathe: (pts, s = 30) => new THREE.LatheGeometry(pts.map(p => new THREE.Vector2(p[0], p[1])), s),
+  disc: (r, s = 40) => new THREE.CircleGeometry(r, s), plane: (w, h) => new THREE.PlaneGeometry(w, h),
+  caps: (r, l) => new THREE.CapsuleGeometry(r, l, 6, 14), dode: r => new THREE.DodecahedronGeometry(r, 0), octa: r => new THREE.OctahedronGeometry(r, 0),
+  tube: (pts, r) => new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(...p))), 40, r, 8),
+};
+const RV = { thumbs: {}, shots: {}, models: {}, queue: [], yaw: 0, pitch: 0.15, zoom: 1, pop: 1, on: false };
+function relModel(i) { // built once, then centred and scaled to fit the viewer
+  if (RV.models[i]) return RV.models[i];
+  const g = new THREE.Group(), M = relMats();
+  const mk = parent => (geo, m, x = 0, y = 0, z = 0, rx = 0, ry = 0, rz = 0, sx = 1, sy = sx, sz = sx) => { const me = new THREE.Mesh(geo, m); me.position.set(x, y, z); me.rotation.set(rx, ry, rz); me.scale.set(sx, sy, sz); parent.add(me); return me; };
+  RG.sub = (x, y, z, rx, ry, rz) => { const s = new THREE.Group(); s.position.set(x, y, z); s.rotation.set(rx, ry, rz); g.add(s); return mk(s); };
+  RELIC_BUILD[i](mk(g), M, RG, relTex);
+  const sp = new THREE.Box3().setFromObject(g).getBoundingSphere(new THREE.Sphere()), k = 1.12 / sp.radius, w = new THREE.Group();
+  g.scale.setScalar(k); g.position.copy(sp.center).multiplyScalar(-k); w.add(g);
+  return RV.models[i] = w;
+}
+function rvInit() {
+  if (RV.r) return;
+  const r = RV.r = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.1;
+  RV.scene = new THREE.Scene();
+  const pm = new THREE.PMREMGenerator(r); RV.scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture; pm.dispose();
+  RV.cam = new THREE.PerspectiveCamera(30, 1, 0.1, 20); RV.cam.position.set(0, 0.5, 5); RV.cam.lookAt(0, 0, 0);
+  const key = new THREE.DirectionalLight(0xfff0d0, 2.4); key.position.set(2.5, 4, 3.5);
+  const rim = new THREE.DirectionalLight(0x8fd0e0, 1.2); rim.position.set(-3, 1.5, -3);
+  RV.pivot = new THREE.Group(); RV.tp = new THREE.Group(); RV.tp.rotation.set(0.15, -0.55, 0);
+  RV.scene.add(key, rim, RV.pivot, RV.tp);
+  const c = r.domElement; let drag = null;
+  c.addEventListener('pointerdown', e => { drag = [e.clientX, e.clientY]; RV.drag = true; c.setPointerCapture(e.pointerId); });
+  c.addEventListener('pointermove', e => { if (!drag) return; RV.yaw += (e.clientX - drag[0]) * 0.011; RV.pitch = clamp(RV.pitch + (e.clientY - drag[1]) * 0.008, -0.9, 1.1); drag = [e.clientX, e.clientY]; });
+  for (const ev of ['pointerup', 'pointercancel']) c.addEventListener(ev, () => { drag = null; RV.drag = false; });
+  c.addEventListener('wheel', e => { e.preventDefault(); RV.zoom = clamp(RV.zoom - e.deltaY * 0.001, 0.7, 1.6); }, { passive: false });
+}
+function relThumb(i, size = 160, store = RV.thumbs, ry = -0.55, zoom = 1) { // a still of the model, rendered once with the viewer's own renderer
+  if (store[i]) return store[i];
+  rvInit(); const m = relModel(i), home = m.parent, fl = m.getObjectByName('flame'); if (fl) fl.visible = false;
+  RV.tp.rotation.set(zoom > 1 ? 0.04 : 0.15, ry, 0); RV.tp.scale.setScalar(zoom); RV.r.setPixelRatio(1); RV.r.setSize(size, size, false); RV.cam.aspect = 1; RV.cam.updateProjectionMatrix();
+  RV.pivot.visible = false; RV.tp.add(m); RV.r.render(RV.scene, RV.cam);
+  const url = zoom > 1 ? cropShot(RV.r.domElement) : RV.r.domElement.toDataURL(); RV.tp.remove(m); if (home) home.add(m); RV.pivot.visible = true; RV.w = 0;
+  if (fl) fl.visible = G.rel[i] === 2;
+  return store[i] = url;
+}
+function cropShot(src) { // trims the empty margin so every puzzle piece shows part of the object
+  const c = document.createElement('canvas'), w = c.width = src.width, h = c.height = src.height, x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(src, 0, 0);
+  const d = x.getImageData(0, 0, w, h).data; let x0 = w, y0 = h, x1 = 0, y1 = 0;
+  for (let py = 0; py < h; py++) for (let px = 0; px < w; px++) if (d[(py * w + px) * 4 + 3] > 12) { if (px < x0) x0 = px; if (px > x1) x1 = px; if (py < y0) y0 = py; if (py > y1) y1 = py; }
+  if (x1 <= x0 || y1 <= y0) return { url: c.toDataURL(), ar: 1 };
+  const o = document.createElement('canvas'); o.width = x1 - x0 + 1; o.height = y1 - y0 + 1; o.getContext('2d').drawImage(c, x0, y0, o.width, o.height, 0, 0, o.width, o.height);
+  return { url: o.toDataURL(), ar: o.width / o.height };
+}
+function rvMount(box, i, pop = false) {
+  rvInit(); RV.box = box; box.append(RV.r.domElement);
+  const m = relModel(i), fl = m.getObjectByName('flame'); if (fl) fl.visible = G.rel[i] === 2;
+  RV.pivot.clear(); RV.pivot.add(m); RV.pop = pop ? 0 : 1; RV.w = 0; RV.zoom = 1; RV.pitch = 0.15; if (pop) RV.yaw = -0.5;
+  if (!RV.on) { RV.on = true; RV.last = performance.now(); requestAnimationFrame(rvLoop); }
+}
+function rvStop() { RV.on = false; RV.box = null; RV.queue.length = 0; RV.goal = null; rqPz = false; }
+function rvLoop(now) {
+  if (!RV.on || !RV.box) return;
+  const dt = Math.min(0.05, (now - RV.last) / 1000); RV.last = now;
+  for (let k = 0; k < 3 && RV.queue.length; k++) { const i = RV.queue.shift(), u = relThumb(i); document.querySelectorAll(`img[data-rt="${i}"]`).forEach(im => { im.src = u; }); }
+  const w = RV.box.clientWidth, h = RV.box.clientHeight;
+  if (w && h) {
+    if (w !== RV.w || h !== RV.h) { RV.w = w; RV.h = h; RV.r.setPixelRatio(Math.min(devicePixelRatio, 2)); RV.r.setSize(w, h, false); RV.cam.aspect = w / h; RV.cam.updateProjectionMatrix(); }
+    if (!RV.drag && !RV.goal) RV.yaw += dt * 0.45;
+    if (RV.goal) { // "turn" puzzles: hold the asked face towards the eye
+      const gl = RV.goal, near = Math.abs(Math.atan2(Math.sin(RV.yaw - gl.y), Math.cos(RV.yaw - gl.y))) < 0.32 && Math.abs(RV.pitch - gl.p) < 0.3;
+      RV.hold = near ? (RV.hold || 0) + dt : 0; if (RV.hold > 0.6) { RV.goal = null; RV.hold = 0; gl.cb(); }
+    }
+    RV.pop = Math.min(1, RV.pop + dt * 1.2); const e = 1 - Math.pow(1 - RV.pop, 3); // new relics spin in
+    RV.pivot.rotation.set(RV.pitch, RV.yaw + (1 - e) * 7, 0); RV.pivot.scale.setScalar(Math.max(0.001, e) * RV.zoom); RV.pivot.position.y = Math.sin(now / 900) * 0.03;
+    RV.r.render(RV.scene, RV.cam);
+  }
+  requestAnimationFrame(rvLoop);
+}
+
+/* ---- the Relics book: gallery on the left, 3D viewer and reading on the right ---- */
+const BLANK = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+let rqSel = 0, rqTab = 'col', rqPz = false;
+function openRelics(sel) {
+  audio.sfx('page');
+  if (sel != null) { rqSel = sel; rqTab = 'col'; } else if (G.relNew.length) rqSel = G.relNew[0]; else if (!G.rel[rqSel] && relCount()) rqSel = relIds()[0];
+  renderRelics(openModal('<div class="card reliq" role="dialog" aria-label="Relíquias de Antioquia"></div>', rvStop, true));
+}
+function renderRelics(el) {
+  const R = RELICS[rqSel], st = relState(rqSel), top = el.querySelector('.rq-list')?.scrollTop || 0;
+  G.relNew = G.relNew.filter(i => i !== rqSel); $('#relBadge').hidden = !G.relNew.length;
+  const thumb = i => `<button class="rq-it r${RELICS[i].r} ${relState(i) ? '' : 'off'} ${i === rqSel ? 'sel' : ''}" data-i="${i}" title="${relState(i) ? RELICS[i].n : 'Ainda não encontrada'}" aria-label="${relState(i) ? RELICS[i].n : 'Relíquia ainda não encontrada'}"><img data-rt="${i}" alt="" src="${RV.thumbs[i] || BLANK}"><i class="num">${String(i + 1).padStart(2, '0')}</i>${G.relNew.includes(i) ? '<i class="dot"></i>' : relState(i) === 2 ? '<i class="mem">✦</i>' : ''}</button>`;
+  const cols = REL_COLS.map(([name, sub], ci) => { const ids = RELICS.map((r, i) => i).filter(i => RELICS[i].c === ci);
+    return `<div class="grp"><span>${ROMAN[ci]} · ${name}</span><small>${ids.filter(relState).length}/${ids.length}${G.relSets.includes(ci) ? ' ✦' : ''}</small></div><div class="rq-grid">${ids.map(thumb).join('')}</div>`; }).join('');
+  const cons = REL_CONN.map((c, ci) => { const open = G.relConn.includes(ci), n = c.ids.filter(i => relState(i) === 2).length;
+    return `<div class="rq-con ${open ? 'open' : ''}"><b>${c.t}</b><div class="rq-grid">${c.ids.map(thumb).join('')}</div>${open ? `<p>${c.x}</p><span class="ref">${c.ref}</span>` : `<small>${n} de ${c.ids.length} memórias reveladas. Quando todas forem contadas no ágape, a conexão aparece.</small>`}</div>`; }).join('');
+  const tags = `${R.k.includes('b') ? `<span class="rq-tag b">Relato bíblico · ${R.ref}</span>` : ''}${R.k.includes('h') ? `<span class="rq-tag h">Contexto histórico${R.k === 'h' ? ' · ' + R.ref : ''}</span>` : ''}<span class="rq-tag f">Objeto: reconstituição ficcional</span>`;
+  const mine = REL_CONN.map((c, ci) => [c, ci]).filter(([c]) => c.ids.includes(rqSel)).map(([c, ci]) => `<div class="rq-link">Conexão: <b>${c.t}</b> · ${G.relConn.includes(ci) ? 'descoberta' : `${c.ids.filter(i => relState(i) === 2).length} de ${c.ids.length} memórias`}</div>`).join('');
+  const head = `<span class="rq-chip">${RARITY[R.r]}</span><span class="dim">Nº ${String(rqSel + 1).padStart(2, '0')} · Coleção ${ROMAN[R.c]} · ${REL_COLS[R.c][0]}</span>`;
+  const PZ = REL_PZ[rqSel + 1], pzOpen = PZ && !G.relPz.includes(rqSel);
+  const info = !st ? `${head}<h3>Ainda não encontrada</h3><div class="rq-lock">${relHint(rqSel)}</div>`
+    : rqPz && PZ ? `${head}<div class="pz"><h3>${R.n}</h3><p class="pz-q">${PZ[1]}</p><div class="pz-body"></div><p class="pz-msg"></p><button class="ghost back">Voltar à leitura</button></div>`
+    : `${head}<h3>${R.n}</h3><p class="rq-era">${R.e}</p><div class="rq-sec">Vestígio · o objeto</div><p>${R.o}</p><div class="rq-sec">Memória · a história</div>${st === 2 ? `<p>${R.m}</p><div class="rq-tags">${tags}</div><div class="rq-figs">${relFig(rqSel + 1)}</div>`
+      : `<div class="rq-lock">A história deste objeto ainda não foi contada. A cada ágape, um irmão conta a memória de uma relíquia.${G.relTell === rqSel ? '<br><b>Esta será a história do próximo ágape.</b>' : '<br><button class="pill tell">Contar esta no próximo ágape</button>'}${pzOpen ? '<br>Ou descubra agora, por conta própria:<br><button class="pill exam">Examinar de perto</button>' : ''}</div>`}${st === 2 && pzOpen ? '<div class="rq-exam"><button class="ghost exam">Examinar de perto · +3 ✦</button></div>' : ''}${mine}`;
+  el.innerHTML = `<button class="x" aria-label="Fechar">✕</button>
+    <div class="rq-side"><p class="eyebrow">Ecos de Antioquia</p><h2>Relíquias</h2><div class="rq-prog"><b>${relCount()}</b> de ${RELICS.length} vestígios · <b>${relMems()}</b> memórias · <b>${G.relConn.length}</b> de ${REL_CONN.length} conexões</div>
+      <div class="rq-tabs"><button data-t="col" class="${rqTab === 'col' ? 'on' : ''}">Coleções</button><button data-t="con" class="${rqTab === 'con' ? 'on' : ''}">Conexões</button></div>
+      <div class="rq-list">${rqTab === 'col' ? cols : cons}</div></div>
+    <div class="rq-main r${R.r}"><div class="rvbox ${st ? '' : 'off'}"><span class="drag">arraste para girar · role para aproximar</span></div><div class="rq-info">${info}</div></div>`;
+  el.querySelector('.x').onclick = closeModal; el.querySelector('.rq-list').scrollTop = top;
+  el.querySelectorAll('.rq-it').forEach(b => { b.onclick = () => { rqSel = +b.dataset.i; audio.sfx('click'); renderRelics(el); }; });
+  el.querySelectorAll('.rq-tabs button').forEach(b => { b.onclick = () => { rqTab = b.dataset.t; renderRelics(el); }; });
+  const tell = el.querySelector('.tell'); if (tell) tell.onclick = () => { G.relTell = rqSel; audio.sfx('chime'); renderRelics(el); };
+  el.querySelectorAll('.exam').forEach(b => { b.onclick = () => { rqPz = true; audio.sfx('click'); renderRelics(el); }; });
+  const back = el.querySelector('.back'); if (back) back.onclick = () => { rqPz = false; RV.goal = null; renderRelics(el); };
+  RV.queue = RELICS.map((r, i) => i).filter(i => !RV.thumbs[i]);
+  rvMount(el.querySelector('.rvbox'), rqSel); RV.goal = null;
+  if (st && rqPz && PZ) pzStart(el, rqSel, PZ);
+}
+
+/* ---- examining a relic: 20 small puzzles of four kinds; solving one reveals its memory at once ---- */
+const REL_PZ = { // by relic number: [kind, prompt, data]
+  1: ['turn', 'Arraste a moeda no visor até ver o verso, onde está o nome do rei.', [PI, 0.1]],
+  4: ['turn', 'Vire o denário no visor: o que há do outro lado do imperador?', [PI, 0.1]],
+  18: ['turn', 'Vire a ficha no visor para ler quantas medidas de trigo ela vale.', [PI, 0.1]],
+  37: ['turn', 'Vire o amuleto no visor e encontre os sete raios do verso.', [PI, 0.1]],
+  28: ['turn', 'Incline o anel no visor até olhar o sinete bem de frente.', [0, 0.82]],
+  36: ['turn', 'Incline o anel no visor até ver de frente a águia gravada na pedra.', [0, 0.77]],
+  2: ['tiles', 'O mosaico se soltou. Toque em duas peças para trocá-las até recompor os três padrões.'],
+  6: ['tiles', 'A tabuinha rachou. Toque em duas peças para trocá-las e ler os sete nomes.'],
+  8: ['tiles', 'Recomponha o caco. Toque em duas peças para trocá-las até a palavra aparecer.'],
+  14: ['tiles', 'O mapa está em pedaços. Toque em duas peças para trocá-las e achar as duas Antioquias.'],
+  23: ['tiles', 'Reconstrua o desenho da colunata. Toque em duas peças para trocá-las.'],
+  26: ['tiles', 'Reúna os fragmentos do rolo de Isaías. Toque em duas peças para trocá-las.'],
+  13: ['order', 'Toque nas paradas da primeira viagem, na ordem em que aconteceram.', ['Antioquia da Síria', 'Selêucia, o porto', 'Salamina, em Chipre', 'Pafos', 'Perge, na Panfília']],
+  33: ['order', 'Toque nos acontecimentos de Atos 13:1–3, na ordem certa.', ['Adoravam ao Senhor e jejuavam', 'O Espírito disse: separem Barnabé e Saulo', 'Jejuaram e oraram outra vez', 'Impuseram as mãos sobre os dois', 'E os despediram']],
+  38: ['order', 'Reconstitua o caminho de João Marcos, passo a passo.', ['Sai de Jerusalém com Barnabé e Saulo', 'Parte de Antioquia como ajudante', 'Atravessa a ilha de Chipre', 'Chega a Perge, na Panfília', 'Volta para Jerusalém']],
+  40: ['order', 'Toque nas cidades do retorno, na ordem em que Paulo e Barnabé passaram por elas.', ['Derbe', 'Listra', 'Icônio', 'Antioquia da Pisídia', 'Atália, o porto']],
+  3: ['pairs', 'Cada porto, sua terra. Toque num porto e depois na região a que ele serve.', [['Selêucia Piéria', 'Síria'], ['Salamina', 'Chipre'], ['Cesareia', 'Judeia'], ['Óstia', 'Roma'], ['Alexandria', 'Egito']]],
+  11: ['pairs', 'Cinco selos, cinco histórias. Toque num líder e depois no que Atos conta sobre ele.', [['Barnabé', 'levita de Chipre'], ['Simeão', 'chamado Níger'], ['Lúcio', 'de Cirene'], ['Manaém', 'criado com Herodes'], ['Saulo', 'de Tarso']]],
+  27: ['pairs', 'Toque numa palavra grega e depois no que ela quer dizer.', [['ΕΙΡΗΝΗ', 'paz'], ['ΑΓΑΠΗ', 'amor'], ['ΑΡΤΟΣ', 'pão'], ['ΦΩΣ', 'luz']]],
+  39: ['pairs', 'O mal-entendido de Listra: quem é quem? Toque num item e depois no seu par.', [['Chamado de Zeus', 'Barnabé'], ['Chamado de Hermes', 'Paulo, que era quem falava'], ['Trouxe touros e coroas', 'o sacerdote de Zeus'], ['Nunca tinha andado', 'o homem curado']]],
+};
+function pzSolve(el, i) {
+  if (G.relPz.includes(i)) return;
+  G.relPz.push(i); G.stats.relPz++; audio.sfx('win');
+  const fresh = G.rel[i] === 1; if (fresh) { G.rel[i] = 2; G.stats.relMem++; }
+  toast(`<b>Enigma resolvido:</b> ${RELICS[i].n}. <span class="dim">+3 ✦${fresh ? ' · memória revelada' : ''}</span>`, 6000); addComm(3);
+  const msg = el.querySelector('.pz-msg'); if (msg) msg.textContent = 'Isso! A memória se abre…';
+  setTimeout(() => { if (el.isConnected && rqSel === i) { rqPz = false; renderRelics(el); } }, 1100);
+}
+function pzStart(el, i, [kind, , data]) {
+  const body = el.querySelector('.pz-body'), msg = el.querySelector('.pz-msg');
+  const flash = (b, cls) => { b.classList.add(cls); setTimeout(() => b.classList.remove(cls), 450); };
+  if (kind === 'turn') {
+    RV.yaw = data[0] + 2.3; RV.pitch = 0.15; RV.hold = 0; msg.textContent = 'Arraste o objeto no visor.';
+    RV.goal = { y: data[0], p: data[1], cb: () => pzSolve(el, i) };
+  } else if (kind === 'tiles') {
+    const { url, ar } = relThumb(i, 420, RV.shots, 0, 1.3), ord = shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8]); if (ord.every((v, k) => v === k)) ord.reverse();
+    let sel = -1;
+    const draw = () => {
+      body.innerHTML = `<div class="pz-tiles" style="aspect-ratio:${ar.toFixed(3)}">${ord.map((v, k) => `<button data-k="${k}" class="${k === sel ? 'sel' : ''}" aria-label="Peça ${k + 1}" style="background-image:url(${url});background-position:${v % 3 * 50}% ${Math.floor(v / 3) * 50}%"></button>`).join('')}</div>`;
+      body.querySelectorAll('button').forEach(b => { b.onclick = () => {
+        const k = +b.dataset.k; if (sel < 0) { sel = k; audio.sfx('click'); return draw(); }
+        [ord[sel], ord[k]] = [ord[k], ord[sel]]; sel = -1; audio.sfx('pop'); draw();
+        const ok = ord.filter((v, j) => v === j).length; msg.textContent = `${ok} de 9 peças no lugar`;
+        if (ok === 9) { body.querySelectorAll('button').forEach(x => { x.disabled = true; }); pzSolve(el, i); }
+      }; });
+    };
+    draw();
+  } else if (kind === 'order') {
+    let step = 0;
+    body.innerHTML = `<div class="pz-list">${shuffle(data.map((t, k) => [t, k])).map(([t, k]) => `<button class="pz-b" data-k="${k}">${t}</button>`).join('')}</div>`;
+    body.querySelectorAll('button').forEach(b => { b.onclick = () => {
+      if (+b.dataset.k !== step) { audio.sfx('wrong'); flash(b, 'bad'); step = 0; body.querySelectorAll('button').forEach(x => { x.classList.remove('ok'); x.disabled = false; x.querySelector('em')?.remove(); }); msg.textContent = 'Não foi nessa ordem. Comece de novo.'; return; }
+      step++; b.classList.add('ok'); b.disabled = true; b.insertAdjacentHTML('afterbegin', `<em>${step}</em>`); audio.sfx('pop'); msg.textContent = `${step} de ${data.length}`;
+      if (step === data.length) pzSolve(el, i);
+    }; });
+  } else {
+    let sel = null, done = 0;
+    const col = (side, list) => list.map(([t, k]) => `<button class="pz-b" data-s="${side}" data-k="${k}">${t}</button>`);
+    const L = col(0, data.map((d, k) => [d[0], k])), Rr = col(1, shuffle(data.map((d, k) => [d[1], k])));
+    body.innerHTML = `<div class="pz-cols">${L.map((l, k) => l + Rr[k]).join('')}</div>`;
+    body.querySelectorAll('button').forEach(b => { b.onclick = () => {
+      if (b.dataset.s === '0') { sel?.classList.remove('sel'); sel = b; b.classList.add('sel'); audio.sfx('click'); return; }
+      if (!sel) { msg.textContent = 'Toque primeiro num item da esquerda.'; return; }
+      if (sel.dataset.k !== b.dataset.k) { audio.sfx('wrong'); flash(b, 'bad'); msg.textContent = 'Esses dois não combinam.'; return; }
+      for (const x of [sel, b]) { x.classList.remove('sel'); x.classList.add('ok'); x.disabled = true; } sel = null; done++; audio.sfx('pop'); msg.textContent = `${done} de ${data.length} pares`;
+      if (done === data.length) pzSolve(el, i);
+    }; });
+  }
+}
+$('#relBtn').onclick = () => openRelics();
+
 /* ========================= boot ========================= */
 function start(data) {
   G = makeState(data?.save || load());
@@ -4205,6 +5106,6 @@ addEventListener('pagehide', save);
 const hot = window.claude?.hot;
 try { hot?.snapshot?.(() => (resetting ? {} : { save: serial() })); } catch (e) {}
 hot?.ready ? hot.ready(start) : start(hot?.data ?? {});
-if (new URLSearchParams(location.search).has('debug')) window.__antioquia = { get G() { return G; }, NEWS, crier, nextNews, tut: i => { G.tut = i; showTut(); }, event: id => { G.ev = { id, d: dayN(), done: [] }; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, plots, build: (i, k) => { pay(BUILDS[k].cost); placeBuild(i, k); }, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: (id, i = 0) => HOT.find(h => h.id === id).actions()[i].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
+if (new URLSearchParams(location.search).has('debug')) window.__antioquia = { get G() { return G; }, grantRelic, openRelics, tellRelics, REL_PZ, rvLoop, rollFind, RELICS, RV, relThumb, NEWS, crier, nextNews, tut: i => { G.tut = i; showTut(); }, event: id => { G.ev = { id, d: dayN(), done: [] }; }, setHour: h => { G.time = dayN() * 24 + h; }, npcs, toggleBuild, audio, plots, build: (i, k) => { pay(BUILDS[k].cost); placeBuild(i, k); }, look: (x, z, d = 24) => { const off = camera.position.clone().sub(controls.target).setLength(d); controls.target.set(x, 0, z); camera.position.copy(controls.target).add(off); }, play: (id, i = 0) => HOT.find(h => h.id === id).actions()[i].run(), sim: (sec, fps = 30) => { for (let i = 0; i < sec * fps; i++) { simT += 1 / fps; step(1 / fps, simT); } } };
 let simT = 0;
 </script>
